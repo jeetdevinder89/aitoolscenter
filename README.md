@@ -11,7 +11,6 @@ Single-page website built with React + Vite to help users discover, compare, and
 - FAQ and newsletter signup section
 - Mobile-responsive layout
 - Branded color and typography system
-- Vercel Analytics integration
 - SEO metadata, robots.txt, and sitemap.xml for indexing
 
 ## Run locally
@@ -51,7 +50,9 @@ npm run build
 - Copy `.env.example` to `.env`.
 - Set `SUPABASE_URL` to your project URL from Supabase.
 - Set `SUPABASE_SERVICE_ROLE_KEY` to the Supabase service role key in your Vercel project settings.
-- The site posts to `/api/newsletter`, and the Vercel function writes to the `newsletter_submissions` table.
+- The site posts to `/api/newsletter`, and the Python Vercel function writes to the `newsletter_submissions` table.
+- To send confirmation email, set SMTP variables: `SMTP_HOST`, `SMTP_PORT`, `SMTP_USERNAME`, `SMTP_PASSWORD`, and `NEWSLETTER_FROM_EMAIL`.
+- Optional: set `SMTP_USE_TLS`, `NEWSLETTER_REPLY_TO_EMAIL`, and `SITE_URL`.
 - Restart the dev server after changing environment variables locally.
 
 ## Submit Tool Setup
@@ -68,8 +69,7 @@ npm run build
 
 ## Analytics
 
-- Vercel Analytics is enabled in `src/main.jsx` using `@vercel/analytics/react`.
-- In Vercel dashboard, open your project and enable Analytics for production insights.
+- Vercel Analytics dependency is not enabled in the current build.
 
 ## SEO
 

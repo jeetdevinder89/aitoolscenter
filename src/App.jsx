@@ -403,8 +403,15 @@ function App() {
         throw new Error('Unable to subscribe at the moment.')
       }
 
+      const result = await response.json()
+
       setNewsletterEmail('')
-      setNewsletterStatus({ type: 'success', message: 'Thanks for subscribing. Check your inbox for confirmation.' })
+      setNewsletterStatus({
+        type: 'success',
+        message: result.confirmationSent
+          ? 'Thanks for subscribing. Check your inbox for confirmation.'
+          : 'Thanks for subscribing. Your email has been added to the newsletter list.',
+      })
     } catch {
       setNewsletterStatus({
         type: 'error',
