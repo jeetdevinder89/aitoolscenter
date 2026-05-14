@@ -11,6 +11,7 @@ Single-page website built with React + Vite to help users discover, compare, and
 - Mobile-responsive layout
 - Branded color and typography system
 - Vercel Analytics integration
+- SEO metadata, robots.txt, and sitemap.xml for indexing
 
 ## Run locally
 
@@ -54,6 +55,12 @@ npm run build
 
 - Vercel Analytics is enabled in `src/main.jsx` using `@vercel/analytics/react`.
 - In Vercel dashboard, open your project and enable Analytics for production insights.
+
+## SEO
+
+- Core SEO and social metadata are in `index.html`.
+- `public/robots.txt` allows crawling and points to the sitemap.
+- `public/sitemap.xml` includes the production domain URL.
 
 ## Releases
 
