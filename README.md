@@ -6,7 +6,7 @@ Single-page website built with React + Vite to help users discover, compare, and
 
 - AI tools directory with categories and search
 - Favorites, sorting, and side-by-side tool comparison
-- Submit-your-tool form with validation and endpoint-based delivery
+- Submit-your-tool form with validation and server-side delivery
 - Educational section explaining how AI tools work
 - FAQ and newsletter signup section
 - Mobile-responsive layout
@@ -43,21 +43,22 @@ npm run build
 ## Customization notes
 
 - Update tool links, ratings, and categories in `src/App.jsx`.
-- Set `VITE_NEWSLETTER_ENDPOINT` to connect the newsletter form to your provider endpoint.
+- Configure `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in Vercel for form handling.
 - Add affiliate links and a paid submit-your-tool flow for monetization.
 
 ## Newsletter Setup
 
 - Copy `.env.example` to `.env`.
-- Set `VITE_NEWSLETTER_ENDPOINT` to your provider form endpoint.
-- For Formspree, use a URL like `https://formspree.io/f/your-form-id`.
-- Restart the dev server after changing environment variables.
+- Set `SUPABASE_URL` to your project URL from Supabase.
+- Set `SUPABASE_SERVICE_ROLE_KEY` to the Supabase service role key in your Vercel project settings.
+- The site posts to `/api/newsletter`, and the Vercel function writes to the `newsletter_submissions` table.
+- Restart the dev server after changing environment variables locally.
 
 ## Submit Tool Setup
 
-- Set `VITE_SUBMIT_TOOL_ENDPOINT` in `.env` or Vercel environment variables.
-- The submit form posts JSON including name, URL, category, pricing, contact email, and description.
-- For Formspree, create a second form endpoint and paste it as `VITE_SUBMIT_TOOL_ENDPOINT`.
+- Use the same `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` environment variables.
+- The submit form posts JSON to `/api/submit-tool` and the Vercel function writes to `tool_submissions`.
+- The payload includes name, URL, category, pricing, contact email, and description.
 
 ## Deployment
 

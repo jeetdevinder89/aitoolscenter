@@ -172,8 +172,8 @@ const SORT_OPTIONS = [
 const LOCAL_FAVORITES_KEY = 'aitoolscenter-favorites'
 const LOCAL_VISITS_KEY = 'aitoolscenter-local-visits'
 const SESSION_VISIT_KEY = 'aitoolscenter-session-visited'
-const NEWSLETTER_ENDPOINT = import.meta.env.VITE_NEWSLETTER_ENDPOINT || ''
-const SUBMIT_TOOL_ENDPOINT = import.meta.env.VITE_SUBMIT_TOOL_ENDPOINT || ''
+const NEWSLETTER_ENDPOINT = '/api/newsletter'
+const SUBMIT_TOOL_ENDPOINT = '/api/submit-tool'
 const TOOL_CATEGORIES = CATEGORIES.filter((category) => category !== 'All')
 const PRICING_OPTIONS = ['Free', 'Freemium', 'Paid', 'Enterprise']
 
@@ -383,14 +383,6 @@ function App() {
   const handleNewsletterSubmit = async (event) => {
     event.preventDefault()
 
-    if (!NEWSLETTER_ENDPOINT) {
-      setNewsletterStatus({
-        type: 'error',
-        message: 'Newsletter endpoint is not configured. Set VITE_NEWSLETTER_ENDPOINT in your environment.',
-      })
-      return
-    }
-
     setIsSubmittingNewsletter(true)
     setNewsletterStatus({ type: 'idle', message: '' })
 
@@ -477,14 +469,6 @@ function App() {
 
     if (Object.keys(errors).length > 0) {
       setToolSubmitStatus({ type: 'error', message: 'Please fix the highlighted fields and submit again.' })
-      return
-    }
-
-    if (!SUBMIT_TOOL_ENDPOINT) {
-      setToolSubmitStatus({
-        type: 'error',
-        message: 'Submit endpoint is not configured. Set VITE_SUBMIT_TOOL_ENDPOINT in your environment.',
-      })
       return
     }
 
