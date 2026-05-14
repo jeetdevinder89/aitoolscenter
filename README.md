@@ -1,7 +1,5 @@
 # AIToolsCenter Website
 
-[![Deploy to GitHub Pages](https://github.com/jeetdevinder89/aitoolscenter/actions/workflows/deploy.yml/badge.svg)](https://github.com/jeetdevinder89/aitoolscenter/actions/workflows/deploy.yml)
-
 Single-page website built with React + Vite to help users discover, compare, and choose the best AI tools for writing, coding, design, video, automation, and research.
 
 ## What is included
@@ -46,8 +44,9 @@ npm run build
 
 ## Deployment
 
-- Live site: https://jeetdevinder89.github.io/aitoolscenter/
-- GitHub Pages deploys automatically from `main` via `.github/workflows/deploy.yml`.
+- Vercel project URL: https://aitoolscenter-kappa.vercel.app/
+- Custom domain: https://aitoolscenter.in/
+- Deployments are managed by Vercel from the connected GitHub repository.
 
 ## Releases
 
@@ -62,6 +61,6 @@ git push origin v1.0.0
 
 ## Custom domain
 
-- Configured domain: https://aitoolscenter.in/
-- The `public/CNAME` file is set to `aitoolscenter.in`.
-- In GitHub Pages settings, keep Source as `GitHub Actions` and set the custom domain to `aitoolscenter.in`.
+- Set `aitoolscenter.in` as Primary in Vercel Domains.
+- Use the exact DNS records shown in Vercel for `@` and `www`.
+- Remove any old GitHub Pages DNS entries to avoid conflicts.
