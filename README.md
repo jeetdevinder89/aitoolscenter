@@ -1,5 +1,7 @@
 # AIToolsCenter Website
 
+[![Deploy to GitHub Pages](https://github.com/jeetdevinder89/aitoolscenter/actions/workflows/deploy.yml/badge.svg)](https://github.com/jeetdevinder89/aitoolscenter/actions/workflows/deploy.yml)
+
 Single-page website built with React + Vite to help users discover, compare, and choose the best AI tools for writing, coding, design, video, automation, and research.
 
 ## What is included
@@ -41,3 +43,23 @@ npm run build
 - Update tool links, ratings, and categories in `src/App.jsx`.
 - Replace newsletter form alert with a real email provider (Mailchimp, ConvertKit, or Beehiiv).
 - Add affiliate links and a paid submit-your-tool flow for monetization.
+
+## Deployment
+
+- Live site: https://jeetdevinder89.github.io/aitoolscenter/
+- GitHub Pages deploys automatically from `main` via `.github/workflows/deploy.yml`.
+
+## Releases
+
+- Create a version tag and push it to trigger the release workflow:
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+- This creates a GitHub Release and uploads a `dist.zip` build artifact.
+
+## Custom domain
+
+- To enable a custom domain, add your domain in repository settings under Pages, then add a `public/CNAME` file containing that domain.
