@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const CATEGORIES = ['All', 'Writing', 'Image', 'Video', 'Coding', 'Productivity', 'Automation', 'Research']
 
@@ -163,6 +163,16 @@ const FAQS = [
   },
 ]
 
+const SORT_OPTIONS = [
+  { value: 'featured', label: 'Featured' },
+  { value: 'rating', label: 'Highest rated' },
+  { value: 'name', label: 'A to Z' },
+]
+
+const LOCAL_FAVORITES_KEY = 'aitoolscenter-favorites'
+const LOCAL_VISITS_KEY = 'aitoolscenter-local-visits'
+const SESSION_VISIT_KEY = 'aitoolscenter-session-visited'
+
 function Stars({ count }) {
   return (
     <span aria-label={`${count} out of 5 stars`} style={{ color: '#f59e0b', fontSize: '0.85rem' }}>
@@ -171,28 +181,78 @@ function Stars({ count }) {
   )
 }
 
-function ToolCard({ tool }) {
+function ToolCard({ tool, isFavorite, isCompared, onToggleFavorite, onToggleCompare }) {
   return (
     <article className="tool-card">
       <div className="tool-card-top">
         <span className="tool-badge">{tool.badge}</span>
         <span className="tool-category">{tool.category}</span>
       </div>
-      <h3>{tool.name}</h3>
-      <Stars count={tool.rating} />
+      <div className="tool-card-header">
+        <div>
+          <h3>{tool.name}</h3>
+          <Stars count={tool.rating} />
+        </div>
+        <button
+          type="button"
+          className={`favorite-btn${isFavorite ? ' active' : ''}`}
+          aria-label={isFavorite ? `Remove ${tool.name} from favorites` : `Save ${tool.name} to favorites`}
+          onClick={() => onToggleFavorite(tool.name)}
+        >
+          {isFavorite ? '★' : '☆'}
+        </button>
+      </div>
       <p>{tool.tagline}</p>
       <div className="tool-tags">
-        {tool.tags.map((t) => (
-          <span key={t} className="tag">{t}</span>
+        {tool.tags.map((tag) => (
+          <span key={tag} className="tag">{tag}</span>
         ))}
       </div>
-      <a
-        className="btn btn-primary tool-btn"
-        href={tool.link}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Visit Tool →
+      <div className="tool-actions-row">
+        <a
+          className="btn btn-primary tool-btn"
+          href={tool.link}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Visit Tool →
+        </a>
+        <button
+          type="button"
+          className={`btn btn-secondary compare-btn${isCompared ? ' active' : ''}`}
+          onClick={() => onToggleCompare(tool.name)}
+        >
+          {isCompared ? 'Added to Compare' : 'Compare'}
+        </button>
+      </div>
+    </article>
+  )
+}
+
+function ComparisonCard({ tool, onRemove }) {
+  return (
+    <article className="comparison-card">
+      <div className="comparison-card-top">
+        <div>
+          <h3>{tool.name}</h3>
+          <p>{tool.tagline}</p>
+        </div>
+        <button type="button" className="comparison-remove" onClick={() => onRemove(tool.name)}>
+          Remove
+        </button>
+      </div>
+      <div className="comparison-meta">
+        <span>{tool.category}</span>
+        <span>{tool.badge}</span>
+        <span><Stars count={tool.rating} /></span>
+      </div>
+      <div className="tool-tags">
+        {tool.tags.map((tag) => (
+          <span key={tag} className="tag">{tag}</span>
+        ))}
+      </div>
+      <a className="comparison-link" href={tool.link} target="_blank" rel="noopener noreferrer">
+        Open {tool.name}
       </a>
     </article>
   )
@@ -200,6 +260,7 @@ function ToolCard({ tool }) {
 
 function FaqItem({ q, a }) {
   const [open, setOpen] = useState(false)
+
   return (
     <div className="faq-item">
       <button className="faq-question" onClick={() => setOpen(!open)} aria-expanded={open}>
@@ -214,32 +275,106 @@ function FaqItem({ q, a }) {
 function App() {
   const [activeCategory, setActiveCategory] = useState('All')
   const [search, setSearch] = useState('')
+  const [sortBy, setSortBy] = useState('featured')
+  const [favoritesOnly, setFavoritesOnly] = useState(false)
+  const [favorites, setFavorites] = useState([])
+  const [compareList, setCompareList] = useState([])
+  const [localVisits, setLocalVisits] = useState(1)
+
+  useEffect(() => {
+    const savedFavorites = localStorage.getItem(LOCAL_FAVORITES_KEY)
+
+    if (savedFavorites) {
+      try {
+        setFavorites(JSON.parse(savedFavorites))
+      } catch {
+        setFavorites([])
+      }
+    }
+
+    const storedVisits = Number(localStorage.getItem(LOCAL_VISITS_KEY) || '0')
+    const alreadyCounted = sessionStorage.getItem(SESSION_VISIT_KEY)
+    const nextVisits = alreadyCounted ? Math.max(storedVisits, 1) : storedVisits + 1
+
+    if (!alreadyCounted) {
+      localStorage.setItem(LOCAL_VISITS_KEY, String(nextVisits))
+      sessionStorage.setItem(SESSION_VISIT_KEY, 'true')
+    }
+
+    setLocalVisits(nextVisits)
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_FAVORITES_KEY, JSON.stringify(favorites))
+  }, [favorites])
+
+  const toggleFavorite = (toolName) => {
+    setFavorites((current) => (
+      current.includes(toolName)
+        ? current.filter((name) => name !== toolName)
+        : [...current, toolName]
+    ))
+  }
+
+  const toggleCompare = (toolName) => {
+    setCompareList((current) => {
+      if (current.includes(toolName)) {
+        return current.filter((name) => name !== toolName)
+      }
+
+      if (current.length >= 3) {
+        return [...current.slice(1), toolName]
+      }
+
+      return [...current, toolName]
+    })
+  }
 
   const filtered = TOOLS.filter((tool) => {
-    const matchCat = activeCategory === 'All' || tool.category === activeCategory
-    const q = search.toLowerCase()
+    const matchCategory = activeCategory === 'All' || tool.category === activeCategory
+    const query = search.toLowerCase().trim()
     const matchSearch =
-      !q ||
-      tool.name.toLowerCase().includes(q) ||
-      tool.tagline.toLowerCase().includes(q) ||
-      tool.tags.some((t) => t.toLowerCase().includes(q))
-    return matchCat && matchSearch
+      !query ||
+      tool.name.toLowerCase().includes(query) ||
+      tool.tagline.toLowerCase().includes(query) ||
+      tool.badge.toLowerCase().includes(query) ||
+      tool.tags.some((tag) => tag.toLowerCase().includes(query))
+    const matchFavorites = !favoritesOnly || favorites.includes(tool.name)
+
+    return matchCategory && matchSearch && matchFavorites
+  }).sort((left, right) => {
+    if (sortBy === 'rating') {
+      return right.rating - left.rating || left.name.localeCompare(right.name)
+    }
+
+    if (sortBy === 'name') {
+      return left.name.localeCompare(right.name)
+    }
+
+    return 0
   })
+
+  const comparisonTools = compareList
+    .map((name) => TOOLS.find((tool) => tool.name === name))
+    .filter(Boolean)
+
+  const topPicks = [...TOOLS]
+    .sort((left, right) => right.rating - left.rating || left.name.localeCompare(right.name))
+    .slice(0, 3)
 
   return (
     <div className="page">
-      {/* NAV */}
       <nav className="nav">
         <span className="nav-logo">⚡ AIToolsCenter.in</span>
         <div className="nav-links">
           <a href="#tools">Tools</a>
+          <a href="#compare">Compare</a>
           <a href="#how-ai-works">How AI Works</a>
           <a href="#faq">FAQ</a>
           <a href="#newsletter" className="btn btn-primary nav-cta">Get Weekly Picks</a>
         </div>
       </nav>
 
-      {/* HERO */}
       <header className="hero">
         <p className="eyebrow">UPDATED MAY 2026 • 15+ TOOLS REVIEWED</p>
         <h1>Find the Best AI Tools in One Place</h1>
@@ -252,44 +387,123 @@ function App() {
             type="search"
             placeholder="Search tools, e.g. 'image generation', 'code', 'free'…"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(event) => setSearch(event.target.value)}
             aria-label="Search AI tools"
           />
         </div>
         <div className="hero-stats">
           <span>✅ 15+ Tools Listed</span>
-          <span>✅ Free &amp; Paid Options</span>
-          <span>✅ Updated Monthly</span>
+          <span>★ {favorites.length} Saved Favorites</span>
+          <span>↺ {localVisits} Visits From This Browser</span>
         </div>
       </header>
 
-      {/* TOOLS */}
       <main>
+        <section className="section picks-section">
+          <div className="section-heading-row">
+            <div>
+              <h2>Top Picks Right Now</h2>
+              <p className="section-copy">Start here if you want the shortest path to proven AI tools.</p>
+            </div>
+          </div>
+          <div className="quick-picks-grid">
+            {topPicks.map((tool) => (
+              <div key={tool.name} className="quick-pick-card">
+                <div className="quick-pick-top">
+                  <strong>{tool.name}</strong>
+                  <Stars count={tool.rating} />
+                </div>
+                <p>{tool.tagline}</p>
+                <div className="tool-tags">
+                  {tool.tags.slice(0, 2).map((tag) => (
+                    <span key={tag} className="tag">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section className="section" id="tools">
-          <h2>Browse AI Tools by Category</h2>
+          <div className="section-heading-row">
+            <div>
+              <h2>Browse AI Tools by Category</h2>
+              <p className="section-copy">Filter the directory, save favorites, and compare up to three tools side by side.</p>
+            </div>
+            <div className="results-chip">{filtered.length} results</div>
+          </div>
+
           <div className="category-filters" role="group" aria-label="Filter by category">
-            {CATEGORIES.map((cat) => (
+            {CATEGORIES.map((category) => (
               <button
-                key={cat}
-                className={`filter-btn${activeCategory === cat ? ' active' : ''}`}
-                onClick={() => setActiveCategory(cat)}
+                key={category}
+                className={`filter-btn${activeCategory === category ? ' active' : ''}`}
+                onClick={() => setActiveCategory(category)}
               >
-                {cat}
+                {category}
               </button>
             ))}
           </div>
+
+          <div className="tool-toolbar">
+            <label className="toolbar-field">
+              <span>Sort by</span>
+              <select value={sortBy} onChange={(event) => setSortBy(event.target.value)}>
+                {SORT_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>{option.label}</option>
+                ))}
+              </select>
+            </label>
+            <label className="checkbox-pill">
+              <input
+                type="checkbox"
+                checked={favoritesOnly}
+                onChange={(event) => setFavoritesOnly(event.target.checked)}
+              />
+              <span>Favorites only</span>
+            </label>
+            <button type="button" className="btn btn-secondary toolbar-button" onClick={() => setCompareList([])}>
+              Clear Compare
+            </button>
+          </div>
+
           {filtered.length === 0 ? (
-            <p style={{ marginTop: '2rem', color: 'var(--muted)' }}>No tools match your search. Try a different keyword.</p>
+            <p className="empty-state">No tools match your current filters. Try a different keyword or turn off favorites only.</p>
           ) : (
             <div className="tools-grid">
               {filtered.map((tool) => (
-                <ToolCard key={tool.name} tool={tool} />
+                <ToolCard
+                  key={tool.name}
+                  tool={tool}
+                  isFavorite={favorites.includes(tool.name)}
+                  isCompared={compareList.includes(tool.name)}
+                  onToggleFavorite={toggleFavorite}
+                  onToggleCompare={toggleCompare}
+                />
               ))}
             </div>
           )}
         </section>
 
-        {/* HOW AI WORKS */}
+        <section className="section compare-section" id="compare">
+          <div className="section-heading-row">
+            <div>
+              <h2>Compare Tools Side by Side</h2>
+              <p className="section-copy">Add up to three tools from the directory to compare pricing, category, rating, and use cases.</p>
+            </div>
+            <div className="results-chip">{comparisonTools.length}/3 selected</div>
+          </div>
+          {comparisonTools.length === 0 ? (
+            <p className="empty-state">No tools selected yet. Use the Compare button on any card to build a shortlist.</p>
+          ) : (
+            <div className="comparison-grid">
+              {comparisonTools.map((tool) => (
+                <ComparisonCard key={tool.name} tool={tool} onRemove={toggleCompare} />
+              ))}
+            </div>
+          )}
+        </section>
+
         <section className="section info-section" id="how-ai-works">
           <div className="info-grid">
             <div>
@@ -314,12 +528,12 @@ function App() {
                 { icon: '🎨', title: 'Diffusion Models', desc: 'Generate images by progressively refining noise into visuals.' },
                 { icon: '⚙️', title: 'Agents', desc: 'AI agents take multi-step actions to complete complex goals.' },
                 { icon: '🔗', title: 'RAG', desc: 'Retrieval-Augmented Generation grounds AI answers in real data.' },
-              ].map((c) => (
-                <div key={c.title} className="info-card">
-                  <span className="info-icon">{c.icon}</span>
+              ].map((card) => (
+                <div key={card.title} className="info-card">
+                  <span className="info-icon">{card.icon}</span>
                   <div>
-                    <strong>{c.title}</strong>
-                    <p>{c.desc}</p>
+                    <strong>{card.title}</strong>
+                    <p>{card.desc}</p>
                   </div>
                 </div>
               ))}
@@ -327,7 +541,6 @@ function App() {
           </div>
         </section>
 
-        {/* USE CASES */}
         <section className="section">
           <h2>What You Can Do with AI Tools</h2>
           <div className="use-cases-grid">
@@ -338,35 +551,33 @@ function App() {
               { icon: '🎬', title: 'Produce videos', desc: 'Generate cinematic short-form videos from a text description.' },
               { icon: '📊', title: 'Analyze data', desc: 'Summarize reports, extract insights, and build dashboards.' },
               { icon: '🤖', title: 'Automate workflows', desc: 'Connect apps and eliminate repetitive manual tasks.' },
-            ].map((u) => (
-              <div key={u.title} className="use-case-card">
-                <span className="use-icon">{u.icon}</span>
-                <h3>{u.title}</h3>
-                <p>{u.desc}</p>
+            ].map((useCase) => (
+              <div key={useCase.title} className="use-case-card">
+                <span className="use-icon">{useCase.icon}</span>
+                <h3>{useCase.title}</h3>
+                <p>{useCase.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* FAQ */}
         <section className="section" id="faq">
           <h2>Frequently Asked Questions</h2>
           <div className="faq-list">
-            {FAQS.map((f) => (
-              <FaqItem key={f.q} q={f.q} a={f.a} />
+            {FAQS.map((faq) => (
+              <FaqItem key={faq.q} q={faq.q} a={faq.a} />
             ))}
           </div>
         </section>
 
-        {/* NEWSLETTER */}
         <section className="section newsletter" id="newsletter">
           <h2>Get Weekly AI Tool Picks in Your Inbox</h2>
           <p>Every week we review 2-3 new or updated AI tools — free to subscribe, no spam.</p>
           <form
             className="newsletter-form"
-            onSubmit={(e) => {
-              e.preventDefault()
-              alert('Thanks! You are subscribed. (Connect a real email service like Mailchimp or ConvertKit to activate.)')
+            onSubmit={(event) => {
+              event.preventDefault()
+              alert('Thanks! You are subscribed. Connect a real email service like Mailchimp, Loops, or ConvertKit to activate delivery.')
             }}
           >
             <input type="email" placeholder="Enter your email address" required aria-label="Email address" />
