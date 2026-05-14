@@ -5,10 +5,12 @@ Single-page website built with React + Vite to help users discover, compare, and
 ## What is included
 
 - AI tools directory with categories and search
+- Favorites, sorting, and side-by-side tool comparison
 - Educational section explaining how AI tools work
 - FAQ and newsletter signup section
 - Mobile-responsive layout
 - Branded color and typography system
+- Vercel Analytics integration
 
 ## Run locally
 
@@ -47,6 +49,11 @@ npm run build
 - Vercel project URL: https://aitoolscenter-kappa.vercel.app/
 - Custom domain: https://aitoolscenter.in/
 - Deployments are managed by Vercel from the connected GitHub repository.
+
+## Analytics
+
+- Vercel Analytics is enabled in `src/main.jsx` using `@vercel/analytics/react`.
+- In Vercel dashboard, open your project and enable Analytics for production insights.
 
 ## Releases
 
