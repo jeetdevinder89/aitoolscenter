@@ -172,6 +172,7 @@ const SORT_OPTIONS = [
 const LOCAL_FAVORITES_KEY = 'aitoolscenter-favorites'
 const LOCAL_VISITS_KEY = 'aitoolscenter-local-visits'
 const SESSION_VISIT_KEY = 'aitoolscenter-session-visited'
+const NEWSLETTER_ENDPOINT = import.meta.env.VITE_NEWSLETTER_ENDPOINT || ''
 
 function Stars({ count }) {
   return (
@@ -280,6 +281,9 @@ function App() {
   const [favorites, setFavorites] = useState([])
   const [compareList, setCompareList] = useState([])
   const [localVisits, setLocalVisits] = useState(1)
+  const [newsletterEmail, setNewsletterEmail] = useState('')
+  const [newsletterStatus, setNewsletterStatus] = useState({ type: 'idle', message: '' })
+  const [isSubmittingNewsletter, setIsSubmittingNewsletter] = useState(false)
 
   useEffect(() => {
     const savedFavorites = localStorage.getItem(LOCAL_FAVORITES_KEY)
@@ -361,6 +365,49 @@ function App() {
   const topPicks = [...TOOLS]
     .sort((left, right) => right.rating - left.rating || left.name.localeCompare(right.name))
     .slice(0, 3)
+
+  const handleNewsletterSubmit = async (event) => {
+    event.preventDefault()
+
+    if (!NEWSLETTER_ENDPOINT) {
+      setNewsletterStatus({
+        type: 'error',
+        message: 'Newsletter endpoint is not configured. Set VITE_NEWSLETTER_ENDPOINT in your environment.',
+      })
+      return
+    }
+
+    setIsSubmittingNewsletter(true)
+    setNewsletterStatus({ type: 'idle', message: '' })
+
+    try {
+      const response = await fetch(NEWSLETTER_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: newsletterEmail,
+          source: 'aitoolscenter-newsletter',
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Unable to subscribe at the moment.')
+      }
+
+      setNewsletterEmail('')
+      setNewsletterStatus({ type: 'success', message: 'Thanks for subscribing. Check your inbox for confirmation.' })
+    } catch {
+      setNewsletterStatus({
+        type: 'error',
+        message: 'Subscription failed. Please try again in a moment.',
+      })
+    } finally {
+      setIsSubmittingNewsletter(false)
+    }
+  }
 
   return (
     <div className="page">
@@ -573,16 +620,24 @@ function App() {
         <section className="section newsletter" id="newsletter">
           <h2>Get Weekly AI Tool Picks in Your Inbox</h2>
           <p>Every week we review 2-3 new or updated AI tools — free to subscribe, no spam.</p>
-          <form
-            className="newsletter-form"
-            onSubmit={(event) => {
-              event.preventDefault()
-              alert('Thanks! You are subscribed. Connect a real email service like Mailchimp, Loops, or ConvertKit to activate delivery.')
-            }}
-          >
-            <input type="email" placeholder="Enter your email address" required aria-label="Email address" />
-            <button type="submit" className="btn btn-primary">Subscribe Free</button>
+          <form className="newsletter-form" onSubmit={handleNewsletterSubmit}>
+            <input
+              type="email"
+              placeholder="Enter your email address"
+              required
+              aria-label="Email address"
+              value={newsletterEmail}
+              onChange={(event) => setNewsletterEmail(event.target.value)}
+            />
+            <button type="submit" className="btn btn-primary" disabled={isSubmittingNewsletter}>
+              {isSubmittingNewsletter ? 'Subscribing...' : 'Subscribe Free'}
+            </button>
           </form>
+          {newsletterStatus.message ? (
+            <p className={`newsletter-status ${newsletterStatus.type === 'error' ? 'is-error' : 'is-success'}`}>
+              {newsletterStatus.message}
+            </p>
+          ) : null}
           <p className="trust">No spam. Unsubscribe anytime. 100% free.</p>
         </section>
       </main>

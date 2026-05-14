@@ -42,8 +42,15 @@ npm run build
 ## Customization notes
 
 - Update tool links, ratings, and categories in `src/App.jsx`.
-- Replace newsletter form alert with a real email provider (Mailchimp, ConvertKit, or Beehiiv).
+- Set `VITE_NEWSLETTER_ENDPOINT` to connect the newsletter form to your provider endpoint.
 - Add affiliate links and a paid submit-your-tool flow for monetization.
+
+## Newsletter Setup
+
+- Copy `.env.example` to `.env`.
+- Set `VITE_NEWSLETTER_ENDPOINT` to your provider form endpoint.
+- For Formspree, use a URL like `https://formspree.io/f/your-form-id`.
+- Restart the dev server after changing environment variables.
 
 ## Deployment
 

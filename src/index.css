@@ -707,6 +707,20 @@ h1 {
   font-size: 0.9rem;
 }
 
+.newsletter-status {
+  margin: 0.8rem 0 0;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.newsletter-status.is-success {
+  color: #d8ffe5;
+}
+
+.newsletter-status.is-error {
+  color: #ffe2e2;
+}
+
 .trust {
   margin: 0.5rem 0 0;
   font-size: 0.9rem;
