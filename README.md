@@ -62,4 +62,6 @@ git push origin v1.0.0
 
 ## Custom domain
 
-- To enable a custom domain, add your domain in repository settings under Pages, then add a `public/CNAME` file containing that domain.
+- Configured domain: https://aitoolscenter.in/
+- The `public/CNAME` file is set to `aitoolscenter.in`.
+- In GitHub Pages settings, keep Source as `GitHub Actions` and set the custom domain to `aitoolscenter.in`.
