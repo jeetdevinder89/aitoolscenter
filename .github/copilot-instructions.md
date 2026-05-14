@@ -2,13 +2,13 @@
 Summary: File created and present at .github/copilot-instructions.md.
 
 - [x] Clarify Project Requirements
-Summary: Built a Vite + React single-page marketing site for a med spa lead automation service.
+Summary: Built a Vite + React single-page AI tools discovery and comparison website.
 
 - [x] Scaffold the Project
 Summary: Scaffolding completed with create-vite@5.5.2 (Node 18 compatible).
 
 - [x] Customize the Project
-Summary: Replaced starter template with a responsive conversion-focused landing page and custom branding.
+Summary: Replaced starter template with a responsive AI tools directory featuring filtering, comparison, and submissions.
 
 - [x] Install Required Extensions
 Summary: No extensions specified by project setup info.

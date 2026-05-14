@@ -63,8 +63,8 @@ npm run build
 
 ## Deployment
 
-- Vercel project URL: https://aitoolscenter-kappa.vercel.app/
-- Custom domain: https://aitoolscenter.in/
+- Production URL: https://aitoolscenter.in/
+- Vercel preview URL is generated per deployment in your Vercel dashboard.
 - Deployments are managed by Vercel from the connected GitHub repository.
 
 ## Analytics
