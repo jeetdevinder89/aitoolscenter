@@ -664,6 +664,91 @@ h1 {
   line-height: 1.7;
 }
 
+.submit-tool-section {
+  background: linear-gradient(140deg, #f2f4ff, #ebfbff);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  border-top: none;
+}
+
+.submit-tool-form {
+  margin-top: 1.2rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field-group span {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+.field-group input,
+.field-group select,
+.field-group textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  padding: 0.75rem 0.85rem;
+  outline: none;
+}
+
+.field-group textarea {
+  resize: vertical;
+}
+
+.field-group input:focus,
+.field-group select:focus,
+.field-group textarea:focus {
+  border-color: var(--accent);
+}
+
+.field-group [aria-invalid='true'] {
+  border-color: #dc2626;
+}
+
+.field-group-full {
+  grid-column: 1 / -1;
+}
+
+.field-error {
+  color: #b91c1c;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.submit-tool-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.7rem;
+}
+
+.submit-tool-status {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.submit-tool-status.is-success {
+  color: #166534;
+}
+
+.submit-tool-status.is-error {
+  color: #b91c1c;
+}
+
 /* NEWSLETTER */
 .newsletter {
   background: linear-gradient(135deg, var(--accent), var(--accent-dark));
@@ -743,7 +828,8 @@ h1 {
   .info-grid,
   .use-cases-grid,
   .comparison-grid,
-  .quick-picks-grid {
+  .quick-picks-grid,
+  .submit-tool-form {
     grid-template-columns: 1fr;
   }
 }

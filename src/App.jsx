@@ -173,6 +173,9 @@ const LOCAL_FAVORITES_KEY = 'aitoolscenter-favorites'
 const LOCAL_VISITS_KEY = 'aitoolscenter-local-visits'
 const SESSION_VISIT_KEY = 'aitoolscenter-session-visited'
 const NEWSLETTER_ENDPOINT = import.meta.env.VITE_NEWSLETTER_ENDPOINT || ''
+const SUBMIT_TOOL_ENDPOINT = import.meta.env.VITE_SUBMIT_TOOL_ENDPOINT || ''
+const TOOL_CATEGORIES = CATEGORIES.filter((category) => category !== 'All')
+const PRICING_OPTIONS = ['Free', 'Freemium', 'Paid', 'Enterprise']
 
 function Stars({ count }) {
   return (
@@ -284,6 +287,17 @@ function App() {
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterStatus, setNewsletterStatus] = useState({ type: 'idle', message: '' })
   const [isSubmittingNewsletter, setIsSubmittingNewsletter] = useState(false)
+  const [toolSubmission, setToolSubmission] = useState({
+    name: '',
+    url: '',
+    category: 'Writing',
+    pricing: 'Freemium',
+    contactEmail: '',
+    description: '',
+  })
+  const [toolErrors, setToolErrors] = useState({})
+  const [toolSubmitStatus, setToolSubmitStatus] = useState({ type: 'idle', message: '' })
+  const [isSubmittingTool, setIsSubmittingTool] = useState(false)
 
   useEffect(() => {
     const savedFavorites = localStorage.getItem(LOCAL_FAVORITES_KEY)
@@ -409,6 +423,115 @@ function App() {
     }
   }
 
+  const validateToolSubmission = (payload) => {
+    const errors = {}
+
+    if (!payload.name.trim()) {
+      errors.name = 'Tool name is required.'
+    }
+
+    if (!payload.url.trim()) {
+      errors.url = 'Tool website URL is required.'
+    } else {
+      try {
+        const parsedUrl = new URL(payload.url)
+        if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
+          errors.url = 'URL must start with http:// or https://.'
+        }
+      } catch {
+        errors.url = 'Enter a valid website URL.'
+      }
+    }
+
+    if (!payload.contactEmail.trim()) {
+      errors.contactEmail = 'Contact email is required.'
+    }
+
+    if (!payload.description.trim() || payload.description.trim().length < 30) {
+      errors.description = 'Description must be at least 30 characters.'
+    }
+
+    return errors
+  }
+
+  const handleToolInputChange = (event) => {
+    const { name, value } = event.target
+    setToolSubmission((current) => ({ ...current, [name]: value }))
+    setToolErrors((current) => ({ ...current, [name]: '' }))
+  }
+
+  const handleToolSubmit = async (event) => {
+    event.preventDefault()
+
+    const payload = {
+      name: toolSubmission.name.trim(),
+      url: toolSubmission.url.trim(),
+      category: toolSubmission.category,
+      pricing: toolSubmission.pricing,
+      contactEmail: toolSubmission.contactEmail.trim(),
+      description: toolSubmission.description.trim(),
+    }
+
+    const errors = validateToolSubmission(payload)
+    setToolErrors(errors)
+
+    if (Object.keys(errors).length > 0) {
+      setToolSubmitStatus({ type: 'error', message: 'Please fix the highlighted fields and submit again.' })
+      return
+    }
+
+    if (!SUBMIT_TOOL_ENDPOINT) {
+      setToolSubmitStatus({
+        type: 'error',
+        message: 'Submit endpoint is not configured. Set VITE_SUBMIT_TOOL_ENDPOINT in your environment.',
+      })
+      return
+    }
+
+    setIsSubmittingTool(true)
+    setToolSubmitStatus({ type: 'idle', message: '' })
+
+    try {
+      const response = await fetch(SUBMIT_TOOL_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...payload,
+          source: 'aitoolscenter-submit-tool',
+          submittedAt: new Date().toISOString(),
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Unable to submit at this time.')
+      }
+
+      setToolSubmission({
+        name: '',
+        url: '',
+        category: 'Writing',
+        pricing: 'Freemium',
+        contactEmail: '',
+        description: '',
+      })
+      setToolErrors({})
+      setToolSubmitStatus({
+        type: 'success',
+        message: 'Thanks. Your tool submission was received and will be reviewed shortly.',
+      })
+    } catch {
+      setToolSubmitStatus({
+        type: 'error',
+        message: 'Submission failed. Please try again in a few minutes.',
+      })
+    } finally {
+      setIsSubmittingTool(false)
+    }
+  }
+
   return (
     <div className="page">
       <nav className="nav">
@@ -416,6 +539,7 @@ function App() {
         <div className="nav-links">
           <a href="#tools">Tools</a>
           <a href="#compare">Compare</a>
+          <a href="#submit-tool">Submit Tool</a>
           <a href="#how-ai-works">How AI Works</a>
           <a href="#faq">FAQ</a>
           <a href="#newsletter" className="btn btn-primary nav-cta">Get Weekly Picks</a>
@@ -615,6 +739,107 @@ function App() {
               <FaqItem key={faq.q} q={faq.q} a={faq.a} />
             ))}
           </div>
+        </section>
+
+        <section className="section submit-tool-section" id="submit-tool">
+          <h2>Submit Your Tool</h2>
+          <p className="section-copy">
+            Building an AI product? Share your tool for review and potential listing in AIToolsCenter.
+          </p>
+          <form className="submit-tool-form" onSubmit={handleToolSubmit} noValidate>
+            <label className="field-group">
+              <span>Tool name</span>
+              <input
+                name="name"
+                type="text"
+                value={toolSubmission.name}
+                onChange={handleToolInputChange}
+                placeholder="Example: PromptPilot"
+                aria-invalid={Boolean(toolErrors.name)}
+                required
+              />
+              {toolErrors.name ? <small className="field-error">{toolErrors.name}</small> : null}
+            </label>
+
+            <label className="field-group">
+              <span>Website URL</span>
+              <input
+                name="url"
+                type="url"
+                value={toolSubmission.url}
+                onChange={handleToolInputChange}
+                placeholder="https://yourtool.com"
+                aria-invalid={Boolean(toolErrors.url)}
+                required
+              />
+              {toolErrors.url ? <small className="field-error">{toolErrors.url}</small> : null}
+            </label>
+
+            <label className="field-group">
+              <span>Category</span>
+              <select
+                name="category"
+                value={toolSubmission.category}
+                onChange={handleToolInputChange}
+              >
+                {TOOL_CATEGORIES.map((category) => (
+                  <option key={category} value={category}>{category}</option>
+                ))}
+              </select>
+            </label>
+
+            <label className="field-group">
+              <span>Pricing</span>
+              <select
+                name="pricing"
+                value={toolSubmission.pricing}
+                onChange={handleToolInputChange}
+              >
+                {PRICING_OPTIONS.map((option) => (
+                  <option key={option} value={option}>{option}</option>
+                ))}
+              </select>
+            </label>
+
+            <label className="field-group field-group-full">
+              <span>Contact email</span>
+              <input
+                name="contactEmail"
+                type="email"
+                value={toolSubmission.contactEmail}
+                onChange={handleToolInputChange}
+                placeholder="founder@yourtool.com"
+                aria-invalid={Boolean(toolErrors.contactEmail)}
+                required
+              />
+              {toolErrors.contactEmail ? <small className="field-error">{toolErrors.contactEmail}</small> : null}
+            </label>
+
+            <label className="field-group field-group-full">
+              <span>What does your tool do?</span>
+              <textarea
+                name="description"
+                value={toolSubmission.description}
+                onChange={handleToolInputChange}
+                rows={5}
+                placeholder="Describe use case, who it's for, and what makes it different."
+                aria-invalid={Boolean(toolErrors.description)}
+                required
+              />
+              {toolErrors.description ? <small className="field-error">{toolErrors.description}</small> : null}
+            </label>
+
+            <div className="field-group-full submit-tool-actions">
+              <button type="submit" className="btn btn-primary" disabled={isSubmittingTool}>
+                {isSubmittingTool ? 'Submitting...' : 'Submit Tool'}
+              </button>
+              {toolSubmitStatus.message ? (
+                <p className={`submit-tool-status ${toolSubmitStatus.type === 'error' ? 'is-error' : 'is-success'}`}>
+                  {toolSubmitStatus.message}
+                </p>
+              ) : null}
+            </div>
+          </form>
         </section>
 
         <section className="section newsletter" id="newsletter">

@@ -6,6 +6,7 @@ Single-page website built with React + Vite to help users discover, compare, and
 
 - AI tools directory with categories and search
 - Favorites, sorting, and side-by-side tool comparison
+- Submit-your-tool form with validation and endpoint-based delivery
 - Educational section explaining how AI tools work
 - FAQ and newsletter signup section
 - Mobile-responsive layout
@@ -51,6 +52,12 @@ npm run build
 - Set `VITE_NEWSLETTER_ENDPOINT` to your provider form endpoint.
 - For Formspree, use a URL like `https://formspree.io/f/your-form-id`.
 - Restart the dev server after changing environment variables.
+
+## Submit Tool Setup
+
+- Set `VITE_SUBMIT_TOOL_ENDPOINT` in `.env` or Vercel environment variables.
+- The submit form posts JSON including name, URL, category, pricing, contact email, and description.
+- For Formspree, create a second form endpoint and paste it as `VITE_SUBMIT_TOOL_ENDPOINT`.
 
 ## Deployment
 
