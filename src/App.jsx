@@ -190,8 +190,8 @@ const LOCAL_RATINGS_KEY = 'aitoolscenter-user-ratings'
 const LOCAL_TOOL_CLICKS_KEY = 'aitoolscenter-tool-clicks'
 const SESSION_VISIT_KEY = 'aitoolscenter-session-visited'
 const SESSION_GLOBAL_VISIT_KEY = 'aitoolscenter-global-visit-counted'
-const COUNTAPI_NAMESPACE = 'aitoolscenter.in'
-const COUNTAPI_KEY = 'website-visits'
+const COUNTERAPI_NAMESPACE = 'aitoolscenter'
+const COUNTERAPI_KEY = 'website-visits'
 const NEWSLETTER_ENDPOINT = '/api/newsletter'
 
 const AI_NEWS = aiNews
@@ -963,18 +963,17 @@ function App() {
     const loadWebsiteVisitorCount = async () => {
       const hasCountedSessionVisit = sessionStorage.getItem(SESSION_GLOBAL_VISIT_KEY)
       const endpoint = hasCountedSessionVisit
-        ? `https://api.countapi.xyz/get/${COUNTAPI_NAMESPACE}/${COUNTAPI_KEY}`
-        : `https://api.countapi.xyz/hit/${COUNTAPI_NAMESPACE}/${COUNTAPI_KEY}`
+        ? `https://api.counterapi.dev/v1/${COUNTERAPI_NAMESPACE}/${COUNTERAPI_KEY}/get`
+        : `https://api.counterapi.dev/v1/${COUNTERAPI_NAMESPACE}/${COUNTERAPI_KEY}/up`
 
       try {
-        const response = await fetch(endpoint, { method: 'GET' })
-        if (!response.ok) {
-          throw new Error('Visitor count request failed')
-        }
+        const response = await fetch(endpoint)
+        if (!response.ok) throw new Error('Visitor count request failed')
 
         const result = await response.json()
-        if (!cancelled && typeof result.value === 'number') {
-          setWebsiteVisitors(result.value)
+        const count = result.count ?? result.value
+        if (!cancelled && typeof count === 'number') {
+          setWebsiteVisitors(count)
         }
 
         if (!hasCountedSessionVisit) {
