@@ -377,21 +377,8 @@ const canUseInteractiveTilt = () => (
 )
 
 const canUseWebglHero = () => {
-  if (typeof window === 'undefined') {
-    return false
-  }
-
-  if (!canUseInteractiveTilt()) {
-    return false
-  }
-
-  try {
-    const canvas = document.createElement('canvas')
-    const hasWebgl = !!(window.WebGLRenderingContext && (canvas.getContext('webgl2') || canvas.getContext('webgl')))
-    return hasWebgl
-  } catch {
-    return false
-  }
+  // Keep the same hero treatment as mobile for a more consistent layout.
+  return false
 }
 
 const getWebglHeroQuality = () => {
