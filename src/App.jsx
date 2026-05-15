@@ -181,24 +181,28 @@ const AI_NEWS = [
     title: 'OpenAI launches GPT-5 with real-time voice and vision',
     summary: 'GPT-5 introduces a unified model for text, voice, and vision with dramatically improved reasoning and a new o3-style thinking mode built in.',
     tag: 'OpenAI',
+    link: 'https://openai.com/index/gpt-5/',
   },
   {
     date: 'May 8, 2026',
     title: 'Google DeepMind releases Gemini 2.5 Ultra',
     summary: 'Gemini 2.5 Ultra tops coding and science benchmarks, with a 2M token context window and native integration across all Google Workspace apps.',
     tag: 'Google',
+    link: 'https://deepmind.google/models/gemini/',
   },
   {
     date: 'May 5, 2026',
     title: 'Midjourney V7 launches with reference image control',
     summary: 'Midjourney V7 adds style and subject reference images, giving creators fine-grained control over character consistency across generations.',
     tag: 'Image AI',
+    link: 'https://www.midjourney.com',
   },
   {
     date: 'Apr 29, 2026',
     title: 'Cursor 1.0 ships with background agent and full codebase indexing',
     summary: 'Cursor hits 1.0 with an autonomous background agent that can open PRs, run tests, and iterate on code without manual prompting.',
     tag: 'Coding',
+    link: 'https://cursor.sh',
   },
 ]
 const SUBMIT_TOOL_ENDPOINT = '/api/submit-tool'
@@ -662,7 +666,7 @@ function App() {
 
       <header className="hero">
         <p className="eyebrow">UPDATED MAY 2026 • 15+ TOOLS REVIEWED</p>
-        <h1>Find the Best AI Tools in One Place</h1>
+        <h1>Find the Best <span className="gradient-text">AI Tools</span> in One Place</h1>
         <p className="subtext">
           We test, rank, and explain AI tools so you can skip the confusion and start using the right
           tool for writing, images, coding, video, automation, and more.
@@ -710,6 +714,7 @@ function App() {
         </section>
 
         <section className="section" id="tools">
+          <div className="section-divider"></div>
           <div className="section-heading-row">
             <div>
               <h2>Browse AI Tools by Category</h2>
@@ -774,6 +779,7 @@ function App() {
         </section>
 
         <section className="section compare-section" id="compare">
+          <div className="section-divider"></div>
           <div className="section-heading-row">
             <div>
               <h2>Compare Tools Side by Side</h2>
@@ -850,6 +856,7 @@ function App() {
         </section>
 
         <section className="section news-section" id="ai-news">
+          <div className="section-divider"></div>
           <div className="section-heading-row">
             <div>
               <h2>AI News &amp; Updates</h2>
@@ -864,7 +871,11 @@ function App() {
                   <span className="news-tag">{item.tag}</span>
                   <span className="news-date">{item.date}</span>
                 </div>
-                <h3 className="news-title">{item.title}</h3>
+                <h3 className="news-title">
+                  <a href={item.link} target="_blank" rel="noopener noreferrer" className="news-title-link">
+                    {item.title}
+                  </a>
+                </h3>
                 <p className="news-summary">{item.summary}</p>
               </div>
             ))}
@@ -872,6 +883,7 @@ function App() {
         </section>
 
         <section className="section" id="faq">
+          <div className="section-divider"></div>
           <h2>Frequently Asked Questions</h2>
           <div className="faq-list">
             {FAQS.map((faq) => (
