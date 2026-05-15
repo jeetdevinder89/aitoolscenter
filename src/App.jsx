@@ -205,6 +205,94 @@ const AI_NEWS = [
     link: 'https://cursor.sh',
   },
 ]
+
+const LEGAL_PAGES = {
+  '/about': {
+    title: 'About AIToolsCenter',
+    description: 'Learn how AIToolsCenter reviews, curates, and updates AI tools for readers.',
+    intro: 'AIToolsCenter is an editorial AI tools directory built to help people discover practical, trustworthy tools faster.',
+    sections: [
+      {
+        heading: 'How We Review',
+        items: [
+          'We evaluate tools by category fit, ease of use, and feature depth.',
+          'Listings are manually curated and updated based on product changes.',
+          'We prioritize clear descriptions and practical use cases for readers.',
+        ],
+      },
+      {
+        heading: 'Editorial Independence',
+        items: [
+          'Sponsored placement, if any, is labeled clearly.',
+          'Affiliate relationships do not change core ranking methodology.',
+          'We regularly remove outdated or low-quality tools from the list.',
+        ],
+      },
+    ],
+  },
+  '/privacy-policy': {
+    title: 'Privacy Policy',
+    description: 'Read how AIToolsCenter handles newsletter subscriptions, tool submissions, cookies, and limited user data.',
+    intro: 'We collect minimal data needed to run this site, handle submissions, and improve user experience.',
+    sections: [
+      {
+        heading: 'What We Collect',
+        items: [
+          'Newsletter subscriptions store email address and subscription source.',
+          'Tool submissions store details provided through the submission form.',
+          'Basic analytics and ad technologies may use cookies to personalize content and measure performance.',
+        ],
+      },
+      {
+        heading: 'How We Use Data',
+        items: [
+          'We use submitted information to respond to requests, review tool listings, and improve site content.',
+          'We do not sell personal data to third parties.',
+          'You can request removal of your submitted personal data by contacting us.',
+        ],
+      },
+    ],
+  },
+  '/terms-and-conditions': {
+    title: 'Terms and Conditions',
+    description: 'Review the terms that govern your use of AIToolsCenter and its third-party listings.',
+    intro: 'By using AIToolsCenter, you agree to the terms below and all applicable laws.',
+    sections: [
+      {
+        heading: 'Use of the Site',
+        items: [
+          'All content is provided for informational purposes only.',
+          'Tool pricing, availability, and features can change without notice.',
+          'Users are responsible for evaluating third-party tools before use.',
+        ],
+      },
+      {
+        heading: 'Restrictions',
+        items: [
+          'Unauthorized scraping, abuse, or harmful automated use of this site is prohibited.',
+          'We may update these terms as the site evolves.',
+          'Continued use of the site constitutes acceptance of updated terms.',
+        ],
+      },
+    ],
+  },
+  '/contact': {
+    title: 'Contact AIToolsCenter',
+    description: 'Get in touch with AIToolsCenter for support, corrections, privacy requests, and partnerships.',
+    intro: 'For support, corrections, legal/privacy requests, or partnership inquiries, contact us using the details below.',
+    sections: [
+      {
+        heading: 'Primary Contact',
+        items: [
+          'Email: support@aitoolscenter.in',
+          'Typical response time: 2 to 5 business days.',
+          'Use this address for support, privacy requests, and business inquiries.',
+        ],
+      },
+    ],
+  },
+}
+
 const SUBMIT_TOOL_ENDPOINT = '/api/submit-tool'
 const TOOL_CATEGORIES = CATEGORIES.filter((category) => category !== 'All')
 const PRICING_OPTIONS = ['Free', 'Freemium', 'Paid', 'Enterprise']
@@ -216,6 +304,7 @@ const slugifyToolName = (value) => value
   .replace(/^-+|-+$/g, '')
 
 const getToolBySlug = (slug) => TOOLS.find((tool) => slugifyToolName(tool.name) === slug)
+const getLegalPage = (pathname) => LEGAL_PAGES[pathname] || null
 
 const upsertMeta = ({ attr, key, content }) => {
   let tag = document.head.querySelector(`meta[${attr}="${key}"]`)
@@ -466,7 +555,85 @@ function AdUnit({ slot, className = '' }) {
   )
 }
 
+function SiteNav() {
+  return (
+    <nav className="nav">
+      <a href="/" className="nav-logo">⚡ AIToolsCenter.in</a>
+      <div className="nav-links">
+        <a href="/#tools">Tools</a>
+        <a href="/#compare">Compare</a>
+        <a href="/#ai-news">AI News</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/privacy-policy">Privacy</a>
+        <a href="/terms-and-conditions">Terms</a>
+        <a href="/#newsletter" className="btn btn-primary nav-cta">Get Weekly Picks</a>
+      </div>
+    </nav>
+  )
+}
+
+function SiteFooter() {
+  return (
+    <footer className="footer">
+      <div className="footer-links">
+        <a href="/about">About</a>
+        <a href="/privacy-policy">Privacy</a>
+        <a href="/terms-and-conditions">Terms</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <p>© 2026 AIToolsCenter.in · Built to help you navigate the AI landscape.</p>
+      <p style={{ marginTop: '0.4rem', fontSize: '0.85rem', color: 'var(--muted)' }}>
+        Some links are affiliate links. We may earn a small commission at no extra cost to you.
+      </p>
+    </footer>
+  )
+}
+
+function LegalPage({ page }) {
+  return (
+    <div className="page">
+      <SiteNav />
+      <main className="content-page">
+        <section className="content-hero">
+          <p className="eyebrow">SITE INFORMATION</p>
+          <h1>{page.title}</h1>
+          <p className="subtext">{page.intro}</p>
+        </section>
+
+        <section className="content-shell">
+          <div className="content-stack">
+            {page.sections.map((section) => (
+              <article key={section.heading} className="policy-card content-card">
+                <h2>{section.heading}</h2>
+                {section.heading === 'Primary Contact' ? (
+                  <ul className="policy-list">
+                    <li>
+                      Email: <a href="mailto:support@aitoolscenter.in">support@aitoolscenter.in</a>
+                    </li>
+                    <li>Typical response time: 2 to 5 business days.</li>
+                    <li>Use this address for support, privacy requests, and business inquiries.</li>
+                  </ul>
+                ) : (
+                  <ul className="policy-list">
+                    {section.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                )}
+              </article>
+            ))}
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </div>
+  )
+}
+
 function App() {
+  const normalizedPath = window.location.pathname.replace(/\/$/, '') || '/'
+  const legalPage = getLegalPage(normalizedPath)
   const [activeCategory, setActiveCategory] = useState('All')
   const [search, setSearch] = useState('')
   const [sortBy, setSortBy] = useState('featured')
@@ -531,10 +698,10 @@ function App() {
 
   useEffect(() => {
     const baseUrl = 'https://aitoolscenter.in'
-    const { pathname } = window.location
-    const matched = pathname.startsWith('/tools/')
-      ? getToolBySlug(pathname.replace('/tools/', '').replace(/\/$/, ''))
+    const matched = normalizedPath.startsWith('/tools/')
+      ? getToolBySlug(normalizedPath.replace('/tools/', ''))
       : null
+    const matchedLegalPage = getLegalPage(normalizedPath)
 
     if (matched) {
       setSearch((current) => current || matched.name)
@@ -542,15 +709,21 @@ function App() {
 
     const title = matched
       ? `${matched.name} Review, Pricing & Alternatives | AIToolsCenter.in`
-      : 'AIToolsCenter.in - Best AI Tools Directory for 2026'
+      : matchedLegalPage
+        ? `${matchedLegalPage.title} | AIToolsCenter.in`
+        : 'AIToolsCenter.in - Best AI Tools Directory for 2026'
 
     const description = matched
       ? `${matched.name}: ${matched.tagline} Explore pricing, use cases, categories, and alternatives on AIToolsCenter.in.`
-      : 'Discover and compare top AI tools for writing, coding, images, video, automation, and productivity.'
+      : matchedLegalPage
+        ? matchedLegalPage.description
+        : 'Discover and compare top AI tools for writing, coding, images, video, automation, and productivity.'
 
     const canonicalUrl = matched
       ? `${baseUrl}/tools/${slugifyToolName(matched.name)}`
-      : `${baseUrl}/`
+      : matchedLegalPage
+        ? `${baseUrl}${normalizedPath}`
+        : `${baseUrl}/`
 
     document.title = title
     upsertMeta({ attr: 'name', key: 'description', content: description })
@@ -621,10 +794,23 @@ function App() {
             ratingCount: '1',
           },
         }
+      : matchedLegalPage
+        ? {
+            '@context': 'https://schema.org',
+            '@type': 'WebPage',
+            name: matchedLegalPage.title,
+            description: matchedLegalPage.description,
+            url: canonicalUrl,
+            isPartOf: {
+              '@type': 'WebSite',
+              name: 'AIToolsCenter.in',
+              url: `${baseUrl}/`,
+            },
+          }
       : listSchema
 
     upsertJsonLd(toolSchema)
-  }, [])
+  }, [normalizedPath])
 
   const rateTool = (toolName, star) => {
     setUserRatings((current) => {
@@ -845,22 +1031,13 @@ function App() {
     }
   }
 
+  if (legalPage) {
+    return <LegalPage page={legalPage} />
+  }
+
   return (
     <div className="page">
-      <nav className="nav">
-        <span className="nav-logo">⚡ AIToolsCenter.in</span>
-        <div className="nav-links">
-          <a href="#tools">Tools</a>
-          <a href="#compare">Compare</a>
-          <a href="#ai-news">AI News</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-          <a href="#submit-tool">Submit Tool</a>
-          <a href="#how-ai-works">How AI Works</a>
-          <a href="#faq">FAQ</a>
-          <a href="#newsletter" className="btn btn-primary nav-cta">Get Weekly Picks</a>
-        </div>
-      </nav>
+      <SiteNav />
 
       <header className="hero">
         <p className="eyebrow">UPDATED MAY 2026 • 15+ TOOLS REVIEWED</p>
@@ -1094,77 +1271,6 @@ function App() {
           </div>
         </section>
 
-        <section className="section" id="about">
-          <div className="section-divider"></div>
-          <div className="section-heading-row">
-            <div>
-              <h2>About AIToolsCenter</h2>
-              <p className="section-copy">
-                AIToolsCenter is an editorial AI tools directory built to help people discover practical, trustworthy tools faster.
-              </p>
-            </div>
-          </div>
-          <div className="policy-grid">
-            <article className="policy-card">
-              <h3>How We Review</h3>
-              <ul className="policy-list">
-                <li>We evaluate tools by category fit, ease of use, and feature depth.</li>
-                <li>Listings are manually curated and updated based on product changes.</li>
-                <li>We prioritize clear descriptions and practical use cases for readers.</li>
-              </ul>
-            </article>
-            <article className="policy-card">
-              <h3>Editorial Independence</h3>
-              <ul className="policy-list">
-                <li>Sponsored placement, if any, is labeled clearly.</li>
-                <li>Affiliate relationships do not change core ranking methodology.</li>
-                <li>We regularly remove outdated or low-quality tools from the list.</li>
-              </ul>
-            </article>
-          </div>
-        </section>
-
-        <section className="section legal-section" id="privacy">
-          <div className="section-divider"></div>
-          <h2>Privacy Policy</h2>
-          <p className="section-copy">
-            We collect minimal data needed to run this site and improve user experience.
-          </p>
-          <ul className="policy-list">
-            <li>Newsletter subscriptions store email address and subscription source.</li>
-            <li>Tool submissions store details provided through the submission form.</li>
-            <li>Basic analytics and ad technologies may use cookies to personalize content and measure performance.</li>
-            <li>We do not sell personal data to third parties.</li>
-            <li>You can request removal of your submitted personal data by contacting us.</li>
-          </ul>
-        </section>
-
-        <section className="section legal-section" id="terms">
-          <div className="section-divider"></div>
-          <h2>Terms &amp; Conditions</h2>
-          <ul className="policy-list">
-            <li>All content is provided for informational purposes only.</li>
-            <li>Tool pricing, availability, and features can change without notice.</li>
-            <li>Users are responsible for evaluating third-party tools before use.</li>
-            <li>Unauthorized scraping, abuse, or harmful automated use of this site is prohibited.</li>
-            <li>By using this site, you agree to these terms and applicable laws.</li>
-          </ul>
-        </section>
-
-        <section className="section legal-section" id="contact">
-          <div className="section-divider"></div>
-          <h2>Contact</h2>
-          <div className="policy-card contact-card">
-            <p>
-              For support, corrections, legal/privacy requests, or partnership inquiries, contact us at:
-            </p>
-            <p>
-              <a href="mailto:support@aitoolscenter.in">support@aitoolscenter.in</a>
-            </p>
-            <p className="section-copy">Typical response time: 2 to 5 business days.</p>
-          </div>
-        </section>
-
         <section className="section submit-tool-section" id="submit-tool">
           <h2>Submit Your Tool</h2>
           <p className="section-copy">
@@ -1291,18 +1397,7 @@ function App() {
         </section>
       </main>
 
-      <footer className="footer">
-        <div className="footer-links">
-          <a href="#about">About</a>
-          <a href="#privacy">Privacy</a>
-          <a href="#terms">Terms</a>
-          <a href="#contact">Contact</a>
-        </div>
-        <p>© 2026 AIToolsCenter.in · Built to help you navigate the AI landscape.</p>
-        <p style={{ marginTop: '0.4rem', fontSize: '0.85rem', color: 'var(--muted)' }}>
-          Some links are affiliate links. We may earn a small commission at no extra cost to you.
-        </p>
-      </footer>
+      <SiteFooter />
     </div>
   )
 }

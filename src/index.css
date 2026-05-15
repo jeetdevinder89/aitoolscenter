@@ -59,6 +59,28 @@ body {
   padding: 0 0 5rem;
 }
 
+.content-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.content-hero {
+  padding: 4.5rem 0 2rem;
+}
+
+.content-shell {
+  margin-top: 1rem;
+}
+
+.content-stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.content-card h2 {
+  margin-bottom: 0.8rem;
+}
+
 /* -- NAV --------------------------------------------------- */
 .nav {
   position: sticky;
@@ -101,6 +123,10 @@ body {
   font-weight: 500;
   font-size: 0.9rem;
   transition: color 0.2s;
+}
+
+.nav-logo {
+  text-decoration: none;
 }
 
 .nav-links a:hover { color: var(--ink); }
@@ -1240,6 +1266,10 @@ h1 .gradient-text {
 
 .contact-card a:hover {
   text-decoration: underline;
+}
+
+.policy-card a {
+  color: var(--accent2);
 }
 
 /* -- FOOTER ------------------------------------------------ */
