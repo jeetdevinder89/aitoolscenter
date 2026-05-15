@@ -26,8 +26,46 @@ const decodeHtml = (value) => value
   .replace(/&#39;/g, "'")
   .replace(/&lt;/g, '<')
   .replace(/&gt;/g, '>')
+  .replace(/&nbsp;/gi, ' ')
   .replace(/<[^>]*>/g, '')
+  .replace(/\u00a0/g, ' ')
+  .replace(/\s+/g, ' ')
   .trim();
+
+const escapeForRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+const sanitizeSourceTag = (value) => value
+  .replace(/^[^a-z0-9]+/i, '')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+const cleanTitle = (title, source) => {
+  if (!source) {
+    return title;
+  }
+
+  const sourcePattern = new RegExp(`\\s[-|:]\\s${escapeForRegExp(source)}$`, 'i');
+  return title.replace(sourcePattern, '').trim();
+};
+
+const cleanSummary = (summary, source, title) => {
+  if (!summary) {
+    return 'Latest update from the AI ecosystem.';
+  }
+
+  let next = decodeHtml(summary);
+
+  if (source) {
+    const tailPattern = new RegExp(`(?:\\s|-|:)+${escapeForRegExp(source)}$`, 'i');
+    next = next.replace(tailPattern, '').trim();
+  }
+
+  if (next === title || next.length < 25) {
+    return `Latest update on ${title}.`;
+  }
+
+  return next;
+};
 
 const extractItems = (xmlText) => {
   const itemRegex = /<item>([\s\S]*?)<\/item>/g;
@@ -46,18 +84,20 @@ const extractItems = (xmlText) => {
     const rawLink = decodeHtml(block.match(linkRegex)?.[1] || '');
     const rawDate = decodeHtml(block.match(pubDateRegex)?.[1] || '');
     const rawDescription = decodeHtml(block.match(descriptionRegex)?.[1] || '');
-    const rawSource = decodeHtml(block.match(sourceRegex)?.[1] || 'AI News');
+    const rawSource = sanitizeSourceTag(decodeHtml(block.match(sourceRegex)?.[1] || 'AI News'));
+    const title = cleanTitle(rawTitle, rawSource);
+    const summary = cleanSummary(rawDescription, rawSource, title);
 
-    if (!rawTitle || !rawLink || seenTitles.has(rawTitle)) {
+    if (!title || !rawLink || seenTitles.has(title)) {
       continue;
     }
 
-    seenTitles.add(rawTitle);
+    seenTitles.add(title);
 
     results.push({
       date: formatDate(rawDate),
-      title: rawTitle,
-      summary: rawDescription || 'Latest update from the AI ecosystem.',
+      title,
+      summary,
       tag: rawSource || 'AI News',
       link: rawLink,
     });
