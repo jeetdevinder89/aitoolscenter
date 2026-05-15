@@ -1055,13 +1055,14 @@ function App() {
     .sort((left, right) => right.rating - left.rating || left.name.localeCompare(right.name))
     .slice(0, 3)
 
-  const categoryCounts = TOOL_CATEGORIES.reduce((accumulator, category) => {
-    accumulator[category] = TOOLS.filter((tool) => tool.category === category).length
+  const tagCounts = TOOLS.flatMap((tool) => tool.tags).reduce((accumulator, tag) => {
+    accumulator[tag] = (accumulator[tag] || 0) + 1
     return accumulator
   }, {})
 
-  const trendingCategories = [...TOOL_CATEGORIES]
-    .sort((left, right) => (categoryCounts[right] || 0) - (categoryCounts[left] || 0))
+  const trendingTags = Object.entries(tagCounts)
+    .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
+    .map(([tag]) => tag)
     .slice(0, 5)
 
   const handleNewsletterSubmit = async (event) => {
@@ -1262,22 +1263,23 @@ function App() {
         <section className="section discovery-rail" aria-label="Discovery shortcuts">
           <div className="section-heading-row">
             <div>
-              <h2>Trending Categories</h2>
-              <p className="section-copy">Quickly jump into popular categories and pricing models.</p>
+              <h2>Trending Searches</h2>
+              <p className="section-copy">Jump into popular tags and pricing models in one click.</p>
             </div>
           </div>
           <div className="discovery-chips">
-            {trendingCategories.map((category) => (
+            {trendingTags.map((tag) => (
               <button
-                key={category}
+                key={tag}
                 type="button"
                 className="filter-btn"
                 onClick={() => {
-                  setActiveCategory(category)
+                  setActiveCategory('All')
+                  setSearch(tag)
                   document.getElementById('tools')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
                 }}
               >
-                {category} ({categoryCounts[category] || 0})
+                {tag} ({tagCounts[tag] || 0})
               </button>
             ))}
           </div>
