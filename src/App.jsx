@@ -189,7 +189,6 @@ const LOCAL_VISITS_KEY = 'aitoolscenter-local-visits'
 const LOCAL_RATINGS_KEY = 'aitoolscenter-user-ratings'
 const LOCAL_TOOL_CLICKS_KEY = 'aitoolscenter-tool-clicks'
 const SESSION_VISIT_KEY = 'aitoolscenter-session-visited'
-const SESSION_GLOBAL_VISIT_KEY = 'aitoolscenter-global-visit-counted'
 const PAGE_VIEWS_API = '/api/page-views'
 const NEWSLETTER_ENDPOINT = '/api/newsletter'
 
@@ -960,25 +959,30 @@ function App() {
     let cancelled = false
 
     const loadWebsiteVisitorCount = async () => {
-      const hasCountedSessionVisit = sessionStorage.getItem(SESSION_GLOBAL_VISIT_KEY)
-      const method = hasCountedSessionVisit ? 'GET' : 'POST'
-
       try {
-        const response = await fetch(PAGE_VIEWS_API, { method })
+        const response = await fetch(PAGE_VIEWS_API, { method: 'POST' })
         if (!response.ok) throw new Error('Visitor count request failed')
 
         const result = await response.json()
-        const count = result.count
-        if (!cancelled && typeof count === 'number') {
+        const count = Number(result.count)
+        if (!cancelled && Number.isFinite(count)) {
           setWebsiteVisitors(count)
         }
-
-        if (!hasCountedSessionVisit) {
-          sessionStorage.setItem(SESSION_GLOBAL_VISIT_KEY, 'true')
-        }
       } catch {
-        if (!cancelled) {
-          setWebsiteVisitors(null)
+        // Fallback to current count without incrementing if POST fails.
+        try {
+          const fallbackResponse = await fetch(PAGE_VIEWS_API, { method: 'GET' })
+          if (!fallbackResponse.ok) throw new Error('Visitor count fallback failed')
+
+          const fallbackResult = await fallbackResponse.json()
+          const fallbackCount = Number(fallbackResult.count)
+          if (!cancelled && Number.isFinite(fallbackCount)) {
+            setWebsiteVisitors(fallbackCount)
+          }
+        } catch {
+          if (!cancelled) {
+            setWebsiteVisitors(null)
+          }
         }
       }
     }
