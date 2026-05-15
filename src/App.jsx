@@ -501,29 +501,15 @@ function AdUnit({ slot, className = '' }) {
       return
     }
 
-    const initializeAd = () => {
+    const timeout = setTimeout(() => {
       try {
         ;(window.adsbygoogle = window.adsbygoogle || []).push({})
       } catch {
         // Ignore ad-render errors so page UX is never blocked.
       }
-    }
+    }, 300)
 
-    const existingScript = document.querySelector('script[data-adsense="true"]')
-    if (existingScript) {
-      const timeout = setTimeout(initializeAd, 350)
-      return () => clearTimeout(timeout)
-    }
-
-    const script = document.createElement('script')
-    script.async = true
-    script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`
-    script.crossOrigin = 'anonymous'
-    script.setAttribute('data-adsense', 'true')
-    script.onload = initializeAd
-    document.head.appendChild(script)
-
-    return undefined
+    return () => clearTimeout(timeout)
   }, [])
 
   if (!ADSENSE_CLIENT_ID || import.meta.env.DEV) {
