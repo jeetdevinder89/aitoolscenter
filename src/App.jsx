@@ -220,14 +220,24 @@ const LEGAL_PAGES = {
   '/privacy-policy': {
     title: 'Privacy Policy',
     description: 'Read how AIToolsCenter handles newsletter subscriptions, tool submissions, cookies, and limited user data.',
-    intro: 'We collect minimal data needed to run this site, handle submissions, and improve user experience.',
+    intro: 'We collect minimal data needed to run this site, handle submissions, and improve user experience. Last updated: May 15, 2026.',
     sections: [
       {
         heading: 'What We Collect',
         items: [
           'Newsletter subscriptions store email address and subscription source.',
           'Tool submissions store details provided through the submission form.',
-          'Basic analytics and ad technologies may use cookies to personalize content and measure performance.',
+          'Google AdSense and associated ad technologies use cookies and web beacons to serve personalized ads based on your visits to this and other websites.',
+          'Basic analytics cookies may be used to measure site traffic and user interaction patterns.',
+        ],
+      },
+      {
+        heading: 'Google AdSense and Advertising Cookies',
+        items: [
+          'This site uses Google AdSense to display advertisements. Google uses cookies (including the DoubleClick cookie) to serve ads based on your prior visits to this site and other sites on the web.',
+          'You can opt out of personalized advertising by visiting Google Ad Settings at https://adssettings.google.com.',
+          'You can also opt out of third-party vendor cookies for personalized advertising by visiting www.aboutads.info.',
+          'We have implemented Google Consent Mode v2. If you decline non-essential cookies via our consent banner, personalized ads and analytics will not be activated.',
         ],
       },
       {
@@ -235,7 +245,8 @@ const LEGAL_PAGES = {
         items: [
           'We use submitted information to respond to requests, review tool listings, and improve site content.',
           'We do not sell personal data to third parties.',
-          'You can request removal of your submitted personal data by contacting us.',
+          'You can request removal of your submitted personal data by contacting us at support@aitoolscenter.in.',
+          'You may update your cookie preferences at any time using the consent banner in the site footer.',
         ],
       },
     ],
