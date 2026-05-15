@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import aiNews from './data/ai-news.json'
 
 const CATEGORIES = ['All', 'Writing', 'Image', 'Video', 'Coding', 'Productivity', 'Automation', 'Research']
 
@@ -175,36 +176,7 @@ const LOCAL_RATINGS_KEY = 'aitoolscenter-user-ratings'
 const SESSION_VISIT_KEY = 'aitoolscenter-session-visited'
 const NEWSLETTER_ENDPOINT = '/api/newsletter'
 
-const AI_NEWS = [
-  {
-    date: 'May 12, 2026',
-    title: 'OpenAI launches GPT-5 with real-time voice and vision',
-    summary: 'GPT-5 introduces a unified model for text, voice, and vision with dramatically improved reasoning and a new o3-style thinking mode built in.',
-    tag: 'OpenAI',
-    link: 'https://openai.com/index/gpt-5/',
-  },
-  {
-    date: 'May 8, 2026',
-    title: 'Google DeepMind releases Gemini 2.5 Ultra',
-    summary: 'Gemini 2.5 Ultra tops coding and science benchmarks, with a 2M token context window and native integration across all Google Workspace apps.',
-    tag: 'Google',
-    link: 'https://deepmind.google/models/gemini/',
-  },
-  {
-    date: 'May 5, 2026',
-    title: 'Midjourney V7 launches with reference image control',
-    summary: 'Midjourney V7 adds style and subject reference images, giving creators fine-grained control over character consistency across generations.',
-    tag: 'Image AI',
-    link: 'https://www.midjourney.com',
-  },
-  {
-    date: 'Apr 29, 2026',
-    title: 'Cursor 1.0 ships with background agent and full codebase indexing',
-    summary: 'Cursor hits 1.0 with an autonomous background agent that can open PRs, run tests, and iterate on code without manual prompting.',
-    tag: 'Coding',
-    link: 'https://cursor.sh',
-  },
-]
+const AI_NEWS = aiNews
 
 const LEGAL_PAGES = {
   '/about': {
@@ -339,6 +311,11 @@ const slugifyCategoryName = (value) => value
   .replace(/[^a-z0-9]+/g, '-')
   .replace(/^-+|-+$/g, '')
 
+const getToolOutboundUrl = (tool) => tool.affiliateLink || tool.link
+const getToolAnchorRel = (tool) => (
+  tool.affiliateLink ? 'noopener noreferrer nofollow sponsored' : 'noopener noreferrer'
+)
+
 const getToolBySlug = (slug) => TOOLS.find((tool) => slugifyToolName(tool.name) === slug)
 const getCategoryBySlug = (slug) => TOOL_CATEGORIES.find((category) => slugifyCategoryName(category) === slug) || null
 const getLegalPage = (pathname) => LEGAL_PAGES[pathname] || null
@@ -466,9 +443,9 @@ function ToolCard({ tool, isFavorite, isCompared, userRating, onToggleFavorite, 
       <div className="tool-actions-row">
         <a
           className="btn btn-primary tool-btn"
-          href={tool.link}
+          href={getToolOutboundUrl(tool)}
           target="_blank"
-          rel="noopener noreferrer"
+          rel={getToolAnchorRel(tool)}
         >
           Visit Tool →
         </a>
@@ -514,7 +491,7 @@ function ComparisonCard({ tool, onRemove }) {
           <span key={tag} className="tag">{tag}</span>
         ))}
       </div>
-      <a className="comparison-link" href={tool.link} target="_blank" rel="noopener noreferrer">
+      <a className="comparison-link" href={getToolOutboundUrl(tool)} target="_blank" rel={getToolAnchorRel(tool)}>
         Open {tool.name}
       </a>
     </article>
@@ -687,7 +664,7 @@ function ToolDetailPage({ tool }) {
                 <li>Pricing model: {tool.badge}.</li>
                 <li>Community rating: {tool.rating}/5 based on editorial scoring.</li>
               </ul>
-              <a className="btn btn-primary" href={tool.link} target="_blank" rel="noopener noreferrer">Visit {tool.name}</a>
+              <a className="btn btn-primary" href={getToolOutboundUrl(tool)} target="_blank" rel={getToolAnchorRel(tool)}>Visit {tool.name}</a>
             </article>
 
             <article className="content-card policy-card">
@@ -1321,7 +1298,7 @@ function App() {
                   <div className="top-ten-meta">
                     <span className="tag">{tool.category}</span>
                     <span className="tag">{tool.badge}</span>
-                    <a href={tool.link} target="_blank" rel="noopener noreferrer" className="top-ten-visit">
+                    <a href={getToolOutboundUrl(tool)} target="_blank" rel={getToolAnchorRel(tool)} className="top-ten-visit">
                       Visit
                     </a>
                   </div>

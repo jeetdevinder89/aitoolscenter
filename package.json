@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "seo:check": "node scripts/seo-healthcheck.mjs https://aitoolscenter.in"
+    "seo:check": "node scripts/seo-healthcheck.mjs https://aitoolscenter.in",
+    "news:update": "node scripts/update-ai-news.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",
