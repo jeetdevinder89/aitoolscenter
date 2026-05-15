@@ -5,8 +5,11 @@ Single-page website built with React + Vite to help users discover, compare, and
 ## What is included
 
 - AI tools directory with categories and search
+- Dedicated SEO routes for tools and categories
 - Favorites, sorting, and side-by-side tool comparison
+- Top 10 weekly ranked section
 - Submit-your-tool form with validation and server-side delivery
+- AI news section with external source links
 - Educational section explaining how AI tools work
 - FAQ and newsletter signup section
 - Mobile-responsive layout

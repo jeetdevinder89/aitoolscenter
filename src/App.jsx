@@ -169,8 +169,6 @@ const SORT_OPTIONS = [
   { value: 'name', label: 'A to Z' },
 ]
 
-const PRICING_FILTERS = ['All', 'Free', 'Freemium', 'Paid', 'Pro']
-
 const LOCAL_FAVORITES_KEY = 'aitoolscenter-favorites'
 const LOCAL_VISITS_KEY = 'aitoolscenter-local-visits'
 const LOCAL_RATINGS_KEY = 'aitoolscenter-user-ratings'
@@ -344,20 +342,6 @@ const slugifyCategoryName = (value) => value
 const getToolBySlug = (slug) => TOOLS.find((tool) => slugifyToolName(tool.name) === slug)
 const getCategoryBySlug = (slug) => TOOL_CATEGORIES.find((category) => slugifyCategoryName(category) === slug) || null
 const getLegalPage = (pathname) => LEGAL_PAGES[pathname] || null
-
-const getPricingBucket = (badge) => {
-  const normalized = badge.toLowerCase()
-  if (normalized.includes('free + pro') || normalized.includes('freemium')) {
-    return 'Freemium'
-  }
-  if (normalized.includes('free')) {
-    return 'Free'
-  }
-  if (normalized.includes('pro') || normalized.includes('add-on')) {
-    return 'Pro'
-  }
-  return 'Paid'
-}
 
 const getToolSlugFromPath = (pathname) => (pathname.startsWith('/tools/') ? pathname.replace('/tools/', '') : null)
 const getCategorySlugFromPath = (pathname) => (pathname.startsWith('/categories/') ? pathname.replace('/categories/', '') : null)
@@ -786,7 +770,6 @@ function App() {
   const toolPage = toolSlug ? getToolBySlug(toolSlug) : null
   const categoryPage = categorySlug ? getCategoryBySlug(categorySlug) : null
   const [activeCategory, setActiveCategory] = useState('All')
-  const [activePricing, setActivePricing] = useState('All')
   const [search, setSearch] = useState('')
   const [sortBy, setSortBy] = useState('featured')
   const [favoritesOnly, setFavoritesOnly] = useState(false)
@@ -1023,8 +1006,6 @@ function App() {
 
   const filtered = TOOLS.filter((tool) => {
     const matchCategory = activeCategory === 'All' || tool.category === activeCategory
-    const pricingBucket = getPricingBucket(tool.badge)
-    const matchPricing = activePricing === 'All' || pricingBucket === activePricing
     const query = search.toLowerCase().trim()
     const matchSearch =
       !query ||
@@ -1034,7 +1015,7 @@ function App() {
       tool.tags.some((tag) => tag.toLowerCase().includes(query))
     const matchFavorites = !favoritesOnly || favorites.includes(tool.name)
 
-    return matchCategory && matchPricing && matchSearch && matchFavorites
+    return matchCategory && matchSearch && matchFavorites
   }).sort((left, right) => {
     if (sortBy === 'rating') {
       return right.rating - left.rating || left.name.localeCompare(right.name)
@@ -1394,7 +1375,6 @@ function App() {
               className="btn btn-secondary toolbar-button"
               onClick={() => {
                 setActiveCategory('All')
-                setActivePricing('All')
                 setSearch('')
                 setFavoritesOnly(false)
               }}
@@ -1456,7 +1436,7 @@ function App() {
               <p>
                 Most modern AI tools are powered by <strong>Large Language Models (LLMs)</strong> —
                 neural networks trained on vast amounts of text, code, and images. They predict the
-                best next output given your input (called a "prompt").
+                best next output given your input (called a prompt).
               </p>
               <p>
                 When you type a question into ChatGPT or describe an image to Midjourney, the model
