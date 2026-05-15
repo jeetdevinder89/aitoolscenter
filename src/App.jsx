@@ -298,13 +298,53 @@ const TOOL_CATEGORIES = CATEGORIES.filter((category) => category !== 'All')
 const PRICING_OPTIONS = ['Free', 'Freemium', 'Paid', 'Enterprise']
 const ADSENSE_CLIENT_ID = import.meta.env.VITE_ADSENSE_CLIENT_ID || 'ca-pub-2770089511325323'
 
+const CATEGORY_SEO = {
+  Writing: {
+    headline: 'Best AI Writing Tools in 2026',
+    description: 'Discover the best AI writing tools for blogs, emails, scripts, and long-form content.',
+  },
+  Image: {
+    headline: 'Top AI Image Generation Tools',
+    description: 'Compare image-focused AI tools for art, design, product mockups, and visual ideation.',
+  },
+  Video: {
+    headline: 'Top AI Video Tools',
+    description: 'Explore AI video tools for generation, editing, short clips, and cinematic visuals.',
+  },
+  Coding: {
+    headline: 'Best AI Coding Assistants',
+    description: 'Find AI coding tools for autocomplete, debugging, refactoring, and codebase chat.',
+  },
+  Productivity: {
+    headline: 'AI Productivity Tools',
+    description: 'Discover AI assistants that speed up notes, docs, planning, and everyday workflows.',
+  },
+  Automation: {
+    headline: 'AI Automation Platforms',
+    description: 'Compare no-code and low-code automation tools that connect apps and reduce manual work.',
+  },
+  Research: {
+    headline: 'Best AI Research Tools',
+    description: 'Find AI search and research tools with citations, summaries, and real-time web context.',
+  },
+}
+
 const slugifyToolName = (value) => value
   .toLowerCase()
   .replace(/[^a-z0-9]+/g, '-')
   .replace(/^-+|-+$/g, '')
 
+const slugifyCategoryName = (value) => value
+  .toLowerCase()
+  .replace(/[^a-z0-9]+/g, '-')
+  .replace(/^-+|-+$/g, '')
+
 const getToolBySlug = (slug) => TOOLS.find((tool) => slugifyToolName(tool.name) === slug)
+const getCategoryBySlug = (slug) => TOOL_CATEGORIES.find((category) => slugifyCategoryName(category) === slug) || null
 const getLegalPage = (pathname) => LEGAL_PAGES[pathname] || null
+
+const getToolSlugFromPath = (pathname) => (pathname.startsWith('/tools/') ? pathname.replace('/tools/', '') : null)
+const getCategorySlugFromPath = (pathname) => (pathname.startsWith('/categories/') ? pathname.replace('/categories/', '') : null)
 
 const upsertMeta = ({ attr, key, content }) => {
   let tag = document.head.querySelector(`meta[${attr}="${key}"]`)
@@ -380,11 +420,11 @@ function ToolCard({ tool, isFavorite, isCompared, userRating, onToggleFavorite, 
     <article className="tool-card">
       <div className="tool-card-top">
         <span className="tool-badge">{tool.badge}</span>
-        <span className="tool-category">{tool.category}</span>
+        <a className="tool-category" href={`/categories/${slugifyCategoryName(tool.category)}`}>{tool.category}</a>
       </div>
       <div className="tool-card-header">
         <div>
-          <h3>{tool.name}</h3>
+          <h3><a className="tool-name-link" href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a></h3>
           <Stars count={tool.rating} />
           <span className="community-label"> community</span>
         </div>
@@ -457,7 +497,7 @@ function ComparisonCard({ tool, onRemove }) {
     <article className="comparison-card">
       <div className="comparison-card-top">
         <div>
-          <h3>{tool.name}</h3>
+          <h3><a className="tool-name-link" href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a></h3>
           <p>{tool.tagline}</p>
         </div>
         <button type="button" className="comparison-remove" onClick={() => onRemove(tool.name)}>
@@ -617,9 +657,118 @@ function LegalPage({ page }) {
   )
 }
 
+function ToolDetailPage({ tool }) {
+  const categoryTools = TOOLS
+    .filter((item) => item.category === tool.category && item.name !== tool.name)
+    .slice(0, 3)
+
+  return (
+    <div className="page">
+      <SiteNav />
+      <main className="content-page">
+        <section className="content-hero">
+          <p className="eyebrow">TOOL PROFILE</p>
+          <h1>{tool.name}</h1>
+          <p className="subtext">{tool.tagline}</p>
+          <div className="tool-detail-chips">
+            <span className="tag">Category: <a href={`/categories/${slugifyCategoryName(tool.category)}`}>{tool.category}</a></span>
+            <span className="tag">Pricing: {tool.badge}</span>
+            <span className="tag"><Stars count={tool.rating} /></span>
+          </div>
+        </section>
+
+        <section className="content-shell">
+          <div className="content-stack">
+            <article className="content-card policy-card">
+              <h2>Why use {tool.name}</h2>
+              <p>{tool.name} helps with {tool.category.toLowerCase()} workflows and is commonly used for faster execution with AI-assisted output.</p>
+              <ul className="policy-list">
+                <li>Best for: teams and creators who need reliable {tool.category.toLowerCase()} support.</li>
+                <li>Pricing model: {tool.badge}.</li>
+                <li>Community rating: {tool.rating}/5 based on editorial scoring.</li>
+              </ul>
+              <a className="btn btn-primary" href={tool.link} target="_blank" rel="noopener noreferrer">Visit {tool.name}</a>
+            </article>
+
+            <article className="content-card policy-card">
+              <h2>Popular features</h2>
+              <div className="tool-tags">
+                {tool.tags.map((tag) => (
+                  <span key={tag} className="tag">{tag}</span>
+                ))}
+              </div>
+            </article>
+
+            {categoryTools.length > 0 && (
+              <article className="content-card policy-card">
+                <h2>Alternatives to {tool.name}</h2>
+                <ul className="policy-list">
+                  {categoryTools.map((item) => (
+                    <li key={item.name}>
+                      <a href={`/tools/${slugifyToolName(item.name)}`}>{item.name}</a> - {item.tagline}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            )}
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </div>
+  )
+}
+
+function CategoryPage({ category }) {
+  const categoryTools = TOOLS.filter((tool) => tool.category === category)
+  const categorySeo = CATEGORY_SEO[category]
+
+  return (
+    <div className="page">
+      <SiteNav />
+      <main className="content-page">
+        <section className="content-hero">
+          <p className="eyebrow">CATEGORY GUIDE</p>
+          <h1>{categorySeo?.headline || `${category} AI Tools`}</h1>
+          <p className="subtext">{categorySeo?.description || `Compare top ${category.toLowerCase()} AI tools, pricing, and use cases.`}</p>
+        </section>
+
+        <section className="content-shell">
+          <div className="content-stack">
+            <article className="content-card policy-card">
+              <h2>Top {category} tools</h2>
+              <ul className="policy-list">
+                {categoryTools.map((tool) => (
+                  <li key={tool.name}>
+                    <a href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a> - {tool.tagline}
+                  </li>
+                ))}
+              </ul>
+            </article>
+
+            <article className="content-card policy-card">
+              <h2>How to choose a {category.toLowerCase()} tool</h2>
+              <ul className="policy-list">
+                <li>Start with your primary use case and required output quality.</li>
+                <li>Compare free tier limits against paid feature unlocks.</li>
+                <li>Prefer tools with consistent updates and strong user adoption.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </div>
+  )
+}
+
 function App() {
   const normalizedPath = window.location.pathname.replace(/\/$/, '') || '/'
   const legalPage = getLegalPage(normalizedPath)
+  const toolSlug = getToolSlugFromPath(normalizedPath)
+  const categorySlug = getCategorySlugFromPath(normalizedPath)
+  const toolPage = toolSlug ? getToolBySlug(toolSlug) : null
+  const categoryPage = categorySlug ? getCategoryBySlug(categorySlug) : null
   const [activeCategory, setActiveCategory] = useState('All')
   const [search, setSearch] = useState('')
   const [sortBy, setSortBy] = useState('featured')
@@ -684,9 +833,8 @@ function App() {
 
   useEffect(() => {
     const baseUrl = 'https://aitoolscenter.in'
-    const matched = normalizedPath.startsWith('/tools/')
-      ? getToolBySlug(normalizedPath.replace('/tools/', ''))
-      : null
+    const matched = toolSlug ? getToolBySlug(toolSlug) : null
+    const matchedCategory = categorySlug ? getCategoryBySlug(categorySlug) : null
     const matchedLegalPage = getLegalPage(normalizedPath)
 
     if (matched) {
@@ -695,18 +843,24 @@ function App() {
 
     const title = matched
       ? `${matched.name} Review, Pricing & Alternatives | AIToolsCenter.in`
+      : matchedCategory
+        ? `${matchedCategory} AI Tools, Reviews & Alternatives | AIToolsCenter.in`
       : matchedLegalPage
         ? `${matchedLegalPage.title} | AIToolsCenter.in`
         : 'AIToolsCenter.in - Best AI Tools Directory for 2026'
 
     const description = matched
       ? `${matched.name}: ${matched.tagline} Explore pricing, use cases, categories, and alternatives on AIToolsCenter.in.`
+      : matchedCategory
+        ? (CATEGORY_SEO[matchedCategory]?.description || `Explore top ${matchedCategory} AI tools with reviews and alternatives.`)
       : matchedLegalPage
         ? matchedLegalPage.description
         : 'Discover and compare top AI tools for writing, coding, images, video, automation, and productivity.'
 
     const canonicalUrl = matched
       ? `${baseUrl}/tools/${slugifyToolName(matched.name)}`
+      : matchedCategory
+        ? `${baseUrl}/categories/${slugifyCategoryName(matchedCategory)}`
       : matchedLegalPage
         ? `${baseUrl}${normalizedPath}`
         : `${baseUrl}/`
@@ -780,6 +934,25 @@ function App() {
             ratingCount: '1',
           },
         }
+      : matchedCategory
+        ? {
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: `${matchedCategory} AI Tools`,
+            description,
+            url: canonicalUrl,
+            mainEntity: {
+              '@type': 'ItemList',
+              itemListElement: TOOLS
+                .filter((tool) => tool.category === matchedCategory)
+                .map((tool, index) => ({
+                  '@type': 'ListItem',
+                  position: index + 1,
+                  name: tool.name,
+                  url: `${baseUrl}/tools/${slugifyToolName(tool.name)}`,
+                })),
+            },
+          }
       : matchedLegalPage
         ? {
             '@context': 'https://schema.org',
@@ -796,7 +969,7 @@ function App() {
       : listSchema
 
     upsertJsonLd(toolSchema)
-  }, [normalizedPath])
+  }, [normalizedPath, toolSlug, categorySlug])
 
   const rateTool = (toolName, star) => {
     setUserRatings((current) => {
@@ -1021,6 +1194,14 @@ function App() {
     return <LegalPage page={legalPage} />
   }
 
+  if (toolPage) {
+    return <ToolDetailPage tool={toolPage} />
+  }
+
+  if (categoryPage) {
+    return <CategoryPage category={categoryPage} />
+  }
+
   return (
     <div className="page">
       <SiteNav />
@@ -1060,7 +1241,7 @@ function App() {
             {topPicks.map((tool) => (
               <div key={tool.name} className="quick-pick-card">
                 <div className="quick-pick-top">
-                  <strong>{tool.name}</strong>
+                  <strong><a className="tool-name-link" href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a></strong>
                   <Stars count={tool.rating} />
                 </div>
                 <p>{tool.tagline}</p>

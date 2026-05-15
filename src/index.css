@@ -1272,6 +1272,38 @@ h1 .gradient-text {
   color: var(--accent2);
 }
 
+.tool-name-link {
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.tool-name-link:hover {
+  color: var(--accent2);
+}
+
+.tool-detail-chips {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.tool-detail-chips .tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.tool-detail-chips .tag a {
+  color: var(--accent2);
+  text-decoration: none;
+}
+
+.tool-detail-chips .tag a:hover {
+  text-decoration: underline;
+}
+
 /* -- FOOTER ------------------------------------------------ */
 .footer {
   margin-top: 4rem;
