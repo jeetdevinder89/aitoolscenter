@@ -1,7 +1,5 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import aiNews from './data/ai-news.json'
-
-const WebglHeroScene = lazy(() => import('./components/WebglHeroScene'))
 
 const CATEGORIES = ['All', 'Writing', 'Image', 'Video', 'Coding', 'Productivity', 'Automation', 'Research']
 
@@ -189,6 +187,7 @@ const LOCAL_VISITS_KEY = 'aitoolscenter-local-visits'
 const LOCAL_RATINGS_KEY = 'aitoolscenter-user-ratings'
 const LOCAL_TOOL_CLICKS_KEY = 'aitoolscenter-tool-clicks'
 const SESSION_VISIT_KEY = 'aitoolscenter-session-visited'
+const LOCAL_GLOBAL_VISIT_DATE_KEY = 'aitoolscenter-global-visit-date'
 const PAGE_VIEWS_API = '/api/page-views'
 const NEWSLETTER_ENDPOINT = '/api/newsletter'
 
@@ -375,32 +374,6 @@ const canUseInteractiveTilt = () => (
   && window.matchMedia('(hover: hover) and (pointer: fine)').matches
   && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
 )
-
-const canUseWebglHero = () => {
-  // Keep the same hero treatment as mobile for a more consistent layout.
-  return false
-}
-
-const getWebglHeroQuality = () => {
-  if (typeof window === 'undefined') {
-    return 'low'
-  }
-
-  const memory = navigator.deviceMemory || 4
-  const cores = navigator.hardwareConcurrency || 4
-  const dpr = window.devicePixelRatio || 1
-  const width = window.innerWidth || 1280
-
-  if (memory >= 8 && cores >= 8 && dpr <= 2 && width >= 1400) {
-    return 'high'
-  }
-
-  if (memory >= 4 && cores >= 4 && width >= 960) {
-    return 'balanced'
-  }
-
-  return 'low'
-}
 
 function useInteractiveTilt({ tilt = 8, shift = 10 } = {}) {
   const elementRef = useRef(null)
@@ -898,8 +871,6 @@ function App() {
   const [isSubmittingTool, setIsSubmittingTool] = useState(false)
   const [toolClicks, setToolClicks] = useState({})
   const [theme, setTheme] = useState(() => localStorage.getItem(LOCAL_THEME_KEY) || 'dark')
-  const [showWebglHero, setShowWebglHero] = useState(false)
-  const [webglHeroQuality, setWebglHeroQuality] = useState('balanced')
   const heroTiltHandlers = useInteractiveTilt({ tilt: 9, shift: 12 })
 
   useEffect(() => {
@@ -946,14 +917,21 @@ function App() {
     let cancelled = false
 
     const loadWebsiteVisitorCount = async () => {
+      const today = new Date().toISOString().slice(0, 10)
+      const lastCountedDate = localStorage.getItem(LOCAL_GLOBAL_VISIT_DATE_KEY)
+      const method = lastCountedDate === today ? 'GET' : 'POST'
+
       try {
-        const response = await fetch(PAGE_VIEWS_API, { method: 'POST' })
+        const response = await fetch(PAGE_VIEWS_API, { method })
         if (!response.ok) throw new Error('Visitor count request failed')
 
         const result = await response.json()
         const count = Number(result.count)
         if (!cancelled && Number.isFinite(count)) {
           setWebsiteVisitors(count)
+          if (method === 'POST') {
+            localStorage.setItem(LOCAL_GLOBAL_VISIT_DATE_KEY, today)
+          }
         }
       } catch {
         // Fallback to current count without incrementing if POST fails.
@@ -997,14 +975,6 @@ function App() {
     document.documentElement.setAttribute('data-theme', theme)
     localStorage.setItem(LOCAL_THEME_KEY, theme)
   }, [theme])
-
-  useEffect(() => {
-    const shouldUseWebgl = canUseWebglHero()
-    setShowWebglHero(shouldUseWebgl)
-    if (shouldUseWebgl) {
-      setWebglHeroQuality(getWebglHeroQuality())
-    }
-  }, [])
 
   useEffect(() => {
     const baseUrl = 'https://aitoolscenter.in'
@@ -1471,43 +1441,37 @@ function App() {
             </div>
           </div>
 
-          <aside className={`hero-visual${showWebglHero ? ' has-webgl' : ''}`} aria-hidden="true">
-            {showWebglHero ? (
-              <Suspense fallback={null}>
-                <WebglHeroScene quality={webglHeroQuality} />
-              </Suspense>
-            ) : (
-              <div
-                className="orbital-shell"
-                ref={heroTiltHandlers.elementRef}
-                onMouseMove={heroTiltHandlers.onMouseMove}
-                onMouseLeave={heroTiltHandlers.onMouseLeave}
-              >
-                <div className="ring ring-a"></div>
-                <div className="ring ring-b"></div>
-                <div className="ring ring-c"></div>
+          <aside className="hero-visual" aria-hidden="true">
+            <div
+              className="orbital-shell"
+              ref={heroTiltHandlers.elementRef}
+              onMouseMove={heroTiltHandlers.onMouseMove}
+              onMouseLeave={heroTiltHandlers.onMouseLeave}
+            >
+              <div className="ring ring-a"></div>
+              <div className="ring ring-b"></div>
+              <div className="ring ring-c"></div>
 
-                <article className="core-card">
-                  <p>AI Command Deck</p>
-                  <strong>{filtered.length} discoverable tools</strong>
-                  <span>Category: {activeCategory}</span>
-                  <div className="core-bars">
-                    <i style={{ width: '82%' }}></i>
-                    <i style={{ width: '63%' }}></i>
-                    <i style={{ width: '48%' }}></i>
-                  </div>
-                </article>
+              <article className="core-card">
+                <p>AI Command Deck</p>
+                <strong>{filtered.length} discoverable tools</strong>
+                <span>Category: {activeCategory}</span>
+                <div className="core-bars">
+                  <i style={{ width: '82%' }}></i>
+                  <i style={{ width: '63%' }}></i>
+                  <i style={{ width: '48%' }}></i>
+                </div>
+              </article>
 
-                <div className="float-panel panel-a">
-                  <small>Live signal</small>
-                  <strong>Trending tags</strong>
-                </div>
-                <div className="float-panel panel-b">
-                  <small>Top category</small>
-                  <strong>{topPicks[0]?.category || 'Writing'}</strong>
-                </div>
+              <div className="float-panel panel-a">
+                <small>Live signal</small>
+                <strong>Trending tags</strong>
               </div>
-            )}
+              <div className="float-panel panel-b">
+                <small>Top category</small>
+                <strong>{topPicks[0]?.category || 'Writing'}</strong>
+              </div>
+            </div>
           </aside>
         </div>
       </header>

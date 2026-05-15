@@ -313,22 +313,16 @@ body {
   perspective: 1400px;
   display: grid;
   place-items: center;
-}
-
-.hero-webgl {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
-.hero-webgl canvas {
-  width: 100% !important;
-  height: 100% !important;
-  filter: saturate(1.14) contrast(1.06);
-}
-
-.hero-visual.has-webgl {
   box-shadow: 0 24px 58px rgba(10, 14, 36, 0.52), inset 0 1px 0 rgba(255,255,255,0.14);
+}
+
+.hero-visual::after {
+  content: '';
+  position: absolute;
+  inset: auto -8% -40% -8%;
+  height: 58%;
+  background: radial-gradient(ellipse at center, rgba(124,108,255,0.2), rgba(124,108,255,0));
+  pointer-events: none;
 }
 
 .orbital-shell {
@@ -339,7 +333,7 @@ body {
   --glow-x: 50%;
   --glow-y: 50%;
   position: relative;
-  width: min(470px, 100%);
+  width: min(520px, 100%);
   aspect-ratio: 1 / 1;
   transform-style: preserve-3d;
   transform: translate3d(var(--shift-x), var(--shift-y), 0) rotateX(calc(8deg + var(--tilt-x))) rotateY(calc(-10deg + var(--tilt-y)));
@@ -389,7 +383,7 @@ body {
 
 .core-card {
   position: absolute;
-  inset: 30% 20%;
+  inset: 29% 19%;
   display: grid;
   gap: 0.45rem;
   align-content: center;
@@ -460,7 +454,7 @@ body {
 }
 
 .panel-a {
-  top: 16%;
+  top: 14%;
   left: 1%;
   transform: translateZ(48px);
   animation: float-up 4.8s ease-in-out infinite;
@@ -468,7 +462,7 @@ body {
 
 .panel-b {
   right: 2%;
-  bottom: 18%;
+  bottom: 15%;
   transform: translateZ(52px);
   animation: float-up 5.8s ease-in-out infinite;
 }
@@ -2009,10 +2003,6 @@ h1 .gradient-text {
 }
 
 @media (hover: none), (pointer: coarse) {
-  .hero-webgl {
-    display: none;
-  }
-
   .orbital-shell,
   .tool-card {
     transform: none;
@@ -2039,10 +2029,6 @@ h1 .gradient-text {
     transform: none;
     transition: none;
     animation: none;
-  }
-
-  .hero-webgl {
-    display: none;
   }
 
   .orbital-shell,
