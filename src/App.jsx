@@ -171,8 +171,36 @@ const SORT_OPTIONS = [
 
 const LOCAL_FAVORITES_KEY = 'aitoolscenter-favorites'
 const LOCAL_VISITS_KEY = 'aitoolscenter-local-visits'
+const LOCAL_RATINGS_KEY = 'aitoolscenter-user-ratings'
 const SESSION_VISIT_KEY = 'aitoolscenter-session-visited'
 const NEWSLETTER_ENDPOINT = '/api/newsletter'
+
+const AI_NEWS = [
+  {
+    date: 'May 12, 2026',
+    title: 'OpenAI launches GPT-5 with real-time voice and vision',
+    summary: 'GPT-5 introduces a unified model for text, voice, and vision with dramatically improved reasoning and a new o3-style thinking mode built in.',
+    tag: 'OpenAI',
+  },
+  {
+    date: 'May 8, 2026',
+    title: 'Google DeepMind releases Gemini 2.5 Ultra',
+    summary: 'Gemini 2.5 Ultra tops coding and science benchmarks, with a 2M token context window and native integration across all Google Workspace apps.',
+    tag: 'Google',
+  },
+  {
+    date: 'May 5, 2026',
+    title: 'Midjourney V7 launches with reference image control',
+    summary: 'Midjourney V7 adds style and subject reference images, giving creators fine-grained control over character consistency across generations.',
+    tag: 'Image AI',
+  },
+  {
+    date: 'Apr 29, 2026',
+    title: 'Cursor 1.0 ships with background agent and full codebase indexing',
+    summary: 'Cursor hits 1.0 with an autonomous background agent that can open PRs, run tests, and iterate on code without manual prompting.',
+    tag: 'Coding',
+  },
+]
 const SUBMIT_TOOL_ENDPOINT = '/api/submit-tool'
 const TOOL_CATEGORIES = CATEGORIES.filter((category) => category !== 'All')
 const PRICING_OPTIONS = ['Free', 'Freemium', 'Paid', 'Enterprise']
@@ -185,7 +213,37 @@ function Stars({ count }) {
   )
 }
 
-function ToolCard({ tool, isFavorite, isCompared, onToggleFavorite, onToggleCompare }) {
+function InteractiveStars({ toolName, currentRating, onRate }) {
+  const [hover, setHover] = useState(0)
+  return (
+    <div className="user-rating-row">
+      <span className="user-rating-label">Your rating:</span>
+      {[1, 2, 3, 4, 5].map((star) => (
+        <button
+          key={star}
+          type="button"
+          className={`star-btn${(hover || currentRating) >= star ? ' lit' : ''}`}
+          aria-label={`Rate ${toolName} ${star} star${star > 1 ? 's' : ''}`}
+          onClick={() => onRate(toolName, star === currentRating ? 0 : star)}
+          onMouseEnter={() => setHover(star)}
+          onMouseLeave={() => setHover(0)}
+        >
+          {(hover || currentRating) >= star ? '★' : '☆'}
+        </button>
+      ))}
+      {currentRating > 0 && (
+        <span className="user-rated-badge">You rated {currentRating}/5</span>
+      )}
+    </div>
+  )
+}
+
+function ToolCard({ tool, isFavorite, isCompared, userRating, onToggleFavorite, onToggleCompare, onTagClick, onRate }) {
+  const [reported, setReported] = useState(false)
+  const similarTools = TOOLS
+    .filter((t) => t.category === tool.category && t.name !== tool.name)
+    .slice(0, 2)
+
   return (
     <article className="tool-card">
       <div className="tool-card-top">
@@ -196,6 +254,7 @@ function ToolCard({ tool, isFavorite, isCompared, onToggleFavorite, onToggleComp
         <div>
           <h3>{tool.name}</h3>
           <Stars count={tool.rating} />
+          <span className="community-label"> community</span>
         </div>
         <button
           type="button"
@@ -209,9 +268,29 @@ function ToolCard({ tool, isFavorite, isCompared, onToggleFavorite, onToggleComp
       <p>{tool.tagline}</p>
       <div className="tool-tags">
         {tool.tags.map((tag) => (
-          <span key={tag} className="tag">{tag}</span>
+          <button
+            key={tag}
+            type="button"
+            className="tag tag-btn"
+            onClick={() => onTagClick(tag)}
+            title={`Filter by ${tag}`}
+          >
+            {tag}
+          </button>
         ))}
       </div>
+      <InteractiveStars toolName={tool.name} currentRating={userRating || 0} onRate={onRate} />
+      {similarTools.length > 0 && (
+        <p className="similar-tools">
+          Also try:{' '}
+          {similarTools.map((s, i) => (
+            <span key={s.name}>
+              <button type="button" className="similar-link" onClick={() => onTagClick(s.name)}>{s.name}</button>
+              {i < similarTools.length - 1 ? ', ' : ''}
+            </span>
+          ))}
+        </p>
+      )}
       <div className="tool-actions-row">
         <a
           className="btn btn-primary tool-btn"
@@ -229,6 +308,14 @@ function ToolCard({ tool, isFavorite, isCompared, onToggleFavorite, onToggleComp
           {isCompared ? 'Added to Compare' : 'Compare'}
         </button>
       </div>
+      <button
+        type="button"
+        className={`report-link${reported ? ' reported' : ''}`}
+        onClick={() => setReported(true)}
+        disabled={reported}
+      >
+        {reported ? '✓ Thanks for reporting' : 'Report broken link'}
+      </button>
     </article>
   )
 }
@@ -295,18 +382,27 @@ function App() {
     contactEmail: '',
     description: '',
   })
+  const [userRatings, setUserRatings] = useState({})
   const [toolErrors, setToolErrors] = useState({})
   const [toolSubmitStatus, setToolSubmitStatus] = useState({ type: 'idle', message: '' })
   const [isSubmittingTool, setIsSubmittingTool] = useState(false)
 
   useEffect(() => {
     const savedFavorites = localStorage.getItem(LOCAL_FAVORITES_KEY)
-
     if (savedFavorites) {
       try {
         setFavorites(JSON.parse(savedFavorites))
       } catch {
         setFavorites([])
+      }
+    }
+
+    const savedRatings = localStorage.getItem(LOCAL_RATINGS_KEY)
+    if (savedRatings) {
+      try {
+        setUserRatings(JSON.parse(savedRatings))
+      } catch {
+        setUserRatings({})
       }
     }
 
@@ -325,6 +421,21 @@ function App() {
   useEffect(() => {
     localStorage.setItem(LOCAL_FAVORITES_KEY, JSON.stringify(favorites))
   }, [favorites])
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_RATINGS_KEY, JSON.stringify(userRatings))
+  }, [userRatings])
+
+  const rateTool = (toolName, star) => {
+    setUserRatings((current) => {
+      if (star === 0) {
+        const next = { ...current }
+        delete next[toolName]
+        return next
+      }
+      return { ...current, [toolName]: star }
+    })
+  }
 
   const toggleFavorite = (toolName) => {
     setFavorites((current) => (
@@ -385,6 +496,17 @@ function App() {
 
     setIsSubmittingNewsletter(true)
     setNewsletterStatus({ type: 'idle', message: '' })
+
+    // In local dev the serverless API is not available
+    if (import.meta.env.DEV) {
+      setNewsletterEmail('')
+      setNewsletterStatus({
+        type: 'success',
+        message: 'Thanks for subscribing. (Demo mode — email not sent in local dev.)',
+      })
+      setIsSubmittingNewsletter(false)
+      return
+    }
 
     try {
       const response = await fetch(NEWSLETTER_ENDPOINT, {
@@ -530,6 +652,7 @@ function App() {
         <div className="nav-links">
           <a href="#tools">Tools</a>
           <a href="#compare">Compare</a>
+          <a href="#ai-news">AI News</a>
           <a href="#submit-tool">Submit Tool</a>
           <a href="#how-ai-works">How AI Works</a>
           <a href="#faq">FAQ</a>
@@ -639,8 +762,11 @@ function App() {
                   tool={tool}
                   isFavorite={favorites.includes(tool.name)}
                   isCompared={compareList.includes(tool.name)}
+                  userRating={userRatings[tool.name] || 0}
                   onToggleFavorite={toggleFavorite}
                   onToggleCompare={toggleCompare}
+                  onTagClick={(tag) => setSearch(tag)}
+                  onRate={rateTool}
                 />
               ))}
             </div>
@@ -718,6 +844,28 @@ function App() {
                 <span className="use-icon">{useCase.icon}</span>
                 <h3>{useCase.title}</h3>
                 <p>{useCase.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="section news-section" id="ai-news">
+          <div className="section-heading-row">
+            <div>
+              <h2>AI News &amp; Updates</h2>
+              <p className="section-copy">The latest launches, model releases, and product updates from the AI world.</p>
+            </div>
+            <span className="results-chip">Updated May 2026</span>
+          </div>
+          <div className="news-grid">
+            {AI_NEWS.map((item) => (
+              <div key={item.title} className="news-card">
+                <div className="news-card-top">
+                  <span className="news-tag">{item.tag}</span>
+                  <span className="news-date">{item.date}</span>
+                </div>
+                <h3 className="news-title">{item.title}</h3>
+                <p className="news-summary">{item.summary}</p>
               </div>
             ))}
           </div>
