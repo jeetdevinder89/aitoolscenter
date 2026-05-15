@@ -5,6 +5,17 @@ const WebglHeroScene = lazy(() => import('./components/WebglHeroScene'))
 
 const CATEGORIES = ['All', 'Writing', 'Image', 'Video', 'Coding', 'Productivity', 'Automation', 'Research']
 
+const CATEGORY_ICONS = {
+  All: '🌐',
+  Writing: '✍️',
+  Image: '🎨',
+  Video: '🎬',
+  Coding: '💻',
+  Productivity: '⚡',
+  Automation: '🤖',
+  Research: '🔬',
+}
+
 const TOOLS = [
   {
     name: 'ChatGPT',
@@ -495,13 +506,16 @@ function ToolCard({ tool, isFavorite, isCompared, userRating, onToggleFavorite, 
     >
       <div className="tool-card-top">
         <span className="tool-badge">{tool.badge}</span>
-        <a className="tool-category" href={`/categories/${slugifyCategoryName(tool.category)}`}>{tool.category}</a>
+        <a className="tool-category" href={`/categories/${slugifyCategoryName(tool.category)}`}>{CATEGORY_ICONS[tool.category] || ''} {tool.category}</a>
       </div>
       <div className="tool-card-header">
-        <div>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.7rem' }}>
+          <div className="tool-icon-initial" aria-hidden="true">{tool.name.charAt(0)}</div>
+          <div>
           <h3><a className="tool-name-link" href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a></h3>
           <Stars count={tool.rating} />
           <span className="community-label"> community</span>
+          </div>
         </div>
         <button
           type="button"
@@ -1495,7 +1509,7 @@ function App() {
                 className={`filter-btn${activeCategory === category ? ' active' : ''}`}
                 onClick={() => setActiveCategory(category)}
               >
-                {category}
+                <span style={{ fontSize: '0.9em' }}>{CATEGORY_ICONS[category]}</span> {category}
               </button>
             ))}
           </div>
