@@ -180,13 +180,18 @@ const FAQS = [
 const SORT_OPTIONS = [
   { value: 'featured', label: 'Featured' },
   { value: 'rating', label: 'Highest rated' },
+  { value: 'clicks', label: 'Most clicked' },
   { value: 'name', label: 'A to Z' },
 ]
 
 const LOCAL_FAVORITES_KEY = 'aitoolscenter-favorites'
 const LOCAL_VISITS_KEY = 'aitoolscenter-local-visits'
 const LOCAL_RATINGS_KEY = 'aitoolscenter-user-ratings'
+const LOCAL_TOOL_CLICKS_KEY = 'aitoolscenter-tool-clicks'
 const SESSION_VISIT_KEY = 'aitoolscenter-session-visited'
+const SESSION_GLOBAL_VISIT_KEY = 'aitoolscenter-global-visit-counted'
+const COUNTAPI_NAMESPACE = 'aitoolscenter.in'
+const COUNTAPI_KEY = 'website-visits'
 const NEWSLETTER_ENDPOINT = '/api/newsletter'
 
 const AI_NEWS = aiNews
@@ -490,7 +495,7 @@ function InteractiveStars({ toolName, currentRating, onRate }) {
   )
 }
 
-function ToolCard({ tool, isFavorite, isCompared, userRating, onToggleFavorite, onToggleCompare, onTagClick, onRate }) {
+function ToolCard({ tool, isFavorite, isCompared, userRating, clickCount, onToggleFavorite, onToggleCompare, onTagClick, onRate, onVisit }) {
   const tiltHandlers = useInteractiveTilt({ tilt: 7, shift: 8 })
   const [reported, setReported] = useState(false)
   const similarTools = TOOLS
@@ -558,6 +563,7 @@ function ToolCard({ tool, isFavorite, isCompared, userRating, onToggleFavorite, 
           href={getToolOutboundUrl(tool)}
           target="_blank"
           rel={getToolAnchorRel(tool)}
+          onClick={() => onVisit(tool.name)}
         >
           Visit Tool →
         </a>
@@ -569,6 +575,9 @@ function ToolCard({ tool, isFavorite, isCompared, userRating, onToggleFavorite, 
           {isCompared ? 'Added to Compare' : 'Compare'}
         </button>
       </div>
+      <span className="tool-click-count">
+        {clickCount} visitor click{clickCount === 1 ? '' : 's'}
+      </span>
       <button
         type="button"
         className={`report-link${reported ? ' reported' : ''}`}
@@ -865,6 +874,7 @@ function App() {
   const [favorites, setFavorites] = useState([])
   const [compareList, setCompareList] = useState([])
   const [localVisits, setLocalVisits] = useState(1)
+  const [websiteVisitors, setWebsiteVisitors] = useState(null)
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterStatus, setNewsletterStatus] = useState({ type: 'idle', message: '' })
   const [isSubmittingNewsletter, setIsSubmittingNewsletter] = useState(false)
@@ -880,6 +890,7 @@ function App() {
   const [toolErrors, setToolErrors] = useState({})
   const [toolSubmitStatus, setToolSubmitStatus] = useState({ type: 'idle', message: '' })
   const [isSubmittingTool, setIsSubmittingTool] = useState(false)
+  const [toolClicks, setToolClicks] = useState({})
   const [showWebglHero, setShowWebglHero] = useState(false)
   const [webglHeroQuality, setWebglHeroQuality] = useState('balanced')
   const heroTiltHandlers = useInteractiveTilt({ tilt: 9, shift: 12 })
@@ -903,6 +914,15 @@ function App() {
       }
     }
 
+    const savedClicks = localStorage.getItem(LOCAL_TOOL_CLICKS_KEY)
+    if (savedClicks) {
+      try {
+        setToolClicks(JSON.parse(savedClicks))
+      } catch {
+        setToolClicks({})
+      }
+    }
+
     const storedVisits = Number(localStorage.getItem(LOCAL_VISITS_KEY) || '0')
     const alreadyCounted = sessionStorage.getItem(SESSION_VISIT_KEY)
     const nextVisits = alreadyCounted ? Math.max(storedVisits, 1) : storedVisits + 1
@@ -916,12 +936,53 @@ function App() {
   }, [])
 
   useEffect(() => {
+    let cancelled = false
+
+    const loadWebsiteVisitorCount = async () => {
+      const hasCountedSessionVisit = sessionStorage.getItem(SESSION_GLOBAL_VISIT_KEY)
+      const endpoint = hasCountedSessionVisit
+        ? `https://api.countapi.xyz/get/${COUNTAPI_NAMESPACE}/${COUNTAPI_KEY}`
+        : `https://api.countapi.xyz/hit/${COUNTAPI_NAMESPACE}/${COUNTAPI_KEY}`
+
+      try {
+        const response = await fetch(endpoint, { method: 'GET' })
+        if (!response.ok) {
+          throw new Error('Visitor count request failed')
+        }
+
+        const result = await response.json()
+        if (!cancelled && typeof result.value === 'number') {
+          setWebsiteVisitors(result.value)
+        }
+
+        if (!hasCountedSessionVisit) {
+          sessionStorage.setItem(SESSION_GLOBAL_VISIT_KEY, 'true')
+        }
+      } catch {
+        if (!cancelled) {
+          setWebsiteVisitors(null)
+        }
+      }
+    }
+
+    loadWebsiteVisitorCount()
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  useEffect(() => {
     localStorage.setItem(LOCAL_FAVORITES_KEY, JSON.stringify(favorites))
   }, [favorites])
 
   useEffect(() => {
     localStorage.setItem(LOCAL_RATINGS_KEY, JSON.stringify(userRatings))
   }, [userRatings])
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_TOOL_CLICKS_KEY, JSON.stringify(toolClicks))
+  }, [toolClicks])
 
   useEffect(() => {
     const shouldUseWebgl = canUseWebglHero()
@@ -1104,6 +1165,13 @@ function App() {
     })
   }
 
+  const trackToolClick = (toolName) => {
+    setToolClicks((current) => ({
+      ...current,
+      [toolName]: (current[toolName] || 0) + 1,
+    }))
+  }
+
   const filtered = TOOLS.filter((tool) => {
     const matchCategory = activeCategory === 'All' || tool.category === activeCategory
     const query = search.toLowerCase().trim()
@@ -1119,6 +1187,12 @@ function App() {
   }).sort((left, right) => {
     if (sortBy === 'rating') {
       return right.rating - left.rating || left.name.localeCompare(right.name)
+    }
+
+    if (sortBy === 'clicks') {
+      const rightClicks = toolClicks[right.name] || 0
+      const leftClicks = toolClicks[left.name] || 0
+      return rightClicks - leftClicks || right.rating - left.rating || left.name.localeCompare(right.name)
     }
 
     if (sortBy === 'name') {
@@ -1178,7 +1252,7 @@ function App() {
     })
 
     return () => observer.disconnect()
-  }, [filtered.length, comparisonTools.length, activeCategory, sortBy, favoritesOnly, search])
+  }, [filtered.length, comparisonTools.length, activeCategory, sortBy, favoritesOnly, search, toolClicks])
 
   const handleNewsletterSubmit = async (event) => {
     event.preventDefault()
@@ -1375,6 +1449,7 @@ function App() {
             <div className="hero-stats">
               <span>✅ 15+ Tools Listed</span>
               <span>★ {favorites.length} Saved Favorites</span>
+              <span>👥 {websiteVisitors === null ? 'Live' : websiteVisitors.toLocaleString()} Website Visits</span>
               <span>↺ {localVisits} Visits From This Browser</span>
               <span>🛡️ Manually Curated Listings</span>
             </div>
@@ -1565,10 +1640,12 @@ function App() {
                     isFavorite={favorites.includes(tool.name)}
                     isCompared={compareList.includes(tool.name)}
                     userRating={userRatings[tool.name] || 0}
+                    clickCount={toolClicks[tool.name] || 0}
                     onToggleFavorite={toggleFavorite}
                     onToggleCompare={toggleCompare}
                     onTagClick={(tag) => setSearch(tag)}
                     onRate={rateTool}
+                    onVisit={trackToolClick}
                   />
                 </div>
               ))}

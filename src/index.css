@@ -1163,6 +1163,14 @@ h1 .gradient-text {
   flex-wrap: wrap;
 }
 
+.tool-click-count {
+  display: inline-flex;
+  margin-top: 0.25rem;
+  font-size: 0.74rem;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+}
+
 .compare-btn,
 .toolbar-button {
   font-size: 0.85rem;
