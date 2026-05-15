@@ -679,7 +679,19 @@ function AdUnit({ slot, className = '' }) {
   )
 }
 
-function SiteNav() {
+const LOCAL_THEME_KEY = 'aitoolscenter-theme'
+
+function SiteNav({ theme: themeProp, onToggleTheme: toggleProp }) {
+  const [localTheme, setLocalTheme] = useState(
+    () => document.documentElement.getAttribute('data-theme') || localStorage.getItem(LOCAL_THEME_KEY) || 'dark'
+  )
+  const theme = themeProp !== undefined ? themeProp : localTheme
+  const onToggleTheme = toggleProp || (() => {
+    const next = localTheme === 'dark' ? 'light' : 'dark'
+    setLocalTheme(next)
+    document.documentElement.setAttribute('data-theme', next)
+    localStorage.setItem(LOCAL_THEME_KEY, next)
+  })
   return (
     <nav className="nav">
       <a href="/" className="nav-logo">⚡ AIToolsCenter.in</a>
@@ -691,6 +703,15 @@ function SiteNav() {
         <a href="/contact">Contact</a>
         <a href="/privacy-policy">Privacy</a>
         <a href="/terms-and-conditions">Terms</a>
+        <button
+          type="button"
+          className="theme-toggle"
+          onClick={onToggleTheme}
+          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+        >
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
         <a href="/#newsletter" className="btn btn-primary nav-cta">Get Weekly Picks</a>
       </div>
     </nav>
@@ -891,6 +912,7 @@ function App() {
   const [toolSubmitStatus, setToolSubmitStatus] = useState({ type: 'idle', message: '' })
   const [isSubmittingTool, setIsSubmittingTool] = useState(false)
   const [toolClicks, setToolClicks] = useState({})
+  const [theme, setTheme] = useState(() => localStorage.getItem(LOCAL_THEME_KEY) || 'dark')
   const [showWebglHero, setShowWebglHero] = useState(false)
   const [webglHeroQuality, setWebglHeroQuality] = useState('balanced')
   const heroTiltHandlers = useInteractiveTilt({ tilt: 9, shift: 12 })
@@ -983,6 +1005,11 @@ function App() {
   useEffect(() => {
     localStorage.setItem(LOCAL_TOOL_CLICKS_KEY, JSON.stringify(toolClicks))
   }, [toolClicks])
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem(LOCAL_THEME_KEY, theme)
+  }, [theme])
 
   useEffect(() => {
     const shouldUseWebgl = canUseWebglHero()
@@ -1131,6 +1158,8 @@ function App() {
 
     upsertJsonLd(toolSchema)
   }, [normalizedPath, toolSlug, categorySlug])
+
+  const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
 
   const rateTool = (toolName, star) => {
     setUserRatings((current) => {
@@ -1422,7 +1451,7 @@ function App() {
 
   return (
     <div className="page">
-      <SiteNav />
+      <SiteNav theme={theme} onToggleTheme={toggleTheme} />
 
       <header className="hero">
         <div className="hero-grid">
