@@ -208,6 +208,45 @@ const AI_NEWS = [
 const SUBMIT_TOOL_ENDPOINT = '/api/submit-tool'
 const TOOL_CATEGORIES = CATEGORIES.filter((category) => category !== 'All')
 const PRICING_OPTIONS = ['Free', 'Freemium', 'Paid', 'Enterprise']
+const ADSENSE_CLIENT_ID = import.meta.env.VITE_ADSENSE_CLIENT_ID || ''
+
+const slugifyToolName = (value) => value
+  .toLowerCase()
+  .replace(/[^a-z0-9]+/g, '-')
+  .replace(/^-+|-+$/g, '')
+
+const getToolBySlug = (slug) => TOOLS.find((tool) => slugifyToolName(tool.name) === slug)
+
+const upsertMeta = ({ attr, key, content }) => {
+  let tag = document.head.querySelector(`meta[${attr}="${key}"]`)
+  if (!tag) {
+    tag = document.createElement('meta')
+    tag.setAttribute(attr, key)
+    document.head.appendChild(tag)
+  }
+  tag.setAttribute('content', content)
+}
+
+const upsertCanonical = (href) => {
+  let link = document.head.querySelector('link[rel="canonical"]')
+  if (!link) {
+    link = document.createElement('link')
+    link.setAttribute('rel', 'canonical')
+    document.head.appendChild(link)
+  }
+  link.setAttribute('href', href)
+}
+
+const upsertJsonLd = (payload) => {
+  let tag = document.head.querySelector('script[data-schema="dynamic"]')
+  if (!tag) {
+    tag = document.createElement('script')
+    tag.setAttribute('type', 'application/ld+json')
+    tag.setAttribute('data-schema', 'dynamic')
+    document.head.appendChild(tag)
+  }
+  tag.textContent = JSON.stringify(payload)
+}
 
 function Stars({ count }) {
   return (
@@ -367,6 +406,55 @@ function FaqItem({ q, a }) {
   )
 }
 
+function AdUnit({ slot, className = '' }) {
+  useEffect(() => {
+    if (!ADSENSE_CLIENT_ID || import.meta.env.DEV) {
+      return
+    }
+
+    const initializeAd = () => {
+      try {
+        ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+      } catch {
+        // Ignore ad-render errors so page UX is never blocked.
+      }
+    }
+
+    const existingScript = document.querySelector('script[data-adsense="true"]')
+    if (existingScript) {
+      const timeout = setTimeout(initializeAd, 350)
+      return () => clearTimeout(timeout)
+    }
+
+    const script = document.createElement('script')
+    script.async = true
+    script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`
+    script.crossOrigin = 'anonymous'
+    script.setAttribute('data-adsense', 'true')
+    script.onload = initializeAd
+    document.head.appendChild(script)
+
+    return undefined
+  }, [])
+
+  if (!ADSENSE_CLIENT_ID || import.meta.env.DEV) {
+    return null
+  }
+
+  return (
+    <aside className={`ad-unit ${className}`} aria-label="Advertisement">
+      <ins
+        className="adsbygoogle"
+        style={{ display: 'block' }}
+        data-ad-client={ADSENSE_CLIENT_ID}
+        data-ad-slot={slot}
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
+    </aside>
+  )
+}
+
 function App() {
   const [activeCategory, setActiveCategory] = useState('All')
   const [search, setSearch] = useState('')
@@ -429,6 +517,103 @@ function App() {
   useEffect(() => {
     localStorage.setItem(LOCAL_RATINGS_KEY, JSON.stringify(userRatings))
   }, [userRatings])
+
+  useEffect(() => {
+    const baseUrl = 'https://aitoolscenter.in'
+    const { pathname } = window.location
+    const matched = pathname.startsWith('/tools/')
+      ? getToolBySlug(pathname.replace('/tools/', '').replace(/\/$/, ''))
+      : null
+
+    if (matched) {
+      setSearch((current) => current || matched.name)
+    }
+
+    const title = matched
+      ? `${matched.name} Review, Pricing & Alternatives | AIToolsCenter.in`
+      : 'AIToolsCenter.in - Best AI Tools Directory for 2026'
+
+    const description = matched
+      ? `${matched.name}: ${matched.tagline} Explore pricing, use cases, categories, and alternatives on AIToolsCenter.in.`
+      : 'Discover and compare top AI tools for writing, coding, images, video, automation, and productivity.'
+
+    const canonicalUrl = matched
+      ? `${baseUrl}/tools/${slugifyToolName(matched.name)}`
+      : `${baseUrl}/`
+
+    document.title = title
+    upsertMeta({ attr: 'name', key: 'description', content: description })
+    upsertMeta({ attr: 'property', key: 'og:title', content: title })
+    upsertMeta({ attr: 'property', key: 'og:description', content: description })
+    upsertMeta({ attr: 'property', key: 'og:url', content: canonicalUrl })
+    upsertMeta({ attr: 'name', key: 'twitter:title', content: title })
+    upsertMeta({ attr: 'name', key: 'twitter:description', content: description })
+    upsertCanonical(canonicalUrl)
+
+    const listSchema = {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebSite',
+          name: 'AIToolsCenter.in',
+          url: `${baseUrl}/`,
+          description: 'AI tools directory for comparisons, reviews, and discovery.',
+          potentialAction: {
+            '@type': 'SearchAction',
+            target: `${baseUrl}/?q={search_term_string}`,
+            'query-input': 'required name=search_term_string',
+          },
+        },
+        {
+          '@type': 'ItemList',
+          name: 'AI Tools Directory',
+          itemListElement: TOOLS.map((tool, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            url: `${baseUrl}/tools/${slugifyToolName(tool.name)}`,
+            name: tool.name,
+          })),
+        },
+        {
+          '@type': 'FAQPage',
+          mainEntity: FAQS.map((item) => ({
+            '@type': 'Question',
+            name: item.q,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: item.a,
+            },
+          })),
+        },
+      ],
+    }
+
+    const toolSchema = matched
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: matched.name,
+          applicationCategory: matched.category,
+          operatingSystem: 'Web',
+          description: matched.tagline,
+          url: matched.link,
+          offers: {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'USD',
+            category: matched.badge,
+          },
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: String(matched.rating),
+            bestRating: '5',
+            ratingCount: '1',
+          },
+        }
+      : listSchema
+
+    upsertJsonLd(toolSchema)
+  }, [])
 
   const rateTool = (toolName, star) => {
     setUserRatings((current) => {
@@ -711,6 +896,7 @@ function App() {
               </div>
             ))}
           </div>
+          <AdUnit slot="5239162471" className="ad-unit-inline" />
         </section>
 
         <section className="section" id="tools">
@@ -756,6 +942,8 @@ function App() {
               Clear Compare
             </button>
           </div>
+
+          <AdUnit slot="8014623952" className="ad-unit-inline" />
 
           {filtered.length === 0 ? (
             <p className="empty-state">No tools match your current filters. Try a different keyword or turn off favorites only.</p>
@@ -880,6 +1068,7 @@ function App() {
               </div>
             ))}
           </div>
+          <AdUnit slot="1826409753" className="ad-unit-inline" />
         </section>
 
         <section className="section" id="faq">

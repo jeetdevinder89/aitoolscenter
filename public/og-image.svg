@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">AIToolsCenter.in</title>
+  <desc id="desc">Discover and compare AI tools for writing, coding, design, and automation.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#14172a" />
+      <stop offset="100%" stop-color="#1f3758" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7c6cff" />
+      <stop offset="100%" stop-color="#22d3ee" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="930" cy="90" r="240" fill="#7c6cff" opacity="0.2" />
+  <circle cx="170" cy="520" r="220" fill="#22d3ee" opacity="0.18" />
+  <text x="80" y="255" fill="#e8ecff" font-size="72" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800">AIToolsCenter.in</text>
+  <text x="80" y="330" fill="url(#accent)" font-size="56" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">Best AI Tools Directory</text>
+  <text x="80" y="392" fill="#b8c0eb" font-size="32" font-family="Inter, Segoe UI, Arial, sans-serif">Discover, compare, and choose the right AI stack</text>
+</svg>

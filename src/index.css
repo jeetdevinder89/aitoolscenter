@@ -1,6 +1,6 @@
 /* ============================================================
-   PREMIUM REDESIGN — AIToolsCenter
-   Dark glass nav · Gradient hero · Glassmorphism cards
+   PREMIUM REDESIGN ï¿½ AIToolsCenter
+   Dark glass nav ï¿½ Gradient hero ï¿½ Glassmorphism cards
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap');
@@ -396,6 +396,20 @@ h1 .gradient-text {
   background: rgba(255,255,255,0.03);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
+}
+
+.ad-unit {
+  margin-top: 1.2rem;
+  border: 1px dashed rgba(124,108,255,0.35);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.02);
+  min-height: 90px;
+  padding: 0.45rem;
+  overflow: hidden;
+}
+
+.ad-unit-inline {
+  margin-top: 1.35rem;
 }
 
 .toolbar-field {
