@@ -169,6 +169,8 @@ const SORT_OPTIONS = [
   { value: 'name', label: 'A to Z' },
 ]
 
+const PRICING_FILTERS = ['All', 'Free', 'Freemium', 'Paid', 'Pro']
+
 const LOCAL_FAVORITES_KEY = 'aitoolscenter-favorites'
 const LOCAL_VISITS_KEY = 'aitoolscenter-local-visits'
 const LOCAL_RATINGS_KEY = 'aitoolscenter-user-ratings'
@@ -342,6 +344,20 @@ const slugifyCategoryName = (value) => value
 const getToolBySlug = (slug) => TOOLS.find((tool) => slugifyToolName(tool.name) === slug)
 const getCategoryBySlug = (slug) => TOOL_CATEGORIES.find((category) => slugifyCategoryName(category) === slug) || null
 const getLegalPage = (pathname) => LEGAL_PAGES[pathname] || null
+
+const getPricingBucket = (badge) => {
+  const normalized = badge.toLowerCase()
+  if (normalized.includes('free + pro') || normalized.includes('freemium')) {
+    return 'Freemium'
+  }
+  if (normalized.includes('free')) {
+    return 'Free'
+  }
+  if (normalized.includes('pro') || normalized.includes('add-on')) {
+    return 'Pro'
+  }
+  return 'Paid'
+}
 
 const getToolSlugFromPath = (pathname) => (pathname.startsWith('/tools/') ? pathname.replace('/tools/', '') : null)
 const getCategorySlugFromPath = (pathname) => (pathname.startsWith('/categories/') ? pathname.replace('/categories/', '') : null)
@@ -770,6 +786,7 @@ function App() {
   const toolPage = toolSlug ? getToolBySlug(toolSlug) : null
   const categoryPage = categorySlug ? getCategoryBySlug(categorySlug) : null
   const [activeCategory, setActiveCategory] = useState('All')
+  const [activePricing, setActivePricing] = useState('All')
   const [search, setSearch] = useState('')
   const [sortBy, setSortBy] = useState('featured')
   const [favoritesOnly, setFavoritesOnly] = useState(false)
@@ -1006,6 +1023,8 @@ function App() {
 
   const filtered = TOOLS.filter((tool) => {
     const matchCategory = activeCategory === 'All' || tool.category === activeCategory
+    const pricingBucket = getPricingBucket(tool.badge)
+    const matchPricing = activePricing === 'All' || pricingBucket === activePricing
     const query = search.toLowerCase().trim()
     const matchSearch =
       !query ||
@@ -1015,7 +1034,7 @@ function App() {
       tool.tags.some((tag) => tag.toLowerCase().includes(query))
     const matchFavorites = !favoritesOnly || favorites.includes(tool.name)
 
-    return matchCategory && matchSearch && matchFavorites
+    return matchCategory && matchPricing && matchSearch && matchFavorites
   }).sort((left, right) => {
     if (sortBy === 'rating') {
       return right.rating - left.rating || left.name.localeCompare(right.name)
@@ -1035,6 +1054,15 @@ function App() {
   const topPicks = [...TOOLS]
     .sort((left, right) => right.rating - left.rating || left.name.localeCompare(right.name))
     .slice(0, 3)
+
+  const categoryCounts = TOOL_CATEGORIES.reduce((accumulator, category) => {
+    accumulator[category] = TOOLS.filter((tool) => tool.category === category).length
+    return accumulator
+  }, {})
+
+  const trendingCategories = [...TOOL_CATEGORIES]
+    .sort((left, right) => (categoryCounts[right] || 0) - (categoryCounts[left] || 0))
+    .slice(0, 5)
 
   const handleNewsletterSubmit = async (event) => {
     event.preventDefault()
@@ -1226,10 +1254,47 @@ function App() {
           <span>✅ 15+ Tools Listed</span>
           <span>★ {favorites.length} Saved Favorites</span>
           <span>↺ {localVisits} Visits From This Browser</span>
+          <span>🛡️ Manually Curated Listings</span>
         </div>
       </header>
 
       <main>
+        <section className="section discovery-rail" aria-label="Discovery shortcuts">
+          <div className="section-heading-row">
+            <div>
+              <h2>Trending Categories</h2>
+              <p className="section-copy">Quickly jump into popular categories and pricing models.</p>
+            </div>
+          </div>
+          <div className="discovery-chips">
+            {trendingCategories.map((category) => (
+              <button
+                key={category}
+                type="button"
+                className="filter-btn"
+                onClick={() => {
+                  setActiveCategory(category)
+                  document.getElementById('tools')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }}
+              >
+                {category} ({categoryCounts[category] || 0})
+              </button>
+            ))}
+          </div>
+          <div className="pricing-filters" role="group" aria-label="Filter by pricing">
+            {PRICING_FILTERS.map((pricing) => (
+              <button
+                key={pricing}
+                type="button"
+                className={`filter-btn${activePricing === pricing ? ' active' : ''}`}
+                onClick={() => setActivePricing(pricing)}
+              >
+                {pricing}
+              </button>
+            ))}
+          </div>
+        </section>
+
         <section className="section picks-section">
           <div className="section-heading-row">
             <div>
@@ -1295,6 +1360,18 @@ function App() {
               />
               <span>Favorites only</span>
             </label>
+            <button
+              type="button"
+              className="btn btn-secondary toolbar-button"
+              onClick={() => {
+                setActiveCategory('All')
+                setActivePricing('All')
+                setSearch('')
+                setFavoritesOnly(false)
+              }}
+            >
+              Reset Filters
+            </button>
             <button type="button" className="btn btn-secondary toolbar-button" onClick={() => setCompareList([])}>
               Clear Compare
             </button>
