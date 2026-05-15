@@ -1055,6 +1055,10 @@ function App() {
     .sort((left, right) => right.rating - left.rating || left.name.localeCompare(right.name))
     .slice(0, 3)
 
+  const topTen = [...TOOLS]
+    .sort((left, right) => right.rating - left.rating || left.name.localeCompare(right.name))
+    .slice(0, 10)
+
   const tagCounts = TOOLS.flatMap((tool) => tool.tags).reduce((accumulator, tag) => {
     accumulator[tag] = (accumulator[tag] || 0) + 1
     return accumulator
@@ -1236,26 +1240,62 @@ function App() {
       <SiteNav />
 
       <header className="hero">
-        <p className="eyebrow">UPDATED MAY 2026 • 15+ TOOLS REVIEWED</p>
-        <h1>Find the Best <span className="gradient-text">AI Tools</span> in One Place</h1>
-        <p className="subtext">
-          We test, rank, and explain AI tools so you can skip the confusion and start using the right
-          tool for writing, images, coding, video, automation, and more.
-        </p>
-        <div className="search-bar">
-          <input
-            type="search"
-            placeholder="Search tools, e.g. 'image generation', 'code', 'free'…"
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-            aria-label="Search AI tools"
-          />
-        </div>
-        <div className="hero-stats">
-          <span>✅ 15+ Tools Listed</span>
-          <span>★ {favorites.length} Saved Favorites</span>
-          <span>↺ {localVisits} Visits From This Browser</span>
-          <span>🛡️ Manually Curated Listings</span>
+        <div className="hero-grid">
+          <div className="hero-main">
+            <p className="eyebrow">UPDATED MAY 2026 • 15+ TOOLS REVIEWED</p>
+            <h1>Find the Best <span className="gradient-text">AI Tools</span> in One Place</h1>
+            <p className="subtext">
+              We test, rank, and explain AI tools so you can skip the confusion and start using the right
+              tool for writing, images, coding, video, automation, and more.
+            </p>
+            <div className="hero-cta-row">
+              <a href="#tools" className="btn btn-primary">Explore Directory</a>
+              <a href="#compare" className="btn btn-secondary">Compare Top Tools</a>
+            </div>
+            <div className="search-bar">
+              <input
+                type="search"
+                placeholder="Search tools, e.g. 'image generation', 'code', 'free'…"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                aria-label="Search AI tools"
+              />
+            </div>
+            <div className="hero-stats">
+              <span>✅ 15+ Tools Listed</span>
+              <span>★ {favorites.length} Saved Favorites</span>
+              <span>↺ {localVisits} Visits From This Browser</span>
+              <span>🛡️ Manually Curated Listings</span>
+            </div>
+          </div>
+
+          <aside className="hero-visual" aria-hidden="true">
+            <div className="orbital-shell">
+              <div className="ring ring-a"></div>
+              <div className="ring ring-b"></div>
+              <div className="ring ring-c"></div>
+
+              <article className="core-card">
+                <p>AI Command Deck</p>
+                <strong>{filtered.length} discoverable tools</strong>
+                <span>Category: {activeCategory}</span>
+                <div className="core-bars">
+                  <i style={{ width: '82%' }}></i>
+                  <i style={{ width: '63%' }}></i>
+                  <i style={{ width: '48%' }}></i>
+                </div>
+              </article>
+
+              <div className="float-panel panel-a">
+                <small>Live signal</small>
+                <strong>Trending tags</strong>
+              </div>
+              <div className="float-panel panel-b">
+                <small>Top category</small>
+                <strong>{topPicks[0]?.category || 'Writing'}</strong>
+              </div>
+            </div>
+          </aside>
         </div>
       </header>
 
@@ -1321,6 +1361,40 @@ function App() {
             ))}
           </div>
           <AdUnit slot="5239162471" className="ad-unit-inline" />
+        </section>
+
+        <section className="section top-ten-section" id="top-10">
+          <div className="section-divider"></div>
+          <div className="section-heading-row">
+            <div>
+              <h2>Top 10 This Week</h2>
+              <p className="section-copy">A fast-moving shortlist of tools users are most likely to pick first.</p>
+            </div>
+            <span className="results-chip">Updated Weekly</span>
+          </div>
+          <div className="top-ten-grid">
+            {topTen.map((tool, index) => (
+              <article key={tool.name} className="top-ten-card">
+                <div className="top-ten-rank">#{index + 1}</div>
+                <div className="top-ten-body">
+                  <div className="top-ten-head">
+                    <h3>
+                      <a className="tool-name-link" href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a>
+                    </h3>
+                    <Stars count={tool.rating} />
+                  </div>
+                  <p>{tool.tagline}</p>
+                  <div className="top-ten-meta">
+                    <span className="tag">{tool.category}</span>
+                    <span className="tag">{tool.badge}</span>
+                    <a href={tool.link} target="_blank" rel="noopener noreferrer" className="top-ten-visit">
+                      Visit
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
         </section>
 
         <section className="section" id="tools">
