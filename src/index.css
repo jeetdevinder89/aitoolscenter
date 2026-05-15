@@ -412,6 +412,21 @@ h1 .gradient-text {
   margin-top: 1.35rem;
 }
 
+.ad-unit-placeholder {
+  min-height: 84px;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: 0.3rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.ad-unit-placeholder strong {
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
 .toolbar-field {
   display: flex;
   flex-direction: column;
@@ -1180,6 +1195,53 @@ h1 .gradient-text {
   margin: 0;
 }
 
+/* -- TRUST & LEGAL ----------------------------------------- */
+.policy-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.policy-card,
+.legal-section {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+}
+
+.policy-card h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1rem;
+}
+
+.policy-list {
+  margin: 0.25rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 0.93rem;
+}
+
+.policy-list li + li {
+  margin-top: 0.4rem;
+}
+
+.contact-card p {
+  margin: 0.2rem 0;
+  color: var(--muted);
+}
+
+.contact-card a {
+  color: var(--accent2);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.contact-card a:hover {
+  text-decoration: underline;
+}
+
 /* -- FOOTER ------------------------------------------------ */
 .footer {
   margin-top: 4rem;
@@ -1190,12 +1252,31 @@ h1 .gradient-text {
   font-size: 0.88rem;
 }
 
+.footer-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer-links a:hover {
+  color: var(--ink);
+}
+
 /* -- RESPONSIVE -------------------------------------------- */
 @media (max-width: 900px) {
   .info-grid,
   .use-cases-grid,
   .comparison-grid,
   .quick-picks-grid,
+  .policy-grid,
   .submit-tool-form {
     grid-template-columns: 1fr;
   }

@@ -208,7 +208,7 @@ const AI_NEWS = [
 const SUBMIT_TOOL_ENDPOINT = '/api/submit-tool'
 const TOOL_CATEGORIES = CATEGORIES.filter((category) => category !== 'All')
 const PRICING_OPTIONS = ['Free', 'Freemium', 'Paid', 'Enterprise']
-const ADSENSE_CLIENT_ID = import.meta.env.VITE_ADSENSE_CLIENT_ID || ''
+const ADSENSE_CLIENT_ID = import.meta.env.VITE_ADSENSE_CLIENT_ID || 'ca-pub-2770089511325323'
 
 const slugifyToolName = (value) => value
   .toLowerCase()
@@ -438,7 +438,18 @@ function AdUnit({ slot, className = '' }) {
   }, [])
 
   if (!ADSENSE_CLIENT_ID || import.meta.env.DEV) {
-    return null
+    return (
+      <aside className={`ad-unit ${className}`} aria-label="Advertisement placeholder">
+        <div className="ad-unit-placeholder">
+          <strong>Ad Placement</strong>
+          <span>
+            {import.meta.env.DEV
+              ? 'Visible in local dev as placeholder. Real ads render only on production domain.'
+              : 'Set VITE_ADSENSE_CLIENT_ID to render real ads.'}
+          </span>
+        </div>
+      </aside>
+    )
   }
 
   return (
@@ -842,6 +853,8 @@ function App() {
           <a href="#tools">Tools</a>
           <a href="#compare">Compare</a>
           <a href="#ai-news">AI News</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
           <a href="#submit-tool">Submit Tool</a>
           <a href="#how-ai-works">How AI Works</a>
           <a href="#faq">FAQ</a>
@@ -1081,6 +1094,77 @@ function App() {
           </div>
         </section>
 
+        <section className="section" id="about">
+          <div className="section-divider"></div>
+          <div className="section-heading-row">
+            <div>
+              <h2>About AIToolsCenter</h2>
+              <p className="section-copy">
+                AIToolsCenter is an editorial AI tools directory built to help people discover practical, trustworthy tools faster.
+              </p>
+            </div>
+          </div>
+          <div className="policy-grid">
+            <article className="policy-card">
+              <h3>How We Review</h3>
+              <ul className="policy-list">
+                <li>We evaluate tools by category fit, ease of use, and feature depth.</li>
+                <li>Listings are manually curated and updated based on product changes.</li>
+                <li>We prioritize clear descriptions and practical use cases for readers.</li>
+              </ul>
+            </article>
+            <article className="policy-card">
+              <h3>Editorial Independence</h3>
+              <ul className="policy-list">
+                <li>Sponsored placement, if any, is labeled clearly.</li>
+                <li>Affiliate relationships do not change core ranking methodology.</li>
+                <li>We regularly remove outdated or low-quality tools from the list.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section className="section legal-section" id="privacy">
+          <div className="section-divider"></div>
+          <h2>Privacy Policy</h2>
+          <p className="section-copy">
+            We collect minimal data needed to run this site and improve user experience.
+          </p>
+          <ul className="policy-list">
+            <li>Newsletter subscriptions store email address and subscription source.</li>
+            <li>Tool submissions store details provided through the submission form.</li>
+            <li>Basic analytics and ad technologies may use cookies to personalize content and measure performance.</li>
+            <li>We do not sell personal data to third parties.</li>
+            <li>You can request removal of your submitted personal data by contacting us.</li>
+          </ul>
+        </section>
+
+        <section className="section legal-section" id="terms">
+          <div className="section-divider"></div>
+          <h2>Terms &amp; Conditions</h2>
+          <ul className="policy-list">
+            <li>All content is provided for informational purposes only.</li>
+            <li>Tool pricing, availability, and features can change without notice.</li>
+            <li>Users are responsible for evaluating third-party tools before use.</li>
+            <li>Unauthorized scraping, abuse, or harmful automated use of this site is prohibited.</li>
+            <li>By using this site, you agree to these terms and applicable laws.</li>
+          </ul>
+        </section>
+
+        <section className="section legal-section" id="contact">
+          <div className="section-divider"></div>
+          <h2>Contact</h2>
+          <div className="policy-card contact-card">
+            <p>
+              For support, corrections, legal/privacy requests, or partnership inquiries, contact us at:
+            </p>
+            <p>
+              <a href="mailto:support@aitoolscenter.in">support@aitoolscenter.in</a>
+            </p>
+            <p className="section-copy">Typical response time: 2 to 5 business days.</p>
+          </div>
+        </section>
+
         <section className="section submit-tool-section" id="submit-tool">
           <h2>Submit Your Tool</h2>
           <p className="section-copy">
@@ -1208,6 +1292,12 @@ function App() {
       </main>
 
       <footer className="footer">
+        <div className="footer-links">
+          <a href="#about">About</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#terms">Terms</a>
+          <a href="#contact">Contact</a>
+        </div>
         <p>© 2026 AIToolsCenter.in · Built to help you navigate the AI landscape.</p>
         <p style={{ marginTop: '0.4rem', fontSize: '0.85rem', color: 'var(--muted)' }}>
           Some links are affiliate links. We may earn a small commission at no extra cost to you.
