@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import aiNews from './data/ai-news.json'
+
+const WebglHeroScene = lazy(() => import('./components/WebglHeroScene'))
 
 const CATEGORIES = ['All', 'Writing', 'Image', 'Video', 'Coding', 'Productivity', 'Automation', 'Research']
 
@@ -354,6 +356,96 @@ const upsertJsonLd = (payload) => {
   tag.textContent = JSON.stringify(payload)
 }
 
+const canUseInteractiveTilt = () => (
+  typeof window !== 'undefined'
+  && window.matchMedia('(hover: hover) and (pointer: fine)').matches
+  && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+)
+
+const canUseWebglHero = () => {
+  if (typeof window === 'undefined') {
+    return false
+  }
+
+  if (!canUseInteractiveTilt()) {
+    return false
+  }
+
+  try {
+    const canvas = document.createElement('canvas')
+    const hasWebgl = !!(window.WebGLRenderingContext && (canvas.getContext('webgl2') || canvas.getContext('webgl')))
+    return hasWebgl
+  } catch {
+    return false
+  }
+}
+
+const getWebglHeroQuality = () => {
+  if (typeof window === 'undefined') {
+    return 'low'
+  }
+
+  const memory = navigator.deviceMemory || 4
+  const cores = navigator.hardwareConcurrency || 4
+  const dpr = window.devicePixelRatio || 1
+  const width = window.innerWidth || 1280
+
+  if (memory >= 8 && cores >= 8 && dpr <= 2 && width >= 1400) {
+    return 'high'
+  }
+
+  if (memory >= 4 && cores >= 4 && width >= 960) {
+    return 'balanced'
+  }
+
+  return 'low'
+}
+
+function useInteractiveTilt({ tilt = 8, shift = 10 } = {}) {
+  const elementRef = useRef(null)
+
+  const updateTiltFromMouse = (event) => {
+    if (!canUseInteractiveTilt() || !elementRef.current) {
+      return
+    }
+
+    const bounds = elementRef.current.getBoundingClientRect()
+    const x = (event.clientX - bounds.left) / bounds.width
+    const y = (event.clientY - bounds.top) / bounds.height
+
+    const xRatio = (x - 0.5) * 2
+    const yRatio = (y - 0.5) * 2
+
+    elementRef.current.classList.add('is-tilting')
+    elementRef.current.style.setProperty('--tilt-x', `${-yRatio * tilt}deg`)
+    elementRef.current.style.setProperty('--tilt-y', `${xRatio * tilt}deg`)
+    elementRef.current.style.setProperty('--shift-x', `${xRatio * shift}px`)
+    elementRef.current.style.setProperty('--shift-y', `${yRatio * shift}px`)
+    elementRef.current.style.setProperty('--glow-x', `${x * 100}%`)
+    elementRef.current.style.setProperty('--glow-y', `${y * 100}%`)
+  }
+
+  const resetTilt = () => {
+    if (!elementRef.current) {
+      return
+    }
+
+    elementRef.current.classList.remove('is-tilting')
+    elementRef.current.style.setProperty('--tilt-x', '0deg')
+    elementRef.current.style.setProperty('--tilt-y', '0deg')
+    elementRef.current.style.setProperty('--shift-x', '0px')
+    elementRef.current.style.setProperty('--shift-y', '0px')
+    elementRef.current.style.setProperty('--glow-x', '50%')
+    elementRef.current.style.setProperty('--glow-y', '50%')
+  }
+
+  return {
+    elementRef,
+    onMouseMove: updateTiltFromMouse,
+    onMouseLeave: resetTilt,
+  }
+}
+
 function Stars({ count }) {
   return (
     <span aria-label={`${count} out of 5 stars`} style={{ color: '#f59e0b', fontSize: '0.85rem' }}>
@@ -388,13 +480,19 @@ function InteractiveStars({ toolName, currentRating, onRate }) {
 }
 
 function ToolCard({ tool, isFavorite, isCompared, userRating, onToggleFavorite, onToggleCompare, onTagClick, onRate }) {
+  const tiltHandlers = useInteractiveTilt({ tilt: 7, shift: 8 })
   const [reported, setReported] = useState(false)
   const similarTools = TOOLS
     .filter((t) => t.category === tool.category && t.name !== tool.name)
     .slice(0, 2)
 
   return (
-    <article className="tool-card">
+    <article
+      className="tool-card"
+      ref={tiltHandlers.elementRef}
+      onMouseMove={tiltHandlers.onMouseMove}
+      onMouseLeave={tiltHandlers.onMouseLeave}
+    >
       <div className="tool-card-top">
         <span className="tool-badge">{tool.badge}</span>
         <a className="tool-category" href={`/categories/${slugifyCategoryName(tool.category)}`}>{tool.category}</a>
@@ -498,11 +596,11 @@ function ComparisonCard({ tool, onRemove }) {
   )
 }
 
-function FaqItem({ q, a }) {
+function FaqItem({ q, a, className = '', style = undefined }) {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="faq-item">
+    <div className={`faq-item ${className}`.trim()} style={style} data-scroll-reveal>
       <button className="faq-question" onClick={() => setOpen(!open)} aria-expanded={open}>
         {q}
         <span className="faq-icon">{open ? '−' : '+'}</span>
@@ -768,6 +866,9 @@ function App() {
   const [toolErrors, setToolErrors] = useState({})
   const [toolSubmitStatus, setToolSubmitStatus] = useState({ type: 'idle', message: '' })
   const [isSubmittingTool, setIsSubmittingTool] = useState(false)
+  const [showWebglHero, setShowWebglHero] = useState(false)
+  const [webglHeroQuality, setWebglHeroQuality] = useState('balanced')
+  const heroTiltHandlers = useInteractiveTilt({ tilt: 9, shift: 12 })
 
   useEffect(() => {
     const savedFavorites = localStorage.getItem(LOCAL_FAVORITES_KEY)
@@ -807,6 +908,14 @@ function App() {
   useEffect(() => {
     localStorage.setItem(LOCAL_RATINGS_KEY, JSON.stringify(userRatings))
   }, [userRatings])
+
+  useEffect(() => {
+    const shouldUseWebgl = canUseWebglHero()
+    setShowWebglHero(shouldUseWebgl)
+    if (shouldUseWebgl) {
+      setWebglHeroQuality(getWebglHeroQuality())
+    }
+  }, [])
 
   useEffect(() => {
     const baseUrl = 'https://aitoolscenter.in'
@@ -1017,6 +1126,46 @@ function App() {
     .sort((left, right) => right.rating - left.rating || left.name.localeCompare(right.name))
     .slice(0, 10)
 
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    const revealNodes = Array.from(document.querySelectorAll('[data-scroll-reveal]'))
+    if (revealNodes.length === 0) {
+      return
+    }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      revealNodes.forEach((node) => node.classList.add('is-visible'))
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      {
+        threshold: 0.16,
+        rootMargin: '0px 0px -8% 0px',
+      },
+    )
+
+    revealNodes.forEach((node) => {
+      if (!node.classList.contains('is-visible')) {
+        observer.observe(node)
+      }
+    })
+
+    return () => observer.disconnect()
+  }, [filtered.length, comparisonTools.length, activeCategory, sortBy, favoritesOnly, search])
+
   const handleNewsletterSubmit = async (event) => {
     event.preventDefault()
 
@@ -1217,32 +1366,43 @@ function App() {
             </div>
           </div>
 
-          <aside className="hero-visual" aria-hidden="true">
-            <div className="orbital-shell">
-              <div className="ring ring-a"></div>
-              <div className="ring ring-b"></div>
-              <div className="ring ring-c"></div>
+          <aside className={`hero-visual${showWebglHero ? ' has-webgl' : ''}`} aria-hidden="true">
+            {showWebglHero ? (
+              <Suspense fallback={null}>
+                <WebglHeroScene quality={webglHeroQuality} />
+              </Suspense>
+            ) : (
+              <div
+                className="orbital-shell"
+                ref={heroTiltHandlers.elementRef}
+                onMouseMove={heroTiltHandlers.onMouseMove}
+                onMouseLeave={heroTiltHandlers.onMouseLeave}
+              >
+                <div className="ring ring-a"></div>
+                <div className="ring ring-b"></div>
+                <div className="ring ring-c"></div>
 
-              <article className="core-card">
-                <p>AI Command Deck</p>
-                <strong>{filtered.length} discoverable tools</strong>
-                <span>Category: {activeCategory}</span>
-                <div className="core-bars">
-                  <i style={{ width: '82%' }}></i>
-                  <i style={{ width: '63%' }}></i>
-                  <i style={{ width: '48%' }}></i>
+                <article className="core-card">
+                  <p>AI Command Deck</p>
+                  <strong>{filtered.length} discoverable tools</strong>
+                  <span>Category: {activeCategory}</span>
+                  <div className="core-bars">
+                    <i style={{ width: '82%' }}></i>
+                    <i style={{ width: '63%' }}></i>
+                    <i style={{ width: '48%' }}></i>
+                  </div>
+                </article>
+
+                <div className="float-panel panel-a">
+                  <small>Live signal</small>
+                  <strong>Trending tags</strong>
                 </div>
-              </article>
-
-              <div className="float-panel panel-a">
-                <small>Live signal</small>
-                <strong>Trending tags</strong>
+                <div className="float-panel panel-b">
+                  <small>Top category</small>
+                  <strong>{topPicks[0]?.category || 'Writing'}</strong>
+                </div>
               </div>
-              <div className="float-panel panel-b">
-                <small>Top category</small>
-                <strong>{topPicks[0]?.category || 'Writing'}</strong>
-              </div>
-            </div>
+            )}
           </aside>
         </div>
       </header>
@@ -1256,8 +1416,13 @@ function App() {
             </div>
           </div>
           <div className="quick-picks-grid">
-            {topPicks.map((tool) => (
-              <div key={tool.name} className="quick-pick-card">
+            {topPicks.map((tool, index) => (
+              <div
+                key={tool.name}
+                className={`quick-pick-card scroll-reveal reveal-dramatic ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
+                style={{ '--reveal-delay': `${Math.min(index * 55, 220)}ms` }}
+                data-scroll-reveal
+              >
                 <div className="quick-pick-top">
                   <strong><a className="tool-name-link" href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a></strong>
                   <Stars count={tool.rating} />
@@ -1285,7 +1450,12 @@ function App() {
           </div>
           <div className="top-ten-grid">
             {topTen.map((tool, index) => (
-              <article key={tool.name} className="top-ten-card">
+              <article
+                key={tool.name}
+                className={`top-ten-card scroll-reveal reveal-dramatic ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
+                style={{ '--reveal-delay': `${Math.min(index * 45, 260)}ms` }}
+                data-scroll-reveal
+              >
                 <div className="top-ten-rank">#{index + 1}</div>
                 <div className="top-ten-body">
                   <div className="top-ten-head">
@@ -1369,18 +1539,24 @@ function App() {
             <p className="empty-state">No tools match your current filters. Try a different keyword or turn off favorites only.</p>
           ) : (
             <div className="tools-grid">
-              {filtered.map((tool) => (
-                <ToolCard
+              {filtered.map((tool, index) => (
+                <div
                   key={tool.name}
-                  tool={tool}
-                  isFavorite={favorites.includes(tool.name)}
-                  isCompared={compareList.includes(tool.name)}
-                  userRating={userRatings[tool.name] || 0}
-                  onToggleFavorite={toggleFavorite}
-                  onToggleCompare={toggleCompare}
-                  onTagClick={(tag) => setSearch(tag)}
-                  onRate={rateTool}
-                />
+                  className={`scroll-reveal reveal-subtle ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
+                  style={{ '--reveal-delay': `${Math.min(index * 32, 260)}ms` }}
+                  data-scroll-reveal
+                >
+                  <ToolCard
+                    tool={tool}
+                    isFavorite={favorites.includes(tool.name)}
+                    isCompared={compareList.includes(tool.name)}
+                    userRating={userRatings[tool.name] || 0}
+                    onToggleFavorite={toggleFavorite}
+                    onToggleCompare={toggleCompare}
+                    onTagClick={(tag) => setSearch(tag)}
+                    onRate={rateTool}
+                  />
+                </div>
               ))}
             </div>
           )}
@@ -1399,8 +1575,15 @@ function App() {
             <p className="empty-state">No tools selected yet. Use the Compare button on any card to build a shortlist.</p>
           ) : (
             <div className="comparison-grid">
-              {comparisonTools.map((tool) => (
-                <ComparisonCard key={tool.name} tool={tool} onRemove={toggleCompare} />
+              {comparisonTools.map((tool, index) => (
+                <div
+                  key={tool.name}
+                  className={`scroll-reveal reveal-subtle ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
+                  style={{ '--reveal-delay': `${Math.min(index * 80, 240)}ms` }}
+                  data-scroll-reveal
+                >
+                  <ComparisonCard tool={tool} onRemove={toggleCompare} />
+                </div>
               ))}
             </div>
           )}
@@ -1453,8 +1636,13 @@ function App() {
               { icon: '🎬', title: 'Produce videos', desc: 'Generate cinematic short-form videos from a text description.' },
               { icon: '📊', title: 'Analyze data', desc: 'Summarize reports, extract insights, and build dashboards.' },
               { icon: '🤖', title: 'Automate workflows', desc: 'Connect apps and eliminate repetitive manual tasks.' },
-            ].map((useCase) => (
-              <div key={useCase.title} className="use-case-card">
+            ].map((useCase, index) => (
+              <div
+                key={useCase.title}
+                className={`use-case-card scroll-reveal reveal-elastic ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
+                style={{ '--reveal-delay': `${Math.min(index * 45, 220)}ms` }}
+                data-scroll-reveal
+              >
                 <span className="use-icon">{useCase.icon}</span>
                 <h3>{useCase.title}</h3>
                 <p>{useCase.desc}</p>
@@ -1473,8 +1661,13 @@ function App() {
             <span className="results-chip">Updated May 2026</span>
           </div>
           <div className="news-grid">
-            {AI_NEWS.map((item) => (
-              <div key={item.title} className="news-card">
+            {AI_NEWS.map((item, index) => (
+              <div
+                key={item.title}
+                className={`news-card scroll-reveal reveal-elastic ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
+                style={{ '--reveal-delay': `${Math.min(index * 48, 260)}ms` }}
+                data-scroll-reveal
+              >
                 <div className="news-card-top">
                   <span className="news-tag">{item.tag}</span>
                   <span className="news-date">{item.date}</span>
@@ -1495,8 +1688,14 @@ function App() {
           <div className="section-divider"></div>
           <h2>Frequently Asked Questions</h2>
           <div className="faq-list">
-            {FAQS.map((faq) => (
-              <FaqItem key={faq.q} q={faq.q} a={faq.a} />
+            {FAQS.map((faq, index) => (
+              <FaqItem
+                key={faq.q}
+                q={faq.q}
+                a={faq.a}
+                className={`scroll-reveal reveal-subtle ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
+                style={{ '--reveal-delay': `${Math.min(index * 48, 220)}ms` }}
+              />
             ))}
           </div>
         </section>

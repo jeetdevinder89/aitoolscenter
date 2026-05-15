@@ -187,18 +187,66 @@ body {
 }
 
 .hero-visual {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.4rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  background:
+    radial-gradient(circle at 16% 18%, rgba(124,108,255,0.28), transparent 44%),
+    radial-gradient(circle at 80% 74%, rgba(34,211,238,0.22), transparent 38%),
+    rgba(8, 10, 24, 0.65);
   min-height: 420px;
   perspective: 1400px;
   display: grid;
   place-items: center;
 }
 
+.hero-webgl {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hero-webgl canvas {
+  width: 100% !important;
+  height: 100% !important;
+  filter: saturate(1.14) contrast(1.06);
+}
+
+.hero-visual.has-webgl {
+  box-shadow: 0 24px 58px rgba(10, 14, 36, 0.52), inset 0 1px 0 rgba(255,255,255,0.14);
+}
+
 .orbital-shell {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --shift-x: 0px;
+  --shift-y: 0px;
+  --glow-x: 50%;
+  --glow-y: 50%;
   position: relative;
   width: min(470px, 100%);
   aspect-ratio: 1 / 1;
   transform-style: preserve-3d;
-  transform: rotateX(8deg) rotateY(-10deg);
+  transform: translate3d(var(--shift-x), var(--shift-y), 0) rotateX(calc(8deg + var(--tilt-x))) rotateY(calc(-10deg + var(--tilt-y)));
+  transition: transform 0.22s ease, filter 0.22s ease;
+  filter: drop-shadow(0 16px 46px rgba(8, 10, 25, 0.45));
+  z-index: 2;
+}
+
+.orbital-shell::before {
+  content: '';
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  background: radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(124,108,255,0.36), rgba(34,211,238,0.2) 30%, transparent 62%);
+  transform: translate3d(calc(var(--shift-x) * -0.25), calc(var(--shift-y) * -0.25), 0);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.orbital-shell.is-tilting {
+  filter: drop-shadow(0 24px 64px rgba(124,108,255,0.24));
 }
 
 .ring {
@@ -491,6 +539,83 @@ h1 .gradient-text {
   max-width: 58ch;
 }
 
+.scroll-reveal {
+  opacity: 0;
+  filter: blur(10px);
+  --reveal-distance: 56px;
+  transition:
+    opacity 0.62s cubic-bezier(0.2, 0.65, 0.2, 1),
+    transform 0.82s cubic-bezier(0.2, 0.65, 0.2, 1),
+    filter 0.82s cubic-bezier(0.2, 0.65, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: transform, opacity, filter;
+}
+
+.scroll-reveal.reveal-left {
+  transform: translate3d(calc(-1 * var(--reveal-distance)), 0, 0);
+}
+
+.scroll-reveal.reveal-right {
+  transform: translate3d(var(--reveal-distance), 0, 0);
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate3d(0, 0, 0);
+}
+
+.scroll-reveal.reveal-dramatic {
+  --reveal-distance: 88px;
+  filter: blur(14px);
+  transition:
+    opacity 0.56s cubic-bezier(0.12, 0.74, 0.23, 1),
+    transform 0.68s cubic-bezier(0.12, 0.74, 0.23, 1),
+    filter 0.68s cubic-bezier(0.12, 0.74, 0.23, 1);
+}
+
+.scroll-reveal.reveal-subtle {
+  --reveal-distance: 24px;
+  filter: blur(5px);
+  transition:
+    opacity 0.72s cubic-bezier(0.25, 0.6, 0.25, 1),
+    transform 0.94s cubic-bezier(0.25, 0.6, 0.25, 1),
+    filter 0.94s cubic-bezier(0.25, 0.6, 0.25, 1);
+}
+
+.scroll-reveal.reveal-elastic.is-visible {
+  animation: reveal-elastic-in 720ms cubic-bezier(0.22, 1.18, 0.32, 1) both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+@keyframes reveal-elastic-in {
+  0% {
+    transform: translate3d(calc(var(--reveal-distance) * var(--reveal-dir, 1)), 0, 0) scale(0.96);
+    opacity: 0;
+    filter: blur(9px);
+  }
+  66% {
+    transform: translate3d(calc(var(--reveal-distance) * -0.12 * var(--reveal-dir, 1)), 0, 0) scale(1.01);
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.scroll-reveal.reveal-elastic.reveal-left {
+  --reveal-distance: 62px;
+  --reveal-dir: -1;
+}
+
+.scroll-reveal.reveal-elastic.reveal-right {
+  --reveal-distance: 62px;
+  --reveal-dir: 1;
+}
+
 .results-chip {
   display: inline-flex;
   align-items: center;
@@ -757,6 +882,13 @@ h1 .gradient-text {
 }
 
 .tool-card {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --shift-x: 0px;
+  --shift-y: 0px;
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --hover-lift: 0px;
   background: var(--card);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
@@ -769,13 +901,16 @@ h1 .gradient-text {
   position: relative;
   overflow: hidden;
   transform-style: preserve-3d;
+  transform: translate3d(var(--shift-x), calc(var(--shift-y) - var(--hover-lift)), 0) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
 }
 
 .tool-card::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--gradient-card);
+  background:
+    radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(124,108,255,0.28), transparent 50%),
+    var(--gradient-card);
   opacity: 0;
   transition: opacity 0.22s;
   pointer-events: none;
@@ -794,16 +929,14 @@ h1 .gradient-text {
 }
 
 .tool-card:hover {
-  transform: translateY(-9px) rotateX(5deg) rotateY(-5deg);
+  --hover-lift: 9px;
   box-shadow: 0 24px 62px rgba(124,108,255,0.27), 0 6px 16px rgba(0,0,0,0.34);
   border-color: rgba(124,108,255,0.3);
 }
 
-.tool-card:nth-child(even):hover {
-  transform: translateY(-9px) rotateX(5deg) rotateY(5deg);
-}
-
 .tool-card:hover::before { opacity: 1; }
+
+.tool-card.is-tilting::before { opacity: 1; }
 
 .tool-card:hover::after {
   transform: rotate(18deg) translateX(260%);
@@ -1650,6 +1783,79 @@ h1 .gradient-text {
 
   .orbital-shell {
     width: min(380px, 100%);
+  }
+
+  .scroll-reveal.reveal-left {
+    --reveal-distance: 26px;
+  }
+
+  .scroll-reveal.reveal-right {
+    --reveal-distance: 26px;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .hero-webgl {
+    display: none;
+  }
+
+  .orbital-shell,
+  .tool-card {
+    transform: none;
+  }
+
+  .orbital-shell::before,
+  .tool-card::before {
+    opacity: 0.65;
+  }
+
+  .tool-card:hover {
+    --hover-lift: 0px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal,
+  .scroll-reveal.reveal-left,
+  .scroll-reveal.reveal-right,
+  .scroll-reveal.is-visible,
+  .scroll-reveal.reveal-elastic.is-visible {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+
+  .hero-webgl {
+    display: none;
+  }
+
+  .orbital-shell,
+  .tool-card,
+  .quick-pick-card,
+  .top-ten-card,
+  .news-card,
+  .info-card,
+  .use-case-card {
+    transition: none;
+  }
+
+  .ring-a,
+  .ring-b,
+  .ring-c,
+  .panel-a,
+  .panel-b {
+    animation: none;
+  }
+
+  .orbital-shell,
+  .tool-card {
+    transform: none;
+  }
+
+  .tool-card:hover {
+    --hover-lift: 0px;
   }
 }
 
