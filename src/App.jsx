@@ -316,6 +316,58 @@ const CATEGORY_SEO = {
   },
 }
 
+const TOOL_DETAIL_WRITEUPS = {
+  ChatGPT: 'ChatGPT is strong for daily knowledge work because it handles ideation, drafting, summarization, and light coding in one flow. Teams often use it to turn rough notes into publishable copy, generate first-pass support responses, and speed up research with structured prompts. It is especially useful when you need a fast assistant for mixed tasks rather than a single specialized workflow.',
+  Claude: 'Claude is a practical choice for long-form reasoning and document-heavy analysis. It performs well on policy review, synthesis of multiple sources, and rewriting dense text into clearer business language. Many users prefer Claude when they need more deliberate outputs, careful tone control, and consistent handling of long context windows.',
+  Gemini: 'Gemini works best when your workflow already lives in the Google ecosystem. It can accelerate research, summarize threads, and help convert ideas into presentations or drafts with less copy-paste friction. For users switching between search, docs, and communication tools all day, Gemini can reduce context switching overhead significantly.',
+  Midjourney: 'Midjourney is favored by designers and creators who need striking visual direction quickly. It excels at mood exploration, style iteration, and concept art that can later be refined in design tools. The main strength is image quality and creative range, making it a strong option for campaigns, storytelling boards, and brand experimentation.',
+  'DALL·E 3': 'DALL·E 3 is often the easiest entry point for image generation because it is tightly integrated with conversational prompting workflows. It helps users move from plain-language ideas to usable visual drafts without learning complex syntax. This is useful for marketers, educators, and founders who need quick visuals for communication and testing.',
+  'Stable Diffusion': 'Stable Diffusion is ideal when control and flexibility matter more than convenience. Because it is open-source and widely customizable, teams can tune models, run private deployments, and integrate image generation into internal pipelines. It is a strong fit for advanced users who want ownership over prompts, model behavior, and cost structure.',
+  'GitHub Copilot': 'GitHub Copilot improves coding throughput by generating context-aware suggestions directly inside the editor. It is particularly effective for repetitive patterns, boilerplate, tests, and first drafts of unfamiliar APIs. Development teams typically benefit most when Copilot is paired with clear code review standards and strong linting/test gates.',
+  Cursor: 'Cursor is built for developers who want deeper AI integration across the entire codebase rather than single-line completion. It helps with refactors, implementation planning, and navigating large repositories through conversational commands. The biggest advantage is reducing time spent jumping between docs, files, and external chat tools.',
+  Tabnine: 'Tabnine is a practical option for organizations that prioritize controlled AI usage and IDE flexibility. It supports code completion workflows while emphasizing privacy-oriented deployment models. Teams using strict compliance requirements often consider Tabnine when they need AI assistance without heavily changing existing tooling habits.',
+  Runway: 'Runway is useful for teams producing short-form videos, ad concepts, and creative experiments under tight timelines. It combines generation and editing features that can shorten production cycles from days to hours. Its strongest use case is rapid visual prototyping for marketing and creative direction before full production investment.',
+}
+
+const CONSENT_STORAGE_KEY = 'aitoolscenter-consent-v1'
+
+const CONSENT_DEFAULTS = {
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  analytics_storage: 'denied',
+  functionality_storage: 'denied',
+  personalization_storage: 'denied',
+  security_storage: 'granted',
+}
+
+const CONSENT_ACCEPT_ALL = {
+  ad_storage: 'granted',
+  ad_user_data: 'granted',
+  ad_personalization: 'granted',
+  analytics_storage: 'granted',
+  functionality_storage: 'granted',
+  personalization_storage: 'granted',
+  security_storage: 'granted',
+}
+
+const applyConsentUpdate = (consentSettings) => {
+  if (typeof window === 'undefined') {
+    return
+  }
+
+  const payload = { ...CONSENT_DEFAULTS, ...consentSettings }
+
+  if (typeof window.gtag !== 'function') {
+    window.dataLayer = window.dataLayer || []
+    window.gtag = function gtag() {
+      window.dataLayer.push(arguments)
+    }
+  }
+
+  window.gtag('consent', 'update', payload)
+}
+
 const slugifyToolName = (value) => value
   .toLowerCase()
   .replace(/[^a-z0-9]+/g, '-')
@@ -689,7 +741,103 @@ function SiteFooter() {
       <p style={{ marginTop: '0.4rem', fontSize: '0.85rem', color: 'var(--muted)' }}>
         Some links are affiliate links. We may earn a small commission at no extra cost to you.
       </p>
+      <ConsentBanner />
     </footer>
+  )
+}
+
+function ConsentBanner() {
+  const [visible, setVisible] = useState(false)
+  const [showCustomize, setShowCustomize] = useState(false)
+  const [choices, setChoices] = useState({
+    analytics: false,
+    adStorage: false,
+    adPersonalization: false,
+    adUserData: false,
+    personalization: false,
+    functionality: false,
+  })
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(CONSENT_STORAGE_KEY)
+      if (!stored) {
+        setVisible(true)
+        return
+      }
+
+      const parsed = JSON.parse(stored)
+      if (parsed?.consent) {
+        applyConsentUpdate(parsed.consent)
+      } else {
+        setVisible(true)
+      }
+    } catch {
+      setVisible(true)
+    }
+  }, [])
+
+  const persistAndApply = (consent, source) => {
+    try {
+      localStorage.setItem(
+        CONSENT_STORAGE_KEY,
+        JSON.stringify({ consent, source, updatedAt: new Date().toISOString() })
+      )
+    } catch {
+      // Ignore localStorage failures and still apply in-session consent update.
+    }
+    applyConsentUpdate(consent)
+    setVisible(false)
+    setShowCustomize(false)
+  }
+
+  const saveCustomConsent = () => {
+    const customConsent = {
+      ad_storage: choices.adStorage ? 'granted' : 'denied',
+      ad_user_data: choices.adUserData ? 'granted' : 'denied',
+      ad_personalization: choices.adPersonalization ? 'granted' : 'denied',
+      analytics_storage: choices.analytics ? 'granted' : 'denied',
+      functionality_storage: choices.functionality ? 'granted' : 'denied',
+      personalization_storage: choices.personalization ? 'granted' : 'denied',
+      security_storage: 'granted',
+    }
+    persistAndApply(customConsent, 'custom')
+  }
+
+  if (!visible) {
+    return null
+  }
+
+  return (
+    <section className="consent-banner" role="dialog" aria-live="polite" aria-label="Cookie consent">
+      <p>
+        We use cookies and ad technology to improve performance, measure usage, and show relevant ads.
+        Choose your preferences. See <a href="/privacy-policy">Privacy Policy</a>.
+      </p>
+      <div className="consent-actions">
+        <button type="button" className="btn btn-primary" onClick={() => persistAndApply(CONSENT_ACCEPT_ALL, 'accept-all')}>
+          Accept All
+        </button>
+        <button type="button" className="btn btn-secondary" onClick={() => persistAndApply(CONSENT_DEFAULTS, 'reject')}>
+          Reject Non-Essential
+        </button>
+        <button type="button" className="btn btn-secondary" onClick={() => setShowCustomize((value) => !value)}>
+          {showCustomize ? 'Hide Customization' : 'Customize'}
+        </button>
+      </div>
+
+      {showCustomize ? (
+        <div className="consent-customize">
+          <label><input type="checkbox" checked={choices.analytics} onChange={(e) => setChoices((v) => ({ ...v, analytics: e.target.checked }))} /> Analytics cookies</label>
+          <label><input type="checkbox" checked={choices.adStorage} onChange={(e) => setChoices((v) => ({ ...v, adStorage: e.target.checked }))} /> Ad storage</label>
+          <label><input type="checkbox" checked={choices.adPersonalization} onChange={(e) => setChoices((v) => ({ ...v, adPersonalization: e.target.checked }))} /> Ad personalization</label>
+          <label><input type="checkbox" checked={choices.adUserData} onChange={(e) => setChoices((v) => ({ ...v, adUserData: e.target.checked }))} /> Ad user data</label>
+          <label><input type="checkbox" checked={choices.personalization} onChange={(e) => setChoices((v) => ({ ...v, personalization: e.target.checked }))} /> Personalization storage</label>
+          <label><input type="checkbox" checked={choices.functionality} onChange={(e) => setChoices((v) => ({ ...v, functionality: e.target.checked }))} /> Functionality storage</label>
+          <button type="button" className="btn btn-primary consent-save" onClick={saveCustomConsent}>Save Choices</button>
+        </div>
+      ) : null}
+    </section>
   )
 }
 
@@ -758,7 +906,7 @@ function ToolDetailPage({ tool }) {
           <div className="content-stack">
             <article className="content-card policy-card">
               <h2>Why use {tool.name}</h2>
-              <p>{tool.name} helps with {tool.category.toLowerCase()} workflows and is commonly used for faster execution with AI-assisted output.</p>
+              <p>{TOOL_DETAIL_WRITEUPS[tool.name] || `${tool.name} helps with ${tool.category.toLowerCase()} workflows and is commonly used for faster execution with AI-assisted output.`}</p>
               <ul className="policy-list">
                 <li>Best for: teams and creators who need reliable {tool.category.toLowerCase()} support.</li>
                 <li>Pricing model: {tool.badge}.</li>
