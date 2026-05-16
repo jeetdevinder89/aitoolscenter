@@ -186,6 +186,7 @@ const LOCAL_FAVORITES_KEY = 'aitoolscenter-favorites'
 const LOCAL_VISITS_KEY = 'aitoolscenter-local-visits'
 const LOCAL_RATINGS_KEY = 'aitoolscenter-user-ratings'
 const LOCAL_TOOL_CLICKS_KEY = 'aitoolscenter-tool-clicks'
+const LOCAL_AMAZON_CLICKS_KEY = 'aitoolscenter-amazon-clicks'
 const SESSION_VISIT_KEY = 'aitoolscenter-session-visited'
 const LOCAL_GLOBAL_VISIT_DATE_KEY = 'aitoolscenter-global-visit-date'
 const PAGE_VIEWS_API = '/api/page-views'
@@ -706,7 +707,7 @@ function ComparisonCard({ tool, onRemove }) {
   )
 }
 
-function AmazonPickCard({ item }) {
+function AmazonPickCard({ item, clickCount, onVisit }) {
   return (
     <article className="amazon-pick-card">
       <div className="tool-card-top">
@@ -725,10 +726,14 @@ function AmazonPickCard({ item }) {
           href={getToolOutboundUrl(item)}
           target="_blank"
           rel={getToolAnchorRel(item)}
+          onClick={() => onVisit(item.name)}
         >
           View on Amazon
         </a>
       </div>
+      <span className="tool-click-count">
+        {clickCount} Amazon click{clickCount === 1 ? '' : 's'}
+      </span>
       <p className="affiliate-disclosure">Affiliate disclosure: As an Amazon Associate, we may earn from qualifying purchases.</p>
     </article>
   )
@@ -1127,6 +1132,7 @@ function App() {
   const [toolSubmitStatus, setToolSubmitStatus] = useState({ type: 'idle', message: '' })
   const [isSubmittingTool, setIsSubmittingTool] = useState(false)
   const [toolClicks, setToolClicks] = useState({})
+  const [amazonClicks, setAmazonClicks] = useState({})
   const [theme, setTheme] = useState(() => localStorage.getItem(LOCAL_THEME_KEY) || 'dark')
   const heroTiltHandlers = useInteractiveTilt({ tilt: 9, shift: 12 })
 
@@ -1155,6 +1161,15 @@ function App() {
         setToolClicks(JSON.parse(savedClicks))
       } catch {
         setToolClicks({})
+      }
+    }
+
+    const savedAmazonClicks = localStorage.getItem(LOCAL_AMAZON_CLICKS_KEY)
+    if (savedAmazonClicks) {
+      try {
+        setAmazonClicks(JSON.parse(savedAmazonClicks))
+      } catch {
+        setAmazonClicks({})
       }
     }
 
@@ -1227,6 +1242,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem(LOCAL_TOOL_CLICKS_KEY, JSON.stringify(toolClicks))
   }, [toolClicks])
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_AMAZON_CLICKS_KEY, JSON.stringify(amazonClicks))
+  }, [amazonClicks])
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
@@ -1412,6 +1431,13 @@ function App() {
     setToolClicks((current) => ({
       ...current,
       [toolName]: (current[toolName] || 0) + 1,
+    }))
+  }
+
+  const trackAmazonClick = (itemName) => {
+    setAmazonClicks((current) => ({
+      ...current,
+      [itemName]: (current[itemName] || 0) + 1,
     }))
   }
 
@@ -1833,7 +1859,11 @@ function App() {
                 style={{ '--reveal-delay': `${Math.min(index * 65, 180)}ms` }}
                 data-scroll-reveal
               >
-                <AmazonPickCard item={item} />
+                <AmazonPickCard
+                  item={item}
+                  clickCount={amazonClicks[item.name] || 0}
+                  onVisit={trackAmazonClick}
+                />
               </div>
             ))}
           </div>
