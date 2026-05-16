@@ -194,29 +194,113 @@ const NEWSLETTER_ENDPOINT = '/api/newsletter'
 
 const AI_NEWS = aiNews
 
-const AMAZON_RECOMMENDATIONS = [
+const AMAZON_ROTATION_SIZE = 3
+
+const AMAZON_PRODUCT_POOL = [
   {
     name: 'Echo Dot (5th Gen)',
     category: 'Productivity',
     priceHint: 'Smart speaker',
     tagline: 'Voice assistant for reminders, timers, smart-home controls, and quick daily tasks.',
-    affiliateLink: 'https://www.amazon.in/s?k=Echo+Dot+5th+Gen',
+    searchQuery: 'Echo Dot 5th Gen',
   },
   {
     name: 'Kindle Paperwhite (16 GB)',
     category: 'Research',
     priceHint: 'E-reader',
     tagline: 'Distraction-free reading for founders and creators who read long-form books and docs.',
-    affiliateLink: 'https://www.amazon.in/s?k=Kindle+Paperwhite+16GB',
+    searchQuery: 'Kindle Paperwhite 16GB',
   },
   {
     name: 'Logitech MX Master 3S',
     category: 'Coding',
     priceHint: 'Productivity mouse',
     tagline: 'High-precision mouse with app-specific controls for coding, design, and editing workflows.',
-    affiliateLink: 'https://www.amazon.in/s?k=Logitech+MX+Master+3S',
+    searchQuery: 'Logitech MX Master 3S',
+  },
+  {
+    name: 'Dell 27-inch QHD Monitor',
+    category: 'Productivity',
+    priceHint: 'Monitor',
+    tagline: 'Sharp text and larger workspace for prompting, dashboards, and multitasking.',
+    searchQuery: 'Dell 27 inch QHD monitor',
+  },
+  {
+    name: 'Blue Yeti USB Microphone',
+    category: 'Research',
+    priceHint: 'Microphone',
+    tagline: 'Clean voice capture for AI voice notes, podcasts, and video explainers.',
+    searchQuery: 'Blue Yeti USB microphone',
+  },
+  {
+    name: 'Sony WH-1000XM5 Headphones',
+    category: 'Productivity',
+    priceHint: 'Noise-canceling',
+    tagline: 'Focused deep-work sessions with excellent noise cancellation and call quality.',
+    searchQuery: 'Sony WH-1000XM5',
+  },
+  {
+    name: 'Samsung T7 Portable SSD',
+    category: 'Coding',
+    priceHint: 'Storage',
+    tagline: 'Fast external storage for model assets, videos, and project backups.',
+    searchQuery: 'Samsung T7 portable SSD',
+  },
+  {
+    name: 'Apple Magic Keyboard',
+    category: 'Coding',
+    priceHint: 'Keyboard',
+    tagline: 'Reliable low-profile keyboard for long writing and coding sessions.',
+    searchQuery: 'Apple Magic Keyboard',
+  },
+  {
+    name: 'BenQ ScreenBar Monitor Lamp',
+    category: 'Productivity',
+    priceHint: 'Desk light',
+    tagline: 'Desk lighting that reduces glare and eye strain during late-night work.',
+    searchQuery: 'BenQ ScreenBar monitor light',
+  },
+  {
+    name: 'Anker 100W USB-C Charger',
+    category: 'Automation',
+    priceHint: 'Power adapter',
+    tagline: 'Single compact charger for laptop, phone, and creator accessories.',
+    searchQuery: 'Anker 100W USB C charger',
+  },
+  {
+    name: 'Elgato Stream Deck MK.2',
+    category: 'Automation',
+    priceHint: 'Macro pad',
+    tagline: 'Trigger repetitive production and workflow actions with one tap.',
+    searchQuery: 'Elgato Stream Deck MK.2',
+  },
+  {
+    name: 'TP-Link Archer AX73 Router',
+    category: 'Research',
+    priceHint: 'Wi-Fi router',
+    tagline: 'Stable high-speed internet for cloud AI tools, meetings, and uploads.',
+    searchQuery: 'TP Link Archer AX73',
   },
 ]
+
+const buildAmazonSearchLink = (query) => `https://www.amazon.in/s?k=${encodeURIComponent(query)}`
+
+const getDailyAmazonRecommendations = (pool, size) => {
+  const dayKey = new Date().toISOString().slice(0, 10)
+  const seedBase = Array.from(dayKey).reduce((acc, char) => acc + char.charCodeAt(0), 0)
+
+  const ranked = pool
+    .map((item, index) => {
+      const score = (seedBase * (index + 11) + index * 97) % 997
+      return { item, score }
+    })
+    .sort((left, right) => left.score - right.score)
+
+  return ranked.slice(0, size).map(({ item }) => ({
+    ...item,
+    affiliateLink: buildAmazonSearchLink(item.searchQuery),
+  }))
+}
 
 const LEGAL_PAGES = {
   '/about': {
@@ -1479,6 +1563,8 @@ function App() {
     .sort((left, right) => right.rating - left.rating || left.name.localeCompare(right.name))
     .slice(0, 3)
 
+  const dailyAmazonRecommendations = getDailyAmazonRecommendations(AMAZON_PRODUCT_POOL, AMAZON_ROTATION_SIZE)
+
   useEffect(() => {
     if (typeof window === 'undefined') {
       return
@@ -1849,10 +1935,10 @@ function App() {
               <h2>Amazon Picks for AI Creators</h2>
               <p className="section-copy">Hardware and accessories we recommend for faster AI workflows, research, and productivity.</p>
             </div>
-            <div className="results-chip">{AMAZON_RECOMMENDATIONS.length} picks</div>
+            <div className="results-chip">{dailyAmazonRecommendations.length} picks • rotates daily</div>
           </div>
           <div className="amazon-grid">
-            {AMAZON_RECOMMENDATIONS.map((item, index) => (
+            {dailyAmazonRecommendations.map((item, index) => (
               <div
                 key={item.name}
                 className={`scroll-reveal reveal-subtle ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
