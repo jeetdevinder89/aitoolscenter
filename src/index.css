@@ -105,10 +105,6 @@
   background: linear-gradient(150deg, rgba(124,108,255,0.07) 0%, rgba(255,255,255,0.9) 60%);
 }
 
-[data-theme="light"] .top-ten-card {
-  background: linear-gradient(135deg, rgba(124,108,255,0.07) 0%, rgba(255,255,255,0.95) 50%, rgba(34,211,238,0.03) 100%);
-}
-
 [data-theme="light"] .hero-stats span {
   background: rgba(0,0,0,0.05);
   border-color: rgba(0,0,0,0.09);
@@ -850,91 +846,6 @@ h1 .gradient-text {
   line-height: 1.55;
 }
 
-/* -- TOP 10 ------------------------------------------------ */
-.top-ten-grid {
-  display: grid;
-  gap: 0.9rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.top-ten-card {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.85rem;
-  align-items: stretch;
-  border-radius: var(--radius);
-  border: 1px solid rgba(124,108,255,0.15);
-  background: linear-gradient(135deg, rgba(124,108,255,0.1) 0%, rgba(14,17,40,0.9) 50%, rgba(34,211,238,0.04) 100%);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-  overflow: hidden;
-  transition: transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.24s, border-color 0.24s;
-}
-
-.top-ten-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(124,108,255,0.45);
-  box-shadow: 0 24px 50px rgba(124,108,255,0.25), 0 8px 18px rgba(0,0,0,0.35);
-}
-
-.top-ten-rank {
-  min-width: 4.5rem;
-  display: grid;
-  place-items: center;
-  font-family: var(--headline);
-  font-size: 1.2rem;
-  font-weight: 900;
-  color: #fff;
-  background: linear-gradient(160deg, rgba(124,108,255,0.6) 0%, rgba(91,79,207,0.4) 100%);
-  border-right: 1px solid rgba(124,108,255,0.3);
-  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-}
-
-.top-ten-body {
-  padding: 0.85rem 1rem 0.95rem 0.2rem;
-}
-
-.top-ten-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.top-ten-head h3 {
-  font-size: 1.03rem;
-}
-
-.top-ten-body p {
-  margin: 0.4rem 0 0.65rem;
-  color: var(--muted);
-  font-size: 0.87rem;
-  line-height: 1.55;
-}
-
-.top-ten-meta {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  flex-wrap: wrap;
-}
-
-.top-ten-visit {
-  margin-left: auto;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--accent2);
-  text-decoration: none;
-  border: 1px solid rgba(34,211,238,0.35);
-  padding: 0.2rem 0.58rem;
-  border-radius: 999px;
-  transition: background 0.18s, color 0.18s;
-}
-
-.top-ten-visit:hover {
-  color: #04111b;
-  background: var(--accent2);
-}
-
 /* -- CATEGORY FILTERS -------------------------------------- */
 .category-filters {
   display: flex;
@@ -1200,6 +1111,17 @@ h1 .gradient-text {
   letter-spacing: 0.02em;
 }
 
+.tool-affiliate-pill {
+  background: rgba(251, 146, 60, 0.14);
+  color: #fdba74;
+  border: 1px solid rgba(251, 146, 60, 0.32);
+  border-radius: 999px;
+  padding: 0.14rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
 .tool-category {
   background: rgba(34,211,238,0.1);
   color: #7deeff;
@@ -1271,6 +1193,13 @@ h1 .gradient-text {
   font-size: 0.74rem;
   color: var(--muted);
   letter-spacing: 0.01em;
+}
+
+.affiliate-disclosure {
+  margin: 0.35rem 0 0;
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: var(--muted);
 }
 
 .compare-btn,
@@ -1449,6 +1378,51 @@ h1 .gradient-text {
 }
 
 .comparison-link:hover { color: var(--accent2); }
+
+/* -- AMAZON PICKS ------------------------------------------ */
+.amazon-section {
+  background: linear-gradient(140deg, rgba(251,146,60,0.08), rgba(34,211,238,0.05));
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+}
+
+.amazon-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.amazon-pick-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-height: 100%;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.amazon-pick-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(251,146,60,0.35);
+  box-shadow: 0 16px 40px rgba(251,146,60,0.18);
+}
+
+.amazon-pick-card h3 {
+  margin: 0.2rem 0 0;
+  font-size: 1.03rem;
+}
+
+.amazon-pick-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.58;
+}
 
 /* -- HOW AI WORKS ------------------------------------------ */
 .info-section {
@@ -2042,8 +2016,8 @@ h1 .gradient-text {
   .info-grid,
   .use-cases-grid,
   .comparison-grid,
+  .amazon-grid,
   .quick-picks-grid,
-  .top-ten-grid,
   .policy-grid,
   .submit-tool-form {
     grid-template-columns: 1fr;
@@ -2102,7 +2076,6 @@ h1 .gradient-text {
   .orbital-shell,
   .tool-card,
   .quick-pick-card,
-  .top-ten-card,
   .news-card,
   .info-card,
   .use-case-card {
@@ -2151,6 +2124,7 @@ h1 .gradient-text {
   }
 
   .compare-section,
+  .amazon-section,
   .info-section,
   .submit-tool-section,
   .newsletter {

@@ -45,6 +45,8 @@ npm run build
 ## Customization notes
 
 - Update tool links, ratings, and categories in `src/App.jsx`.
+- Add `VITE_AMAZON_ASSOCIATE_TAG` in `.env.local` (example: `aitoolscenter-21`) to automatically append your Amazon tag to any Amazon link in tool cards.
+- For any tool/card, set `affiliateLink` in `TOOLS` when you want a custom tracking URL; otherwise `link` is used.
 - Configure `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in Vercel for form handling.
 - Add affiliate links and a paid submit-your-tool flow for monetization.
 

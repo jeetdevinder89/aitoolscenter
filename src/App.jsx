@@ -193,6 +193,30 @@ const NEWSLETTER_ENDPOINT = '/api/newsletter'
 
 const AI_NEWS = aiNews
 
+const AMAZON_RECOMMENDATIONS = [
+  {
+    name: 'Echo Dot (5th Gen)',
+    category: 'Productivity',
+    priceHint: 'Smart speaker',
+    tagline: 'Voice assistant for reminders, timers, smart-home controls, and quick daily tasks.',
+    affiliateLink: 'https://www.amazon.in/dp/B09B8V1LZ3',
+  },
+  {
+    name: 'Kindle Paperwhite (16 GB)',
+    category: 'Research',
+    priceHint: 'E-reader',
+    tagline: 'Distraction-free reading for founders and creators who read long-form books and docs.',
+    affiliateLink: 'https://www.amazon.in/dp/B0CFPJYX7P',
+  },
+  {
+    name: 'Logitech MX Master 3S',
+    category: 'Coding',
+    priceHint: 'Productivity mouse',
+    tagline: 'High-precision mouse with app-specific controls for coding, design, and editing workflows.',
+    affiliateLink: 'https://www.amazon.in/dp/B07S395RWD',
+  },
+]
+
 const LEGAL_PAGES = {
   '/about': {
     title: 'About AIToolsCenter',
@@ -295,6 +319,7 @@ const SUBMIT_TOOL_ENDPOINT = '/api/submit-tool'
 const TOOL_CATEGORIES = CATEGORIES.filter((category) => category !== 'All')
 const PRICING_OPTIONS = ['Free', 'Freemium', 'Paid', 'Enterprise']
 const ADSENSE_CLIENT_ID = import.meta.env.VITE_ADSENSE_CLIENT_ID || 'ca-pub-2770089511325323'
+const AMAZON_ASSOCIATE_TAG = (import.meta.env.VITE_AMAZON_ASSOCIATE_TAG || '').trim()
 
 const CATEGORY_SEO = {
   Writing: {
@@ -389,9 +414,43 @@ const slugifyCategoryName = (value) => value
   .replace(/[^a-z0-9]+/g, '-')
   .replace(/^-+|-+$/g, '')
 
-const getToolOutboundUrl = (tool) => tool.affiliateLink || tool.link
+const AMAZON_HOST_REGEX = /(^|\.)amazon\.[a-z.]+$/i
+
+const isAmazonUrl = (url) => {
+  try {
+    const parsedUrl = new URL(url)
+    return AMAZON_HOST_REGEX.test(parsedUrl.hostname)
+  } catch {
+    return false
+  }
+}
+
+const isAffiliateTool = (tool) => Boolean(tool.affiliateLink) || isAmazonUrl(tool.link || '')
+
+const appendAmazonAssociateTag = (url) => {
+  if (!AMAZON_ASSOCIATE_TAG) {
+    return url
+  }
+
+  try {
+    const parsedUrl = new URL(url)
+    if (!AMAZON_HOST_REGEX.test(parsedUrl.hostname)) {
+      return url
+    }
+
+    if (!parsedUrl.searchParams.has('tag')) {
+      parsedUrl.searchParams.set('tag', AMAZON_ASSOCIATE_TAG)
+    }
+
+    return parsedUrl.toString()
+  } catch {
+    return url
+  }
+}
+
+const getToolOutboundUrl = (tool) => appendAmazonAssociateTag(tool.affiliateLink || tool.link)
 const getToolAnchorRel = (tool) => (
-  tool.affiliateLink ? 'noopener noreferrer nofollow sponsored' : 'noopener noreferrer'
+  isAffiliateTool(tool) ? 'noopener noreferrer nofollow sponsored' : 'noopener noreferrer'
 )
 
 const getToolBySlug = (slug) => TOOLS.find((tool) => slugifyToolName(tool.name) === slug)
@@ -532,6 +591,7 @@ function ToolCard({ tool, isFavorite, isCompared, userRating, clickCount, onTogg
     >
       <div className="tool-card-top">
         <span className="tool-badge">{tool.badge}</span>
+        {isAffiliateTool(tool) ? <span className="tool-affiliate-pill">Affiliate</span> : null}
         <a className="tool-category" href={`/categories/${slugifyCategoryName(tool.category)}`}>{CATEGORY_ICONS[tool.category] || ''} {tool.category}</a>
       </div>
       <div className="tool-card-header">
@@ -596,6 +656,9 @@ function ToolCard({ tool, isFavorite, isCompared, userRating, clickCount, onTogg
           {isCompared ? 'Added to Compare' : 'Compare'}
         </button>
       </div>
+      {isAffiliateTool(tool) ? (
+        <p className="affiliate-disclosure">Affiliate disclosure: We may earn a commission from eligible purchases, at no extra cost to you.</p>
+      ) : null}
       <span className="tool-click-count">
         {clickCount} visitor click{clickCount === 1 ? '' : 's'}
       </span>
@@ -636,6 +699,37 @@ function ComparisonCard({ tool, onRemove }) {
       <a className="comparison-link" href={getToolOutboundUrl(tool)} target="_blank" rel={getToolAnchorRel(tool)}>
         Open {tool.name}
       </a>
+      {isAffiliateTool(tool) ? (
+        <p className="affiliate-disclosure">Affiliate disclosure: We may earn a commission from eligible purchases, at no extra cost to you.</p>
+      ) : null}
+    </article>
+  )
+}
+
+function AmazonPickCard({ item }) {
+  return (
+    <article className="amazon-pick-card">
+      <div className="tool-card-top">
+        <span className="tool-badge">{item.priceHint}</span>
+        <span className="tool-affiliate-pill">Amazon Pick</span>
+      </div>
+      <h3>{item.name}</h3>
+      <p>{item.tagline}</p>
+      <div className="tool-tags">
+        <span className="tag">{item.category}</span>
+        <span className="tag">Amazon.in</span>
+      </div>
+      <div className="tool-actions-row">
+        <a
+          className="btn btn-primary tool-btn"
+          href={getToolOutboundUrl(item)}
+          target="_blank"
+          rel={getToolAnchorRel(item)}
+        >
+          View on Amazon
+        </a>
+      </div>
+      <p className="affiliate-disclosure">Affiliate disclosure: As an Amazon Associate, we may earn from qualifying purchases.</p>
     </article>
   )
 }
@@ -718,6 +812,7 @@ function SiteNav({ theme: themeProp, onToggleTheme: toggleProp }) {
       <a href="/" className="nav-logo">⚡ AIToolsCenter.in</a>
       <div className="nav-links">
         <a href="/#tools">Tools</a>
+        <a href="/#amazon-picks">Amazon Picks</a>
         <a href="/#compare">Compare</a>
         <a href="/#ai-news">AI News</a>
         <a href="/about">About</a>
@@ -750,7 +845,7 @@ function SiteFooter() {
       </div>
       <p>© 2026 AIToolsCenter.in · Built to help you navigate the AI landscape.</p>
       <p style={{ marginTop: '0.4rem', fontSize: '0.85rem', color: 'var(--muted)' }}>
-        Some links are affiliate links. We may earn a small commission at no extra cost to you.
+        Some links are affiliate links. As an Amazon Associate, we may earn from qualifying purchases at no extra cost to you.
       </p>
       <ConsentBanner />
     </footer>
@@ -924,6 +1019,9 @@ function ToolDetailPage({ tool }) {
                 <li>Community rating: {tool.rating}/5 based on editorial scoring.</li>
               </ul>
               <a className="btn btn-primary" href={getToolOutboundUrl(tool)} target="_blank" rel={getToolAnchorRel(tool)}>Visit {tool.name}</a>
+              {isAffiliateTool(tool) ? (
+                <p className="affiliate-disclosure">Affiliate disclosure: We may earn a commission from eligible purchases, at no extra cost to you.</p>
+              ) : null}
             </article>
 
             <article className="content-card policy-card">
@@ -1355,10 +1453,6 @@ function App() {
     .sort((left, right) => right.rating - left.rating || left.name.localeCompare(right.name))
     .slice(0, 3)
 
-  const topTen = [...TOOLS]
-    .sort((left, right) => right.rating - left.rating || left.name.localeCompare(right.name))
-    .slice(0, 10)
-
   useEffect(() => {
     if (typeof window === 'undefined') {
       return
@@ -1636,76 +1730,6 @@ function App() {
       </header>
 
       <main>
-        <section className="section picks-section">
-          <div className="section-heading-row">
-            <div>
-              <h2>Top Picks Right Now</h2>
-              <p className="section-copy">Start here if you want the shortest path to proven AI tools.</p>
-            </div>
-          </div>
-          <div className="quick-picks-grid">
-            {topPicks.map((tool, index) => (
-              <div
-                key={tool.name}
-                className={`quick-pick-card scroll-reveal reveal-dramatic ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
-                style={{ '--reveal-delay': `${Math.min(index * 55, 220)}ms` }}
-                data-scroll-reveal
-              >
-                <div className="quick-pick-top">
-                  <strong><a className="tool-name-link" href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a></strong>
-                  <Stars count={tool.rating} />
-                </div>
-                <p>{tool.tagline}</p>
-                <div className="tool-tags">
-                  {tool.tags.slice(0, 2).map((tag) => (
-                    <span key={tag} className="tag">{tag}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-          <AdUnit slot="5239162471" className="ad-unit-inline" />
-        </section>
-
-        <section className="section top-ten-section" id="top-10">
-          <div className="section-divider"></div>
-          <div className="section-heading-row">
-            <div>
-              <h2>Top 10 This Week</h2>
-              <p className="section-copy">A fast-moving shortlist of tools users are most likely to pick first.</p>
-            </div>
-            <span className="results-chip">Updated Weekly</span>
-          </div>
-          <div className="top-ten-grid">
-            {topTen.map((tool, index) => (
-              <article
-                key={tool.name}
-                className={`top-ten-card scroll-reveal reveal-dramatic ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
-                style={{ '--reveal-delay': `${Math.min(index * 45, 260)}ms` }}
-                data-scroll-reveal
-              >
-                <div className="top-ten-rank">#{index + 1}</div>
-                <div className="top-ten-body">
-                  <div className="top-ten-head">
-                    <h3>
-                      <a className="tool-name-link" href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a>
-                    </h3>
-                    <Stars count={tool.rating} />
-                  </div>
-                  <p>{tool.tagline}</p>
-                  <div className="top-ten-meta">
-                    <span className="tag">{tool.category}</span>
-                    <span className="tag">{tool.badge}</span>
-                    <a href={getToolOutboundUrl(tool)} target="_blank" rel={getToolAnchorRel(tool)} className="top-ten-visit">
-                      Visit
-                    </a>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
         <section className="section" id="tools">
           <div className="section-divider"></div>
           <div className="section-heading-row">
@@ -1790,6 +1814,29 @@ function App() {
               ))}
             </div>
           )}
+        </section>
+
+        <section className="section amazon-section" id="amazon-picks">
+          <div className="section-divider"></div>
+          <div className="section-heading-row">
+            <div>
+              <h2>Amazon Picks for AI Creators</h2>
+              <p className="section-copy">Hardware and accessories we recommend for faster AI workflows, research, and productivity.</p>
+            </div>
+            <div className="results-chip">{AMAZON_RECOMMENDATIONS.length} picks</div>
+          </div>
+          <div className="amazon-grid">
+            {AMAZON_RECOMMENDATIONS.map((item, index) => (
+              <div
+                key={item.name}
+                className={`scroll-reveal reveal-subtle ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
+                style={{ '--reveal-delay': `${Math.min(index * 65, 180)}ms` }}
+                data-scroll-reveal
+              >
+                <AmazonPickCard item={item} />
+              </div>
+            ))}
+          </div>
         </section>
 
         <section className="section compare-section" id="compare">
