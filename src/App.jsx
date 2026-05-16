@@ -199,21 +199,21 @@ const AMAZON_RECOMMENDATIONS = [
     category: 'Productivity',
     priceHint: 'Smart speaker',
     tagline: 'Voice assistant for reminders, timers, smart-home controls, and quick daily tasks.',
-    affiliateLink: 'https://www.amazon.in/dp/B09B8V1LZ3',
+    affiliateLink: 'https://www.amazon.in/s?k=Echo+Dot+5th+Gen',
   },
   {
     name: 'Kindle Paperwhite (16 GB)',
     category: 'Research',
     priceHint: 'E-reader',
     tagline: 'Distraction-free reading for founders and creators who read long-form books and docs.',
-    affiliateLink: 'https://www.amazon.in/dp/B0CFPJYX7P',
+    affiliateLink: 'https://www.amazon.in/s?k=Kindle+Paperwhite+16GB',
   },
   {
     name: 'Logitech MX Master 3S',
     category: 'Coding',
     priceHint: 'Productivity mouse',
     tagline: 'High-precision mouse with app-specific controls for coding, design, and editing workflows.',
-    affiliateLink: 'https://www.amazon.in/dp/B07S395RWD',
+    affiliateLink: 'https://www.amazon.in/s?k=Logitech+MX+Master+3S',
   },
 ]
 
@@ -319,7 +319,7 @@ const SUBMIT_TOOL_ENDPOINT = '/api/submit-tool'
 const TOOL_CATEGORIES = CATEGORIES.filter((category) => category !== 'All')
 const PRICING_OPTIONS = ['Free', 'Freemium', 'Paid', 'Enterprise']
 const ADSENSE_CLIENT_ID = import.meta.env.VITE_ADSENSE_CLIENT_ID || 'ca-pub-2770089511325323'
-const AMAZON_ASSOCIATE_TAG = (import.meta.env.VITE_AMAZON_ASSOCIATE_TAG || '').trim()
+const AMAZON_ASSOCIATE_TAG = (import.meta.env.VITE_AMAZON_ASSOCIATE_TAG || 'aitoolscenter-21').trim()
 
 const CATEGORY_SEO = {
   Writing: {
