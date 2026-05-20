@@ -1,0 +1,25 @@
+AI Workflow Kit - AIToolsCenter.in
+Updated: May 2026
+
+1) Content Workflow (Blog + Social)
+- Prompt: "You are a senior content strategist. Build a 4-part outline for [topic] aimed at [audience] with practical examples."
+- Prompt: "Turn this outline into a 900-word post with a clear hook, subheadings, and CTA."
+- Prompt: "Repurpose this blog into: 3 LinkedIn posts, 5 X posts, and 1 newsletter summary."
+
+2) Research Workflow
+- Prompt: "Summarize this topic in 7 bullet points, include key risks, opportunities, and unanswered questions."
+- Prompt: "Create a comparison table of top tools for [use case] with columns: Free Plan, Best For, Limitations, Pricing Notes."
+
+3) Coding Workflow
+- Prompt: "Act as a senior engineer. Review this code for correctness, performance, and readability. Return a patch-style suggestion list."
+- Prompt: "Generate table-driven tests for this function and include edge cases."
+
+4) Video Workflow
+- Prompt: "Write a 60-second short video script about [topic] with hook, 3 key points, and ending CTA."
+- Prompt: "Generate 10 thumbnail text options under 5 words each."
+
+5) Business Workflow
+- Prompt: "Create a weekly AI operations checklist for a small team focused on content, sales, and support."
+- Prompt: "Suggest 5 automations using Zapier/Make for [business type]."
+
+Find more guides: https://aitoolscenter.in
