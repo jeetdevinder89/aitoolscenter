@@ -1853,6 +1853,7 @@ function App() {
   const [exitIntentStatus, setExitIntentStatus] = useState({ type: 'idle', message: '' })
   const [theme, setTheme] = useState(() => localStorage.getItem(LOCAL_THEME_KEY) || 'dark')
   const heroTiltHandlers = useInteractiveTilt({ tilt: 9, shift: 12 })
+  const skipInitialHashScrollRef = useRef(false)
 
   useEffect(() => {
     const savedFavorites = localStorage.getItem(LOCAL_FAVORITES_KEY)
@@ -2021,9 +2022,34 @@ function App() {
   }, [theme])
 
   useEffect(() => {
+    if (typeof window === 'undefined' || normalizedPath !== '/') {
+      return
+    }
+
+    const navigationEntries = performance.getEntriesByType?.('navigation')
+    const isReloadNavigation = navigationEntries?.[0]?.type === 'reload'
+
+    if (!isReloadNavigation) {
+      return
+    }
+
+    if (window.location.hash) {
+      window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`)
+      skipInitialHashScrollRef.current = true
+    }
+
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }, [normalizedPath])
+
+  useEffect(() => {
     const scrollToHashTarget = () => {
       const hash = window.location.hash
       if (!hash) {
+        return
+      }
+
+      if (skipInitialHashScrollRef.current) {
+        skipInitialHashScrollRef.current = false
         return
       }
 
