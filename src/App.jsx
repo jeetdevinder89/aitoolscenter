@@ -1167,7 +1167,6 @@ function SiteNav({ theme: themeProp, onToggleTheme: toggleProp }) {
         <a href="/#trending">Trending</a>
         <a href="/trending-ai-tools-this-week">Weekly Trends</a>
         <a href="/#amazon-picks">Amazon Picks</a>
-        <a href="/#compare">Compare</a>
         <a href="/compare-hub">Compare Hub</a>
         <a href="/#finder-quiz">Tool Finder</a>
         <a href="/#ai-news">AI News</a>
