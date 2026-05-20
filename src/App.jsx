@@ -182,11 +182,142 @@ const SORT_OPTIONS = [
   { value: 'name', label: 'A to Z' },
 ]
 
+const OUTCOME_BLOCKS = [
+  {
+    title: 'AI Tools for Students',
+    outcome: 'Study faster and write better assignments in less time.',
+    category: 'Research',
+    slug: 'students',
+    tools: ['ChatGPT', 'Gemini', 'Perplexity'],
+  },
+  {
+    title: 'AI Tools for Small Business',
+    outcome: 'Launch content, automate admin work, and reduce tool costs.',
+    category: 'Automation',
+    slug: 'small-businesses',
+    tools: ['ChatGPT', 'Zapier AI', 'Notion AI'],
+  },
+  {
+    title: 'AI Tools for Developers',
+    outcome: 'Ship code faster with better context and fewer repetitive tasks.',
+    category: 'Coding',
+    slug: 'developers',
+    tools: ['GitHub Copilot', 'Cursor', 'Claude'],
+  },
+  {
+    title: 'AI Tools for Teachers',
+    outcome: 'Prepare lessons and classroom material in minutes, not hours.',
+    category: 'Writing',
+    slug: 'teachers',
+    tools: ['ChatGPT', 'Gemini', 'Notion AI'],
+  },
+  {
+    title: 'AI Tools for Content Creators',
+    outcome: 'Create scripts, visuals, and short videos from one workflow.',
+    category: 'Video',
+    slug: 'content-creators',
+    tools: ['Runway', 'Midjourney', 'DALL·E 3'],
+  },
+]
+
+const USE_CASE_PAGES = [
+  {
+    slug: 'students',
+    title: 'Best AI Tools for Students',
+    intro: 'Find AI tools that help students summarize complex topics, draft assignments, and speed up revision.',
+    toolNames: ['ChatGPT', 'Gemini', 'Perplexity', 'Notion AI'],
+    faqs: [
+      { q: 'What is the best free AI tool for students?', a: 'Gemini and ChatGPT are the easiest free starting points for study support and writing help.' },
+      { q: 'Can AI help with exam preparation?', a: 'Yes. AI tools can generate quizzes, explain difficult topics, and summarize notes into revision-ready formats.' },
+    ],
+  },
+  {
+    slug: 'teachers',
+    title: 'Best AI Tools for Teachers',
+    intro: 'Discover AI tools for lesson planning, worksheet drafting, and classroom communication.',
+    toolNames: ['ChatGPT', 'Gemini', 'Notion AI', 'Claude'],
+    faqs: [
+      { q: 'How can teachers use AI safely?', a: 'Teachers should review AI outputs, avoid sharing student-sensitive data, and use AI as an assistant, not an authority.' },
+      { q: 'Which AI tool is best for lesson plans?', a: 'ChatGPT and Claude are strong options for lesson structure, examples, and differentiated instruction ideas.' },
+    ],
+  },
+  {
+    slug: 'sql-developers',
+    title: 'Best AI Tools for SQL Developers',
+    intro: 'Use AI to write better queries, optimize SQL logic, and explain complex joins faster.',
+    toolNames: ['ChatGPT', 'Claude', 'GitHub Copilot', 'Perplexity'],
+    faqs: [
+      { q: 'Can AI optimize SQL queries?', a: 'Yes. AI can suggest indexing ideas, query rewrites, and execution-plan-oriented improvements when prompted correctly.' },
+      { q: 'Which AI tool is best for database work?', a: 'ChatGPT and Claude are strong for explanation-heavy SQL tasks; Copilot helps when SQL is embedded in code.' },
+    ],
+  },
+  {
+    slug: 'small-businesses',
+    title: 'Best AI Tools for Small Businesses',
+    intro: 'Find tools for marketing, customer communication, and workflow automation without a big team.',
+    toolNames: ['ChatGPT', 'Zapier AI', 'Make (Integromat)', 'Notion AI'],
+    faqs: [
+      { q: 'What is the best AI stack for a small business?', a: 'A common stack is ChatGPT for content, Notion AI for documentation, and Zapier AI for automations.' },
+      { q: 'Do small businesses need paid AI plans?', a: 'Many can start on free plans and upgrade only after they validate recurring usage and ROI.' },
+    ],
+  },
+  {
+    slug: 'youtube-automation',
+    title: 'Best AI Tools for YouTube Automation',
+    intro: 'Build a faster YouTube workflow with tools for scripting, thumbnails, and video generation.',
+    toolNames: ['ChatGPT', 'Runway', 'DALL·E 3', 'Midjourney'],
+    faqs: [
+      { q: 'Can AI create YouTube scripts?', a: 'Yes. AI is effective for hook ideas, outlines, and first drafts that creators then refine with their voice.' },
+      { q: 'Which AI tool is best for AI video creation?', a: 'Runway is a strong choice for rapid concept videos and short-form visual production.' },
+    ],
+  },
+]
+
+const COMPARISON_PAGES = [
+  {
+    slug: 'chatgpt-vs-claude',
+    title: 'ChatGPT vs Claude',
+    description: 'Compare ChatGPT and Claude for writing, coding, long-context analysis, and business workflows.',
+    tools: ['ChatGPT', 'Claude'],
+    rows: [
+      { feature: 'Free Plan', values: ['Yes', 'Yes'] },
+      { feature: 'Coding Quality', values: ['Excellent', 'Excellent'] },
+      { feature: 'Context Length', values: ['Medium', 'Very High'] },
+      { feature: 'Best For', values: ['General workflows', 'Long documents and analysis'] },
+    ],
+  },
+  {
+    slug: 'midjourney-vs-dall-e-3',
+    title: 'Midjourney vs DALL·E 3',
+    description: 'See which image model is better for quality, prompt simplicity, and production-ready visuals.',
+    tools: ['Midjourney', 'DALL·E 3'],
+    rows: [
+      { feature: 'Free Plan', values: ['No', 'Via ChatGPT plans'] },
+      { feature: 'Image Style Quality', values: ['Outstanding', 'Very Good'] },
+      { feature: 'Ease of Use', values: ['Intermediate', 'Beginner-friendly'] },
+      { feature: 'Best For', values: ['Creative direction', 'Fast image drafting'] },
+    ],
+  },
+  {
+    slug: 'cursor-vs-github-copilot',
+    title: 'Cursor vs GitHub Copilot',
+    description: 'Compare modern AI coding assistants for speed, codebase awareness, and day-to-day development.',
+    tools: ['Cursor', 'GitHub Copilot'],
+    rows: [
+      { feature: 'Free Plan', values: ['Yes', 'Trial'] },
+      { feature: 'IDE Integration', values: ['Editor-first', 'Broad IDE ecosystem'] },
+      { feature: 'Codebase Chat', values: ['Strong', 'Improving'] },
+      { feature: 'Best For', values: ['AI-native coding flow', 'Inline coding assistance'] },
+    ],
+  },
+]
+
 const LOCAL_FAVORITES_KEY = 'aitoolscenter-favorites'
 const LOCAL_VISITS_KEY = 'aitoolscenter-local-visits'
 const LOCAL_RATINGS_KEY = 'aitoolscenter-user-ratings'
 const LOCAL_TOOL_CLICKS_KEY = 'aitoolscenter-tool-clicks'
 const LOCAL_AMAZON_CLICKS_KEY = 'aitoolscenter-amazon-clicks'
+const LOCAL_HELPFUL_VOTES_KEY = 'aitoolscenter-helpful-votes'
 const SESSION_VISIT_KEY = 'aitoolscenter-session-visited'
 const LOCAL_GLOBAL_VISIT_DATE_KEY = 'aitoolscenter-global-visit-date'
 const PAGE_VIEWS_API = '/api/page-views'
@@ -541,9 +672,13 @@ const getToolAnchorRel = (tool) => (
 const getToolBySlug = (slug) => TOOLS.find((tool) => slugifyToolName(tool.name) === slug)
 const getCategoryBySlug = (slug) => TOOL_CATEGORIES.find((category) => slugifyCategoryName(category) === slug) || null
 const getLegalPage = (pathname) => LEGAL_PAGES[pathname] || null
+const getUseCaseBySlug = (slug) => USE_CASE_PAGES.find((page) => page.slug === slug) || null
+const getComparisonBySlug = (slug) => COMPARISON_PAGES.find((page) => page.slug === slug) || null
 
 const getToolSlugFromPath = (pathname) => (pathname.startsWith('/tools/') ? pathname.replace('/tools/', '') : null)
 const getCategorySlugFromPath = (pathname) => (pathname.startsWith('/categories/') ? pathname.replace('/categories/', '') : null)
+const getUseCaseSlugFromPath = (pathname) => (pathname.startsWith('/best-ai-tools-for/') ? pathname.replace('/best-ai-tools-for/', '') : null)
+const getComparisonSlugFromPath = (pathname) => (pathname.startsWith('/compare/') ? pathname.replace('/compare/', '') : null)
 
 const upsertMeta = ({ attr, key, content }) => {
   let tag = document.head.querySelector(`meta[${attr}="${key}"]`)
@@ -660,7 +795,7 @@ function InteractiveStars({ toolName, currentRating, onRate }) {
   )
 }
 
-function ToolCard({ tool, isFavorite, isCompared, userRating, clickCount, onToggleFavorite, onToggleCompare, onTagClick, onRate, onVisit }) {
+function ToolCard({ tool, isFavorite, isCompared, userRating, clickCount, helpfulVote, onToggleFavorite, onToggleCompare, onTagClick, onRate, onVisit, onHelpfulVote }) {
   const tiltHandlers = useInteractiveTilt({ tilt: 7, shift: 8 })
   const [reported, setReported] = useState(false)
   const similarTools = TOOLS
@@ -747,6 +882,25 @@ function ToolCard({ tool, isFavorite, isCompared, userRating, clickCount, onTogg
       <span className="tool-click-count">
         {clickCount} visitor click{clickCount === 1 ? '' : 's'}
       </span>
+      <div className="helpful-row">
+        <span>Was this helpful?</span>
+        <button
+          type="button"
+          className={`helpful-btn${helpfulVote === 'up' ? ' active' : ''}`}
+          onClick={() => onHelpfulVote(tool.name, helpfulVote === 'up' ? null : 'up')}
+          aria-label={`Mark ${tool.name} as helpful`}
+        >
+          👍
+        </button>
+        <button
+          type="button"
+          className={`helpful-btn${helpfulVote === 'down' ? ' active' : ''}`}
+          onClick={() => onHelpfulVote(tool.name, helpfulVote === 'down' ? null : 'down')}
+          aria-label={`Mark ${tool.name} as not helpful`}
+        >
+          👎
+        </button>
+      </div>
       <button
         type="button"
         className={`report-link${reported ? ' reported' : ''}`}
@@ -900,9 +1054,12 @@ function SiteNav({ theme: themeProp, onToggleTheme: toggleProp }) {
     <nav className="nav">
       <a href="/" className="nav-logo">⚡ AIToolsCenter.in</a>
       <div className="nav-links">
+        <a href="/#use-cases">Use Cases</a>
         <a href="/#tools">Tools</a>
+        <a href="/#trending">Trending</a>
         <a href="/#amazon-picks">Amazon Picks</a>
         <a href="/#compare">Compare</a>
+        <a href="/#finder-quiz">Tool Finder</a>
         <a href="/#ai-news">AI News</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
@@ -1081,6 +1238,9 @@ function ToolDetailPage({ tool }) {
   const categoryTools = TOOLS
     .filter((item) => item.category === tool.category && item.name !== tool.name)
     .slice(0, 3)
+  const relatedUseCases = OUTCOME_BLOCKS
+    .filter((item) => item.tools.includes(tool.name) || item.category === tool.category)
+    .slice(0, 3)
 
   return (
     <div className="page">
@@ -1134,6 +1294,32 @@ function ToolDetailPage({ tool }) {
                 </ul>
               </article>
             )}
+
+            <article className="content-card policy-card">
+              <h2>Related guides and use cases</h2>
+              <ul className="policy-list">
+                <li><a href={`/categories/${slugifyCategoryName(tool.category)}`}>Best {tool.category} AI tools</a></li>
+                {relatedUseCases.map((item) => (
+                  <li key={item.slug}>
+                    <a href={`/best-ai-tools-for/${item.slug}`}>{item.title}</a>
+                  </li>
+                ))}
+                {COMPARISON_PAGES.filter((page) => page.tools.includes(tool.name)).map((page) => (
+                  <li key={page.slug}>
+                    <a href={`/compare/${page.slug}`}>{page.title}</a>
+                  </li>
+                ))}
+              </ul>
+            </article>
+
+            <article className="content-card policy-card">
+              <h2>{tool.name} FAQs</h2>
+              <div className="faq-list">
+                <FaqItem q={`Is ${tool.name} free?`} a={`${tool.name} is listed as ${tool.badge}. Check the official pricing page for the latest plan details.`} />
+                <FaqItem q={`What is ${tool.name} best for?`} a={`${tool.name} is best for ${tool.category.toLowerCase()} workflows where speed and output consistency matter.`} />
+                <FaqItem q={`What are alternatives to ${tool.name}?`} a={`Popular alternatives include ${categoryTools.map((item) => item.name).join(', ') || 'similar tools in this category'}.`} />
+              </div>
+            </article>
           </div>
         </section>
       </main>
@@ -1185,13 +1371,143 @@ function CategoryPage({ category }) {
   )
 }
 
+function ComparisonTable({ comparison }) {
+  const comparisonTools = comparison.tools
+    .map((name) => TOOLS.find((tool) => tool.name === name))
+    .filter(Boolean)
+
+  return (
+    <div className="comparison-table-wrap">
+      <table className="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            {comparison.tools.map((name) => (
+              <th key={name}>{name}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {comparison.rows.map((row) => (
+            <tr key={row.feature}>
+              <td>{row.feature}</td>
+              {row.values.map((value, index) => (
+                <td key={`${row.feature}-${index}`}>{value}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className="comparison-table-links">
+        {comparisonTools.map((tool) => (
+          <a key={tool.name} href={`/tools/${slugifyToolName(tool.name)}`} className="btn btn-secondary">
+            Read {tool.name} review
+          </a>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function UseCaseLandingPage({ page }) {
+  const tools = page.toolNames
+    .map((name) => TOOLS.find((tool) => tool.name === name))
+    .filter(Boolean)
+
+  return (
+    <div className="page">
+      <SiteNav />
+      <main className="content-page">
+        <section className="content-hero">
+          <p className="eyebrow">OUTCOME GUIDE</p>
+          <h1>{page.title}</h1>
+          <p className="subtext">{page.intro}</p>
+        </section>
+
+        <section className="content-shell">
+          <div className="content-stack">
+            <article className="content-card policy-card">
+              <h2>Top picks for this use case</h2>
+              <ul className="policy-list">
+                {tools.map((tool) => (
+                  <li key={tool.name}>
+                    <a href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a> - {tool.tagline}
+                  </li>
+                ))}
+              </ul>
+            </article>
+
+            <article className="content-card policy-card">
+              <h2>Comparison shortcuts</h2>
+              <ul className="policy-list">
+                {COMPARISON_PAGES.map((comparison) => (
+                  <li key={comparison.slug}>
+                    <a href={`/compare/${comparison.slug}`}>{comparison.title}</a>
+                  </li>
+                ))}
+              </ul>
+            </article>
+
+            <article className="content-card policy-card">
+              <h2>FAQs</h2>
+              <div className="faq-list">
+                {page.faqs.map((faq) => (
+                  <FaqItem key={faq.q} q={faq.q} a={faq.a} />
+                ))}
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </div>
+  )
+}
+
+function ComparisonLandingPage({ comparison }) {
+  return (
+    <div className="page">
+      <SiteNav />
+      <main className="content-page">
+        <section className="content-hero">
+          <p className="eyebrow">AI TOOL COMPARISON</p>
+          <h1>{comparison.title}</h1>
+          <p className="subtext">{comparison.description}</p>
+        </section>
+
+        <section className="content-shell">
+          <div className="content-stack">
+            <article className="content-card policy-card">
+              <h2>Side-by-side comparison table</h2>
+              <ComparisonTable comparison={comparison} />
+            </article>
+
+            <article className="content-card policy-card">
+              <h2>FAQs</h2>
+              <div className="faq-list">
+                <FaqItem q={`Which is better: ${comparison.tools[0]} or ${comparison.tools[1]}?`} a={`The right choice depends on your workflow. Use the comparison table above, then test both free plans if available.`} />
+                <FaqItem q={`Are ${comparison.tools[0]} and ${comparison.tools[1]} good for beginners?`} a={`Yes, but onboarding effort varies by product. Choose the one that matches your primary outcome and existing workflow.`} />
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </div>
+  )
+}
+
 function App() {
   const normalizedPath = window.location.pathname.replace(/\/$/, '') || '/'
   const legalPage = getLegalPage(normalizedPath)
   const toolSlug = getToolSlugFromPath(normalizedPath)
   const categorySlug = getCategorySlugFromPath(normalizedPath)
+  const useCaseSlug = getUseCaseSlugFromPath(normalizedPath)
+  const comparisonSlug = getComparisonSlugFromPath(normalizedPath)
   const toolPage = toolSlug ? getToolBySlug(toolSlug) : null
   const categoryPage = categorySlug ? getCategoryBySlug(categorySlug) : null
+  const useCasePage = useCaseSlug ? getUseCaseBySlug(useCaseSlug) : null
+  const comparisonPage = comparisonSlug ? getComparisonBySlug(comparisonSlug) : null
   const [activeCategory, setActiveCategory] = useState('All')
   const [search, setSearch] = useState('')
   const [sortBy, setSortBy] = useState('featured')
@@ -1217,6 +1533,8 @@ function App() {
   const [isSubmittingTool, setIsSubmittingTool] = useState(false)
   const [toolClicks, setToolClicks] = useState({})
   const [amazonClicks, setAmazonClicks] = useState({})
+  const [helpfulVotes, setHelpfulVotes] = useState({})
+  const [quizGoal, setQuizGoal] = useState('write content')
   const [theme, setTheme] = useState(() => localStorage.getItem(LOCAL_THEME_KEY) || 'dark')
   const heroTiltHandlers = useInteractiveTilt({ tilt: 9, shift: 12 })
 
@@ -1254,6 +1572,15 @@ function App() {
         setAmazonClicks(JSON.parse(savedAmazonClicks))
       } catch {
         setAmazonClicks({})
+      }
+    }
+
+    const savedHelpfulVotes = localStorage.getItem(LOCAL_HELPFUL_VOTES_KEY)
+    if (savedHelpfulVotes) {
+      try {
+        setHelpfulVotes(JSON.parse(savedHelpfulVotes))
+      } catch {
+        setHelpfulVotes({})
       }
     }
 
@@ -1332,6 +1659,10 @@ function App() {
   }, [amazonClicks])
 
   useEffect(() => {
+    localStorage.setItem(LOCAL_HELPFUL_VOTES_KEY, JSON.stringify(helpfulVotes))
+  }, [helpfulVotes])
+
+  useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
     localStorage.setItem(LOCAL_THEME_KEY, theme)
   }, [theme])
@@ -1340,6 +1671,8 @@ function App() {
     const baseUrl = 'https://aitoolscenter.in'
     const matched = toolSlug ? getToolBySlug(toolSlug) : null
     const matchedCategory = categorySlug ? getCategoryBySlug(categorySlug) : null
+    const matchedUseCase = useCaseSlug ? getUseCaseBySlug(useCaseSlug) : null
+    const matchedComparison = comparisonSlug ? getComparisonBySlug(comparisonSlug) : null
     const matchedLegalPage = getLegalPage(normalizedPath)
 
     if (matched) {
@@ -1350,6 +1683,10 @@ function App() {
       ? `${matched.name} Review, Pricing & Alternatives | AIToolsCenter.in`
       : matchedCategory
         ? `${matchedCategory} AI Tools, Reviews & Alternatives | AIToolsCenter.in`
+      : matchedUseCase
+        ? `${matchedUseCase.title} | AIToolsCenter.in`
+      : matchedComparison
+        ? `${matchedComparison.title} | AIToolsCenter.in`
       : matchedLegalPage
         ? `${matchedLegalPage.title} | AIToolsCenter.in`
         : 'AIToolsCenter.in - Best AI Tools Directory for 2026'
@@ -1358,6 +1695,10 @@ function App() {
       ? `${matched.name}: ${matched.tagline} Explore pricing, use cases, categories, and alternatives on AIToolsCenter.in.`
       : matchedCategory
         ? (CATEGORY_SEO[matchedCategory]?.description || `Explore top ${matchedCategory} AI tools with reviews and alternatives.`)
+      : matchedUseCase
+        ? matchedUseCase.intro
+      : matchedComparison
+        ? matchedComparison.description
       : matchedLegalPage
         ? matchedLegalPage.description
         : 'Discover and compare top AI tools for writing, coding, images, video, automation, and productivity.'
@@ -1366,6 +1707,10 @@ function App() {
       ? `${baseUrl}/tools/${slugifyToolName(matched.name)}`
       : matchedCategory
         ? `${baseUrl}/categories/${slugifyCategoryName(matchedCategory)}`
+      : matchedUseCase
+        ? `${baseUrl}/best-ai-tools-for/${matchedUseCase.slug}`
+      : matchedComparison
+        ? `${baseUrl}/compare/${matchedComparison.slug}`
       : matchedLegalPage
         ? `${baseUrl}${normalizedPath}`
         : `${baseUrl}/`
@@ -1404,6 +1749,21 @@ function App() {
           })),
         },
         {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${baseUrl}/` },
+            matchedCategory
+              ? { '@type': 'ListItem', position: 2, name: matchedCategory, item: `${baseUrl}/categories/${slugifyCategoryName(matchedCategory)}` }
+              : matched
+                ? { '@type': 'ListItem', position: 2, name: matched.name, item: `${baseUrl}/tools/${slugifyToolName(matched.name)}` }
+                : matchedUseCase
+                  ? { '@type': 'ListItem', position: 2, name: matchedUseCase.title, item: `${baseUrl}/best-ai-tools-for/${matchedUseCase.slug}` }
+                  : matchedComparison
+                    ? { '@type': 'ListItem', position: 2, name: matchedComparison.title, item: `${baseUrl}/compare/${matchedComparison.slug}` }
+                    : { '@type': 'ListItem', position: 2, name: 'Directory', item: `${baseUrl}/` },
+          ],
+        },
+        {
           '@type': 'FAQPage',
           mainEntity: FAQS.map((item) => ({
             '@type': 'Question',
@@ -1438,6 +1798,19 @@ function App() {
             bestRating: '5',
             ratingCount: '1',
           },
+          review: {
+            '@type': 'Review',
+            reviewRating: {
+              '@type': 'Rating',
+              ratingValue: String(matched.rating),
+              bestRating: '5',
+            },
+            author: {
+              '@type': 'Organization',
+              name: 'AIToolsCenter.in',
+            },
+            reviewBody: TOOL_DETAIL_WRITEUPS[matched.name] || matched.tagline,
+          },
         }
       : matchedCategory
         ? {
@@ -1458,6 +1831,31 @@ function App() {
                 })),
             },
           }
+      : matchedUseCase
+        ? {
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: matchedUseCase.title,
+            description,
+            url: canonicalUrl,
+            mainEntity: {
+              '@type': 'ItemList',
+              itemListElement: matchedUseCase.toolNames.map((name, index) => ({
+                '@type': 'ListItem',
+                position: index + 1,
+                name,
+                url: `${baseUrl}/tools/${slugifyToolName(name)}`,
+              })),
+            },
+          }
+      : matchedComparison
+        ? {
+            '@context': 'https://schema.org',
+            '@type': 'WebPage',
+            name: matchedComparison.title,
+            description,
+            url: canonicalUrl,
+          }
       : matchedLegalPage
         ? {
             '@context': 'https://schema.org',
@@ -1474,7 +1872,7 @@ function App() {
       : listSchema
 
     upsertJsonLd(toolSchema)
-  }, [normalizedPath, toolSlug, categorySlug])
+  }, [normalizedPath, toolSlug, categorySlug, useCaseSlug, comparisonSlug])
 
   const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
 
@@ -1525,6 +1923,20 @@ function App() {
     }))
   }
 
+  const handleHelpfulVote = (toolName, vote) => {
+    setHelpfulVotes((current) => {
+      if (!vote) {
+        const next = { ...current }
+        delete next[toolName]
+        return next
+      }
+      return {
+        ...current,
+        [toolName]: vote,
+      }
+    })
+  }
+
   const filtered = TOOLS.filter((tool) => {
     const matchCategory = activeCategory === 'All' || tool.category === activeCategory
     const query = search.toLowerCase().trim()
@@ -1564,6 +1976,23 @@ function App() {
     .slice(0, 3)
 
   const dailyAmazonRecommendations = getDailyAmazonRecommendations(AMAZON_PRODUCT_POOL, AMAZON_ROTATION_SIZE)
+  const trendingTools = [...TOOLS]
+    .sort((left, right) => {
+      const rightClicks = toolClicks[right.name] || 0
+      const leftClicks = toolClicks[left.name] || 0
+      return rightClicks - leftClicks || right.rating - left.rating
+    })
+    .slice(0, 5)
+
+  const quizMatches = (() => {
+    const goal = quizGoal.toLowerCase()
+    const byGoal = TOOLS.filter((tool) => (
+      tool.category.toLowerCase().includes(goal)
+      || tool.tagline.toLowerCase().includes(goal)
+      || tool.tags.some((tag) => tag.toLowerCase().includes(goal))
+    ))
+    return (byGoal.length > 0 ? byGoal : TOOLS).slice(0, 3)
+  })()
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -1771,6 +2200,14 @@ function App() {
     return <CategoryPage category={categoryPage} />
   }
 
+  if (useCasePage) {
+    return <UseCaseLandingPage page={useCasePage} />
+  }
+
+  if (comparisonPage) {
+    return <ComparisonLandingPage comparison={comparisonPage} />
+  }
+
   return (
     <div className="page">
       <SiteNav theme={theme} onToggleTheme={toggleTheme} />
@@ -1779,13 +2216,13 @@ function App() {
         <div className="hero-grid">
           <div className="hero-main">
             <p className="eyebrow">UPDATED MAY 2026 • 15+ TOOLS REVIEWED</p>
-            <h1>Find the Best <span className="gradient-text">AI Tools</span> in One Place</h1>
+            <h1>Find the right <span className="gradient-text">AI tool</span> in 60 seconds</h1>
             <p className="subtext">
-              We test, rank, and explain AI tools so you can skip the confusion and start using the right
-              tool for writing, images, coding, video, automation, and more.
+              Skip the hype. Start with your outcome, then get practical tool recommendations for studying,
+              teaching, coding, content creation, and business growth.
             </p>
             <div className="hero-cta-row">
-              <a href="#tools" className="btn btn-primary">Explore Directory</a>
+              <a href="#use-cases" className="btn btn-primary">Find by Outcome</a>
               <a href="#compare" className="btn btn-secondary">Compare Top Tools</a>
             </div>
             <div className="search-bar">
@@ -1798,7 +2235,8 @@ function App() {
               />
             </div>
             <div className="hero-stats">
-              <span>✅ 15+ Tools Listed</span>
+              <span>🎯 Outcome-first recommendations</span>
+              <span>✅ 15+ Tools Reviewed</span>
               <span>★ {favorites.length} Saved Favorites</span>
               <span>👥 {websiteVisitors === null ? 'Live' : websiteVisitors.toLocaleString()} Website Visits</span>
               <span>↺ {localVisits} Visits From This Browser</span>
@@ -1842,6 +2280,76 @@ function App() {
       </header>
 
       <main>
+        <section className="section" id="use-cases">
+          <div className="section-divider"></div>
+          <div className="section-heading-row">
+            <div>
+              <h2>Start with your goal, not a giant list</h2>
+              <p className="section-copy">Problem → solution → recommended tools. Pick the use case and jump to curated options.</p>
+            </div>
+            <div className="results-chip">Outcome-driven discovery</div>
+          </div>
+          <div className="outcome-grid">
+            {OUTCOME_BLOCKS.map((block, index) => (
+              <article
+                key={block.slug}
+                className={`outcome-card scroll-reveal reveal-elastic ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
+                style={{ '--reveal-delay': `${Math.min(index * 50, 220)}ms` }}
+                data-scroll-reveal
+              >
+                <span className="tag">{CATEGORY_ICONS[block.category]} {block.category}</span>
+                <h3>{block.title}</h3>
+                <p>{block.outcome}</p>
+                <div className="tool-tags">
+                  {block.tools.map((name) => (
+                    <a key={name} className="tag" href={`/tools/${slugifyToolName(name)}`}>{name}</a>
+                  ))}
+                </div>
+                <a href={`/best-ai-tools-for/${block.slug}`} className="btn btn-secondary">View this guide</a>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section" id="trending">
+          <div className="section-divider"></div>
+          <div className="section-heading-row">
+            <div>
+              <h2>Trending AI Tools Today</h2>
+              <p className="section-copy">Most visited tools this week based on live click behavior in this directory.</p>
+            </div>
+            <div className="results-chip">Updates automatically</div>
+          </div>
+          <div className="trending-grid">
+            {trendingTools.map((tool, index) => (
+              <article key={tool.name} className="trend-card" data-scroll-reveal>
+                <small>#{index + 1}</small>
+                <h3><a className="tool-name-link" href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a></h3>
+                <p>{tool.tagline}</p>
+                <span className="tool-click-count">{toolClicks[tool.name] || 0} clicks</span>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section" id="landing-pages">
+          <div className="section-divider"></div>
+          <div className="section-heading-row">
+            <div>
+              <h2>Best AI Tools for specific professions</h2>
+              <p className="section-copy">Programmatic landing pages targeting high-intent “best for X” searches.</p>
+            </div>
+          </div>
+          <div className="landing-links-grid">
+            {USE_CASE_PAGES.map((page) => (
+              <a key={page.slug} href={`/best-ai-tools-for/${page.slug}`} className="landing-link-card">
+                <strong>{page.title}</strong>
+                <span>{page.intro}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+
         <section className="section" id="tools">
           <div className="section-divider"></div>
           <div className="section-heading-row">
@@ -1916,11 +2424,13 @@ function App() {
                     isCompared={compareList.includes(tool.name)}
                     userRating={userRatings[tool.name] || 0}
                     clickCount={toolClicks[tool.name] || 0}
+                    helpfulVote={helpfulVotes[tool.name] || null}
                     onToggleFavorite={toggleFavorite}
                     onToggleCompare={toggleCompare}
                     onTagClick={(tag) => setSearch(tag)}
                     onRate={rateTool}
                     onVisit={trackToolClick}
+                    onHelpfulVote={handleHelpfulVote}
                   />
                 </div>
               ))}
@@ -1951,6 +2461,28 @@ function App() {
                   onVisit={trackAmazonClick}
                 />
               </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="section" id="comparison-pages">
+          <div className="section-divider"></div>
+          <div className="section-heading-row">
+            <div>
+              <h2>ChatGPT vs Claude, Midjourney vs DALL·E, and more</h2>
+              <p className="section-copy">Comparison pages are built for high-intent search and faster buying decisions.</p>
+            </div>
+          </div>
+          <article className="compare-table-shell">
+            <h3>{COMPARISON_PAGES[0].title}</h3>
+            <ComparisonTable comparison={COMPARISON_PAGES[0]} />
+          </article>
+          <div className="landing-links-grid">
+            {COMPARISON_PAGES.map((page) => (
+              <a key={page.slug} href={`/compare/${page.slug}`} className="landing-link-card">
+                <strong>{page.title}</strong>
+                <span>{page.description}</span>
+              </a>
             ))}
           </div>
         </section>
@@ -2194,9 +2726,41 @@ function App() {
           </form>
         </section>
 
+        <section className="section finder-section" id="finder-quiz">
+          <div className="section-divider"></div>
+          <div className="section-heading-row">
+            <div>
+              <h2>AI Tool Finder Quiz</h2>
+              <p className="section-copy">What do you want to do with AI? Choose one goal to get instant recommendations.</p>
+            </div>
+          </div>
+          <div className="quiz-shell">
+            <label className="toolbar-field">
+              <span>Primary Goal</span>
+              <select value={quizGoal} onChange={(event) => setQuizGoal(event.target.value)}>
+                <option value="write content">Write content</option>
+                <option value="video">Make videos</option>
+                <option value="coding">Code</option>
+                <option value="research">Research</option>
+                <option value="study">Study</option>
+                <option value="business">Start business</option>
+              </select>
+            </label>
+            <div className="quiz-results">
+              {quizMatches.map((tool) => (
+                <article key={tool.name} className="quiz-result-card">
+                  <h3><a className="tool-name-link" href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a></h3>
+                  <p>{tool.tagline}</p>
+                  <a className="btn btn-secondary" href={getToolOutboundUrl(tool)} target="_blank" rel={getToolAnchorRel(tool)}>Try {tool.name}</a>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="section newsletter" id="newsletter">
           <h2>Get Weekly AI Tool Picks in Your Inbox</h2>
-          <p>Every week we review 2-3 new or updated AI tools — free to subscribe, no spam.</p>
+          <p>Get 5 new AI tools every week: trending picks, free tools, prompts, and practical AI business ideas.</p>
           <form className="newsletter-form" onSubmit={handleNewsletterSubmit}>
             <input
               type="email"

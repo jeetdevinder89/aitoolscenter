@@ -1195,6 +1195,29 @@ h1 .gradient-text {
   letter-spacing: 0.01em;
 }
 
+.helpful-row {
+  margin-top: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--muted);
+  font-size: 0.74rem;
+}
+
+.helpful-btn {
+  border: 1px solid var(--card-border);
+  background: rgba(255,255,255,0.04);
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.helpful-btn.active {
+  border-color: rgba(124,108,255,0.4);
+  background: rgba(124,108,255,0.15);
+}
+
 .affiliate-disclosure {
   margin: 0.35rem 0 0;
   font-size: 0.74rem;
@@ -1484,6 +1507,170 @@ h1 .gradient-text {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.9rem;
+}
+
+.outcome-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.95rem;
+}
+
+.outcome-card {
+  background: linear-gradient(145deg, rgba(34,211,238,0.08), rgba(124,108,255,0.1));
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.outcome-card h3 {
+  font-size: 1.05rem;
+}
+
+.outcome-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.trending-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.trend-card {
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.03);
+  padding: 0.95rem;
+}
+
+.trend-card small {
+  color: var(--accent2);
+  font-weight: 700;
+}
+
+.trend-card h3 {
+  margin-top: 0.3rem;
+  font-size: 0.95rem;
+}
+
+.trend-card p {
+  margin: 0.45rem 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.landing-links-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.landing-link-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  text-decoration: none;
+  color: var(--ink);
+  background: rgba(255,255,255,0.03);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.landing-link-card:hover {
+  border-color: rgba(124,108,255,0.35);
+  transform: translateY(-2px);
+}
+
+.landing-link-card span {
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.compare-table-shell {
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  background: rgba(255,255,255,0.03);
+  margin-bottom: 1rem;
+}
+
+.comparison-table-wrap {
+  overflow-x: auto;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+}
+
+.comparison-table th,
+.comparison-table td {
+  border: 1px solid var(--line);
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+  font-size: 0.86rem;
+}
+
+.comparison-table th {
+  background: rgba(124,108,255,0.12);
+  color: var(--ink);
+}
+
+.comparison-table td {
+  color: var(--muted);
+}
+
+.comparison-table-links {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.finder-section {
+  background: linear-gradient(140deg, rgba(34,211,238,0.07), rgba(124,108,255,0.05));
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 2.1rem;
+}
+
+.quiz-shell {
+  display: grid;
+  gap: 1rem;
+}
+
+.quiz-results {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.quiz-result-card {
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.03);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.quiz-result-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.45;
 }
 
 .use-case-card {
@@ -2015,8 +2202,12 @@ h1 .gradient-text {
 @media (max-width: 900px) {
   .info-grid,
   .use-cases-grid,
+  .outcome-grid,
   .comparison-grid,
   .amazon-grid,
+  .landing-links-grid,
+  .trending-grid,
+  .quiz-results,
   .quick-picks-grid,
   .policy-grid,
   .submit-tool-form {
@@ -2103,6 +2294,12 @@ h1 .gradient-text {
 @media (max-width: 640px) {
   .hero { padding-top: 2.5rem; }
 
+  .search-bar {
+    position: sticky;
+    top: 0.65rem;
+    z-index: 70;
+  }
+
   .nav { margin: 0; padding: 0.8rem 1rem; }
 
   .nav-links { gap: 0.7rem; }
@@ -2127,6 +2324,7 @@ h1 .gradient-text {
   .amazon-section,
   .info-section,
   .submit-tool-section,
+  .finder-section,
   .newsletter {
     padding: 1.5rem;
   }
