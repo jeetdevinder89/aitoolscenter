@@ -1171,10 +1171,6 @@ function SiteNav({ theme: themeProp, onToggleTheme: toggleProp }) {
         <a href="/compare-hub">Compare Hub</a>
         <a href="/#finder-quiz">Tool Finder</a>
         <a href="/#ai-news">AI News</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-        <a href="/privacy-policy">Privacy</a>
-        <a href="/terms-and-conditions">Terms</a>
         <button
           type="button"
           className="theme-toggle"
@@ -2725,6 +2721,8 @@ function App() {
           </div>
         </section>
 
+        <AdUnit slot="3951802461" className="ad-unit-inline" />
+
         <section className="section" id="trending">
           <div className="section-divider"></div>
           <div className="section-heading-row">
@@ -2745,6 +2743,8 @@ function App() {
             ))}
           </div>
         </section>
+
+        <AdUnit slot="6729415088" className="ad-unit-inline" />
 
         <section className="section" id="alternatives">
           <div className="section-divider"></div>
@@ -2781,6 +2781,8 @@ function App() {
             ))}
           </div>
         </section>
+
+        <AdUnit slot="9301754426" className="ad-unit-inline" />
 
         <section className="section" id="tools">
           <div className="section-divider"></div>
@@ -2921,6 +2923,8 @@ function App() {
             <a href="/compare-hub" className="btn btn-secondary">Open Comparison Matrix Hub</a>
           </div>
         </section>
+
+        <AdUnit slot="5543871290" className="ad-unit-inline" />
 
         <section className="section compare-section" id="compare">
           <div className="section-divider"></div>
@@ -3192,6 +3196,8 @@ function App() {
             </div>
           </div>
         </section>
+
+        <AdUnit slot="7482196035" className="ad-unit-inline" />
 
         <section className="section newsletter" id="newsletter">
           <h2>Get Weekly AI Tool Picks in Your Inbox</h2>
