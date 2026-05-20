@@ -242,6 +242,26 @@ const USE_CASE_PAGES = [
     ],
   },
   {
+    slug: 'developers',
+    title: 'Best AI Tools for Developers',
+    intro: 'Compare AI tools for coding, refactoring, debugging, and shipping software faster.',
+    toolNames: ['GitHub Copilot', 'Cursor', 'Claude', 'ChatGPT'],
+    faqs: [
+      { q: 'Which AI coding tool is best for day-to-day development?', a: 'GitHub Copilot and Cursor are both strong choices; select based on your editor workflow and collaboration needs.' },
+      { q: 'Can AI tools help with debugging and refactoring?', a: 'Yes. Modern AI coding assistants can explain code, suggest fixes, and accelerate refactors when paired with tests and code review.' },
+    ],
+  },
+  {
+    slug: 'content-creators',
+    title: 'Best AI Tools for Content Creators',
+    intro: 'Find practical AI tools for scripts, visuals, thumbnails, and video production workflows.',
+    toolNames: ['ChatGPT', 'Runway', 'Midjourney', 'DALL·E 3'],
+    faqs: [
+      { q: 'What AI tools are best for creators?', a: 'A common creator stack is ChatGPT for scripts, Midjourney or DALL·E for visuals, and Runway for video production.' },
+      { q: 'Can AI speed up short-form video workflows?', a: 'Yes. AI tools can reduce scripting, ideation, and rough-cut time significantly for reels and short videos.' },
+    ],
+  },
+  {
     slug: 'sql-developers',
     title: 'Best AI Tools for SQL Developers',
     intro: 'Use AI to write better queries, optimize SQL logic, and explain complex joins faster.',
