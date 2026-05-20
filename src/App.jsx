@@ -1162,6 +1162,7 @@ function SiteNav({ theme: themeProp, onToggleTheme: toggleProp }) {
     <nav className="nav">
       <a href="/" className="nav-logo">⚡ AIToolsCenter.in</a>
       <div className="nav-links">
+        <a href="/">Home</a>
         <a href="/#use-cases">Use Cases</a>
         <a href="/#tools">Tools</a>
         <a href="/#trending">Trending</a>
@@ -1185,6 +1186,37 @@ function SiteNav({ theme: themeProp, onToggleTheme: toggleProp }) {
   )
 }
 
+function BackToTopButton() {
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => {
+      setVisible(window.scrollY > 420)
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  if (!visible) {
+    return null
+  }
+
+  return (
+    <button
+      type="button"
+      className="back-to-top-btn"
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      aria-label="Back to top"
+      title="Back to top"
+    >
+      Top ↑
+    </button>
+  )
+}
+
 function SiteFooter() {
   return (
     <footer className="footer">
@@ -1199,6 +1231,7 @@ function SiteFooter() {
         Some links are affiliate links. As an Amazon Associate, we may earn from qualifying purchases at no extra cost to you.
       </p>
       <ConsentBanner />
+      <BackToTopButton />
     </footer>
   )
 }
@@ -1986,6 +2019,29 @@ function App() {
     document.documentElement.setAttribute('data-theme', theme)
     localStorage.setItem(LOCAL_THEME_KEY, theme)
   }, [theme])
+
+  useEffect(() => {
+    const scrollToHashTarget = () => {
+      const hash = window.location.hash
+      if (!hash) {
+        return
+      }
+
+      const targetId = decodeURIComponent(hash.slice(1))
+      const target = document.getElementById(targetId)
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }
+
+    const timeout = setTimeout(scrollToHashTarget, 90)
+    window.addEventListener('hashchange', scrollToHashTarget)
+
+    return () => {
+      clearTimeout(timeout)
+      window.removeEventListener('hashchange', scrollToHashTarget)
+    }
+  }, [normalizedPath])
 
   useEffect(() => {
     const baseUrl = 'https://aitoolscenter.in'
