@@ -1117,18 +1117,7 @@ function AdUnit({ slot, className = '' }) {
   }, [])
 
   if (!ADSENSE_CLIENT_ID || import.meta.env.DEV) {
-    return (
-      <aside className={`ad-unit ${className}`} aria-label="Advertisement placeholder">
-        <div className="ad-unit-placeholder">
-          <strong>Ad Placement</strong>
-          <span>
-            {import.meta.env.DEV
-              ? 'Visible in local dev as placeholder. Real ads render only on production domain.'
-              : 'Set VITE_ADSENSE_CLIENT_ID to render real ads.'}
-          </span>
-        </div>
-      </aside>
-    )
+    return null
   }
 
   return (
@@ -3332,7 +3321,6 @@ function App() {
                 {exitIntentStatus.message}
               </p>
             ) : null}
-            <a href="/ai-workflow-kit.txt" className="tool-name-link" target="_blank" rel="noopener noreferrer">Preview kit without signup</a>
           </div>
         </section>
       ) : null}
