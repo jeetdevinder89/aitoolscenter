@@ -1134,6 +1134,46 @@ function AdUnit({ slot, className = '' }) {
   )
 }
 
+function RailPanel({ eyebrow, title, description, links = [], chips = [] }) {
+  return (
+    <article className="rail-panel">
+      <span className="rail-eyebrow">{eyebrow}</span>
+      <h3>{title}</h3>
+      <p>{description}</p>
+      {chips.length > 0 ? (
+        <div className="rail-chip-row">
+          {chips.map((chip) => (
+            <span key={chip} className="rail-chip">{chip}</span>
+          ))}
+        </div>
+      ) : null}
+      {links.length > 0 ? (
+        <div className="rail-link-list">
+          {links.map((link) => (
+            <a key={link.href} href={link.href} className="rail-link-card">
+              <strong>{link.label}</strong>
+              <span>{link.meta}</span>
+            </a>
+          ))}
+        </div>
+      ) : null}
+    </article>
+  )
+}
+
+function PageRails({ left, right }) {
+  return (
+    <>
+      <aside className="page-rail page-rail-left" aria-label={left.eyebrow}>
+        <RailPanel {...left} />
+      </aside>
+      <aside className="page-rail page-rail-right" aria-label={right.eyebrow}>
+        <RailPanel {...right} />
+      </aside>
+    </>
+  )
+}
+
 const LOCAL_THEME_KEY = 'aitoolscenter-theme'
 
 function SiteNav({ theme: themeProp, onToggleTheme: toggleProp }) {
@@ -1321,41 +1361,68 @@ function ConsentBanner() {
 }
 
 function LegalPage({ page }) {
+  const leftRail = {
+    eyebrow: 'Site map',
+    title: 'Important pages',
+    description: 'Quick access to the pages readers open most often while browsing the directory.',
+    chips: ['About', 'Privacy', 'Terms', 'Contact'],
+    links: [
+      { label: 'About AIToolsCenter', href: '/about', meta: 'Review process and editorial standards' },
+      { label: 'Privacy Policy', href: '/privacy-policy', meta: 'Cookies, ads, and data handling' },
+      { label: 'Contact', href: '/contact', meta: 'Support and partnerships' },
+    ],
+  }
+
+  const rightRail = {
+    eyebrow: 'Trust',
+    title: 'Editorial guardrails',
+    description: 'The site keeps affiliate disclosure, consent, and listing policies visible across the experience.',
+    chips: ['Editorial', 'Disclosure', 'Consent'],
+    links: [
+      { label: 'Home', href: '/', meta: 'Return to the main discovery page' },
+      { label: 'Compare Hub', href: '/compare-hub', meta: 'Pair tools side by side' },
+      { label: 'Weekly Trends', href: '/trending-ai-tools-this-week', meta: 'See what is getting clicked' },
+    ],
+  }
+
   return (
     <div className="page">
       <SiteNav />
-      <main className="content-page">
-        <section className="content-hero">
-          <p className="eyebrow">SITE INFORMATION</p>
-          <h1>{page.title}</h1>
-          <p className="subtext">{page.intro}</p>
-        </section>
+      <div className="page-body">
+        <PageRails left={leftRail} right={rightRail} />
+        <main className="content-page">
+          <section className="content-hero">
+            <p className="eyebrow">SITE INFORMATION</p>
+            <h1>{page.title}</h1>
+            <p className="subtext">{page.intro}</p>
+          </section>
 
-        <section className="content-shell">
-          <div className="content-stack">
-            {page.sections.map((section) => (
-              <article key={section.heading} className="policy-card content-card">
-                <h2>{section.heading}</h2>
-                {section.heading === 'Primary Contact' ? (
-                  <ul className="policy-list">
-                    <li>
-                      Email: <a href="mailto:support@aitoolscenter.in">support@aitoolscenter.in</a>
-                    </li>
-                    <li>Typical response time: 2 to 5 business days.</li>
-                    <li>Use this address for support, privacy requests, and business inquiries.</li>
-                  </ul>
-                ) : (
-                  <ul className="policy-list">
-                    {section.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                )}
-              </article>
-            ))}
-          </div>
-        </section>
-      </main>
+          <section className="content-shell">
+            <div className="content-stack">
+              {page.sections.map((section) => (
+                <article key={section.heading} className="policy-card content-card">
+                  <h2>{section.heading}</h2>
+                  {section.heading === 'Primary Contact' ? (
+                    <ul className="policy-list">
+                      <li>
+                        Email: <a href="mailto:support@aitoolscenter.in">support@aitoolscenter.in</a>
+                      </li>
+                      <li>Typical response time: 2 to 5 business days.</li>
+                      <li>Use this address for support, privacy requests, and business inquiries.</li>
+                    </ul>
+                  ) : (
+                    <ul className="policy-list">
+                      {section.items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  )}
+                </article>
+              ))}
+            </div>
+          </section>
+        </main>
+      </div>
       <SiteFooter />
     </div>
   )
@@ -1368,89 +1435,119 @@ function ToolDetailPage({ tool }) {
   const relatedUseCases = OUTCOME_BLOCKS
     .filter((item) => item.tools.includes(tool.name) || item.category === tool.category)
     .slice(0, 3)
+  const leftRail = {
+    eyebrow: 'Related tools',
+    title: `${tool.category} picks`,
+    description: `A compact set of alternatives and complements for ${tool.name}.`,
+    chips: [tool.category, tool.badge, `${tool.rating}/5`],
+    links: categoryTools.map((item) => ({
+      label: item.name,
+      href: `/tools/${slugifyToolName(item.name)}`,
+      meta: item.tagline,
+    })),
+  }
+
+  const rightRail = {
+    eyebrow: 'Quick jump',
+    title: 'Use-case shortcuts',
+    description: 'Move from the individual tool page back to the workflows and comparisons that fit it best.',
+    chips: ['Alternatives', 'Comparisons', 'Use cases'],
+    links: [
+      { label: `${tool.name} alternatives`, href: `/alternatives-to-${slugifyToolName(tool.name)}`, meta: 'See close matches' },
+      { label: `${tool.category} category page`, href: `/categories/${slugifyCategoryName(tool.category)}`, meta: 'Browse the full category' },
+      ...relatedUseCases.map((item) => ({
+        label: item.title,
+        href: `/best-ai-tools-for/${item.slug}`,
+        meta: item.outcome,
+      })),
+    ],
+  }
 
   return (
     <div className="page">
       <SiteNav />
-      <main className="content-page">
-        <section className="content-hero">
-          <p className="eyebrow">TOOL PROFILE</p>
-          <h1>{tool.name}</h1>
-          <p className="subtext">{tool.tagline}</p>
-          <div className="tool-detail-chips">
-            <span className="tag">Category: <a href={`/categories/${slugifyCategoryName(tool.category)}`}>{tool.category}</a></span>
-            <span className="tag">Pricing: {tool.badge}</span>
-            <span className="tag"><Stars count={tool.rating} /></span>
-          </div>
-        </section>
+      <div className="page-body">
+        <PageRails left={leftRail} right={rightRail} />
+        <main className="content-page">
+          <section className="content-hero">
+            <p className="eyebrow">TOOL PROFILE</p>
+            <h1>{tool.name}</h1>
+            <p className="subtext">{tool.tagline}</p>
+            <div className="tool-detail-chips">
+              <span className="tag">Category: <a href={`/categories/${slugifyCategoryName(tool.category)}`}>{tool.category}</a></span>
+              <span className="tag">Pricing: {tool.badge}</span>
+              <span className="tag"><Stars count={tool.rating} /></span>
+            </div>
+          </section>
 
-        <section className="content-shell">
-          <div className="content-stack">
-            <article className="content-card policy-card">
-              <h2>Why use {tool.name}</h2>
-              <p>{TOOL_DETAIL_WRITEUPS[tool.name] || `${tool.name} helps with ${tool.category.toLowerCase()} workflows and is commonly used for faster execution with AI-assisted output.`}</p>
-              <ul className="policy-list">
-                <li>Best for: teams and creators who need reliable {tool.category.toLowerCase()} support.</li>
-                <li>Pricing model: {tool.badge}.</li>
-                <li>Community rating: {tool.rating}/5 based on editorial scoring.</li>
-              </ul>
-              <a className="btn btn-primary" href={getToolOutboundUrl(tool)} target="_blank" rel={getToolAnchorRel(tool)}>Visit {tool.name}</a>
-              {isAffiliateTool(tool) ? (
-                <p className="affiliate-disclosure">Affiliate disclosure: We may earn a commission from eligible purchases, at no extra cost to you.</p>
-              ) : null}
-            </article>
-
-            <article className="content-card policy-card">
-              <h2>Popular features</h2>
-              <div className="tool-tags">
-                {tool.tags.map((tag) => (
-                  <span key={tag} className="tag">{tag}</span>
-                ))}
-              </div>
-            </article>
-
-            {categoryTools.length > 0 && (
+          <section className="content-shell">
+            <div className="content-stack">
               <article className="content-card policy-card">
-                <h2>Alternatives to {tool.name}</h2>
+                <h2>Why use {tool.name}</h2>
+                <p>{TOOL_DETAIL_WRITEUPS[tool.name] || `${tool.name} helps with ${tool.category.toLowerCase()} workflows and is commonly used for faster execution with AI-assisted output.`}</p>
                 <ul className="policy-list">
-                  {categoryTools.map((item) => (
-                    <li key={item.name}>
-                      <a href={`/tools/${slugifyToolName(item.name)}`}>{item.name}</a> - {item.tagline}
+                  <li>Best for: teams and creators who need reliable {tool.category.toLowerCase()} support.</li>
+                  <li>Pricing model: {tool.badge}.</li>
+                  <li>Community rating: {tool.rating}/5 based on editorial scoring.</li>
+                </ul>
+                <a className="btn btn-primary" href={getToolOutboundUrl(tool)} target="_blank" rel={getToolAnchorRel(tool)}>Visit {tool.name}</a>
+                {isAffiliateTool(tool) ? (
+                  <p className="affiliate-disclosure">Affiliate disclosure: We may earn a commission from eligible purchases, at no extra cost to you.</p>
+                ) : null}
+              </article>
+
+              <article className="content-card policy-card">
+                <h2>Popular features</h2>
+                <div className="tool-tags">
+                  {tool.tags.map((tag) => (
+                    <span key={tag} className="tag">{tag}</span>
+                  ))}
+                </div>
+              </article>
+
+              {categoryTools.length > 0 && (
+                <article className="content-card policy-card">
+                  <h2>Alternatives to {tool.name}</h2>
+                  <ul className="policy-list">
+                    {categoryTools.map((item) => (
+                      <li key={item.name}>
+                        <a href={`/tools/${slugifyToolName(item.name)}`}>{item.name}</a> - {item.tagline}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              )}
+
+              <article className="content-card policy-card">
+                <h2>Related guides and use cases</h2>
+                <ul className="policy-list">
+                  <li><a href={`/categories/${slugifyCategoryName(tool.category)}`}>Best {tool.category} AI tools</a></li>
+                  <li><a href={`/alternatives-to-${slugifyToolName(tool.name)}`}>{tool.name} alternatives</a></li>
+                  {relatedUseCases.map((item) => (
+                    <li key={item.slug}>
+                      <a href={`/best-ai-tools-for/${item.slug}`}>{item.title}</a>
+                    </li>
+                  ))}
+                  {COMPARISON_PAGES.filter((page) => page.tools.includes(tool.name)).map((page) => (
+                    <li key={page.slug}>
+                      <a href={`/compare/${page.slug}`}>{page.title}</a>
                     </li>
                   ))}
                 </ul>
               </article>
-            )}
 
-            <article className="content-card policy-card">
-              <h2>Related guides and use cases</h2>
-              <ul className="policy-list">
-                <li><a href={`/categories/${slugifyCategoryName(tool.category)}`}>Best {tool.category} AI tools</a></li>
-                <li><a href={`/alternatives-to-${slugifyToolName(tool.name)}`}>{tool.name} alternatives</a></li>
-                {relatedUseCases.map((item) => (
-                  <li key={item.slug}>
-                    <a href={`/best-ai-tools-for/${item.slug}`}>{item.title}</a>
-                  </li>
-                ))}
-                {COMPARISON_PAGES.filter((page) => page.tools.includes(tool.name)).map((page) => (
-                  <li key={page.slug}>
-                    <a href={`/compare/${page.slug}`}>{page.title}</a>
-                  </li>
-                ))}
-              </ul>
-            </article>
-
-            <article className="content-card policy-card">
-              <h2>{tool.name} FAQs</h2>
-              <div className="faq-list">
-                <FaqItem q={`Is ${tool.name} free?`} a={`${tool.name} is listed as ${tool.badge}. Check the official pricing page for the latest plan details.`} />
-                <FaqItem q={`What is ${tool.name} best for?`} a={`${tool.name} is best for ${tool.category.toLowerCase()} workflows where speed and output consistency matter.`} />
-                <FaqItem q={`What are alternatives to ${tool.name}?`} a={`Popular alternatives include ${categoryTools.map((item) => item.name).join(', ') || 'similar tools in this category'}.`} />
-              </div>
-            </article>
-          </div>
-        </section>
-      </main>
+              <article className="content-card policy-card">
+                <h2>{tool.name} FAQs</h2>
+                <div className="faq-list">
+                  <FaqItem q={`Is ${tool.name} free?`} a={`${tool.name} is listed as ${tool.badge}. Check the official pricing page for the latest plan details.`} />
+                  <FaqItem q={`What is ${tool.name} best for?`} a={`${tool.name} is best for ${tool.category.toLowerCase()} workflows where speed and output consistency matter.`} />
+                  <FaqItem q={`What are alternatives to ${tool.name}?`} a={`Popular alternatives include ${categoryTools.map((item) => item.name).join(', ') || 'similar tools in this category'}.`} />
+                </div>
+              </article>
+            </div>
+          </section>
+        </main>
+      </div>
       <SiteFooter />
     </div>
   )
@@ -1459,41 +1556,71 @@ function ToolDetailPage({ tool }) {
 function CategoryPage({ category }) {
   const categoryTools = TOOLS.filter((tool) => tool.category === category)
   const categorySeo = CATEGORY_SEO[category]
+  const leftRail = {
+    eyebrow: 'Top category tools',
+    title: `${category} stack`,
+    description: `The strongest starting points for people who are exploring ${category.toLowerCase()} workflows.`,
+    chips: [category, `${categoryTools.length} tools`, 'Curated'],
+    links: categoryTools.slice(0, 4).map((tool) => ({
+      label: tool.name,
+      href: `/tools/${slugifyToolName(tool.name)}`,
+      meta: tool.tagline,
+    })),
+  }
+
+  const rightRail = {
+    eyebrow: 'Related paths',
+    title: 'Move deeper',
+    description: 'Use these shortcuts to compare products or jump into adjacent use-case guides.',
+    chips: ['Compare', 'Alternatives', 'Use cases'],
+    links: [
+      { label: 'Compare Hub', href: '/compare-hub', meta: 'Filter pairwise comparisons' },
+      { label: `${category} tools overview`, href: `/categories/${slugifyCategoryName(category)}`, meta: 'Revisit this category page' },
+      ...USE_CASE_PAGES.slice(0, 3).map((page) => ({
+        label: page.title,
+        href: `/best-ai-tools-for/${page.slug}`,
+        meta: page.intro,
+      })),
+    ],
+  }
 
   return (
     <div className="page">
       <SiteNav />
-      <main className="content-page">
-        <section className="content-hero">
-          <p className="eyebrow">CATEGORY GUIDE</p>
-          <h1>{categorySeo?.headline || `${category} AI Tools`}</h1>
-          <p className="subtext">{categorySeo?.description || `Compare top ${category.toLowerCase()} AI tools, pricing, and use cases.`}</p>
-        </section>
+      <div className="page-body">
+        <PageRails left={leftRail} right={rightRail} />
+        <main className="content-page">
+          <section className="content-hero">
+            <p className="eyebrow">CATEGORY GUIDE</p>
+            <h1>{categorySeo?.headline || `${category} AI Tools`}</h1>
+            <p className="subtext">{categorySeo?.description || `Compare top ${category.toLowerCase()} AI tools, pricing, and use cases.`}</p>
+          </section>
 
-        <section className="content-shell">
-          <div className="content-stack">
-            <article className="content-card policy-card">
-              <h2>Top {category} tools</h2>
-              <ul className="policy-list">
-                {categoryTools.map((tool) => (
-                  <li key={tool.name}>
-                    <a href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a> - {tool.tagline}
-                  </li>
-                ))}
-              </ul>
-            </article>
+          <section className="content-shell">
+            <div className="content-stack">
+              <article className="content-card policy-card">
+                <h2>Top {category} tools</h2>
+                <ul className="policy-list">
+                  {categoryTools.map((tool) => (
+                    <li key={tool.name}>
+                      <a href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a> - {tool.tagline}
+                    </li>
+                  ))}
+                </ul>
+              </article>
 
-            <article className="content-card policy-card">
-              <h2>How to choose a {category.toLowerCase()} tool</h2>
-              <ul className="policy-list">
-                <li>Start with your primary use case and required output quality.</li>
-                <li>Compare free tier limits against paid feature unlocks.</li>
-                <li>Prefer tools with consistent updates and strong user adoption.</li>
-              </ul>
-            </article>
-          </div>
-        </section>
-      </main>
+              <article className="content-card policy-card">
+                <h2>How to choose a {category.toLowerCase()} tool</h2>
+                <ul className="policy-list">
+                  <li>Start with your primary use case and required output quality.</li>
+                  <li>Compare free tier limits against paid feature unlocks.</li>
+                  <li>Prefer tools with consistent updates and strong user adoption.</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+        </main>
+      </div>
       <SiteFooter />
     </div>
   )
@@ -1541,85 +1668,148 @@ function UseCaseLandingPage({ page }) {
   const tools = page.toolNames
     .map((name) => TOOLS.find((tool) => tool.name === name))
     .filter(Boolean)
+  const leftRail = {
+    eyebrow: 'Recommended tools',
+    title: page.title,
+    description: page.intro,
+    chips: ['Use case', 'Curated', 'Fast start'],
+    links: tools.map((tool) => ({
+      label: tool.name,
+      href: `/tools/${slugifyToolName(tool.name)}`,
+      meta: tool.tagline,
+    })),
+  }
+
+  const rightRail = {
+    eyebrow: 'Comparison shortcuts',
+    title: 'Keep exploring',
+    description: 'Use the landing pages as a bridge into comparison pages and the core directory.',
+    chips: ['Comparisons', 'Category pages', 'Directory'],
+    links: [
+      ...COMPARISON_PAGES.slice(0, 3).map((comparison) => ({
+        label: comparison.title,
+        href: `/compare/${comparison.slug}`,
+        meta: comparison.description,
+      })),
+      { label: 'Compare Hub', href: '/compare-hub', meta: 'Browse every pairwise comparison' },
+    ],
+  }
 
   return (
     <div className="page">
       <SiteNav />
-      <main className="content-page">
-        <section className="content-hero">
-          <p className="eyebrow">OUTCOME GUIDE</p>
-          <h1>{page.title}</h1>
-          <p className="subtext">{page.intro}</p>
-        </section>
+      <div className="page-body">
+        <PageRails left={leftRail} right={rightRail} />
+        <main className="content-page">
+          <section className="content-hero">
+            <p className="eyebrow">OUTCOME GUIDE</p>
+            <h1>{page.title}</h1>
+            <p className="subtext">{page.intro}</p>
+          </section>
 
-        <section className="content-shell">
-          <div className="content-stack">
-            <article className="content-card policy-card">
-              <h2>Top picks for this use case</h2>
-              <ul className="policy-list">
-                {tools.map((tool) => (
-                  <li key={tool.name}>
-                    <a href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a> - {tool.tagline}
-                  </li>
-                ))}
-              </ul>
-            </article>
+          <section className="content-shell">
+            <div className="content-stack">
+              <article className="content-card policy-card">
+                <h2>Top picks for this use case</h2>
+                <ul className="policy-list">
+                  {tools.map((tool) => (
+                    <li key={tool.name}>
+                      <a href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a> - {tool.tagline}
+                    </li>
+                  ))}
+                </ul>
+              </article>
 
-            <article className="content-card policy-card">
-              <h2>Comparison shortcuts</h2>
-              <ul className="policy-list">
-                {COMPARISON_PAGES.map((comparison) => (
-                  <li key={comparison.slug}>
-                    <a href={`/compare/${comparison.slug}`}>{comparison.title}</a>
-                  </li>
-                ))}
-              </ul>
-            </article>
+              <article className="content-card policy-card">
+                <h2>Comparison shortcuts</h2>
+                <ul className="policy-list">
+                  {COMPARISON_PAGES.map((comparison) => (
+                    <li key={comparison.slug}>
+                      <a href={`/compare/${comparison.slug}`}>{comparison.title}</a>
+                    </li>
+                  ))}
+                </ul>
+              </article>
 
-            <article className="content-card policy-card">
-              <h2>FAQs</h2>
-              <div className="faq-list">
-                {page.faqs.map((faq) => (
-                  <FaqItem key={faq.q} q={faq.q} a={faq.a} />
-                ))}
-              </div>
-            </article>
-          </div>
-        </section>
-      </main>
+              <article className="content-card policy-card">
+                <h2>FAQs</h2>
+                <div className="faq-list">
+                  {page.faqs.map((faq) => (
+                    <FaqItem key={faq.q} q={faq.q} a={faq.a} />
+                  ))}
+                </div>
+              </article>
+            </div>
+          </section>
+        </main>
+      </div>
       <SiteFooter />
     </div>
   )
 }
 
 function ComparisonLandingPage({ comparison }) {
+  const comparisonTools = comparison.tools
+    .map((name) => TOOLS.find((tool) => tool.name === name))
+    .filter(Boolean)
+
+  const leftRail = {
+    eyebrow: 'Head-to-head',
+    title: comparison.title,
+    description: comparison.description,
+    chips: comparison.tools,
+    links: comparisonTools.map((tool) => ({
+      label: tool.name,
+      href: `/tools/${slugifyToolName(tool.name)}`,
+      meta: tool.tagline,
+    })),
+  }
+
+  const rightRail = {
+    eyebrow: 'More comparisons',
+    title: 'Swap between matchups',
+    description: 'Jump into other comparison pages or return to the matrix hub to filter your own shortlist.',
+    chips: ['Matrix', 'Tool pages', 'Shortlists'],
+    links: [
+      { label: 'Compare Hub', href: '/compare-hub', meta: 'Filter every available matchup' },
+      ...COMPARISON_PAGES.filter((page) => page.slug !== comparison.slug).slice(0, 3).map((page) => ({
+        label: page.title,
+        href: `/compare/${page.slug}`,
+        meta: page.description,
+      })),
+    ],
+  }
+
   return (
     <div className="page">
       <SiteNav />
-      <main className="content-page">
-        <section className="content-hero">
-          <p className="eyebrow">AI TOOL COMPARISON</p>
-          <h1>{comparison.title}</h1>
-          <p className="subtext">{comparison.description}</p>
-        </section>
+      <div className="page-body">
+        <PageRails left={leftRail} right={rightRail} />
+        <main className="content-page">
+          <section className="content-hero">
+            <p className="eyebrow">AI TOOL COMPARISON</p>
+            <h1>{comparison.title}</h1>
+            <p className="subtext">{comparison.description}</p>
+          </section>
 
-        <section className="content-shell">
-          <div className="content-stack">
-            <article className="content-card policy-card">
-              <h2>Side-by-side comparison table</h2>
-              <ComparisonTable comparison={comparison} />
-            </article>
+          <section className="content-shell">
+            <div className="content-stack">
+              <article className="content-card policy-card">
+                <h2>Side-by-side comparison table</h2>
+                <ComparisonTable comparison={comparison} />
+              </article>
 
-            <article className="content-card policy-card">
-              <h2>FAQs</h2>
-              <div className="faq-list">
-                <FaqItem q={`Which is better: ${comparison.tools[0]} or ${comparison.tools[1]}?`} a={`The right choice depends on your workflow. Use the comparison table above, then test both free plans if available.`} />
-                <FaqItem q={`Are ${comparison.tools[0]} and ${comparison.tools[1]} good for beginners?`} a={`Yes, but onboarding effort varies by product. Choose the one that matches your primary outcome and existing workflow.`} />
-              </div>
-            </article>
-          </div>
-        </section>
-      </main>
+              <article className="content-card policy-card">
+                <h2>FAQs</h2>
+                <div className="faq-list">
+                  <FaqItem q={`Which is better: ${comparison.tools[0]} or ${comparison.tools[1]}?`} a={`The right choice depends on your workflow. Use the comparison table above, then test both free plans if available.`} />
+                  <FaqItem q={`Are ${comparison.tools[0]} and ${comparison.tools[1]} good for beginners?`} a={`Yes, but onboarding effort varies by product. Choose the one that matches your primary outcome and existing workflow.`} />
+                </div>
+              </article>
+            </div>
+          </section>
+        </main>
+      </div>
       <SiteFooter />
     </div>
   )
@@ -1629,43 +1819,69 @@ function AlternativesLandingPage({ tool }) {
   const alternatives = TOOLS
     .filter((item) => item.category === tool.category && item.name !== tool.name)
     .slice(0, 6)
+  const leftRail = {
+    eyebrow: 'Top alternatives',
+    title: `${tool.name} substitutes`,
+    description: `Closer matches for teams that want a similar workflow without staying locked into ${tool.name}.`,
+    chips: [tool.category, `${alternatives.length} options`],
+    links: alternatives.slice(0, 4).map((item) => ({
+      label: item.name,
+      href: `/tools/${slugifyToolName(item.name)}`,
+      meta: item.tagline,
+    })),
+  }
+
+  const rightRail = {
+    eyebrow: 'Direct comparisons',
+    title: 'View closest matchups',
+    description: 'Use these links to see the fastest direct comparisons for this product.',
+    chips: ['Comparison pages', 'Category', 'Tool pages'],
+    links: alternatives.slice(0, 4).map((item) => ({
+      label: `${tool.name} vs ${item.name}`,
+      href: `/compare/${slugifyToolName(tool.name)}-vs-${slugifyToolName(item.name)}`,
+      meta: 'Direct head-to-head review',
+    })),
+  }
 
   return (
     <div className="page">
       <SiteNav />
-      <main className="content-page">
-        <section className="content-hero">
-          <p className="eyebrow">ALTERNATIVES GUIDE</p>
-          <h1>{tool.name} alternatives</h1>
-          <p className="subtext">Compare alternatives to {tool.name} for pricing, quality, and workflow fit.</p>
-        </section>
+      <div className="page-body">
+        <PageRails left={leftRail} right={rightRail} />
+        <main className="content-page">
+          <section className="content-hero">
+            <p className="eyebrow">ALTERNATIVES GUIDE</p>
+            <h1>{tool.name} alternatives</h1>
+            <p className="subtext">Compare alternatives to {tool.name} for pricing, quality, and workflow fit.</p>
+          </section>
 
-        <section className="content-shell">
-          <div className="content-stack">
-            <article className="content-card policy-card">
-              <h2>Top alternatives</h2>
-              <ul className="policy-list">
-                {alternatives.map((item) => (
-                  <li key={item.name}>
-                    <a href={`/tools/${slugifyToolName(item.name)}`}>{item.name}</a> - {item.tagline}
-                  </li>
-                ))}
-              </ul>
-            </article>
+          <section className="content-shell">
+            <div className="content-stack">
+              <article className="content-card policy-card">
+                <h2>Top alternatives</h2>
+                <ul className="policy-list">
+                  {alternatives.map((item) => (
+                    <li key={item.name}>
+                      <a href={`/tools/${slugifyToolName(item.name)}`}>{item.name}</a> - {item.tagline}
+                    </li>
+                  ))}
+                </ul>
+              </article>
 
-            <article className="content-card policy-card">
-              <h2>Direct comparisons</h2>
-              <ul className="policy-list">
-                {alternatives.map((item) => (
-                  <li key={`${tool.name}-${item.name}`}>
-                    <a href={`/compare/${slugifyToolName(tool.name)}-vs-${slugifyToolName(item.name)}`}>{tool.name} vs {item.name}</a>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </div>
-        </section>
-      </main>
+              <article className="content-card policy-card">
+                <h2>Direct comparisons</h2>
+                <ul className="policy-list">
+                  {alternatives.map((item) => (
+                    <li key={`${tool.name}-${item.name}`}>
+                      <a href={`/compare/${slugifyToolName(tool.name)}-vs-${slugifyToolName(item.name)}`}>{tool.name} vs {item.name}</a>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </div>
+          </section>
+        </main>
+      </div>
       <SiteFooter />
     </div>
   )
@@ -1699,55 +1915,82 @@ function CompareHubPage() {
     }
   }
 
+  const leftRail = {
+    eyebrow: 'Matrix filters',
+    title: 'Tune the shortlist',
+    description: 'Use the hub to reduce the directory down to pairwise comparisons that match a category or use case.',
+    chips: [category, useCase === 'All' ? 'All use cases' : useCase],
+    links: [
+      { label: 'Home', href: '/', meta: 'Return to the main directory' },
+      { label: 'Weekly Trends', href: '/trending-ai-tools-this-week', meta: 'See current click leaders' },
+      { label: 'Tool Finder', href: '/#finder-quiz', meta: 'Get a quick recommendation' },
+    ],
+  }
+
+  const rightRail = {
+    eyebrow: 'Popular routes',
+    title: 'Open a matchup fast',
+    description: 'Jump from the hub into the comparison pages people are most likely to compare first.',
+    chips: ['ChatGPT', 'Claude', 'Midjourney', 'Copilot'],
+    links: pairs.slice(0, 4).map((pair) => ({
+      label: `${pair.left.name} vs ${pair.right.name}`,
+      href: `/compare/${pair.slug}`,
+      meta: `${pair.left.category} vs ${pair.right.category}`,
+    })),
+  }
+
   return (
     <div className="page">
       <SiteNav />
-      <main className="content-page">
-        <section className="content-hero">
-          <p className="eyebrow">COMPARISON HUB</p>
-          <h1>AI Comparison Matrix Hub</h1>
-          <p className="subtext">Filter by category or use case and jump into pairwise tool comparisons.</p>
-        </section>
+      <div className="page-body">
+        <PageRails left={leftRail} right={rightRail} />
+        <main className="content-page">
+          <section className="content-hero">
+            <p className="eyebrow">COMPARISON HUB</p>
+            <h1>AI Comparison Matrix Hub</h1>
+            <p className="subtext">Filter by category or use case and jump into pairwise tool comparisons.</p>
+          </section>
 
-        <section className="content-shell">
-          <div className="content-stack">
-            <article className="content-card policy-card">
-              <h2>Filter comparisons</h2>
-              <div className="compare-hub-filters">
-                <label className="toolbar-field">
-                  <span>Category</span>
-                  <select value={category} onChange={(event) => setCategory(event.target.value)}>
-                    {CATEGORIES.map((entry) => (
-                      <option key={entry} value={entry}>{entry}</option>
-                    ))}
-                  </select>
-                </label>
-                <label className="toolbar-field">
-                  <span>Use Case</span>
-                  <select value={useCase} onChange={(event) => setUseCase(event.target.value)}>
-                    {useCaseOptions.map((entry) => (
-                      <option key={entry} value={entry}>{entry}</option>
-                    ))}
-                  </select>
-                </label>
-              </div>
-              <p className="section-copy">{pairs.length} pairwise comparisons available</p>
-            </article>
+          <section className="content-shell">
+            <div className="content-stack">
+              <article className="content-card policy-card">
+                <h2>Filter comparisons</h2>
+                <div className="compare-hub-filters">
+                  <label className="toolbar-field">
+                    <span>Category</span>
+                    <select value={category} onChange={(event) => setCategory(event.target.value)}>
+                      {CATEGORIES.map((entry) => (
+                        <option key={entry} value={entry}>{entry}</option>
+                      ))}
+                    </select>
+                  </label>
+                  <label className="toolbar-field">
+                    <span>Use Case</span>
+                    <select value={useCase} onChange={(event) => setUseCase(event.target.value)}>
+                      {useCaseOptions.map((entry) => (
+                        <option key={entry} value={entry}>{entry}</option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+                <p className="section-copy">{pairs.length} pairwise comparisons available</p>
+              </article>
 
-            <article className="content-card policy-card">
-              <h2>All pairwise comparison links</h2>
-              <div className="compare-hub-links">
-                {pairs.map((pair) => (
-                  <a key={pair.slug} href={`/compare/${pair.slug}`} className="landing-link-card">
-                    <strong>{pair.left.name} vs {pair.right.name}</strong>
-                    <span>{pair.left.category} vs {pair.right.category}</span>
-                  </a>
-                ))}
-              </div>
-            </article>
-          </div>
-        </section>
-      </main>
+              <article className="content-card policy-card">
+                <h2>All pairwise comparison links</h2>
+                <div className="compare-hub-links">
+                  {pairs.map((pair) => (
+                    <a key={pair.slug} href={`/compare/${pair.slug}`} className="landing-link-card">
+                      <strong>{pair.left.name} vs {pair.right.name}</strong>
+                      <span>{pair.left.category} vs {pair.right.category}</span>
+                    </a>
+                  ))}
+                </div>
+              </article>
+            </div>
+          </section>
+        </main>
+      </div>
       <SiteFooter />
     </div>
   )
@@ -1759,36 +2002,62 @@ function WeeklyTrendingPage({ snapshots }) {
   const activeEntries = activeWeek
     ? Object.entries(snapshots[activeWeek]).sort((left, right) => right[1] - left[1]).slice(0, 10)
     : []
+  const leftRail = {
+    eyebrow: 'Weekly signal',
+    title: activeWeek || 'Current week',
+    description: 'The leaderboard is derived from click activity captured inside this directory.',
+    chips: ['Clicks', 'Weekly', 'Live'],
+    links: activeEntries.slice(0, 4).map(([name, clicks]) => ({
+      label: name,
+      href: `/tools/${slugifyToolName(name)}`,
+      meta: `${clicks} clicks this week`,
+    })),
+  }
+
+  const rightRail = {
+    eyebrow: 'Next step',
+    title: 'Turn traffic into actions',
+    description: 'Use the directory, newsletter, and compare hub together to keep the session moving.',
+    chips: ['Newsletter', 'Compare Hub', 'Directory'],
+    links: [
+      { label: 'Home', href: '/', meta: 'Return to the main directory' },
+      { label: 'Compare Hub', href: '/compare-hub', meta: 'Open the matrix hub' },
+      { label: 'Newsletter', href: '/#newsletter', meta: 'Get weekly picks' },
+    ],
+  }
 
   return (
     <div className="page">
       <SiteNav />
-      <main className="content-page">
-        <section className="content-hero">
-          <p className="eyebrow">WEEKLY TRENDS</p>
-          <h1>Trending AI Tools This Week</h1>
-          <p className="subtext">Weekly snapshot of the most clicked tools in this directory.</p>
-        </section>
+      <div className="page-body">
+        <PageRails left={leftRail} right={rightRail} />
+        <main className="content-page">
+          <section className="content-hero">
+            <p className="eyebrow">WEEKLY TRENDS</p>
+            <h1>Trending AI Tools This Week</h1>
+            <p className="subtext">Weekly snapshot of the most clicked tools in this directory.</p>
+          </section>
 
-        <section className="content-shell">
-          <div className="content-stack">
-            <article className="content-card policy-card">
-              <h2>{activeWeek || 'Current week'} leaderboard</h2>
-              {activeEntries.length === 0 ? (
-                <p className="section-copy">No weekly click data yet. Interactions will populate this page over time.</p>
-              ) : (
-                <ol className="policy-list">
-                  {activeEntries.map(([name, clicks]) => (
-                    <li key={name}>
-                      <a href={`/tools/${slugifyToolName(name)}`}>{name}</a> - {clicks} clicks
-                    </li>
-                  ))}
-                </ol>
-              )}
-            </article>
-          </div>
-        </section>
-      </main>
+          <section className="content-shell">
+            <div className="content-stack">
+              <article className="content-card policy-card">
+                <h2>{activeWeek || 'Current week'} leaderboard</h2>
+                {activeEntries.length === 0 ? (
+                  <p className="section-copy">No weekly click data yet. Interactions will populate this page over time.</p>
+                ) : (
+                  <ol className="policy-list">
+                    {activeEntries.map(([name, clicks]) => (
+                      <li key={name}>
+                        <a href={`/tools/${slugifyToolName(name)}`}>{name}</a> - {clicks} clicks
+                      </li>
+                    ))}
+                  </ol>
+                )}
+              </article>
+            </div>
+          </section>
+        </main>
+      </div>
       <SiteFooter />
     </div>
   )
@@ -2434,12 +2703,6 @@ function App() {
     return (byGoal.length > 0 ? byGoal : TOOLS).slice(0, 3)
   })()
   const alternativeTargets = topPicks.slice(0, 3)
-  const weeklyTrendTop = (() => {
-    const weekKey = getCurrentWeekKey()
-    const weekData = weeklyTrendSnapshots[weekKey] || {}
-    const entries = Object.entries(weekData)
-    return entries.sort((left, right) => right[1] - left[1]).slice(0, 5)
-  })()
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -2691,73 +2954,107 @@ function App() {
   return (
     <div className="page">
       <SiteNav theme={theme} onToggleTheme={toggleTheme} />
+      <div className="page-body page-body-home">
+        <PageRails
+          left={{
+            eyebrow: 'Live picks',
+            title: 'What people click most',
+            description: 'A compact view of the most relevant tools and signals on the directory today.',
+            chips: ['Favorites', 'Clicks', 'Trending'],
+            links: [
+              ...topPicks.slice(0, 2).map((tool) => ({
+                label: tool.name,
+                href: `/tools/${slugifyToolName(tool.name)}`,
+                meta: tool.tagline,
+              })),
+              ...trendingTools.slice(0, 2).map((tool) => ({
+                label: tool.name,
+                href: `/tools/${slugifyToolName(tool.name)}`,
+                meta: `${toolClicks[tool.name] || 0} clicks this week`,
+              })),
+            ],
+          }}
+          right={{
+            eyebrow: 'Quick moves',
+            title: 'Jump to a section',
+            description: 'Use these shortcuts to move across the discovery flow without hunting through the page.',
+            chips: ['Use cases', 'Tools', 'Newsletter'],
+            links: [
+              { label: 'Use Cases', href: '#use-cases', meta: 'Start with a goal' },
+              { label: 'Browse Tools', href: '#tools', meta: 'Filter the directory' },
+              { label: 'Compare Tools', href: '#compare', meta: 'Build a shortlist' },
+              { label: 'Weekly Trends', href: '/trending-ai-tools-this-week', meta: 'Open the weekly leaderboard' },
+            ],
+          }}
+        />
 
-      <header className="hero">
-        <div className="hero-grid">
-          <div className="hero-main">
-            <p className="eyebrow">UPDATED MAY 2026 • 15+ TOOLS REVIEWED</p>
-            <h1>Find the right <span className="gradient-text">AI tool</span> in 60 seconds</h1>
-            <p className="subtext">
-              Skip the hype. Start with your outcome, then get practical tool recommendations for studying,
-              teaching, coding, content creation, and business growth.
-            </p>
-            <div className="hero-cta-row">
-              <a href="#use-cases" className="btn btn-primary">Find by Outcome</a>
-              <a href="#compare" className="btn btn-secondary">Compare Top Tools</a>
-            </div>
-            <div className="search-bar">
-              <input
-                type="search"
-                placeholder="Search tools, e.g. 'image generation', 'code', 'free'…"
-                value={search}
-                onChange={(event) => setSearch(event.target.value)}
-                aria-label="Search AI tools"
-              />
-            </div>
-            <div className="hero-stats">
-              <span>🎯 Outcome-first recommendations</span>
-              <span>✅ 15+ Tools Reviewed</span>
-              <span>★ {favorites.length} Saved Favorites</span>
-              <span>👥 {websiteVisitors === null ? 'Live' : websiteVisitors.toLocaleString()} Website Visits</span>
-              <span>↺ {localVisits} Visits From This Browser</span>
-              <span>🛡️ Manually Curated Listings</span>
-            </div>
-          </div>
-
-          <aside className="hero-visual" aria-hidden="true">
-            <div
-              className="orbital-shell"
-              ref={heroTiltHandlers.elementRef}
-              onMouseMove={heroTiltHandlers.onMouseMove}
-              onMouseLeave={heroTiltHandlers.onMouseLeave}
-            >
-              <div className="ring ring-a"></div>
-              <div className="ring ring-b"></div>
-              <div className="ring ring-c"></div>
-
-              <article className="core-card">
-                <p>AI Command Deck</p>
-                <strong>{filtered.length} discoverable tools</strong>
-                <span>Category: {activeCategory}</span>
-                <div className="core-bars">
-                  <i style={{ width: '82%' }}></i>
-                  <i style={{ width: '63%' }}></i>
-                  <i style={{ width: '48%' }}></i>
+        <div>
+          <header className="hero">
+            <div className="hero-grid">
+              <div className="hero-main">
+                <p className="eyebrow">UPDATED MAY 2026 • 15+ TOOLS REVIEWED</p>
+                <h1>Find the right <span className="gradient-text">AI tool</span> in 60 seconds</h1>
+                <p className="subtext">
+                  Skip the hype. Start with your outcome, then get practical tool recommendations for studying,
+                  teaching, coding, content creation, and business growth.
+                </p>
+                <div className="hero-cta-row">
+                  <a href="#use-cases" className="btn btn-primary">Find by Outcome</a>
+                  <a href="#compare" className="btn btn-secondary">Compare Top Tools</a>
                 </div>
-              </article>
+                <div className="search-bar">
+                  <input
+                    type="search"
+                    placeholder="Search tools, e.g. 'image generation', 'code', 'free'…"
+                    value={search}
+                    onChange={(event) => setSearch(event.target.value)}
+                    aria-label="Search AI tools"
+                  />
+                </div>
+                <div className="hero-stats">
+                  <span>🎯 Outcome-first recommendations</span>
+                  <span>✅ 15+ Tools Reviewed</span>
+                  <span>★ {favorites.length} Saved Favorites</span>
+                  <span>👥 {websiteVisitors === null ? 'Live' : websiteVisitors.toLocaleString()} Website Visits</span>
+                  <span>↺ {localVisits} Visits From This Browser</span>
+                  <span>🛡️ Manually Curated Listings</span>
+                </div>
+              </div>
 
-              <div className="float-panel panel-a">
-                <small>Live signal</small>
-                <strong>Trending tags</strong>
-              </div>
-              <div className="float-panel panel-b">
-                <small>Top category</small>
-                <strong>{topPicks[0]?.category || 'Writing'}</strong>
-              </div>
+              <aside className="hero-visual" aria-hidden="true">
+                <div
+                  className="orbital-shell"
+                  ref={heroTiltHandlers.elementRef}
+                  onMouseMove={heroTiltHandlers.onMouseMove}
+                  onMouseLeave={heroTiltHandlers.onMouseLeave}
+                >
+                  <div className="ring ring-a"></div>
+                  <div className="ring ring-b"></div>
+                  <div className="ring ring-c"></div>
+
+                  <article className="core-card">
+                    <p>AI Command Deck</p>
+                    <strong>{filtered.length} discoverable tools</strong>
+                    <span>Category: {activeCategory}</span>
+                    <div className="core-bars">
+                      <i style={{ width: '82%' }}></i>
+                      <i style={{ width: '63%' }}></i>
+                      <i style={{ width: '48%' }}></i>
+                    </div>
+                  </article>
+
+                  <div className="float-panel panel-a">
+                    <small>Live signal</small>
+                    <strong>Trending tags</strong>
+                  </div>
+                  <div className="float-panel panel-b">
+                    <small>Top category</small>
+                    <strong>{topPicks[0]?.category || 'Writing'}</strong>
+                  </div>
+                </div>
+              </aside>
             </div>
-          </aside>
-        </div>
-      </header>
+          </header>
 
       <main>
         <section className="section" id="use-cases">
@@ -3296,6 +3593,8 @@ function App() {
           <p className="trust">No spam. Unsubscribe anytime. 100% free.</p>
         </section>
       </main>
+        </div>
+      </div>
 
       {showExitIntent ? (
         <section className="exit-intent-modal" role="dialog" aria-label="Free AI workflow kit" aria-live="polite">

@@ -143,7 +143,7 @@ body {
 /* -- LAYOUT ----------------------------------------------- */
 .page {
   position: relative;
-  width: min(1180px, 94vw);
+  width: min(1600px, 96vw);
   margin: 0 auto;
   padding: 0 0 5rem;
 }
@@ -175,6 +175,133 @@ body {
 .content-page {
   max-width: 900px;
   margin: 0 auto;
+}
+
+.page-body {
+  margin-top: 1rem;
+}
+
+.page-rail {
+  display: none;
+}
+
+.rail-panel {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1.15rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--card-border);
+  background:
+    linear-gradient(180deg, rgba(124,108,255,0.12), rgba(34,211,238,0.04)),
+    rgba(255,255,255,0.03);
+  box-shadow: var(--shadow-glass);
+}
+
+.rail-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(124,108,255,0.22);
+  background: rgba(124,108,255,0.09);
+  color: var(--accent2);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.rail-panel h3 {
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.rail-panel p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.rail-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.rail-chip {
+  padding: 0.28rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--card-border);
+  background: rgba(255,255,255,0.04);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.rail-link-list {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.rail-link-card {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--card-border);
+  background: rgba(255,255,255,0.035);
+  text-decoration: none;
+  transition: transform 0.18s, border-color 0.18s, background 0.18s;
+}
+
+.rail-link-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(124,108,255,0.35);
+  background: rgba(124,108,255,0.08);
+}
+
+.rail-link-card strong {
+  color: var(--ink);
+  font-size: 0.86rem;
+}
+
+.rail-link-card span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.4;
+}
+
+@media (min-width: 1400px) {
+  .page-body {
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) minmax(0, 1120px) minmax(180px, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+  }
+
+  .page-body > :not(.page-rail) {
+    grid-column: 2;
+    min-width: 0;
+  }
+
+  .page-rail {
+    display: block;
+    position: sticky;
+    top: 6.2rem;
+    max-height: calc(100vh - 7.2rem);
+    overflow: auto;
+    padding-bottom: 0.2rem;
+  }
+
+  .page-rail-left {
+    grid-column: 1;
+  }
+
+  .page-rail-right {
+    grid-column: 3;
+  }
 }
 
 .content-hero {
