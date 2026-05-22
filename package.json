@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "seo:check": "node scripts/seo-healthcheck.mjs https://aitoolscenter.in",
-    "news:update": "node scripts/update-ai-news.mjs"
+    "news:update": "node scripts/update-ai-news.mjs",
+    "toolkit:pdf": "node scripts/generate-toolkit-pdf.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -25,6 +26,7 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+    "pdfkit": "^0.18.0",
     "vite": "^5.4.1"
   }
 }

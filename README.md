@@ -50,6 +50,28 @@ npm run build
 - Configure `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in Vercel for form handling.
 - Add affiliate links and a paid submit-your-tool flow for monetization.
 
+## Facebook Ads Setup
+
+1. Create a Meta Pixel in Meta Events Manager.
+2. Set `VITE_META_PIXEL_ID` in Vercel Project Settings > Environment Variables.
+3. Redeploy the project. The site will initialize Meta Pixel only when ad consent is granted.
+4. In Meta Ads Manager, use this URL for campaigns: `https://www.aitoolscenter.in/`.
+5. Create conversions in Events Manager for `PageView` and custom event `RouteView`.
+
+Notes:
+- Consent controls are wired to the existing cookie banner.
+- CSP in `vercel.json` includes Meta Pixel domains (`connect.facebook.net`, `www.facebook.com`, `graph.facebook.com`).
+
+## Toolkit PDF
+
+- Source script: `scripts/generate-toolkit-pdf.mjs`
+- Output file: `public/ai-workflow-kit.pdf`
+- Regenerate the PDF anytime with:
+
+```bash
+npm run toolkit:pdf
+```
+
 ## Newsletter Setup
 
 - Copy `.env.example` to `.env`.

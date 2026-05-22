@@ -524,6 +524,7 @@ const LEGAL_PAGES = {
           'Newsletter subscriptions store email address and subscription source.',
           'Tool submissions store details provided through the submission form.',
           'Google AdSense and associated ad technologies use cookies and web beacons to serve personalized ads based on your visits to this and other websites.',
+          'Meta (Facebook) Pixel may be used for conversion tracking and campaign attribution when advertising consent is granted.',
           'Basic analytics cookies may be used to measure site traffic and user interaction patterns.',
         ],
       },
@@ -531,6 +532,7 @@ const LEGAL_PAGES = {
         heading: 'Google AdSense and Advertising Cookies',
         items: [
           'This site uses Google AdSense to display advertisements. Google uses cookies (including the DoubleClick cookie) to serve ads based on your prior visits to this site and other sites on the web.',
+          'We may also use Meta Pixel to measure campaign outcomes and improve ad targeting on Facebook and Instagram when consent is granted.',
           'You can opt out of personalized advertising by visiting Google Ad Settings at https://adssettings.google.com.',
           'You can also opt out of third-party vendor cookies for personalized advertising by visiting www.aboutads.info.',
           'We have implemented Google Consent Mode v2. If you decline non-essential cookies via our consent banner, personalized ads and analytics will not be activated.',
@@ -592,6 +594,7 @@ const TOOL_CATEGORIES = CATEGORIES.filter((category) => category !== 'All')
 const PRICING_OPTIONS = ['Free', 'Freemium', 'Paid', 'Enterprise']
 const ADSENSE_CLIENT_ID = import.meta.env.VITE_ADSENSE_CLIENT_ID || 'ca-pub-2770089511325323'
 const AMAZON_ASSOCIATE_TAG = (import.meta.env.VITE_AMAZON_ASSOCIATE_TAG || 'aitoolscenter-21').trim()
+const META_PIXEL_ID = (import.meta.env.VITE_META_PIXEL_ID || '').trim()
 
 const CATEGORY_SEO = {
   Writing: {
@@ -659,6 +662,69 @@ const CONSENT_ACCEPT_ALL = {
   security_storage: 'granted',
 }
 
+const isAdConsentGranted = (consentSettings = {}) => (
+  consentSettings.ad_storage === 'granted'
+  && consentSettings.ad_user_data === 'granted'
+  && consentSettings.ad_personalization === 'granted'
+)
+
+const ensureMetaPixelInitialized = (consentSettings = {}) => {
+  if (typeof window === 'undefined' || !META_PIXEL_ID || !isAdConsentGranted(consentSettings)) {
+    return
+  }
+
+  if (typeof window.fbq !== 'function') {
+    window.fbq = function fbq() {
+      window.fbq.callMethod
+        ? window.fbq.callMethod.apply(window.fbq, arguments)
+        : window.fbq.queue.push(arguments)
+    }
+    window.fbq.push = window.fbq
+    window.fbq.loaded = true
+    window.fbq.version = '2.0'
+    window.fbq.queue = []
+
+    const script = document.createElement('script')
+    script.async = true
+    script.src = 'https://connect.facebook.net/en_US/fbevents.js'
+    document.head.appendChild(script)
+  }
+
+  if (!window.__metaPixelInitialized) {
+    window.fbq('init', META_PIXEL_ID)
+    window.__metaPixelInitialized = true
+  }
+
+  window.fbq('consent', 'grant')
+}
+
+const trackMetaPageView = (pathname) => {
+  if (typeof window === 'undefined' || !META_PIXEL_ID || typeof window.fbq !== 'function') {
+    return
+  }
+
+  window.fbq('track', 'PageView')
+  window.fbq('trackCustom', 'RouteView', { path: pathname })
+}
+
+const getStoredConsentSettings = () => {
+  if (typeof window === 'undefined') {
+    return CONSENT_DEFAULTS
+  }
+
+  try {
+    const raw = localStorage.getItem(CONSENT_STORAGE_KEY)
+    if (!raw) {
+      return CONSENT_DEFAULTS
+    }
+
+    const parsed = JSON.parse(raw)
+    return parsed?.consent || CONSENT_DEFAULTS
+  } catch {
+    return CONSENT_DEFAULTS
+  }
+}
+
 const applyConsentUpdate = (consentSettings) => {
   if (typeof window === 'undefined') {
     return
@@ -674,6 +740,12 @@ const applyConsentUpdate = (consentSettings) => {
   }
 
   window.gtag('consent', 'update', payload)
+
+  if (typeof window.fbq === 'function') {
+    window.fbq('consent', isAdConsentGranted(payload) ? 'grant' : 'revoke')
+  }
+
+  ensureMetaPixelInitialized(payload)
 }
 
 const slugifyToolName = (value) => value
@@ -2280,6 +2352,16 @@ function App() {
   }, [theme])
 
   useEffect(() => {
+    const consent = getStoredConsentSettings()
+    if (!isAdConsentGranted(consent)) {
+      return
+    }
+
+    ensureMetaPixelInitialized(consent)
+    trackMetaPageView(normalizedPath)
+  }, [normalizedPath])
+
+  useEffect(() => {
     if (typeof window === 'undefined' || normalizedPath !== '/') {
       return
     }
@@ -3570,7 +3652,8 @@ function App() {
           <h2>Get Weekly AI Tool Picks in Your Inbox</h2>
           <p>Get 5 new AI tools every week: trending picks, free tools, prompts, and practical AI business ideas.</p>
           <div className="lead-magnet-row">
-            <a className="btn btn-secondary" href="/ai-workflow-kit.txt" target="_blank" rel="noopener noreferrer">Download Free AI Workflow Kit</a>
+            <a className="btn btn-secondary" href="/ai-workflow-kit.pdf" target="_blank" rel="noopener noreferrer">Download Free AI Workflow Kit (PDF)</a>
+            <a className="btn btn-secondary" href="/ai-workflow-kit.txt" target="_blank" rel="noopener noreferrer">Text version</a>
           </div>
           <form className="newsletter-form" onSubmit={handleNewsletterSubmit}>
             <input
