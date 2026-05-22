@@ -77,6 +77,7 @@ const TOOLS = [
     badge: 'Paid',
     rating: 5,
     tags: ['Coding', 'IDE', 'Autocomplete'],
+    affiliateProgram: 'https://github.com/features/copilot',
   },
   {
     name: 'Cursor',
@@ -95,6 +96,7 @@ const TOOLS = [
     badge: 'Free + Pro',
     rating: 4,
     tags: ['Autocomplete', 'Privacy', 'IDE'],
+    affiliateProgram: 'https://tabnine.com/affiliates',
   },
   {
     name: 'Runway',
@@ -104,6 +106,7 @@ const TOOLS = [
     badge: 'Free + Pro',
     rating: 5,
     tags: ['Video Gen', 'Editing', 'Motion'],
+    affiliateProgram: 'https://runwayml.com/affiliates',
   },
   {
     name: 'Sora',
@@ -122,6 +125,7 @@ const TOOLS = [
     badge: 'Add-on',
     rating: 4,
     tags: ['Notes', 'Summary', 'Writing'],
+    affiliateProgram: 'https://affiliate.notion.so/',
   },
   {
     name: 'Zapier AI',
@@ -131,6 +135,7 @@ const TOOLS = [
     badge: 'Free + Pro',
     rating: 4,
     tags: ['No-Code', 'Workflows', 'Integrations'],
+    affiliateProgram: 'https://zapier.com/affiliate',
   },
   {
     name: 'Make (Integromat)',
@@ -140,6 +145,7 @@ const TOOLS = [
     badge: 'Free + Pro',
     rating: 4,
     tags: ['Visual', 'Workflows', 'No-Code'],
+    affiliateProgram: 'https://www.make.com/en/affiliate-program',
   },
   {
     name: 'Perplexity',
@@ -149,6 +155,7 @@ const TOOLS = [
     badge: 'Free + Pro',
     rating: 5,
     tags: ['Search', 'Citations', 'Real-Time'],
+    affiliateProgram: 'https://perplexity.ai/pro',
   },
 ]
 
@@ -597,6 +604,31 @@ const AMAZON_ASSOCIATE_TAG = (import.meta.env.VITE_AMAZON_ASSOCIATE_TAG || 'aito
 const META_PIXEL_ID = (import.meta.env.VITE_META_PIXEL_ID || '').trim()
 const FACEBOOK_AD_PLACEHOLDERS_ENABLED = String(import.meta.env.VITE_ENABLE_FACEBOOK_AD_PLACEHOLDERS || 'true').toLowerCase() === 'true'
 
+// Affiliate tracking links — set these in Vercel environment variables after signing up.
+const AFFILIATE_LINKS = {
+  'Notion AI':       (import.meta.env.VITE_AFFILIATE_NOTION       || '').trim() || 'https://affiliate.notion.so/',
+  'Runway':          (import.meta.env.VITE_AFFILIATE_RUNWAY        || '').trim() || 'https://runwayml.com/affiliates',
+  'Cursor':          (import.meta.env.VITE_AFFILIATE_CURSOR        || '').trim() || 'https://cursor.sh',
+  'Tabnine':         (import.meta.env.VITE_AFFILIATE_TABNINE       || '').trim() || 'https://tabnine.com/affiliates',
+  'Perplexity':      (import.meta.env.VITE_AFFILIATE_PERPLEXITY    || '').trim() || 'https://perplexity.ai/pro?utm_source=aitoolscenter',
+  'Make (Integromat)':(import.meta.env.VITE_AFFILIATE_MAKE        || '').trim() || 'https://www.make.com/en/register?pc=aitoolscenter',
+  'Zapier AI':       (import.meta.env.VITE_AFFILIATE_ZAPIER        || '').trim() || 'https://zapier.com/affiliate',
+  'GitHub Copilot':  (import.meta.env.VITE_AFFILIATE_COPILOT       || '').trim() || 'https://github.com/features/copilot',
+}
+
+const AFFILIATE_PROGRAMS = [
+  { name: 'Notion AI',        commission: '50% first year',  signup: 'https://affiliate.notion.so/',                    category: 'Productivity' },
+  { name: 'Runway',           commission: '20% recurring',   signup: 'https://runwayml.com/affiliates',                 category: 'Video' },
+  { name: 'Tabnine',         commission: '25% recurring',   signup: 'https://tabnine.com/affiliates',                  category: 'Coding' },
+  { name: 'Perplexity Pro',  commission: '20% per referral',signup: 'https://perplexity.ai/pro',                       category: 'Research' },
+  { name: 'Make',             commission: '20% recurring',   signup: 'https://www.make.com/en/affiliate-program',       category: 'Automation' },
+  { name: 'Zapier',           commission: 'Partner program', signup: 'https://zapier.com/affiliate',                    category: 'Automation' },
+  { name: 'GitHub Copilot',  commission: '$10 per referral',signup: 'https://github.com/features/copilot',             category: 'Coding' },
+  { name: 'Copy.ai',          commission: '45% first year',  signup: 'https://www.copy.ai/affiliates',                  category: 'Writing' },
+  { name: 'Jasper AI',        commission: '30% recurring',   signup: 'https://www.jasper.ai/affiliates',                category: 'Writing' },
+  { name: 'Writesonic',       commission: '30% recurring',   signup: 'https://writesonic.com/affiliate',                category: 'Writing' },
+]
+
 const CATEGORY_SEO = {
   Writing: {
     headline: 'Best AI Writing Tools in 2026',
@@ -798,7 +830,7 @@ const isAmazonUrl = (url) => {
   }
 }
 
-const isAffiliateTool = (tool) => Boolean(tool.affiliateLink) || isAmazonUrl(tool.link || '')
+const isAffiliateTool = (tool) => Boolean(tool.affiliateLink) || Boolean(tool.affiliateProgram) || isAmazonUrl(tool.link || '')
 
 const appendAmazonAssociateTag = (url) => {
   if (!AMAZON_ASSOCIATE_TAG) {
@@ -821,7 +853,11 @@ const appendAmazonAssociateTag = (url) => {
   }
 }
 
-const getToolOutboundUrl = (tool) => appendAmazonAssociateTag(tool.affiliateLink || tool.link)
+const getToolOutboundUrl = (tool) => {
+  if (tool.affiliateLink) return appendAmazonAssociateTag(tool.affiliateLink)
+  if (tool.affiliateProgram && AFFILIATE_LINKS[tool.name]) return AFFILIATE_LINKS[tool.name]
+  return appendAmazonAssociateTag(tool.link)
+}
 const getToolAnchorRel = (tool) => (
   isAffiliateTool(tool) ? 'noopener noreferrer nofollow sponsored' : 'noopener noreferrer'
 )
@@ -3638,6 +3674,37 @@ function App() {
         </section>
 
         <AdUnit slot="7482196035" className="ad-unit-inline" />
+
+        <section className="section affiliate-section" id="affiliate-programs">
+          <div className="section-divider"></div>
+          <div className="section-heading-row">
+            <div>
+              <h2>💰 Earn with AI Tool Affiliate Programs</h2>
+              <p className="section-copy">Sign up for these programs and replace your links in Vercel environment variables to start earning recurring commissions.</p>
+            </div>
+            <div className="results-chip">{AFFILIATE_PROGRAMS.length} programs listed</div>
+          </div>
+          <div className="affiliate-grid">
+            {AFFILIATE_PROGRAMS.map((program) => (
+              <article key={program.name} className="affiliate-card" data-scroll-reveal>
+                <div className="affiliate-card-top">
+                  <span className="tool-badge">{program.category}</span>
+                  <span className="affiliate-commission-pill">{program.commission}</span>
+                </div>
+                <h3>{program.name}</h3>
+                <a
+                  href={program.signup}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary affiliate-btn"
+                >
+                  Join Program →
+                </a>
+              </article>
+            ))}
+          </div>
+          <p className="affiliate-note">💡 After joining, set your tracking URL as a Vercel env var (e.g. <code>VITE_AFFILIATE_NOTION</code>) and redeploy. Tool cards will automatically use your link.</p>
+        </section>
 
         <section className="section newsletter" id="newsletter">
           <h2>Get Weekly AI Tool Picks in Your Inbox</h2>
