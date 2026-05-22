@@ -276,14 +276,20 @@ body {
 @media (min-width: 1400px) {
   .page-body {
     display: grid;
-    grid-template-columns: minmax(180px, 1fr) minmax(0, 1120px) minmax(180px, 1fr);
-    gap: 1.25rem;
+    grid-template-columns: minmax(220px, 280px) minmax(0, 1fr) minmax(220px, 280px);
+    gap: 1rem;
     align-items: start;
   }
 
   .page-body > :not(.page-rail) {
     grid-column: 2;
     min-width: 0;
+  }
+
+  .page-body .content-page {
+    max-width: none;
+    width: 100%;
+    margin: 0;
   }
 
   .page-rail {
