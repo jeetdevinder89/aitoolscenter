@@ -1244,7 +1244,7 @@ function AdUnit({ slot, className = '' }) {
 }
 
 function FacebookAdPlaceholder({ placement, className = '' }) {
-  if (!FACEBOOK_AD_PLACEHOLDERS_ENABLED) {
+  if (!FACEBOOK_AD_PLACEHOLDERS_ENABLED || true) {
     return null
   }
 
@@ -3675,6 +3675,7 @@ function App() {
 
         <AdUnit slot="7482196035" className="ad-unit-inline" />
 
+        {false && (
         <section className="section affiliate-section" id="affiliate-programs">
           <div className="section-divider"></div>
           <div className="section-heading-row">
@@ -3706,6 +3707,7 @@ function App() {
           </div>
           <p className="affiliate-note">💡 After joining, set your tracking URL as a Vercel env var (e.g. <code>VITE_AFFILIATE_NOTION</code>) and redeploy. Tool cards will automatically use your link.</p>
         </section>
+        )}
 
         <section className="section newsletter" id="newsletter">
           <h2>Get Weekly AI Tool Picks in Your Inbox</h2>
