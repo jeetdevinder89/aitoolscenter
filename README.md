@@ -57,6 +57,7 @@ npm run build
 3. Redeploy the project. The site will initialize Meta Pixel only when ad consent is granted.
 4. In Meta Ads Manager, use this URL for campaigns: `https://www.aitoolscenter.in/`.
 5. Create conversions in Events Manager for `PageView` and custom event `RouteView`.
+6. Optional: set `VITE_ENABLE_FACEBOOK_AD_PLACEHOLDERS=true` to show visible Facebook ad slots on the homepage while integrating campaign embeds.
 
 Notes:
 - Consent controls are wired to the existing cookie banner.

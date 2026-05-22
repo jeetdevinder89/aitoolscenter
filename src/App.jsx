@@ -595,6 +595,7 @@ const PRICING_OPTIONS = ['Free', 'Freemium', 'Paid', 'Enterprise']
 const ADSENSE_CLIENT_ID = import.meta.env.VITE_ADSENSE_CLIENT_ID || 'ca-pub-2770089511325323'
 const AMAZON_ASSOCIATE_TAG = (import.meta.env.VITE_AMAZON_ASSOCIATE_TAG || 'aitoolscenter-21').trim()
 const META_PIXEL_ID = (import.meta.env.VITE_META_PIXEL_ID || '').trim()
+const FACEBOOK_AD_PLACEHOLDERS_ENABLED = String(import.meta.env.VITE_ENABLE_FACEBOOK_AD_PLACEHOLDERS || 'true').toLowerCase() === 'true'
 
 const CATEGORY_SEO = {
   Writing: {
@@ -1202,6 +1203,22 @@ function AdUnit({ slot, className = '' }) {
         data-ad-format="auto"
         data-full-width-responsive="true"
       />
+    </aside>
+  )
+}
+
+function FacebookAdPlaceholder({ placement, className = '' }) {
+  if (!FACEBOOK_AD_PLACEHOLDERS_ENABLED) {
+    return null
+  }
+
+  return (
+    <aside className={`ad-unit ad-unit-facebook ${className}`.trim()} aria-label="Facebook ad placeholder">
+      <div className="ad-unit-placeholder ad-unit-placeholder-facebook">
+        <strong>Facebook Ads Placement</strong>
+        <span>{placement}</span>
+        <small>Connect your Meta campaign or partner embed to this slot.</small>
+      </div>
     </aside>
   )
 }
@@ -3081,7 +3098,7 @@ function App() {
                 </p>
                 <div className="hero-cta-row">
                   <a href="#use-cases" className="btn btn-primary">Find by Outcome</a>
-                  <a href="#compare" className="btn btn-secondary">Compare Top Tools</a>
+                  <a href="/compare-hub" className="btn btn-secondary">Open Compare Hub</a>
                 </div>
                 <div className="search-bar">
                   <input
@@ -3170,6 +3187,7 @@ function App() {
         </section>
 
         <AdUnit slot="3951802461" className="ad-unit-inline" />
+        <FacebookAdPlaceholder placement="Homepage: After Use Cases" className="ad-unit-inline" />
 
         <section className="section" id="trending">
           <div className="section-divider"></div>
@@ -3231,6 +3249,7 @@ function App() {
         </section>
 
         <AdUnit slot="9301754426" className="ad-unit-inline" />
+        <FacebookAdPlaceholder placement="Homepage: Before Tool Directory" className="ad-unit-inline" />
 
         <section className="section" id="tools">
           <div className="section-divider"></div>

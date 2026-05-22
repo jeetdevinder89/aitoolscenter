@@ -1069,6 +1069,26 @@ h1 .gradient-text {
   font-size: 0.9rem;
 }
 
+.ad-unit-facebook {
+  border-style: solid;
+  border-color: rgba(24, 119, 242, 0.45);
+  background: linear-gradient(140deg, rgba(24, 119, 242, 0.14), rgba(255, 255, 255, 0.03));
+}
+
+.ad-unit-placeholder-facebook {
+  min-height: 92px;
+}
+
+.ad-unit-placeholder-facebook strong {
+  color: #8fc0ff;
+  letter-spacing: 0.01em;
+}
+
+.ad-unit-placeholder-facebook small {
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
 .toolbar-field {
   display: flex;
   flex-direction: column;
