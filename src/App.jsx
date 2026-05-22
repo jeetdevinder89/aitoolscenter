@@ -3064,7 +3064,6 @@ function App() {
             links: [
               { label: 'Use Cases', href: '#use-cases', meta: 'Start with a goal' },
               { label: 'Browse Tools', href: '#tools', meta: 'Filter the directory' },
-              { label: 'Compare Tools', href: '#compare', meta: 'Build a shortlist' },
               { label: 'Weekly Trends', href: '/trending-ai-tools-this-week', meta: 'Open the weekly leaderboard' },
             ],
           }}
@@ -3374,33 +3373,6 @@ function App() {
         </section>
 
         <AdUnit slot="5543871290" className="ad-unit-inline" />
-
-        <section className="section compare-section" id="compare">
-          <div className="section-divider"></div>
-          <div className="section-heading-row">
-            <div>
-              <h2>Compare Tools Side by Side</h2>
-              <p className="section-copy">Add up to three tools from the directory to compare pricing, category, rating, and use cases.</p>
-            </div>
-            <div className="results-chip">{comparisonTools.length}/3 selected</div>
-          </div>
-          {comparisonTools.length === 0 ? (
-            <p className="empty-state">No tools selected yet. Use the Compare button on any card to build a shortlist.</p>
-          ) : (
-            <div className="comparison-grid">
-              {comparisonTools.map((tool, index) => (
-                <div
-                  key={tool.name}
-                  className={`scroll-reveal reveal-subtle ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
-                  style={{ '--reveal-delay': `${Math.min(index * 80, 240)}ms` }}
-                  data-scroll-reveal
-                >
-                  <ComparisonCard tool={tool} onRemove={toggleCompare} />
-                </div>
-              ))}
-            </div>
-          )}
-        </section>
 
         <section className="section info-section" id="how-ai-works">
           <div className="info-grid">
