@@ -1436,6 +1436,12 @@ h1 .gradient-text {
   margin: 0;
 }
 
+.affiliate-card-note {
+  font-size: 0.76rem;
+  color: var(--muted);
+  margin: 0;
+}
+
 .affiliate-btn {
   font-size: 0.82rem;
   padding: 0.45rem 0.9rem;

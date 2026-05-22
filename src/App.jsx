@@ -612,21 +612,21 @@ const AFFILIATE_LINKS = {
   'Tabnine':         (import.meta.env.VITE_AFFILIATE_TABNINE       || '').trim() || 'https://tabnine.com/affiliates',
   'Perplexity':      (import.meta.env.VITE_AFFILIATE_PERPLEXITY    || '').trim() || 'https://perplexity.ai/pro?utm_source=aitoolscenter',
   'Make (Integromat)':(import.meta.env.VITE_AFFILIATE_MAKE        || '').trim() || 'https://www.make.com/en/register?pc=aitoolscenter',
-  'Zapier AI':       (import.meta.env.VITE_AFFILIATE_ZAPIER        || '').trim() || 'https://zapier.com/affiliate',
+  'Zapier AI':       (import.meta.env.VITE_AFFILIATE_ZAPIER        || '').trim() || 'https://sponsored-content.zapier.app/sign-up',
   'GitHub Copilot':  (import.meta.env.VITE_AFFILIATE_COPILOT       || '').trim() || 'https://github.com/features/copilot',
 }
 
 const AFFILIATE_PROGRAMS = [
-  { name: 'Notion AI',        commission: '50% first year',  signup: 'https://affiliate.notion.so/',                    category: 'Productivity' },
-  { name: 'Runway',           commission: '20% recurring',   signup: 'https://runwayml.com/affiliates',                 category: 'Video' },
-  { name: 'Tabnine',         commission: '25% recurring',   signup: 'https://tabnine.com/affiliates',                  category: 'Coding' },
-  { name: 'Perplexity Pro',  commission: '20% per referral',signup: 'https://perplexity.ai/pro',                       category: 'Research' },
-  { name: 'Make',             commission: '20% recurring',   signup: 'https://www.make.com/en/affiliate-program',       category: 'Automation' },
-  { name: 'Zapier',           commission: 'Partner program', signup: 'https://zapier.com/affiliate',                    category: 'Automation' },
-  { name: 'GitHub Copilot',  commission: '$10 per referral',signup: 'https://github.com/features/copilot',             category: 'Coding' },
-  { name: 'Copy.ai',          commission: '45% first year',  signup: 'https://www.copy.ai/affiliates',                  category: 'Writing' },
-  { name: 'Jasper AI',        commission: '30% recurring',   signup: 'https://www.jasper.ai/affiliates',                category: 'Writing' },
-  { name: 'Writesonic',       commission: '30% recurring',   signup: 'https://writesonic.com/affiliate',                category: 'Writing' },
+  { name: 'Jasper AI',        commission: '25% recurring',   signup: 'https://www.jasper.ai/partners/solutions',        category: 'Writing',      note: 'Apply via FirstPromoter' },
+  { name: 'Writesonic',       commission: '30% recurring',   signup: 'https://affiliates.writesonic.com/signup/24177',  category: 'Writing',      note: 'Instant signup' },
+  { name: 'Notion',           commission: '$50 per sign-up + 20% yr1', signup: 'https://www.notion.com/affiliates',    category: 'Productivity', note: 'Via PartnerStack' },
+  { name: 'Runway',           commission: '20% recurring',   signup: 'https://runwayml.com',                            category: 'Video',        note: 'Contact via site' },
+  { name: 'Zapier',           commission: 'Creator program', signup: 'https://sponsored-content.zapier.app/sign-up',    category: 'Automation',   note: 'Sponsored content' },
+  { name: 'Make',             commission: '20% recurring',   signup: 'https://www.make.com/en/partners',                category: 'Automation',   note: 'Apply as partner' },
+  { name: 'GitHub Copilot',  commission: 'Partner benefits',signup: 'https://partner.github.com',                     category: 'Coding',       note: 'GitHub Partner Network' },
+  { name: 'NeuralText',       commission: '30% recurring',   signup: 'https://neuraltext.com/affiliate',                category: 'Writing',      note: 'Instant signup' },
+  { name: 'Murf AI',          commission: '20% recurring',   signup: 'https://murf.ai/affiliate-program',               category: 'Video',        note: 'Voice AI tool' },
+  { name: 'Descript',         commission: '15% recurring',   signup: 'https://www.descript.com/affiliate',              category: 'Video',        note: 'Audio & video editing' },
 ]
 
 const CATEGORY_SEO = {
@@ -3692,6 +3692,7 @@ function App() {
                   <span className="affiliate-commission-pill">{program.commission}</span>
                 </div>
                 <h3>{program.name}</h3>
+                {program.note ? <p className="affiliate-card-note">{program.note}</p> : null}
                 <a
                   href={program.signup}
                   target="_blank"
