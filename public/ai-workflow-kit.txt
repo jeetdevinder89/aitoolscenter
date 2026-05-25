@@ -22,4 +22,4 @@ Updated: May 2026
 - Prompt: "Create a weekly AI operations checklist for a small team focused on content, sales, and support."
 - Prompt: "Suggest 5 automations using Zapier/Make for [business type]."
 
-Find more guides: https://aitoolscenter.in
+Find more guides: https://www.aitoolscenter.in

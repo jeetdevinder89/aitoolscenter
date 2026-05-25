@@ -38,6 +38,19 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "aitoolscenter.in"
+        }
+      ],
+      "destination": "https://www.aitoolscenter.in/$1",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/ads.txt",

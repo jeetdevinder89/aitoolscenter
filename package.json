@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run sitemap:generate && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "seo:check": "node scripts/seo-healthcheck.mjs https://aitoolscenter.in",
+    "seo:check": "node scripts/seo-healthcheck.mjs https://www.aitoolscenter.in",
+    "sitemap:generate": "node scripts/generate-sitemap.mjs",
     "news:update": "node scripts/update-ai-news.mjs",
     "toolkit:pdf": "node scripts/generate-toolkit-pdf.mjs"
   },
@@ -17,6 +18,7 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@babel/parser": "^7.29.7",
     "@eslint/js": "^9.9.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

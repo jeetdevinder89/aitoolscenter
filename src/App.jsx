@@ -14,6 +14,8 @@ const CATEGORY_ICONS = {
   Research: '🔬',
 }
 
+const SITE_ORIGIN = (import.meta.env.VITE_SITE_ORIGIN || 'https://www.aitoolscenter.in').replace(/\/$/, '')
+
 const TOOLS = [
   {
     name: 'ChatGPT',
@@ -253,6 +255,87 @@ const OUTCOME_BLOCKS = [
     tools: ['Runway', 'Midjourney', 'DALL·E 3'],
   },
 ]
+
+const USE_CASE_PLAYBOOKS = {
+  students: {
+    summary: 'Students usually need three capabilities in one stack: concept explanation, fast drafting, and citation-aware research. The best workflow starts with understanding, then converts notes into revision material and practice tests.',
+    steps: [
+      'Use a chat model to break down difficult topics into plain language and analogies.',
+      'Turn class notes into concise revision sheets and flashcards.',
+      'Validate important claims using a citation-capable research tool before final submission.',
+      'Use a writing assistant to improve clarity, grammar, and structure in your final draft.',
+    ],
+    watchouts: [
+      'Do not copy AI output directly for graded submissions.',
+      'Always verify numerical facts, citations, and policy-sensitive content.',
+      'Keep your personal data and institution data out of prompts.',
+    ],
+  },
+  teachers: {
+    summary: 'Teachers benefit most when AI is used for preparation, differentiation, and feedback support. A practical stack reduces repetitive planning work while preserving instructor judgment.',
+    steps: [
+      'Generate lesson outlines and adapt them by grade level and time constraints.',
+      'Draft worksheet variants for mixed-ability classrooms.',
+      'Create feedback rubrics and parent communication drafts.',
+      'Review all outputs for curriculum fit, local policy, and factual quality.',
+    ],
+    watchouts: [
+      'Avoid sharing student-identifiable data in prompts.',
+      'Review tone and factual claims before sharing with learners.',
+      'Keep human assessment as the final grading authority.',
+    ],
+  },
+  developers: {
+    summary: 'Developers get the most value from AI when it is connected to editor workflows, tests, and code review habits. Fast output is helpful only when quality gates remain strong.',
+    steps: [
+      'Use an editor-native assistant for boilerplate, tests, and repetitive implementation tasks.',
+      'Use long-context assistants for architecture exploration and refactor plans.',
+      'Prompt with repo constraints, style rules, and edge cases to improve output quality.',
+      'Run linting, tests, and human review before merge.',
+    ],
+    watchouts: [
+      'Do not accept generated code without validation and tests.',
+      'Verify dependency and license assumptions when code snippets are suggested.',
+      'Watch for subtle logic regressions in generated refactors.',
+    ],
+  },
+  'content-creators': {
+    summary: 'Creators typically need script ideation, visual generation, and editing workflows to work together. The best stack keeps concept, production, and publishing aligned across channels.',
+    steps: [
+      'Use a writing model for hooks, outlines, and script drafts.',
+      'Generate thumbnails and visual concepts for stronger click-through potential.',
+      'Use video tools for rough cuts, short-form edits, and experimentation.',
+      'Keep a repeatable prompt library for each format to improve consistency.',
+    ],
+    watchouts: [
+      'Avoid publishing unverified claims from generated scripts.',
+      'Check image and music usage rights before monetized use.',
+      'Keep brand voice review as a final editorial step.',
+    ],
+  },
+}
+
+const getUseCasePlaybook = (page) => {
+  const fromMap = USE_CASE_PLAYBOOKS[page.slug]
+  if (fromMap) {
+    return fromMap
+  }
+
+  return {
+    summary: `${page.title} pages perform best when you evaluate tools by workflow fit, output quality, and onboarding speed instead of feature checklists alone. Start with one primary outcome and test two tools side by side for a week.`,
+    steps: [
+      'Define one measurable outcome you want to improve this month.',
+      'Select two tools from this page and run the same task in both.',
+      'Track quality, speed, and team adoption friction before upgrading to paid plans.',
+      'Standardize prompts and documentation once one stack wins.',
+    ],
+    watchouts: [
+      'Do not optimize for novelty if reliability is your primary goal.',
+      'Re-check pricing and limits before committing to annual plans.',
+      'Keep human review for final decisions in customer-facing workflows.',
+    ],
+  }
+}
 
 const USE_CASE_PAGES = [
   {
@@ -1587,6 +1670,11 @@ function ToolDetailPage({ tool }) {
       })),
     ],
   }
+  const shouldAvoid = tool.category === 'Coding'
+    ? 'your team cannot enforce code review, testing, and security checks on generated code'
+    : tool.category === 'Image' || tool.category === 'Video'
+      ? 'you need strict rights-managed assets with full provenance for every output'
+      : 'you need guaranteed deterministic output with no need for iterative review'
 
   return (
     <div className="page">
@@ -1610,6 +1698,10 @@ function ToolDetailPage({ tool }) {
               <article className="content-card policy-card">
                 <h2>Why use {tool.name}</h2>
                 <p>{TOOL_DETAIL_WRITEUPS[tool.name] || `${tool.name} helps with ${tool.category.toLowerCase()} workflows and is commonly used for faster execution with AI-assisted output.`}</p>
+                <p>
+                  In most teams, {tool.name} works best as an acceleration layer instead of a complete replacement for existing workflows.
+                  The strongest results come from repeatable prompts, clear review standards, and explicit quality checks before final publishing.
+                </p>
                 <ul className="policy-list">
                   <li>Best for: teams and creators who need reliable {tool.category.toLowerCase()} support.</li>
                   <li>Pricing model: {tool.badge}.</li>
@@ -1619,6 +1711,19 @@ function ToolDetailPage({ tool }) {
                 {isAffiliateTool(tool) ? (
                   <p className="affiliate-disclosure">Affiliate disclosure: We may earn a commission from eligible purchases, at no extra cost to you.</p>
                 ) : null}
+              </article>
+
+              <article className="content-card policy-card">
+                <h2>When to choose (and skip) {tool.name}</h2>
+                <p>
+                  Choose {tool.name} if your priority is faster execution with acceptable first-draft quality and room for human refinement.
+                  For most teams, it is a strong fit when turnaround speed matters more than perfect zero-edit output.
+                </p>
+                <ul className="policy-list">
+                  <li>Choose it when: you need dependable first drafts and clear iterative improvement loops.</li>
+                  <li>Skip it when: {shouldAvoid}.</li>
+                  <li>Operational tip: create a prompt and QA checklist so output quality remains consistent across teammates.</li>
+                </ul>
               </article>
 
               <article className="content-card policy-card">
@@ -1793,6 +1898,7 @@ function UseCaseLandingPage({ page }) {
   const tools = page.toolNames
     .map((name) => TOOLS.find((tool) => tool.name === name))
     .filter(Boolean)
+  const playbook = getUseCasePlaybook(page)
   const leftRail = {
     eyebrow: 'Recommended tools',
     title: page.title,
@@ -1846,6 +1952,25 @@ function UseCaseLandingPage({ page }) {
               </article>
 
               <article className="content-card policy-card">
+                <h2>How to use this stack effectively</h2>
+                <p>{playbook.summary}</p>
+                <ol className="policy-list">
+                  {playbook.steps.map((step) => (
+                    <li key={step}>{step}</li>
+                  ))}
+                </ol>
+              </article>
+
+              <article className="content-card policy-card">
+                <h2>Common mistakes to avoid</h2>
+                <ul className="policy-list">
+                  {playbook.watchouts.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </article>
+
+              <article className="content-card policy-card">
                 <h2>Comparison shortcuts</h2>
                 <ul className="policy-list">
                   {COMPARISON_PAGES.map((comparison) => (
@@ -1877,6 +2002,10 @@ function ComparisonLandingPage({ comparison }) {
   const comparisonTools = comparison.tools
     .map((name) => TOOLS.find((tool) => tool.name === name))
     .filter(Boolean)
+  const [leftTool, rightTool] = comparisonTools
+  const fitSummary = leftTool && rightTool
+    ? `${leftTool.name} is typically favored for ${leftTool.tags[0] || leftTool.category.toLowerCase()} workflows, while ${rightTool.name} is often selected for ${rightTool.tags[0] || rightTool.category.toLowerCase()} outcomes.`
+    : 'Use the table below to identify the better fit based on workflow, budget, and quality requirements.'
 
   const leftRail = {
     eyebrow: 'Head-to-head',
@@ -1922,6 +2051,17 @@ function ComparisonLandingPage({ comparison }) {
               <article className="content-card policy-card">
                 <h2>Side-by-side comparison table</h2>
                 <ComparisonTable comparison={comparison} />
+              </article>
+
+              <article className="content-card policy-card">
+                <h2>Decision guidance</h2>
+                <p>{fitSummary}</p>
+                <ul className="policy-list">
+                  <li>Step 1: define one primary outcome (speed, quality, integration, or budget).</li>
+                  <li>Step 2: test both tools using the same prompt and same deliverable.</li>
+                  <li>Step 3: compare editing time required before final use.</li>
+                  <li>Step 4: pick the winner based on consistency across repeated tasks.</li>
+                </ul>
               </article>
 
               <article className="content-card policy-card">
@@ -1990,6 +2130,20 @@ function AlternativesLandingPage({ tool }) {
                       <a href={`/tools/${slugifyToolName(item.name)}`}>{item.name}</a> - {item.tagline}
                     </li>
                   ))}
+                </ul>
+              </article>
+
+              <article className="content-card policy-card">
+                <h2>How to evaluate alternatives</h2>
+                <p>
+                  If you are switching from {tool.name}, evaluate alternatives using the same task set and review criteria.
+                  This prevents biased decisions based on interface preference alone and gives you a clearer performance signal.
+                </p>
+                <ul className="policy-list">
+                  <li>Compare onboarding effort and team learning curve.</li>
+                  <li>Measure output quality over at least 5 similar tasks.</li>
+                  <li>Check pricing limits against your expected monthly usage.</li>
+                  <li>Verify integrations you need for production workflows.</li>
                 </ul>
               </article>
 
@@ -2127,6 +2281,10 @@ function WeeklyTrendingPage({ snapshots }) {
   const activeEntries = activeWeek
     ? Object.entries(snapshots[activeWeek]).sort((left, right) => right[1] - left[1]).slice(0, 10)
     : []
+  const benchmarkEntries = TOOLS
+    .slice()
+    .sort((left, right) => right.rating - left.rating)
+    .slice(0, 5)
   const leftRail = {
     eyebrow: 'Weekly signal',
     title: activeWeek || 'Current week',
@@ -2168,7 +2326,17 @@ function WeeklyTrendingPage({ snapshots }) {
               <article className="content-card policy-card">
                 <h2>{activeWeek || 'Current week'} leaderboard</h2>
                 {activeEntries.length === 0 ? (
-                  <p className="section-copy">No weekly click data yet. Interactions will populate this page over time.</p>
+                  <div>
+                    <p className="section-copy">No weekly click data yet. Interactions will populate this page over time.</p>
+                    <p className="section-copy">Until then, start with these high-interest picks from the current directory:</p>
+                    <ol className="policy-list">
+                      {benchmarkEntries.map((tool) => (
+                        <li key={tool.name}>
+                          <a href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a> - {tool.tagline}
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
                 ) : (
                   <ol className="policy-list">
                     {activeEntries.map(([name, clicks]) => (
@@ -2178,6 +2346,19 @@ function WeeklyTrendingPage({ snapshots }) {
                     ))}
                   </ol>
                 )}
+              </article>
+
+              <article className="content-card policy-card">
+                <h2>How this leaderboard works</h2>
+                <p>
+                  Rankings are based on in-directory click activity aggregated by week. The chart updates automatically as visitors open tool pages,
+                  comparison pages, and outbound links from this site.
+                </p>
+                <ul className="policy-list">
+                  <li>Data window: ISO week snapshot (UTC).</li>
+                  <li>Signal source: click interactions captured in this directory.</li>
+                  <li>Goal: help readers quickly identify tools that are currently attracting attention.</li>
+                </ul>
               </article>
             </div>
           </section>
@@ -2463,7 +2644,7 @@ function App() {
   }, [normalizedPath])
 
   useEffect(() => {
-    const baseUrl = 'https://aitoolscenter.in'
+    const baseUrl = SITE_ORIGIN
     const matched = toolSlug ? getToolBySlug(toolSlug) : null
     const matchedCategory = categorySlug ? getCategoryBySlug(categorySlug) : null
     const matchedUseCase = useCaseSlug ? getUseCaseBySlug(useCaseSlug) : null
