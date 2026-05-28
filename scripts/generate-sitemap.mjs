@@ -180,6 +180,7 @@ const buildSitemapXml = ({ toolSlugs, categorySlugs, useCaseSlugs, comparisonSlu
   }
 
   addUrl('/compare-hub', 'weekly', '0.85')
+  addUrl('/news', 'daily', '0.82')
   addUrl('/trending-ai-tools-this-week', 'daily', '0.8')
 
   for (const slug of comparisonSlugs) {

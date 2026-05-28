@@ -3,18 +3,8 @@ import aiNews from './data/ai-news.json'
 
 const CATEGORIES = ['All', 'Writing', 'Image', 'Video', 'Coding', 'Productivity', 'Automation', 'Research']
 
-const CATEGORY_ICONS = {
-  All: '🌐',
-  Writing: '✍️',
-  Image: '🎨',
-  Video: '🎬',
-  Coding: '💻',
-  Productivity: '⚡',
-  Automation: '🤖',
-  Research: '🔬',
-}
-
 const SITE_ORIGIN = (import.meta.env.VITE_SITE_ORIGIN || 'https://www.aitoolscenter.in').replace(/\/$/, '')
+const ADS_APPROVED = String(import.meta.env.VITE_ADS_APPROVED || '').toLowerCase() === 'true'
 
 const TOOLS = [
   {
@@ -159,6 +149,1210 @@ const TOOLS = [
     tags: ['Search', 'Citations', 'Real-Time'],
     affiliateProgram: 'https://perplexity.ai/pro',
   },
+  {
+    name: 'Microsoft Copilot',
+    category: 'Productivity',
+    tagline: 'Assistant integrated with Microsoft apps for writing and planning.',
+    link: 'https://copilot.microsoft.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Microsoft', 'Assistant', 'Office'],
+  },
+  {
+    name: 'Jasper',
+    category: 'Writing',
+    tagline: 'Brand-focused AI writing platform for teams and marketers.',
+    link: 'https://www.jasper.ai',
+    badge: 'Paid',
+    rating: 4,
+    tags: ['Marketing', 'Copywriting', 'Brand Voice'],
+  },
+  {
+    name: 'Writesonic',
+    category: 'Writing',
+    tagline: 'AI writer for blogs, landing pages, and SEO content drafts.',
+    link: 'https://writesonic.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['SEO', 'Blogs', 'Copywriting'],
+  },
+  {
+    name: 'Copy.ai',
+    category: 'Writing',
+    tagline: 'Go-to-market writing and workflow automation for sales content.',
+    link: 'https://www.copy.ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Sales', 'Content', 'Automation'],
+  },
+  {
+    name: 'Grammarly',
+    category: 'Writing',
+    tagline: 'Writing assistant for grammar, clarity, and tone improvement.',
+    link: 'https://www.grammarly.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Grammar', 'Editing', 'Tone'],
+  },
+  {
+    name: 'QuillBot',
+    category: 'Writing',
+    tagline: 'Paraphrasing and rewriting assistant for faster edits.',
+    link: 'https://quillbot.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Paraphrase', 'Rewrite', 'Academic'],
+  },
+  {
+    name: 'Wordtune',
+    category: 'Writing',
+    tagline: 'Sentence-level rewrite suggestions for cleaner communication.',
+    link: 'https://www.wordtune.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Rewrite', 'Clarity', 'Email'],
+  },
+  {
+    name: 'Canva AI',
+    category: 'Image',
+    tagline: 'Design assistant with AI image generation and layout support.',
+    link: 'https://www.canva.com/ai-image-generator/',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Design', 'Templates', 'Image Gen'],
+  },
+  {
+    name: 'Adobe Firefly',
+    category: 'Image',
+    tagline: 'Creative generative AI for text-to-image and visual edits.',
+    link: 'https://firefly.adobe.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Adobe', 'Image Gen', 'Creative'],
+  },
+  {
+    name: 'Leonardo AI',
+    category: 'Image',
+    tagline: 'Image generation platform for concepts, assets, and game art.',
+    link: 'https://leonardo.ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Art', 'Assets', 'Generation'],
+  },
+  {
+    name: 'Ideogram',
+    category: 'Image',
+    tagline: 'Text-forward image model known for high-quality typography.',
+    link: 'https://ideogram.ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Typography', 'Posters', 'Image Gen'],
+  },
+  {
+    name: 'Playground AI',
+    category: 'Image',
+    tagline: 'AI image creation and editing workspace for social creatives.',
+    link: 'https://playground.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Editing', 'Social', 'Image Gen'],
+  },
+  {
+    name: 'Pixlr AI',
+    category: 'Image',
+    tagline: 'Browser-based photo tools with AI enhancements and effects.',
+    link: 'https://pixlr.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Photo', 'Editing', 'Browser'],
+  },
+  {
+    name: 'Remove.bg',
+    category: 'Image',
+    tagline: 'One-click background removal for ecommerce and design workflows.',
+    link: 'https://www.remove.bg',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Background', 'Photos', 'Ecommerce'],
+  },
+  {
+    name: 'Pika',
+    category: 'Video',
+    tagline: 'Prompt-driven video generation and stylized clip editing.',
+    link: 'https://pika.art',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Video Gen', 'Editing', 'Prompt'],
+  },
+  {
+    name: 'Luma Dream Machine',
+    category: 'Video',
+    tagline: 'Fast AI video model for cinematic motion and scenes.',
+    link: 'https://lumalabs.ai/dream-machine',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Video Gen', 'Cinematic', 'Luma'],
+  },
+  {
+    name: 'Synthesia',
+    category: 'Video',
+    tagline: 'Avatar-based video generation for training and explainers.',
+    link: 'https://www.synthesia.io',
+    badge: 'Paid',
+    rating: 4,
+    tags: ['Avatars', 'Training', 'Voiceover'],
+  },
+  {
+    name: 'InVideo AI',
+    category: 'Video',
+    tagline: 'Text-to-video workflows for social media and marketing teams.',
+    link: 'https://invideo.io/ai/',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Text-to-Video', 'Marketing', 'Social'],
+  },
+  {
+    name: 'Descript',
+    category: 'Video',
+    tagline: 'Edit video and podcasts by editing text transcripts.',
+    link: 'https://www.descript.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Podcast', 'Editing', 'Transcription'],
+  },
+  {
+    name: 'VEED',
+    category: 'Video',
+    tagline: 'Online video editor with AI subtitling and repurposing tools.',
+    link: 'https://www.veed.io',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Subtitles', 'Editing', 'Shorts'],
+  },
+  {
+    name: 'CapCut',
+    category: 'Video',
+    tagline: 'AI-assisted video editor popular for short-form content.',
+    link: 'https://www.capcut.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Short Video', 'Editing', 'Creators'],
+  },
+  {
+    name: 'Codeium',
+    category: 'Coding',
+    tagline: 'AI coding assistant with autocomplete and chat in popular IDEs.',
+    link: 'https://codeium.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Autocomplete', 'IDE', 'Chat'],
+  },
+  {
+    name: 'Replit AI',
+    category: 'Coding',
+    tagline: 'Cloud coding workspace with integrated AI assistance.',
+    link: 'https://replit.com/ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Cloud IDE', 'Assistant', 'Code'],
+  },
+  {
+    name: 'Amazon CodeWhisperer',
+    category: 'Coding',
+    tagline: 'AWS coding assistant for secure code suggestions.',
+    link: 'https://aws.amazon.com/codewhisperer/',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['AWS', 'Security', 'Coding'],
+  },
+  {
+    name: 'Sourcegraph Cody',
+    category: 'Coding',
+    tagline: 'Codebase-aware AI assistant for enterprise development teams.',
+    link: 'https://sourcegraph.com/cody',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Codebase', 'Enterprise', 'Assistant'],
+  },
+  {
+    name: 'Phind',
+    category: 'Coding',
+    tagline: 'Developer search and answer engine for technical questions.',
+    link: 'https://www.phind.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Search', 'Developers', 'Answers'],
+  },
+  {
+    name: 'ClickUp Brain',
+    category: 'Productivity',
+    tagline: 'AI assistant for tasks, docs, and team planning workflows.',
+    link: 'https://clickup.com/ai',
+    badge: 'Paid',
+    rating: 4,
+    tags: ['Tasks', 'Planning', 'Teams'],
+  },
+  {
+    name: 'Otter.ai',
+    category: 'Productivity',
+    tagline: 'Meeting transcription with AI summaries and action items.',
+    link: 'https://otter.ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Meetings', 'Transcription', 'Notes'],
+  },
+  {
+    name: 'Tome',
+    category: 'Productivity',
+    tagline: 'AI storytelling and presentation builder for fast decks.',
+    link: 'https://tome.app',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Presentations', 'Storytelling', 'Slides'],
+  },
+  {
+    name: 'Gamma',
+    category: 'Productivity',
+    tagline: 'AI-first docs and presentations with modern layouts.',
+    link: 'https://gamma.app',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Docs', 'Presentations', 'AI'],
+  },
+  {
+    name: 'HubSpot AI',
+    category: 'Productivity',
+    tagline: 'CRM-integrated AI for sales, support, and marketing tasks.',
+    link: 'https://www.hubspot.com/products/ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['CRM', 'Sales', 'Marketing'],
+  },
+  {
+    name: 'Elicit',
+    category: 'Research',
+    tagline: 'Research assistant for literature review and evidence finding.',
+    link: 'https://elicit.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Papers', 'Evidence', 'Research'],
+  },
+  {
+    name: 'Consensus',
+    category: 'Research',
+    tagline: 'Search engine for scientific papers with AI summaries.',
+    link: 'https://consensus.app',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Science', 'Search', 'Summaries'],
+  },
+  {
+    name: 'scite',
+    category: 'Research',
+    tagline: 'Citation analysis platform for stronger evidence-based writing.',
+    link: 'https://scite.ai',
+    badge: 'Paid',
+    rating: 4,
+    tags: ['Citations', 'Evidence', 'Academic'],
+  },
+  {
+    name: 'NotebookLM',
+    category: 'Research',
+    tagline: 'Google research notebook assistant grounded in your sources.',
+    link: 'https://notebooklm.google.com',
+    badge: 'Free',
+    rating: 4,
+    tags: ['Sources', 'Notes', 'Google'],
+  },
+  {
+    name: 'n8n',
+    category: 'Automation',
+    tagline: 'Workflow automation platform with self-host and cloud options.',
+    link: 'https://n8n.io',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Workflows', 'Integrations', 'No-Code'],
+  },
+  {
+    name: 'Bardeen',
+    category: 'Automation',
+    tagline: 'Browser automation for repetitive tasks and lead workflows.',
+    link: 'https://www.bardeen.ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Browser', 'Automations', 'Productivity'],
+  },
+  {
+    name: 'Airtable AI',
+    category: 'Automation',
+    tagline: 'Database workflows with embedded AI fields and automations.',
+    link: 'https://www.airtable.com/product/ai',
+    badge: 'Paid',
+    rating: 4,
+    tags: ['Database', 'Automation', 'Ops'],
+  },
+  {
+    name: 'Flowise',
+    category: 'Automation',
+    tagline: 'Visual builder for LLM apps, chains, and AI workflows.',
+    link: 'https://flowiseai.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['LLM', 'Workflow', 'Builder'],
+  },
+  {
+    name: 'LangChain',
+    category: 'Automation',
+    tagline: 'Framework and tooling for building AI agents and pipelines.',
+    link: 'https://www.langchain.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Agents', 'Framework', 'Pipelines'],
+  },
+  {
+    name: 'ElevenLabs',
+    category: 'Productivity',
+    tagline: 'AI voice generation and text-to-speech for natural audio creation.',
+    link: 'https://elevenlabs.io',
+    badge: 'Free + Pro',
+    rating: 5,
+    tags: ['Text-to-Speech', 'Voice', 'Audio'],
+  },
+  {
+    name: 'Replit AI',
+    category: 'Coding',
+    tagline: 'AI-powered IDE for writing, debugging, and deploying code instantly.',
+    link: 'https://replit.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['IDE', 'Code Editor', 'Deployment'],
+  },
+  {
+    name: 'Leonardo AI',
+    category: 'Image',
+    tagline: 'Professional AI image generation platform for creators and designers.',
+    link: 'https://leonardo.ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Image Gen', 'Art', 'Design'],
+  },
+  {
+    name: 'Hugging Face',
+    category: 'Research',
+    tagline: 'Open-source hub for machine learning models and collaborative AI development.',
+    link: 'https://huggingface.co',
+    badge: 'Free',
+    rating: 5,
+    tags: ['Models', 'Open Source', 'ML'],
+  },
+  {
+    name: 'Synthesia',
+    category: 'Video',
+    tagline: 'Create professional AI videos with avatar presenters in minutes.',
+    link: 'https://www.synthesia.io',
+    badge: 'Paid',
+    rating: 4,
+    tags: ['Video Gen', 'Avatar', 'Marketing'],
+  },
+  {
+    name: 'Descript',
+    category: 'Video',
+    tagline: 'AI-powered video and audio editor that works like a document editor.',
+    link: 'https://www.descript.com',
+    badge: 'Free + Pro',
+    rating: 5,
+    tags: ['Video Edit', 'Podcast', 'Captions'],
+  },
+  {
+    name: 'n8n',
+    category: 'Automation',
+    tagline: 'Fair-code workflow automation platform with unlimited customization.',
+    link: 'https://n8n.io',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Workflow', 'Open Source', 'Integration'],
+  },
+  {
+    name: 'Consensus',
+    category: 'Research',
+    tagline: 'Search peer-reviewed research with AI-powered synthesis and citations.',
+    link: 'https://consensus.app',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Research', 'Academic', 'Studies'],
+  },
+  {
+    name: 'HeyGen',
+    category: 'Video',
+    tagline: 'Create engaging videos with AI avatars and realistic voice synthesis.',
+    link: 'https://www.heygen.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Video Gen', 'Avatar', 'Voices'],
+  },
+  {
+    name: 'Pixlr',
+    category: 'Image',
+    tagline: 'AI-powered photo editor for quick professional image enhancements.',
+    link: 'https://pixlr.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Photo Edit', 'Design', 'Effects'],
+  },
+  {
+    name: 'Ideogram',
+    category: 'Image',
+    tagline: 'AI image generator specializing in text rendering and graphic design.',
+    link: 'https://www.ideogram.ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Image Gen', 'Text', 'Design'],
+  },
+  {
+    name: 'Upscayl',
+    category: 'Image',
+    tagline: 'Open-source AI image upscaler for enhancing low-resolution images.',
+    link: 'https://www.upscayl.org',
+    badge: 'Free',
+    rating: 4,
+    tags: ['Upscaler', 'Open Source', 'Image'],
+  },
+  {
+    name: 'Jasper AI',
+    category: 'Writing',
+    tagline: 'AI copywriting tool for marketing, sales, and content creation.',
+    link: 'https://www.jasper.ai',
+    badge: 'Paid',
+    rating: 4,
+    tags: ['Copywriting', 'Marketing', 'Content'],
+  },
+  {
+    name: 'QuillBot',
+    category: 'Writing',
+    tagline: 'AI paraphrasing and grammar checking for better writing.',
+    link: 'https://quillbot.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Paraphrasing', 'Grammar', 'Writing'],
+  },
+  {
+    name: 'Hemingway Editor',
+    category: 'Writing',
+    tagline: 'AI editor that makes your writing bold and clear.',
+    link: 'https://hemingwayapp.com',
+    badge: 'Freemium',
+    rating: 4,
+    tags: ['Writing', 'Editing', 'Style'],
+  },
+  {
+    name: 'Rytr',
+    category: 'Writing',
+    tagline: 'AI writing assistant for content, emails, and social media.',
+    link: 'https://rytr.me',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Content', 'Email', 'Social Media'],
+  },
+  {
+    name: 'Beautiful.ai',
+    category: 'Productivity',
+    tagline: 'AI-powered presentation maker with smart design assistance.',
+    link: 'https://www.beautiful.ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Presentations', 'Design', 'Slides'],
+  },
+  {
+    name: 'Tome',
+    category: 'Productivity',
+    tagline: 'AI storyteller for creating beautiful presentations and documents.',
+    link: 'https://tome.app',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Presentations', 'Stories', 'Documents'],
+  },
+  {
+    name: 'Gamma.app',
+    category: 'Productivity',
+    tagline: 'Create beautiful presentations, doc and webpages with AI.',
+    link: 'https://gamma.app',
+    badge: 'Freemium',
+    rating: 4,
+    tags: ['Presentations', 'Docs', 'Webpages'],
+  },
+  {
+    name: 'ChatSonic',
+    category: 'Writing',
+    tagline: 'AI chatbot powered by ChatGPT with real-time information.',
+    link: 'https://www.chatsonic.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Chatbot', 'Writing', 'Content'],
+  },
+  {
+    name: 'Copy.ai',
+    category: 'Writing',
+    tagline: 'AI copywriting for marketing, emails, and ads.',
+    link: 'https://copy.ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Copywriting', 'Marketing', 'Ads'],
+  },
+  {
+    name: 'Pika',
+    category: 'Video',
+    tagline: 'AI video generator for creating animation and text-to-video.',
+    link: 'https://pika.art',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Video Gen', 'Animation', 'Text-to-Video'],
+  },
+  {
+    name: 'CapCut',
+    category: 'Video',
+    tagline: 'Free video editor with AI features for cutting, effects, and music.',
+    link: 'https://www.capcut.com',
+    badge: 'Free',
+    rating: 4,
+    tags: ['Video Edit', 'Effects', 'Music'],
+  },
+  {
+    name: 'Filmora',
+    category: 'Video',
+    tagline: 'AI-powered video editor with effects and automation tools.',
+    link: 'https://filmora.wondershare.com',
+    badge: 'Freemium',
+    rating: 4,
+    tags: ['Video Edit', 'Effects', 'AI Tools'],
+  },
+  {
+    name: 'InVideo',
+    category: 'Video',
+    tagline: 'AI video creation tool for YouTube, TikTok, and social media.',
+    link: 'https://invideo.io',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Video Gen', 'Social Media', 'YouTube'],
+  },
+  {
+    name: 'Synthesia',
+    category: 'Video',
+    tagline: 'Create AI videos with virtual presenters without cameras.',
+    link: 'https://www.synthesia.io',
+    badge: 'Paid',
+    rating: 4,
+    tags: ['Video Gen', 'Avatar', 'Presenters'],
+  },
+  {
+    name: 'Stability AI',
+    category: 'Image',
+    tagline: 'Open-source AI image generation for unlimited creativity.',
+    link: 'https://stability.ai',
+    badge: 'Free',
+    rating: 4,
+    tags: ['Image Gen', 'Open Source', 'Creative'],
+  },
+  {
+    name: 'DreamStudio',
+    category: 'Image',
+    tagline: 'Web UI for AI image generation powered by Stable Diffusion.',
+    link: 'https://dreamstudio.ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Image Gen', 'Art', 'Creative'],
+  },
+  {
+    name: 'Artflow',
+    category: 'Image',
+    tagline: 'AI art generator for creating digital artwork quickly.',
+    link: 'https://www.artflow.ai',
+    badge: 'Free + Premium',
+    rating: 4,
+    tags: ['Art', 'Image Gen', 'Creative'],
+  },
+  {
+    name: 'Remove.bg',
+    category: 'Image',
+    tagline: 'AI background remover for photos with one click.',
+    link: 'https://www.remove.bg',
+    badge: 'Free + Pro',
+    rating: 5,
+    tags: ['Image Edit', 'Background', 'Photos'],
+  },
+  {
+    name: 'Photoshop Generative Fill',
+    category: 'Image',
+    tagline: 'Adobe Photoshop with AI-powered generative fill capabilities.',
+    link: 'https://www.adobe.com/products/photoshop.html',
+    badge: 'Paid',
+    rating: 5,
+    tags: ['Image Edit', 'AI', 'Professional'],
+  },
+  {
+    name: 'Runway Gen-2',
+    category: 'Video',
+    tagline: 'Text-to-video AI generator with professional quality output.',
+    link: 'https://runwayml.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Video Gen', '3D', 'Creative'],
+  },
+  {
+    name: 'Pika 1.0',
+    category: 'Video',
+    tagline: 'Real-time video generation from prompts and images.',
+    link: 'https://pika.art',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Video Gen', 'Text-to-Video', 'Real-time'],
+  },
+  {
+    name: 'Fliki',
+    category: 'Video',
+    tagline: 'AI video creator with realistic voices and subtitles.',
+    link: 'https://fliki.ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Video Gen', 'Voice', 'Subtitles'],
+  },
+  {
+    name: 'D-ID',
+    category: 'Video',
+    tagline: 'Create talking head videos from images with AI.',
+    link: 'https://www.d-id.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Video Gen', 'Avatar', 'Talking Head'],
+  },
+  {
+    name: 'Tabby',
+    category: 'Coding',
+    tagline: 'Self-hosted alternative to GitHub Copilot for code completion.',
+    link: 'https://www.tabbyml.com',
+    badge: 'Free',
+    rating: 4,
+    tags: ['Coding', 'Code Complete', 'Open Source'],
+  },
+  {
+    name: 'CodeWhisperer',
+    category: 'Coding',
+    tagline: 'AWS CodeWhisperer for ML-powered code generation.',
+    link: 'https://aws.amazon.com/codewhisperer/',
+    badge: 'Free',
+    rating: 4,
+    tags: ['Coding', 'AWS', 'Code Gen'],
+  },
+  {
+    name: 'Codium AI',
+    category: 'Coding',
+    tagline: 'AI-powered code testing and analysis tool.',
+    link: 'https://www.codium.ai',
+    badge: 'Free',
+    rating: 4,
+    tags: ['Testing', 'Code Analysis', 'QA'],
+  },
+  {
+    name: 'Sourcegrade',
+    category: 'Coding',
+    tagline: 'AI code review and analysis for software teams.',
+    link: 'https://sourcegrade.com',
+    badge: 'Paid',
+    rating: 4,
+    tags: ['Code Review', 'Analysis', 'Teams'],
+  },
+  {
+    name: 'Phind',
+    category: 'Research',
+    tagline: 'AI search engine for developers and technical research.',
+    link: 'https://www.phind.com',
+    badge: 'Free',
+    rating: 4,
+    tags: ['Search', 'Research', 'Coding'],
+  },
+  {
+    name: 'Elicit',
+    category: 'Research',
+    tagline: 'AI research assistant for literature review and synthesis.',
+    link: 'https://elicit.org',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Research', 'Literature Review', 'Academic'],
+  },
+  {
+    name: 'Scite',
+    category: 'Research',
+    tagline: 'AI-powered platform for discovering research papers intelligently.',
+    link: 'https://scite.ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Research', 'Papers', 'Academic'],
+  },
+  {
+    name: 'SciSpace',
+    category: 'Research',
+    tagline: 'AI copilot for research paper reading and understanding.',
+    link: 'https://typeset.io',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Research', 'Papers', 'Reading'],
+  },
+  {
+    name: 'Wolfram Alpha',
+    category: 'Research',
+    tagline: 'Computational intelligence engine for factual queries.',
+    link: 'https://www.wolframalpha.com',
+    badge: 'Free + Pro',
+    rating: 5,
+    tags: ['Search', 'Math', 'Facts'],
+  },
+  {
+    name: 'Bardeen AI',
+    category: 'Automation',
+    tagline: 'No-code automation platform for browser tasks.',
+    link: 'https://www.bardeen.ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Automation', 'No-code', 'Browser'],
+  },
+  {
+    name: 'RPA Express',
+    category: 'Automation',
+    tagline: 'Robotic process automation with AI capabilities.',
+    link: 'https://www.rpa-express.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['RPA', 'Automation', 'Business'],
+  },
+  {
+    name: 'Process Street',
+    category: 'Automation',
+    tagline: 'Workflow management platform with AI assistance.',
+    link: 'https://www.process.st',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Workflow', 'Automation', 'Processes'],
+  },
+  {
+    name: 'Airtable AI',
+    category: 'Productivity',
+    tagline: 'Airtable with AI features for database automation.',
+    link: 'https://airtable.com',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Database', 'AI', 'Automation'],
+  },
+  {
+    name: 'Sheet+',
+    category: 'Productivity',
+    tagline: 'AI-powered Google Sheets extension for formulas and data.',
+    link: 'https://www.sheetplus.ai',
+    badge: 'Freemium',
+    rating: 4,
+    tags: ['Sheets', 'AI', 'Productivity'],
+  },
+  {
+    name: 'Otter Voice Notes',
+    category: 'Productivity',
+    tagline: 'AI transcription and meeting notes for meetings and calls.',
+    link: 'https://otter.ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Transcription', 'Notes', 'Meetings'],
+  },
+  {
+    name: 'Notta',
+    category: 'Productivity',
+    tagline: 'AI meeting transcription and summary tool.',
+    link: 'https://www.notta.ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Transcription', 'Meetings', 'AI'],
+  },
+  {
+    name: 'Read&Write',
+    category: 'Productivity',
+    tagline: 'AI reading and writing support for accessibility.',
+    link: 'https://www.texthelp.com/en-us/products/read-write',
+    badge: 'Paid',
+    rating: 4,
+    tags: ['Accessibility', 'Reading', 'Writing'],
+  },
+  {
+    name: 'Dyslexia-friendly Font',
+    category: 'Productivity',
+    tagline: 'AI-powered reading assistance for dyslexia support.',
+    link: 'https://www.opendyslexic.org',
+    badge: 'Free',
+    rating: 4,
+    tags: ['Accessibility', 'Font', 'Dyslexia'],
+  },
+  {
+    name: 'MeetGeek',
+    category: 'Productivity',
+    tagline: 'AI meeting assistant that records, transcribes, and summarizes.',
+    link: 'https://www.meetgeek.ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Meetings', 'Transcription', 'AI'],
+  },
+  {
+    name: 'Mem',
+    category: 'Productivity',
+    tagline: 'AI-powered note-taking and knowledge manager.',
+    link: 'https://mem.ai',
+    badge: 'Free + Premium',
+    rating: 4,
+    tags: ['Notes', 'Knowledge', 'AI'],
+  },
+  {
+    name: 'Sudowrite',
+    category: 'Writing',
+    tagline: 'AI creative writing tool for novels and stories.',
+    link: 'https://www.sudowrite.com',
+    badge: 'Paid',
+    rating: 4,
+    tags: ['Writing', 'Creative', 'Fiction'],
+  },
+  {
+    name: 'Jasper Stories',
+    category: 'Writing',
+    tagline: 'AI storytelling assistant for content creators.',
+    link: 'https://www.jasper.ai',
+    badge: 'Paid',
+    rating: 4,
+    tags: ['Writing', 'Stories', 'Content'],
+  },
+  {
+    name: 'Booking.ai',
+    category: 'Productivity',
+    tagline: 'AI chatbot for booking appointments and scheduling.',
+    link: 'https://booking.ai',
+    badge: 'Free + Pro',
+    rating: 4,
+    tags: ['Chatbot', 'Booking', 'Scheduling'],
+  },
+  {
+    name: 'HubSpot AI',
+    category: 'Productivity',
+    tagline: 'AI-powered CRM content assistant for marketing and sales.',
+    link: 'https://www.hubspot.com',
+    badge: 'Free + Paid',
+    rating: 4,
+    tags: ['CRM', 'Marketing', 'Sales'],
+  },
+  {
+    name: 'Salesforce Einstein',
+    category: 'Productivity',
+    tagline: 'AI assistant for Salesforce CRM and business intelligence.',
+    link: 'https://www.salesforce.com/products/ai/einstein-generative-ai-features/',
+    badge: 'Paid',
+    rating: 4,
+    tags: ['CRM', 'AI', 'Business'],
+  },
+]
+
+// Curated YouTube tutorials for AI tools
+const YOUTUBE_TUTORIALS = [
+  {
+    id: 'chatgpt-beginner',
+    title: 'ChatGPT for Beginners - Complete Guide',
+    channel: 'TechWithTim',
+    tools: ['ChatGPT'],
+    category: 'Getting Started',
+    description: 'Complete introduction to ChatGPT covering prompting techniques, use cases, and productivity hacks.',
+    videoId: '2BxqYCAEJrY',
+    duration: '15:42',
+  },
+  {
+    id: 'chatgpt-advanced',
+    title: 'Advanced ChatGPT Prompting Techniques',
+    channel: 'DataScience',
+    tools: ['ChatGPT'],
+    category: 'Advanced',
+    description: 'Learn system prompts, chain-of-thought reasoning, and professional ChatGPT workflows.',
+    videoId: 'RYwj0n9_hfI',
+    duration: '22:15',
+  },
+  {
+    id: 'midjourney-intro',
+    title: 'Midjourney AI Art Guide - Zero to Hero',
+    channel: 'ArtByAI',
+    tools: ['Midjourney'],
+    category: 'Image Generation',
+    description: 'Step-by-step tutorial on using Midjourney to create stunning AI artwork from text prompts.',
+    videoId: '5H0L-3Kqk3I',
+    duration: '28:00',
+  },
+  {
+    id: 'midjourney-advanced',
+    title: 'Professional Midjourney Techniques',
+    channel: 'DesignThinking',
+    tools: ['Midjourney'],
+    category: 'Image Generation',
+    description: 'Advanced composition, style, and quality parameters for production-ready Midjourney images.',
+    videoId: 'JKLtOvpT8rU',
+    duration: '31:45',
+  },
+  {
+    id: 'dalle3-tutorial',
+    title: 'DALL-E 3 Complete Tutorial',
+    channel: 'CreativeAI',
+    tools: ['DALL·E 3'],
+    category: 'Image Generation',
+    description: 'Learn to generate high-quality images with DALL-E 3 inside ChatGPT Pro.',
+    videoId: 'Lc5TnpIqL4s',
+    duration: '18:30',
+  },
+  {
+    id: 'github-copilot-basics',
+    title: 'GitHub Copilot Tutorial - Code Faster',
+    channel: 'WebDev',
+    tools: ['GitHub Copilot'],
+    category: 'Coding',
+    description: 'Introduction to GitHub Copilot for VS Code, including setup and practical coding examples.',
+    videoId: 'bphIXmpqPXg',
+    duration: '16:22',
+  },
+  {
+    id: 'github-copilot-advanced',
+    title: 'Advanced GitHub Copilot Workflows',
+    channel: 'DevOpsDaily',
+    tools: ['GitHub Copilot'],
+    category: 'Coding',
+    description: 'Multi-file context, chat features, and enterprise GitHub Copilot setup.',
+    videoId: 'XW1Qo1FVXzQ',
+    duration: '24:18',
+  },
+  {
+    id: 'cursor-editor',
+    title: 'Cursor AI Editor - The Future of Coding',
+    channel: 'CodeWithCursor',
+    tools: ['Cursor'],
+    category: 'Coding',
+    description: 'Deep dive into Cursor editor features, composer mode, and AI-first development workflow.',
+    videoId: 'WxY4J8d0RBE',
+    duration: '26:40',
+  },
+  {
+    id: 'claude-writing',
+    title: 'Claude 3 for Professional Writing',
+    channel: 'WritingAssistant',
+    tools: ['Claude'],
+    category: 'Writing',
+    description: 'Using Claude for long-form writing, editing, and complex analysis tasks.',
+    videoId: 'o1XvBiTBJEw',
+    duration: '19:50',
+  },
+  {
+    id: 'gemini-productivity',
+    title: 'Google Gemini for Productivity',
+    channel: 'GoogleAI',
+    tools: ['Gemini'],
+    category: 'Productivity',
+    description: 'Integration with Google Workspace, search, and collaborative workflows.',
+    videoId: 'i-tLrPuFMYE',
+    duration: '15:45',
+  },
+  {
+    id: 'runway-video-ai',
+    title: 'Runway AI - Create Videos with AI',
+    channel: 'VideoAI',
+    tools: ['Runway'],
+    category: 'Video Generation',
+    description: 'Complete Runway tutorial covering generation, editing, and motion synthesis tools.',
+    videoId: 'gdbFGlBh_oE',
+    duration: '32:10',
+  },
+  {
+    id: 'perplexity-search',
+    title: 'Perplexity AI Search - Find Answers Faster',
+    channel: 'ResearchTools',
+    tools: ['Perplexity'],
+    category: 'Research',
+    description: 'Using Perplexity for researched answers with citations and sources.',
+    videoId: '3XvZ1SfvDh4',
+    duration: '12:30',
+  },
+  {
+    id: 'notion-ai',
+    title: 'Notion AI - Supercharge Your Workspace',
+    channel: 'NotionCentral',
+    tools: ['Notion AI'],
+    category: 'Productivity',
+    description: 'Notion AI features including writing, summarization, and workflow automation.',
+    videoId: 'GeLZHpPkE7o',
+    duration: '21:15',
+  },
+  {
+    id: 'zapier-automation',
+    title: 'Zapier AI Automation - No Code Workflows',
+    channel: 'AutomationHQ',
+    tools: ['Zapier AI'],
+    category: 'Automation',
+    description: 'Build AI-powered automations connecting 6000+ apps without code.',
+    videoId: 'LrJqXKxNY4U',
+    duration: '25:35',
+  },
+  {
+    id: 'grammarly-writing',
+    title: 'Grammarly AI Writing Assistant',
+    channel: 'WritingTips',
+    tools: ['Grammarly'],
+    category: 'Writing',
+    description: 'Setup, style guide, and professional grammar checking with Grammarly.',
+    videoId: '2P9xVb0o8Yc',
+    duration: '11:20',
+  },
+  {
+    id: 'otter-meetings',
+    title: 'Otter.ai - AI Meeting Transcription',
+    channel: 'ProductivityHacks',
+    tools: ['Otter.ai'],
+    category: 'Productivity',
+    description: 'Automatic meeting transcription, summaries, and action item extraction.',
+    videoId: 'H3T8kj7Hd1Y',
+    duration: '14:45',
+  },
+  {
+    id: 'canva-design',
+    title: 'Canva AI - Design Like a Pro',
+    channel: 'DesignBasics',
+    tools: ['Canva AI'],
+    category: 'Image Generation',
+    description: 'Using Canva AI features for quick design mockups and marketing materials.',
+    videoId: 'jhGTe1kE8Zk',
+    duration: '17:55',
+  },
+  {
+    id: 'elevenlabs-voices',
+    title: 'ElevenLabs AI Voice Generator',
+    channel: 'AudioTech',
+    tools: ['ElevenLabs'],
+    category: 'Audio & Voice',
+    description: 'Create natural-sounding AI voices for podcasts, videos, and apps.',
+    videoId: '0CKlvPT-DQY',
+    duration: '13:20',
+  },
+  {
+    id: 'replit-ai-coding',
+    title: 'Replit AI - Code, Collaborate, Deploy',
+    channel: 'ReplitCoding',
+    tools: ['Replit AI'],
+    category: 'Coding',
+    description: 'Complete guide to Replit AI environment for solo and team coding projects.',
+    videoId: 'Hl7p2qJZS0Y',
+    duration: '20:15',
+  },
+  {
+    id: 'leonardo-ai-design',
+    title: 'Leonardo AI - Professional Image Generation',
+    channel: 'DesignStudio',
+    tools: ['Leonardo AI'],
+    category: 'Image Generation',
+    description: 'Advanced prompting and style control for production-quality AI images.',
+    videoId: 'oJRcFKMWGc0',
+    duration: '24:50',
+  },
+  {
+    id: 'hugging-face-models',
+    title: 'Hugging Face for AI Developers',
+    channel: 'AI Research',
+    tools: ['Hugging Face'],
+    category: 'Research & Development',
+    description: 'Access and fine-tune open-source AI models from Hugging Face.',
+    videoId: '83dGYPw5wMs',
+    duration: '28:40',
+  },
+  {
+    id: 'synthesia-videos',
+    title: 'Synthesia - AI Avatar Video Creation',
+    channel: 'VideoProduction',
+    tools: ['Synthesia'],
+    category: 'Video Generation',
+    description: 'Create professional videos with AI avatars without cameras or studios.',
+    videoId: '0jVNvMJGWMU',
+    duration: '19:25',
+  },
+  {
+    id: 'descript-podcast',
+    title: 'Descript - Edit Podcasts Like Text',
+    channel: 'PodcastPro',
+    tools: ['Descript'],
+    category: 'Video & Audio',
+    description: 'Edit podcasts and videos by editing text transcripts with Descript.',
+    videoId: 'mQNXbmH5aEE',
+    duration: '16:10',
+  },
+  {
+    id: 'make-automation',
+    title: 'Make - Automate Everything Without Code',
+    channel: 'AutomationExperts',
+    tools: ['Make'],
+    category: 'Automation',
+    description: 'Build complex workflows connecting apps like Slack, Google Sheets, and CRM.',
+    videoId: 'QBZY_8EY_jI',
+    duration: '27:30',
+  },
+  {
+    id: 'n8n-workflows',
+    title: 'n8n - Open Source Workflow Automation',
+    channel: 'OpenSourceAI',
+    tools: ['n8n'],
+    category: 'Automation',
+    description: 'Self-hosted alternative to Zapier with unlimited customization.',
+    videoId: '-7yrT1-lARg',
+    duration: '22:45',
+  },
+  {
+    id: 'consensus-research',
+    title: 'Consensus - AI-Powered Research Search',
+    channel: 'ResearchGeek',
+    tools: ['Consensus'],
+    category: 'Research',
+    description: 'Find peer-reviewed research papers with AI-synthesized answers.',
+    videoId: 'B-Xe8VYE18A',
+    duration: '12:55',
+  },
+  {
+    id: 'heygen-avatars',
+    title: 'HeyGen - AI Avatar Video Generator',
+    channel: 'VideoMaker',
+    tools: ['HeyGen'],
+    category: 'Video Generation',
+    description: 'Create videos with realistic AI avatars without acting or filming.',
+    videoId: 'Jl5x7nWIRdI',
+    duration: '15:35',
+  },
+  {
+    id: 'pixlr-editing',
+    title: 'Pixlr - AI Photo Editing Made Easy',
+    channel: 'PhotoEditTips',
+    tools: ['Pixlr'],
+    category: 'Image Editing',
+    description: 'Quick AI-powered photo enhancements and professional editing tools.',
+    videoId: '8aSkJhyJbvg',
+    duration: '11:40',
+  },
+  {
+    id: 'ideogram-text-images',
+    title: 'Ideogram - Text-to-Image with Perfect Text',
+    channel: 'DesignAI',
+    tools: ['Ideogram'],
+    category: 'Image Generation',
+    description: 'Generate images with readable text and graphic design elements.',
+    videoId: 'pzH4Gw3bQME',
+    duration: '14:20',
+  },
+  {
+    id: 'upscayl-upscaling',
+    title: 'Upscayl - Free AI Image Upscaler',
+    channel: 'ImageEnhance',
+    tools: ['Upscayl'],
+    category: 'Image Enhancement',
+    description: 'Upscale and enhance low-resolution images with open-source AI.',
+    videoId: 'E7RqWjR0cC0',
+    duration: '10:25',
+  },
 ]
 
 const FAQS = [
@@ -182,13 +1376,6 @@ const FAQS = [
     q: 'Which AI tool is best for making images?',
     a: 'Midjourney produces the highest quality artistic images. DALL·E 3 is easiest for beginners since it is built into ChatGPT. Stable Diffusion is best for free local use.',
   },
-]
-
-const SORT_OPTIONS = [
-  { value: 'featured', label: 'Featured' },
-  { value: 'rating', label: 'Highest rated' },
-  { value: 'clicks', label: 'Most clicked' },
-  { value: 'name', label: 'A to Z' },
 ]
 
 const PROGRAMMATIC_PROFESSIONS = [
@@ -215,6 +1402,66 @@ const PROGRAMMATIC_PROFESSIONS = [
     title: 'Best AI Tools for Sales Teams',
     intro: 'Use AI to write outreach, personalize follow-ups, and automate CRM support work at scale.',
     toolNames: ['ChatGPT', 'Claude', 'Zapier AI', 'Make (Integromat)'],
+  },
+  {
+    slug: 'marketers',
+    title: 'Best AI Tools for Marketers',
+    intro: 'Use AI for campaign ideation, copywriting, and analytics-ready reporting workflows.',
+    toolNames: ['ChatGPT', 'Claude', 'Notion AI', 'Perplexity'],
+  },
+  {
+    slug: 'freelancers',
+    title: 'Best AI Tools for Freelancers',
+    intro: 'Speed up client delivery with AI tools for writing, research, and admin automation.',
+    toolNames: ['ChatGPT', 'Gemini', 'Notion AI', 'Zapier AI'],
+  },
+  {
+    slug: 'customer-support-teams',
+    title: 'Best AI Tools for Customer Support Teams',
+    intro: 'Handle repetitive responses, summarize tickets, and improve support consistency with AI.',
+    toolNames: ['Claude', 'ChatGPT', 'Notion AI', 'Zapier AI'],
+  },
+  {
+    slug: 'hr-managers',
+    title: 'Best AI Tools for HR Managers',
+    intro: 'Draft policies, onboarding docs, and hiring communication faster with AI-assisted workflows.',
+    toolNames: ['ChatGPT', 'Gemini', 'Notion AI', 'Make (Integromat)'],
+  },
+  {
+    slug: 'project-managers',
+    title: 'Best AI Tools for Project Managers',
+    intro: 'Use AI for standup summaries, project updates, and execution planning across teams.',
+    toolNames: ['Claude', 'ChatGPT', 'Notion AI', 'Perplexity'],
+  },
+  {
+    slug: 'founders',
+    title: 'Best AI Tools for Founders',
+    intro: 'Move faster on strategy, hiring, and content execution with practical AI stacks.',
+    toolNames: ['ChatGPT', 'Claude', 'Perplexity', 'Zapier AI'],
+  },
+  {
+    slug: 'ecommerce-sellers',
+    title: 'Best AI Tools for Ecommerce Sellers',
+    intro: 'Create product copy, ad creatives, and automated operations for ecommerce growth.',
+    toolNames: ['ChatGPT', 'Midjourney', 'DALL·E 3', 'Zapier AI'],
+  },
+  {
+    slug: 'real-estate-agents',
+    title: 'Best AI Tools for Real Estate Agents',
+    intro: 'Generate listing copy, outreach messaging, and client communication faster with AI.',
+    toolNames: ['ChatGPT', 'Claude', 'Canva AI', 'Notion AI'],
+  },
+  {
+    slug: 'consultants',
+    title: 'Best AI Tools for Consultants',
+    intro: 'Use AI for proposal drafting, research synthesis, and client-ready deliverables.',
+    toolNames: ['Claude', 'ChatGPT', 'Perplexity', 'Notion AI'],
+  },
+  {
+    slug: 'operations-managers',
+    title: 'Best AI Tools for Operations Managers',
+    intro: 'Automate SOP tasks, reporting, and process improvements with AI-driven workflows.',
+    toolNames: ['ChatGPT', 'Zapier AI', 'Make (Integromat)', 'Notion AI'],
   },
 ]
 
@@ -417,167 +1664,18 @@ const USE_CASE_PAGES = [
   })),
 ]
 
-const COMPARISON_PAGES = [
-  {
-    slug: 'chatgpt-vs-claude',
-    title: 'ChatGPT vs Claude',
-    description: 'Compare ChatGPT and Claude for writing, coding, long-context analysis, and business workflows.',
-    tools: ['ChatGPT', 'Claude'],
-    rows: [
-      { feature: 'Free Plan', values: ['Yes', 'Yes'] },
-      { feature: 'Coding Quality', values: ['Excellent', 'Excellent'] },
-      { feature: 'Context Length', values: ['Medium', 'Very High'] },
-      { feature: 'Best For', values: ['General workflows', 'Long documents and analysis'] },
-    ],
-  },
-  {
-    slug: 'midjourney-vs-dall-e-3',
-    title: 'Midjourney vs DALL·E 3',
-    description: 'See which image model is better for quality, prompt simplicity, and production-ready visuals.',
-    tools: ['Midjourney', 'DALL·E 3'],
-    rows: [
-      { feature: 'Free Plan', values: ['No', 'Via ChatGPT plans'] },
-      { feature: 'Image Style Quality', values: ['Outstanding', 'Very Good'] },
-      { feature: 'Ease of Use', values: ['Intermediate', 'Beginner-friendly'] },
-      { feature: 'Best For', values: ['Creative direction', 'Fast image drafting'] },
-    ],
-  },
-  {
-    slug: 'cursor-vs-github-copilot',
-    title: 'Cursor vs GitHub Copilot',
-    description: 'Compare modern AI coding assistants for speed, codebase awareness, and day-to-day development.',
-    tools: ['Cursor', 'GitHub Copilot'],
-    rows: [
-      { feature: 'Free Plan', values: ['Yes', 'Trial'] },
-      { feature: 'IDE Integration', values: ['Editor-first', 'Broad IDE ecosystem'] },
-      { feature: 'Codebase Chat', values: ['Strong', 'Improving'] },
-      { feature: 'Best For', values: ['AI-native coding flow', 'Inline coding assistance'] },
-    ],
-  },
-]
+
 
 const LOCAL_FAVORITES_KEY = 'aitoolscenter-favorites'
 const LOCAL_VISITS_KEY = 'aitoolscenter-local-visits'
 const LOCAL_RATINGS_KEY = 'aitoolscenter-user-ratings'
 const LOCAL_TOOL_CLICKS_KEY = 'aitoolscenter-tool-clicks'
-const LOCAL_AMAZON_CLICKS_KEY = 'aitoolscenter-amazon-clicks'
 const LOCAL_HELPFUL_VOTES_KEY = 'aitoolscenter-helpful-votes'
 const LOCAL_WEEKLY_TREND_SNAPSHOTS_KEY = 'aitoolscenter-weekly-trend-snapshots'
-const LOCAL_EXIT_INTENT_DISMISSED_KEY = 'aitoolscenter-exit-intent-dismissed'
 const SESSION_VISIT_KEY = 'aitoolscenter-session-visited'
 const LOCAL_GLOBAL_VISIT_DATE_KEY = 'aitoolscenter-global-visit-date'
 const PAGE_VIEWS_API = '/api/page-views'
 const NEWSLETTER_ENDPOINT = '/api/newsletter'
-
-const AI_NEWS = aiNews
-
-const AMAZON_ROTATION_SIZE = 3
-
-const AMAZON_PRODUCT_POOL = [
-  {
-    name: 'Echo Dot (5th Gen)',
-    category: 'Productivity',
-    priceHint: 'Smart speaker',
-    tagline: 'Voice assistant for reminders, timers, smart-home controls, and quick daily tasks.',
-    searchQuery: 'Echo Dot 5th Gen',
-  },
-  {
-    name: 'Kindle Paperwhite (16 GB)',
-    category: 'Research',
-    priceHint: 'E-reader',
-    tagline: 'Distraction-free reading for founders and creators who read long-form books and docs.',
-    searchQuery: 'Kindle Paperwhite 16GB',
-  },
-  {
-    name: 'Logitech MX Master 3S',
-    category: 'Coding',
-    priceHint: 'Productivity mouse',
-    tagline: 'High-precision mouse with app-specific controls for coding, design, and editing workflows.',
-    searchQuery: 'Logitech MX Master 3S',
-  },
-  {
-    name: 'Dell 27-inch QHD Monitor',
-    category: 'Productivity',
-    priceHint: 'Monitor',
-    tagline: 'Sharp text and larger workspace for prompting, dashboards, and multitasking.',
-    searchQuery: 'Dell 27 inch QHD monitor',
-  },
-  {
-    name: 'Blue Yeti USB Microphone',
-    category: 'Research',
-    priceHint: 'Microphone',
-    tagline: 'Clean voice capture for AI voice notes, podcasts, and video explainers.',
-    searchQuery: 'Blue Yeti USB microphone',
-  },
-  {
-    name: 'Sony WH-1000XM5 Headphones',
-    category: 'Productivity',
-    priceHint: 'Noise-canceling',
-    tagline: 'Focused deep-work sessions with excellent noise cancellation and call quality.',
-    searchQuery: 'Sony WH-1000XM5',
-  },
-  {
-    name: 'Samsung T7 Portable SSD',
-    category: 'Coding',
-    priceHint: 'Storage',
-    tagline: 'Fast external storage for model assets, videos, and project backups.',
-    searchQuery: 'Samsung T7 portable SSD',
-  },
-  {
-    name: 'Apple Magic Keyboard',
-    category: 'Coding',
-    priceHint: 'Keyboard',
-    tagline: 'Reliable low-profile keyboard for long writing and coding sessions.',
-    searchQuery: 'Apple Magic Keyboard',
-  },
-  {
-    name: 'BenQ ScreenBar Monitor Lamp',
-    category: 'Productivity',
-    priceHint: 'Desk light',
-    tagline: 'Desk lighting that reduces glare and eye strain during late-night work.',
-    searchQuery: 'BenQ ScreenBar monitor light',
-  },
-  {
-    name: 'Anker 100W USB-C Charger',
-    category: 'Automation',
-    priceHint: 'Power adapter',
-    tagline: 'Single compact charger for laptop, phone, and creator accessories.',
-    searchQuery: 'Anker 100W USB C charger',
-  },
-  {
-    name: 'Elgato Stream Deck MK.2',
-    category: 'Automation',
-    priceHint: 'Macro pad',
-    tagline: 'Trigger repetitive production and workflow actions with one tap.',
-    searchQuery: 'Elgato Stream Deck MK.2',
-  },
-  {
-    name: 'TP-Link Archer AX73 Router',
-    category: 'Research',
-    priceHint: 'Wi-Fi router',
-    tagline: 'Stable high-speed internet for cloud AI tools, meetings, and uploads.',
-    searchQuery: 'TP Link Archer AX73',
-  },
-]
-
-const buildAmazonSearchLink = (query) => `https://www.amazon.in/s?k=${encodeURIComponent(query)}`
-
-const getDailyAmazonRecommendations = (pool, size) => {
-  const dayKey = new Date().toISOString().slice(0, 10)
-  const seedBase = Array.from(dayKey).reduce((acc, char) => acc + char.charCodeAt(0), 0)
-
-  const ranked = pool
-    .map((item, index) => {
-      const score = (seedBase * (index + 11) + index * 97) % 997
-      return { item, score }
-    })
-    .sort((left, right) => left.score - right.score)
-
-  return ranked.slice(0, size).map(({ item }) => ({
-    ...item,
-    affiliateLink: buildAmazonSearchLink(item.searchQuery),
-  }))
-}
 
 const LEGAL_PAGES = {
   '/about': {
@@ -679,13 +1777,9 @@ const LEGAL_PAGES = {
   },
 }
 
-const SUBMIT_TOOL_ENDPOINT = '/api/submit-tool'
 const TOOL_CATEGORIES = CATEGORIES.filter((category) => category !== 'All')
-const PRICING_OPTIONS = ['Free', 'Freemium', 'Paid', 'Enterprise']
-const ADSENSE_CLIENT_ID = import.meta.env.VITE_ADSENSE_CLIENT_ID || 'ca-pub-2770089511325323'
 const AMAZON_ASSOCIATE_TAG = (import.meta.env.VITE_AMAZON_ASSOCIATE_TAG || 'aitoolscenter-21').trim()
 const META_PIXEL_ID = (import.meta.env.VITE_META_PIXEL_ID || '').trim()
-const FACEBOOK_AD_PLACEHOLDERS_ENABLED = String(import.meta.env.VITE_ENABLE_FACEBOOK_AD_PLACEHOLDERS || 'true').toLowerCase() === 'true'
 
 // Affiliate tracking links — set these in Vercel environment variables after signing up.
 const AFFILIATE_LINKS = {
@@ -698,19 +1792,6 @@ const AFFILIATE_LINKS = {
   'Zapier AI':       (import.meta.env.VITE_AFFILIATE_ZAPIER        || '').trim() || 'https://sponsored-content.zapier.app/sign-up',
   'GitHub Copilot':  (import.meta.env.VITE_AFFILIATE_COPILOT       || '').trim() || 'https://github.com/features/copilot',
 }
-
-const AFFILIATE_PROGRAMS = [
-  { name: 'Jasper AI',        commission: '25% recurring',   signup: 'https://www.jasper.ai/partners/solutions',        category: 'Writing',      note: 'Apply via FirstPromoter' },
-  { name: 'Writesonic',       commission: '30% recurring',   signup: 'https://affiliates.writesonic.com/signup/24177',  category: 'Writing',      note: 'Instant signup' },
-  { name: 'Notion',           commission: '$50 per sign-up + 20% yr1', signup: 'https://www.notion.com/affiliates',    category: 'Productivity', note: 'Via PartnerStack' },
-  { name: 'Runway',           commission: '20% recurring',   signup: 'https://runwayml.com',                            category: 'Video',        note: 'Contact via site' },
-  { name: 'Zapier',           commission: 'Creator program', signup: 'https://sponsored-content.zapier.app/sign-up',    category: 'Automation',   note: 'Sponsored content' },
-  { name: 'Make',             commission: '20% recurring',   signup: 'https://www.make.com/en/partners',                category: 'Automation',   note: 'Apply as partner' },
-  { name: 'GitHub Copilot',  commission: 'Partner benefits',signup: 'https://partner.github.com',                     category: 'Coding',       note: 'GitHub Partner Network' },
-  { name: 'NeuralText',       commission: '30% recurring',   signup: 'https://neuraltext.com/affiliate',                category: 'Writing',      note: 'Instant signup' },
-  { name: 'Murf AI',          commission: '20% recurring',   signup: 'https://murf.ai/affiliate-program',               category: 'Video',        note: 'Voice AI tool' },
-  { name: 'Descript',         commission: '15% recurring',   signup: 'https://www.descript.com/affiliate',              category: 'Video',        note: 'Audio & video editing' },
-]
 
 const CATEGORY_SEO = {
   Writing: {
@@ -756,6 +1837,100 @@ const TOOL_DETAIL_WRITEUPS = {
   Runway: 'Runway is useful for teams producing short-form videos, ad concepts, and creative experiments under tight timelines. It combines generation and editing features that can shorten production cycles from days to hours. Its strongest use case is rapid visual prototyping for marketing and creative direction before full production investment.',
 }
 
+const REVIEW_EDITOR_NAME = 'AIToolsCenter Editorial Team'
+const REVIEW_LAST_UPDATED_ISO = '2026-05-28'
+
+const TOOL_EDITORIAL_NOTES = {
+  ChatGPT: {
+    bestFor: 'general-purpose drafting, brainstorming, and cross-functional assistant tasks',
+    watchouts: 'citation quality can vary, so claims should be validated before publishing',
+    verdict: 'Best default option for mixed workflows when speed and flexibility both matter.',
+  },
+  Claude: {
+    bestFor: 'long-context reasoning, policy analysis, and high-volume document rewriting',
+    watchouts: 'final outputs still need factual checks on technical or legal claims',
+    verdict: 'Strong fit for document-heavy teams that need coherent long-form outputs.',
+  },
+  Gemini: {
+    bestFor: 'Google Workspace-connected research, summaries, and productivity tasks',
+    watchouts: 'quality can vary by prompt specificity and account capabilities',
+    verdict: 'Most useful for users deeply integrated into Google tools and workflows.',
+  },
+  Midjourney: {
+    bestFor: 'creative concepting, style exploration, and campaign visual direction',
+    watchouts: 'commercial rights and brand consistency should be reviewed per project',
+    verdict: 'Excellent for high-impact creative iteration when visual quality is the goal.',
+  },
+  'DALL·E 3': {
+    bestFor: 'quick visual ideation directly from plain-language prompts',
+    watchouts: 'design teams may still need post-editing for production-grade assets',
+    verdict: 'Great entry point for teams that need image generation without complex setup.',
+  },
+  'Stable Diffusion': {
+    bestFor: 'advanced teams needing control, customization, and private deployments',
+    watchouts: 'setup and quality tuning can require technical overhead',
+    verdict: 'Best for power users who value flexibility over convenience.',
+  },
+  'GitHub Copilot': {
+    bestFor: 'boilerplate generation, test scaffolding, and in-editor coding acceleration',
+    watchouts: 'generated code must pass normal review, linting, and security checks',
+    verdict: 'High productivity gain when paired with disciplined engineering quality gates.',
+  },
+  Cursor: {
+    bestFor: 'codebase-aware implementation, refactors, and repo-scale navigation',
+    watchouts: 'large automated edits require careful diff review before merge',
+    verdict: 'Strong for developers who want deeper AI assistance across whole repositories.',
+  },
+  Tabnine: {
+    bestFor: 'privacy-oriented completion workflows across multiple IDE environments',
+    watchouts: 'suggestion quality depends on language context and project setup',
+    verdict: 'Useful for teams balancing AI completion with tighter governance requirements.',
+  },
+  Runway: {
+    bestFor: 'rapid short-form video ideation and creative editing experiments',
+    watchouts: 'production outputs may still need manual polish and brand review',
+    verdict: 'Effective for creative teams optimizing turnaround time for concept videos.',
+  },
+  Sora: {
+    bestFor: 'cinematic-style text-to-video exploration and concept validation',
+    watchouts: 'teams should validate visual consistency and content suitability before release',
+    verdict: 'Promising option for early-stage cinematic ideation and storyboarding.',
+  },
+  'Notion AI': {
+    bestFor: 'workspace-native notes, summaries, and documentation drafting',
+    watchouts: 'complex workflows may need external automation or model support',
+    verdict: 'Practical for knowledge teams that already operate inside Notion.',
+  },
+  'Zapier AI': {
+    bestFor: 'no-code workflow automation and cross-app execution at scale',
+    watchouts: 'automation reliability depends on source app APIs and trigger design',
+    verdict: 'Solid choice for operational automation without custom engineering.',
+  },
+  'Make (Integromat)': {
+    bestFor: 'visual automation with advanced branching and scenario logic',
+    watchouts: 'complex scenarios require maintenance discipline and monitoring',
+    verdict: 'Great for teams needing flexible no-code orchestration flows.',
+  },
+  Perplexity: {
+    bestFor: 'fast research with source-cited responses and discovery workflows',
+    watchouts: 'source quality still needs manual verification for critical decisions',
+    verdict: 'Very useful for research-first workflows where citation visibility matters.',
+  },
+}
+
+const getToolEditorialNotes = (tool) => {
+  const mapped = TOOL_EDITORIAL_NOTES[tool.name]
+  if (mapped) {
+    return mapped
+  }
+
+  return {
+    bestFor: `${tool.category.toLowerCase()} workflows where first-draft speed is important`,
+    watchouts: 'outputs should be reviewed for factual accuracy, quality, and fit',
+    verdict: `A practical option for teams evaluating ${tool.category.toLowerCase()} assistants.`,
+  }
+}
+
 const CONSENT_STORAGE_KEY = 'aitoolscenter-consent-v1'
 
 const CONSENT_DEFAULTS = {
@@ -783,6 +1958,19 @@ const isAdConsentGranted = (consentSettings = {}) => (
   && consentSettings.ad_user_data === 'granted'
   && consentSettings.ad_personalization === 'granted'
 )
+
+const syncAdDisplayState = (consentSettings = CONSENT_DEFAULTS) => {
+  if (typeof document === 'undefined') {
+    return
+  }
+
+  const consentGranted = isAdConsentGranted(consentSettings)
+  const adsReady = ADS_APPROVED && consentGranted
+
+  document.documentElement.setAttribute('data-ads-approved', ADS_APPROVED ? 'true' : 'false')
+  document.documentElement.setAttribute('data-ad-consent', consentGranted ? 'granted' : 'denied')
+  document.documentElement.setAttribute('data-ads-ready', adsReady ? 'true' : 'false')
+}
 
 const ensureMetaPixelInitialized = (consentSettings = {}) => {
   if (typeof window === 'undefined' || !META_PIXEL_ID || !isAdConsentGranted(consentSettings)) {
@@ -862,6 +2050,7 @@ const applyConsentUpdate = (consentSettings) => {
   }
 
   ensureMetaPixelInitialized(payload)
+  syncAdDisplayState(payload)
 }
 
 const slugifyToolName = (value) => value
@@ -888,19 +2077,7 @@ const normalizeFreePlanLabel = (badge) => (
   badge.toLowerCase().includes('free') ? 'Yes' : 'No'
 )
 
-const buildAutoComparison = (toolA, toolB) => ({
-  slug: `${slugifyToolName(toolA.name)}-vs-${slugifyToolName(toolB.name)}`,
-  title: `${toolA.name} vs ${toolB.name}`,
-  description: `Compare ${toolA.name} and ${toolB.name} across pricing, ratings, fit, and primary use cases.`,
-  tools: [toolA.name, toolB.name],
-  rows: [
-    { feature: 'Free Plan', values: [normalizeFreePlanLabel(toolA.badge), normalizeFreePlanLabel(toolB.badge)] },
-    { feature: 'Category', values: [toolA.category, toolB.category] },
-    { feature: 'Community Rating', values: [`${toolA.rating}/5`, `${toolB.rating}/5`] },
-    { feature: 'Best For', values: [toolA.tags[0] || toolA.category, toolB.tags[0] || toolB.category] },
-  ],
-  autoGenerated: true,
-})
+
 
 const AMAZON_HOST_REGEX = /(^|\.)amazon\.[a-z.]+$/i
 
@@ -949,36 +2126,39 @@ const getToolBySlug = (slug) => TOOLS.find((tool) => slugifyToolName(tool.name) 
 const getCategoryBySlug = (slug) => TOOL_CATEGORIES.find((category) => slugifyCategoryName(category) === slug) || null
 const getLegalPage = (pathname) => LEGAL_PAGES[pathname] || null
 const getUseCaseBySlug = (slug) => USE_CASE_PAGES.find((page) => page.slug === slug) || null
-const getComparisonBySlug = (slug) => {
-  const editorialComparison = COMPARISON_PAGES.find((page) => page.slug === slug)
-  if (editorialComparison) {
-    return editorialComparison
-  }
 
-  for (let index = 0; index < TOOLS.length; index += 1) {
-    for (let nestedIndex = index + 1; nestedIndex < TOOLS.length; nestedIndex += 1) {
-      const left = TOOLS[index]
-      const right = TOOLS[nestedIndex]
-      const forwardSlug = `${slugifyToolName(left.name)}-vs-${slugifyToolName(right.name)}`
-      const reverseSlug = `${slugifyToolName(right.name)}-vs-${slugifyToolName(left.name)}`
-      if (slug === forwardSlug || slug === reverseSlug) {
-        return buildAutoComparison(left, right)
-      }
-    }
-  }
-
-  return null
-}
 const getAlternativeToolBySlug = (slug) => TOOLS.find((tool) => slugifyToolName(tool.name) === slug) || null
 
 const getToolSlugFromPath = (pathname) => (pathname.startsWith('/tools/') ? pathname.replace('/tools/', '') : null)
 const getCategorySlugFromPath = (pathname) => (pathname.startsWith('/categories/') ? pathname.replace('/categories/', '') : null)
 const getUseCaseSlugFromPath = (pathname) => (pathname.startsWith('/best-ai-tools-for/') ? pathname.replace('/best-ai-tools-for/', '') : null)
-const getComparisonSlugFromPath = (pathname) => (pathname.startsWith('/compare/') ? pathname.replace('/compare/', '') : null)
+
 const getAlternativeSlugFromPath = (pathname) => (pathname.startsWith('/alternatives-to-') ? pathname.replace('/alternatives-to-', '') : null)
 
-const isCompareHubPath = (pathname) => pathname === '/compare-hub'
+
 const isWeeklyTrendingPath = (pathname) => pathname === '/trending-ai-tools-this-week'
+const isNewsPath = (pathname) => pathname === '/news'
+const isTutorialsPath = (pathname) => pathname === '/tutorials'
+const isContactPath = (pathname) => pathname === '/contact'
+const NEWS_PAGE_SIZE = 9
+
+const getSafeNewsPageNumber = (search) => {
+  const value = Number(new URLSearchParams(search || '').get('page') || '1')
+  if (!Number.isFinite(value)) {
+    return 1
+  }
+
+  return Math.max(1, Math.floor(value))
+}
+
+const getIsoDateOrUndefined = (input) => {
+  const parsed = Date.parse(input)
+  if (Number.isNaN(parsed)) {
+    return undefined
+  }
+
+  return new Date(parsed).toISOString()
+}
 
 const upsertMeta = ({ attr, key, content }) => {
   let tag = document.head.querySelector(`meta[${attr}="${key}"]`)
@@ -1095,12 +2275,15 @@ function InteractiveStars({ toolName, currentRating, onRate }) {
   )
 }
 
-function ToolCard({ tool, isFavorite, isCompared, userRating, clickCount, helpfulVote, onToggleFavorite, onToggleCompare, onTagClick, onRate, onVisit, onHelpfulVote }) {
+
+
+function ToolCard({ tool, rank, isFavorite, userRating, helpfulVote, onToggleFavorite, onTagClick, onRate, onVisit, onHelpfulVote }) {
   const tiltHandlers = useInteractiveTilt({ tilt: 7, shift: 8 })
   const [reported, setReported] = useState(false)
   const similarTools = TOOLS
     .filter((t) => t.category === tool.category && t.name !== tool.name)
     .slice(0, 2)
+  const relatedUseCase = OUTCOME_BLOCKS.find((entry) => entry.tools.includes(tool.name))
 
   return (
     <article
@@ -1110,29 +2293,25 @@ function ToolCard({ tool, isFavorite, isCompared, userRating, clickCount, helpfu
       onMouseLeave={tiltHandlers.onMouseLeave}
     >
       <div className="tool-card-top">
-        <span className="tool-badge">{tool.badge}</span>
-        {isAffiliateTool(tool) ? <span className="tool-affiliate-pill">Affiliate</span> : null}
-        <a className="tool-category" href={`/categories/${slugifyCategoryName(tool.category)}`}>{CATEGORY_ICONS[tool.category] || ''} {tool.category}</a>
+        <span className="tool-rank">{rank}</span>
+        <span className="tool-featured-label">FEATURED</span>
+        <span className="tool-ribbon">TOP</span>
       </div>
-      <div className="tool-card-header">
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.7rem' }}>
-          <div className="tool-icon-initial" aria-hidden="true">{tool.name.charAt(0)}</div>
-          <div>
-          <h3><a className="tool-name-link" href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a></h3>
-          <Stars count={tool.rating} />
-          <span className="community-label"> community</span>
-          </div>
+      <div className="tool-card-hero">
+        <div className="tool-card-icon" aria-hidden="true">
+          {tool.name.charAt(0)}
         </div>
-        <button
-          type="button"
-          className={`favorite-btn${isFavorite ? ' active' : ''}`}
-          aria-label={isFavorite ? `Remove ${tool.name} from favorites` : `Save ${tool.name} to favorites`}
-          onClick={() => onToggleFavorite(tool.name)}
-        >
-          {isFavorite ? '★' : '☆'}
-        </button>
+        <div className="tool-card-title-block">
+          <h3><a className="tool-name-link" href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a></h3>
+          <div className="tool-card-accent" />
+          <p>{tool.tagline}</p>
+        </div>
       </div>
-      <p>{tool.tagline}</p>
+      <div className="tool-meta-row tool-meta-row-center">
+        <a className="tool-category-chip" href={`/categories/${slugifyCategoryName(tool.category)}`}>{tool.category}</a>
+        <span className="tool-rating"><Stars count={tool.rating} /></span>
+        <span className="tool-rating-count">{tool.rating}/5</span>
+      </div>
       <div className="tool-tags">
         {tool.tags.map((tag) => (
           <button
@@ -1146,7 +2325,10 @@ function ToolCard({ tool, isFavorite, isCompared, userRating, clickCount, helpfu
           </button>
         ))}
       </div>
-      <InteractiveStars toolName={tool.name} currentRating={userRating || 0} onRate={onRate} />
+      <div className="internal-link-widget">
+        <a href={`/categories/${slugifyCategoryName(tool.category)}`}>Category guide</a>
+        {relatedUseCase ? <a href={`/best-ai-tools-for/${relatedUseCase.slug}`}>Use-case page</a> : null}
+      </div>
       {similarTools.length > 0 && (
         <p className="similar-tools">
           Also try:{' '}
@@ -1166,22 +2348,10 @@ function ToolCard({ tool, isFavorite, isCompared, userRating, clickCount, helpfu
           rel={getToolAnchorRel(tool)}
           onClick={() => onVisit(tool.name)}
         >
-          Visit Tool →
+          Visit
         </a>
-        <button
-          type="button"
-          className={`btn btn-secondary compare-btn${isCompared ? ' active' : ''}`}
-          onClick={() => onToggleCompare(tool.name)}
-        >
-          {isCompared ? 'Added to Compare' : 'Compare'}
-        </button>
       </div>
-      {isAffiliateTool(tool) ? (
-        <p className="affiliate-disclosure">Affiliate disclosure: We may earn a commission from eligible purchases, at no extra cost to you.</p>
-      ) : null}
-      <span className="tool-click-count">
-        {clickCount} visitor click{clickCount === 1 ? '' : 's'}
-      </span>
+      <InteractiveStars toolName={tool.name} currentRating={userRating || 0} onRate={onRate} />
       <div className="helpful-row">
         <span>Was this helpful?</span>
         <button
@@ -1213,70 +2383,6 @@ function ToolCard({ tool, isFavorite, isCompared, userRating, clickCount, helpfu
   )
 }
 
-function ComparisonCard({ tool, onRemove }) {
-  return (
-    <article className="comparison-card">
-      <div className="comparison-card-top">
-        <div>
-          <h3><a className="tool-name-link" href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a></h3>
-          <p>{tool.tagline}</p>
-        </div>
-        <button type="button" className="comparison-remove" onClick={() => onRemove(tool.name)}>
-          Remove
-        </button>
-      </div>
-      <div className="comparison-meta">
-        <span>{tool.category}</span>
-        <span>{tool.badge}</span>
-        <span><Stars count={tool.rating} /></span>
-      </div>
-      <div className="tool-tags">
-        {tool.tags.map((tag) => (
-          <span key={tag} className="tag">{tag}</span>
-        ))}
-      </div>
-      <a className="comparison-link" href={getToolOutboundUrl(tool)} target="_blank" rel={getToolAnchorRel(tool)}>
-        Open {tool.name}
-      </a>
-      {isAffiliateTool(tool) ? (
-        <p className="affiliate-disclosure">Affiliate disclosure: We may earn a commission from eligible purchases, at no extra cost to you.</p>
-      ) : null}
-    </article>
-  )
-}
-
-function AmazonPickCard({ item, clickCount, onVisit }) {
-  return (
-    <article className="amazon-pick-card">
-      <div className="tool-card-top">
-        <span className="tool-badge">{item.priceHint}</span>
-        <span className="tool-affiliate-pill">Amazon Pick</span>
-      </div>
-      <h3>{item.name}</h3>
-      <p>{item.tagline}</p>
-      <div className="tool-tags">
-        <span className="tag">{item.category}</span>
-        <span className="tag">Amazon.in</span>
-      </div>
-      <div className="tool-actions-row">
-        <a
-          className="btn btn-primary tool-btn"
-          href={getToolOutboundUrl(item)}
-          target="_blank"
-          rel={getToolAnchorRel(item)}
-          onClick={() => onVisit(item.name)}
-        >
-          View on Amazon
-        </a>
-      </div>
-      <span className="tool-click-count">
-        {clickCount} Amazon click{clickCount === 1 ? '' : 's'}
-      </span>
-      <p className="affiliate-disclosure">Affiliate disclosure: As an Amazon Associate, we may earn from qualifying purchases.</p>
-    </article>
-  )
-}
-
 function FaqItem({ q, a, className = '', style = undefined }) {
   const [open, setOpen] = useState(false)
 
@@ -1291,103 +2397,36 @@ function FaqItem({ q, a, className = '', style = undefined }) {
   )
 }
 
-function AdUnit({ slot, className = '' }) {
-  useEffect(() => {
-    if (!ADSENSE_CLIENT_ID || import.meta.env.DEV) {
-      return
-    }
-
-    const timeout = setTimeout(() => {
-      try {
-        ;(window.adsbygoogle = window.adsbygoogle || []).push({})
-      } catch {
-        // Ignore ad-render errors so page UX is never blocked.
-      }
-    }, 300)
-
-    return () => clearTimeout(timeout)
-  }, [])
-
-  if (!ADSENSE_CLIENT_ID || import.meta.env.DEV) {
-    return null
-  }
-
-  return (
-    <aside className={`ad-unit ${className}`} aria-label="Advertisement">
-      <ins
-        className="adsbygoogle"
-        style={{ display: 'block' }}
-        data-ad-client={ADSENSE_CLIENT_ID}
-        data-ad-slot={slot}
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      />
-    </aside>
-  )
-}
-
-function FacebookAdPlaceholder({ placement, className = '' }) {
-  if (!FACEBOOK_AD_PLACEHOLDERS_ENABLED || true) {
-    return null
-  }
-
-  return (
-    <aside className={`ad-unit ad-unit-facebook ${className}`.trim()} aria-label="Facebook ad placeholder">
-      <div className="ad-unit-placeholder ad-unit-placeholder-facebook">
-        <strong>Facebook Ads Placement</strong>
-        <span>{placement}</span>
-        <small>Connect your Meta campaign or partner embed to this slot.</small>
-      </div>
-    </aside>
-  )
-}
-
-function RailPanel({ eyebrow, title, description, links = [], chips = [] }) {
-  return (
-    <article className="rail-panel">
-      <span className="rail-eyebrow">{eyebrow}</span>
-      <h3>{title}</h3>
-      <p>{description}</p>
-      {chips.length > 0 ? (
-        <div className="rail-chip-row">
-          {chips.map((chip) => (
-            <span key={chip} className="rail-chip">{chip}</span>
-          ))}
-        </div>
-      ) : null}
-      {links.length > 0 ? (
-        <div className="rail-link-list">
-          {links.map((link) => (
-            <a key={link.href} href={link.href} className="rail-link-card">
-              <strong>{link.label}</strong>
-              <span>{link.meta}</span>
-            </a>
-          ))}
-        </div>
-      ) : null}
-    </article>
-  )
-}
-
-function PageRails({ left, right }) {
-  return (
-    <>
-      <aside className="page-rail page-rail-left" aria-label={left.eyebrow}>
-        <RailPanel {...left} />
-      </aside>
-      <aside className="page-rail page-rail-right" aria-label={right.eyebrow}>
-        <RailPanel {...right} />
-      </aside>
-    </>
-  )
-}
 
 const LOCAL_THEME_KEY = 'aitoolscenter-theme'
 
 function SiteNav({ theme: themeProp, onToggleTheme: toggleProp }) {
-  const [localTheme, setLocalTheme] = useState(
-    () => document.documentElement.getAttribute('data-theme') || localStorage.getItem(LOCAL_THEME_KEY) || 'dark'
-  )
+  const [localTheme, setLocalTheme] = useState('dark')
+
+  useEffect(() => {
+    // Initialize theme on mount
+    const stored = localStorage.getItem(LOCAL_THEME_KEY) || 'dark'
+    const htmlTheme = document.documentElement.getAttribute('data-theme') || stored
+    
+    setLocalTheme(htmlTheme)
+    document.documentElement.setAttribute('data-theme', htmlTheme)
+    localStorage.setItem(LOCAL_THEME_KEY, htmlTheme)
+  }, [])
+
+  useEffect(() => {
+    const onScroll = () => {
+      const scrolled = document.querySelector('.nav')
+      if (window.scrollY > 14) {
+        scrolled?.classList.add('nav-scrolled')
+      } else {
+        scrolled?.classList.remove('nav-scrolled')
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   const theme = themeProp !== undefined ? themeProp : localTheme
   const onToggleTheme = toggleProp || (() => {
     const next = localTheme === 'dark' ? 'light' : 'dark'
@@ -1395,19 +2434,16 @@ function SiteNav({ theme: themeProp, onToggleTheme: toggleProp }) {
     document.documentElement.setAttribute('data-theme', next)
     localStorage.setItem(LOCAL_THEME_KEY, next)
   })
+  
   return (
     <nav className="nav">
-      <a href="/" className="nav-logo">⚡ AIToolsCenter.in</a>
+      <a href="/" className="nav-logo">AIToolsCenter.in</a>
       <div className="nav-links">
         <a href="/">Home</a>
-        <a href="/#use-cases">Use Cases</a>
         <a href="/#tools">Tools</a>
-        <a href="/#trending">Trending</a>
-        <a href="/trending-ai-tools-this-week">Weekly Trends</a>
-        <a href="/#amazon-picks">Amazon Picks</a>
-        <a href="/compare-hub">Compare Hub</a>
-        <a href="/#finder-quiz">Tool Finder</a>
-        <a href="/#ai-news">AI News</a>
+        <a href="/tutorials">Tutorials</a>
+        <a href="/news">News</a>
+        <a href="/contact">Contact</a>
         <button
           type="button"
           className="theme-toggle"
@@ -1417,7 +2453,6 @@ function SiteNav({ theme: themeProp, onToggleTheme: toggleProp }) {
         >
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
-        <a href="/#newsletter" className="btn btn-primary nav-cta">Get Weekly Picks</a>
       </div>
     </nav>
   )
@@ -1457,16 +2492,63 @@ function BackToTopButton() {
 function SiteFooter() {
   return (
     <footer className="footer">
-      <div className="footer-links">
-        <a href="/about">About</a>
-        <a href="/privacy-policy">Privacy</a>
-        <a href="/terms-and-conditions">Terms</a>
-        <a href="/contact">Contact</a>
+      <div className="footer-section footer-submission">
+        <div className="footer-submission-content">
+          <h3>Recommend an AI Tool</h3>
+          <p>Know a great AI tool we're missing? Submit it to our directory.</p>
+          <a href="/contact" className="btn btn-secondary">Submit Tool</a>
+        </div>
       </div>
-      <p>© 2026 AIToolsCenter.in · Built to help you navigate the AI landscape.</p>
-      <p style={{ marginTop: '0.4rem', fontSize: '0.85rem', color: 'var(--muted)' }}>
-        Some links are affiliate links. As an Amazon Associate, we may earn from qualifying purchases at no extra cost to you.
-      </p>
+      
+      <div className="footer-grid">
+        <div className="footer-brand">
+          <a href="/" className="footer-logo">AIToolsCenter.in</a>
+          <p>The independent AI tools directory for 2026. Hand-curated reviews, practical comparisons, and outcome-first recommendations.</p>
+          <div className="footer-social">
+            <a href="/about" title="About us">About</a>
+            <a href="/contact" title="Contact">Contact</a>
+            <a href="/news" title="Latest AI News">News</a>
+          </div>
+        </div>
+
+        <div className="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="/#tools">Browse All Tools</a></li>
+            <li><a href="/tutorials">AI Tutorials</a></li>
+            <li><a href="/news">AI News & Updates</a></li>
+            <li><a href="/trending-ai-tools-this-week">Trending This Week</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div className="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="/#newsletter">Weekly Newsletter</a></li>
+            <li><a href="/ai-workflow-kit.pdf">AI Workflow Kit (PDF)</a></li>
+            <li><a href="/ai-workflow-kit.txt">AI Workflow Kit (Text)</a></li>
+            <li><a href="/best-ai-tools-for/students">Use Case Guides</a></li>
+            <li><a href="/contact">Submit a Tool</a></li>
+          </ul>
+        </div>
+
+        <div className="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/about">About AIToolsCenter</a></li>
+            <li><a href="/about">How We Review</a></li>
+            <li><a href="/contact">Get in Touch</a></li>
+            <li><a href="/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="footer-bottom">
+        <span>© 2026 AIToolsCenter.in · All rights reserved.</span>
+        <span className="footer-disclosure">Some links may be affiliate links. We earn a small commission at no cost to you.</span>
+      </div>
       <ConsentBanner />
       <BackToTopButton />
     </footer>
@@ -1569,35 +2651,10 @@ function ConsentBanner() {
 }
 
 function LegalPage({ page }) {
-  const leftRail = {
-    eyebrow: 'Site map',
-    title: 'Important pages',
-    description: 'Quick access to the pages readers open most often while browsing the directory.',
-    chips: ['About', 'Privacy', 'Terms', 'Contact'],
-    links: [
-      { label: 'About AIToolsCenter', href: '/about', meta: 'Review process and editorial standards' },
-      { label: 'Privacy Policy', href: '/privacy-policy', meta: 'Cookies, ads, and data handling' },
-      { label: 'Contact', href: '/contact', meta: 'Support and partnerships' },
-    ],
-  }
-
-  const rightRail = {
-    eyebrow: 'Trust',
-    title: 'Editorial guardrails',
-    description: 'The site keeps affiliate disclosure, consent, and listing policies visible across the experience.',
-    chips: ['Editorial', 'Disclosure', 'Consent'],
-    links: [
-      { label: 'Home', href: '/', meta: 'Return to the main discovery page' },
-      { label: 'Compare Hub', href: '/compare-hub', meta: 'Pair tools side by side' },
-      { label: 'Weekly Trends', href: '/trending-ai-tools-this-week', meta: 'See what is getting clicked' },
-    ],
-  }
-
   return (
     <div className="page">
       <SiteNav />
       <div className="page-body">
-        <PageRails left={leftRail} right={rightRail} />
         <main className="content-page">
           <section className="content-hero">
             <p className="eyebrow">SITE INFORMATION</p>
@@ -1637,39 +2694,19 @@ function LegalPage({ page }) {
 }
 
 function ToolDetailPage({ tool }) {
+  const editorialNotes = getToolEditorialNotes(tool)
+  const reviewedOn = new Date(`${REVIEW_LAST_UPDATED_ISO}T00:00:00Z`).toLocaleDateString('en-IN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'UTC',
+  })
   const categoryTools = TOOLS
     .filter((item) => item.category === tool.category && item.name !== tool.name)
     .slice(0, 3)
   const relatedUseCases = OUTCOME_BLOCKS
     .filter((item) => item.tools.includes(tool.name) || item.category === tool.category)
     .slice(0, 3)
-  const leftRail = {
-    eyebrow: 'Related tools',
-    title: `${tool.category} picks`,
-    description: `A compact set of alternatives and complements for ${tool.name}.`,
-    chips: [tool.category, tool.badge, `${tool.rating}/5`],
-    links: categoryTools.map((item) => ({
-      label: item.name,
-      href: `/tools/${slugifyToolName(item.name)}`,
-      meta: item.tagline,
-    })),
-  }
-
-  const rightRail = {
-    eyebrow: 'Quick jump',
-    title: 'Use-case shortcuts',
-    description: 'Move from the individual tool page back to the workflows and comparisons that fit it best.',
-    chips: ['Alternatives', 'Comparisons', 'Use cases'],
-    links: [
-      { label: `${tool.name} alternatives`, href: `/alternatives-to-${slugifyToolName(tool.name)}`, meta: 'See close matches' },
-      { label: `${tool.category} category page`, href: `/categories/${slugifyCategoryName(tool.category)}`, meta: 'Browse the full category' },
-      ...relatedUseCases.map((item) => ({
-        label: item.title,
-        href: `/best-ai-tools-for/${item.slug}`,
-        meta: item.outcome,
-      })),
-    ],
-  }
   const shouldAvoid = tool.category === 'Coding'
     ? 'your team cannot enforce code review, testing, and security checks on generated code'
     : tool.category === 'Image' || tool.category === 'Video'
@@ -1680,7 +2717,6 @@ function ToolDetailPage({ tool }) {
     <div className="page">
       <SiteNav />
       <div className="page-body">
-        <PageRails left={leftRail} right={rightRail} />
         <main className="content-page">
           <section className="content-hero">
             <p className="eyebrow">TOOL PROFILE</p>
@@ -1698,6 +2734,7 @@ function ToolDetailPage({ tool }) {
               <article className="content-card policy-card">
                 <h2>Why use {tool.name}</h2>
                 <p>{TOOL_DETAIL_WRITEUPS[tool.name] || `${tool.name} helps with ${tool.category.toLowerCase()} workflows and is commonly used for faster execution with AI-assisted output.`}</p>
+                <p className="section-copy">Reviewed by {REVIEW_EDITOR_NAME} | Last reviewed: {reviewedOn}</p>
                 <p>
                   In most teams, {tool.name} works best as an acceleration layer instead of a complete replacement for existing workflows.
                   The strongest results come from repeatable prompts, clear review standards, and explicit quality checks before final publishing.
@@ -1706,11 +2743,22 @@ function ToolDetailPage({ tool }) {
                   <li>Best for: teams and creators who need reliable {tool.category.toLowerCase()} support.</li>
                   <li>Pricing model: {tool.badge}.</li>
                   <li>Community rating: {tool.rating}/5 based on editorial scoring.</li>
+                  <li>Editorial verdict: {editorialNotes.verdict}</li>
                 </ul>
                 <a className="btn btn-primary" href={getToolOutboundUrl(tool)} target="_blank" rel={getToolAnchorRel(tool)}>Visit {tool.name}</a>
-                {isAffiliateTool(tool) ? (
-                  <p className="affiliate-disclosure">Affiliate disclosure: We may earn a commission from eligible purchases, at no extra cost to you.</p>
-                ) : null}
+              </article>
+
+              <article className="content-card policy-card">
+                <h2>Hands-on evaluation summary</h2>
+                <p>
+                  This profile is based on repeatable editorial checks across onboarding, output quality, and day-to-day workflow fit.
+                  We compare tools using similar tasks to reduce selection bias.
+                </p>
+                <ul className="policy-list">
+                  <li>Best for: {editorialNotes.bestFor}.</li>
+                  <li>Watchouts: {editorialNotes.watchouts}.</li>
+                  <li>Method used: prompt consistency checks, output review, and comparison against same-category tools.</li>
+                </ul>
               </article>
 
               <article className="content-card policy-card">
@@ -1758,12 +2806,21 @@ function ToolDetailPage({ tool }) {
                       <a href={`/best-ai-tools-for/${item.slug}`}>{item.title}</a>
                     </li>
                   ))}
-                  {COMPARISON_PAGES.filter((page) => page.tools.includes(tool.name)).map((page) => (
-                    <li key={page.slug}>
-                      <a href={`/compare/${page.slug}`}>{page.title}</a>
-                    </li>
-                  ))}
                 </ul>
+              </article>
+
+              <article className="content-card policy-card">
+                <h2>Explore more inside AIToolsCenter</h2>
+                <div className="landing-links-grid">
+                  <a href={`/categories/${slugifyCategoryName(tool.category)}`} className="landing-link-card">
+                    <strong>{tool.category} category page</strong>
+                    <span>Browse all curated tools in this category.</span>
+                  </a>
+                  <a href="/trending-ai-tools-this-week" className="landing-link-card">
+                    <strong>Weekly leaderboard</strong>
+                    <span>See which tools are currently drawing attention.</span>
+                  </a>
+                </div>
               </article>
 
               <article className="content-card policy-card">
@@ -1776,6 +2833,21 @@ function ToolDetailPage({ tool }) {
               </article>
             </div>
           </section>
+
+          {categoryTools.length > 0 && (
+            <section className="related-tools-section content-page">
+              <h2>Other {tool.category} tools to consider</h2>
+              <div className="related-tools-grid">
+                {categoryTools.map((item) => (
+                  <a key={item.name} href={`/tools/${slugifyToolName(item.name)}`} className="related-tool-card">
+                    <strong>{item.name}</strong>
+                    <span>{item.tagline}</span>
+                    <span style={{ fontSize: '0.74rem', color: 'var(--accent2)', fontWeight: 700 }}>{item.badge} · ★ {item.rating}</span>
+                  </a>
+                ))}
+              </div>
+            </section>
+          )}
         </main>
       </div>
       <SiteFooter />
@@ -1786,39 +2858,11 @@ function ToolDetailPage({ tool }) {
 function CategoryPage({ category }) {
   const categoryTools = TOOLS.filter((tool) => tool.category === category)
   const categorySeo = CATEGORY_SEO[category]
-  const leftRail = {
-    eyebrow: 'Top category tools',
-    title: `${category} stack`,
-    description: `The strongest starting points for people who are exploring ${category.toLowerCase()} workflows.`,
-    chips: [category, `${categoryTools.length} tools`, 'Curated'],
-    links: categoryTools.slice(0, 4).map((tool) => ({
-      label: tool.name,
-      href: `/tools/${slugifyToolName(tool.name)}`,
-      meta: tool.tagline,
-    })),
-  }
-
-  const rightRail = {
-    eyebrow: 'Related paths',
-    title: 'Move deeper',
-    description: 'Use these shortcuts to compare products or jump into adjacent use-case guides.',
-    chips: ['Compare', 'Alternatives', 'Use cases'],
-    links: [
-      { label: 'Compare Hub', href: '/compare-hub', meta: 'Filter pairwise comparisons' },
-      { label: `${category} tools overview`, href: `/categories/${slugifyCategoryName(category)}`, meta: 'Revisit this category page' },
-      ...USE_CASE_PAGES.slice(0, 3).map((page) => ({
-        label: page.title,
-        href: `/best-ai-tools-for/${page.slug}`,
-        meta: page.intro,
-      })),
-    ],
-  }
 
   return (
     <div className="page">
       <SiteNav />
       <div className="page-body">
-        <PageRails left={leftRail} right={rightRail} />
         <main className="content-page">
           <section className="content-hero">
             <p className="eyebrow">CATEGORY GUIDE</p>
@@ -1847,6 +2891,20 @@ function CategoryPage({ category }) {
                   <li>Prefer tools with consistent updates and strong user adoption.</li>
                 </ul>
               </article>
+
+              <article className="content-card policy-card">
+                <h2>Related links</h2>
+                <div className="landing-links-grid">
+                  <a href="/trending-ai-tools-this-week" className="landing-link-card">
+                    <strong>Weekly AI trends</strong>
+                    <span>Track the latest movement in tool discovery.</span>
+                  </a>
+                  <a href="/#newsletter" className="landing-link-card">
+                    <strong>Get weekly picks</strong>
+                    <span>Subscribe for practical tool updates every week.</span>
+                  </a>
+                </div>
+              </article>
             </div>
           </section>
         </main>
@@ -1856,81 +2914,17 @@ function CategoryPage({ category }) {
   )
 }
 
-function ComparisonTable({ comparison }) {
-  const comparisonTools = comparison.tools
-    .map((name) => TOOLS.find((tool) => tool.name === name))
-    .filter(Boolean)
 
-  return (
-    <div className="comparison-table-wrap">
-      <table className="comparison-table">
-        <thead>
-          <tr>
-            <th>Feature</th>
-            {comparison.tools.map((name) => (
-              <th key={name}>{name}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {comparison.rows.map((row) => (
-            <tr key={row.feature}>
-              <td>{row.feature}</td>
-              {row.values.map((value, index) => (
-                <td key={`${row.feature}-${index}`}>{value}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="comparison-table-links">
-        {comparisonTools.map((tool) => (
-          <a key={tool.name} href={`/tools/${slugifyToolName(tool.name)}`} className="btn btn-secondary">
-            Read {tool.name} review
-          </a>
-        ))}
-      </div>
-    </div>
-  )
-}
 
 function UseCaseLandingPage({ page }) {
   const tools = page.toolNames
     .map((name) => TOOLS.find((tool) => tool.name === name))
     .filter(Boolean)
   const playbook = getUseCasePlaybook(page)
-  const leftRail = {
-    eyebrow: 'Recommended tools',
-    title: page.title,
-    description: page.intro,
-    chips: ['Use case', 'Curated', 'Fast start'],
-    links: tools.map((tool) => ({
-      label: tool.name,
-      href: `/tools/${slugifyToolName(tool.name)}`,
-      meta: tool.tagline,
-    })),
-  }
-
-  const rightRail = {
-    eyebrow: 'Comparison shortcuts',
-    title: 'Keep exploring',
-    description: 'Use the landing pages as a bridge into comparison pages and the core directory.',
-    chips: ['Comparisons', 'Category pages', 'Directory'],
-    links: [
-      ...COMPARISON_PAGES.slice(0, 3).map((comparison) => ({
-        label: comparison.title,
-        href: `/compare/${comparison.slug}`,
-        meta: comparison.description,
-      })),
-      { label: 'Compare Hub', href: '/compare-hub', meta: 'Browse every pairwise comparison' },
-    ],
-  }
-
   return (
     <div className="page">
       <SiteNav />
       <div className="page-body">
-        <PageRails left={leftRail} right={rightRail} />
         <main className="content-page">
           <section className="content-hero">
             <p className="eyebrow">OUTCOME GUIDE</p>
@@ -1970,16 +2964,7 @@ function UseCaseLandingPage({ page }) {
                 </ul>
               </article>
 
-              <article className="content-card policy-card">
-                <h2>Comparison shortcuts</h2>
-                <ul className="policy-list">
-                  {COMPARISON_PAGES.map((comparison) => (
-                    <li key={comparison.slug}>
-                      <a href={`/compare/${comparison.slug}`}>{comparison.title}</a>
-                    </li>
-                  ))}
-                </ul>
-              </article>
+
 
               <article className="content-card policy-card">
                 <h2>FAQs</h2>
@@ -1998,121 +2983,16 @@ function UseCaseLandingPage({ page }) {
   )
 }
 
-function ComparisonLandingPage({ comparison }) {
-  const comparisonTools = comparison.tools
-    .map((name) => TOOLS.find((tool) => tool.name === name))
-    .filter(Boolean)
-  const [leftTool, rightTool] = comparisonTools
-  const fitSummary = leftTool && rightTool
-    ? `${leftTool.name} is typically favored for ${leftTool.tags[0] || leftTool.category.toLowerCase()} workflows, while ${rightTool.name} is often selected for ${rightTool.tags[0] || rightTool.category.toLowerCase()} outcomes.`
-    : 'Use the table below to identify the better fit based on workflow, budget, and quality requirements.'
 
-  const leftRail = {
-    eyebrow: 'Head-to-head',
-    title: comparison.title,
-    description: comparison.description,
-    chips: comparison.tools,
-    links: comparisonTools.map((tool) => ({
-      label: tool.name,
-      href: `/tools/${slugifyToolName(tool.name)}`,
-      meta: tool.tagline,
-    })),
-  }
-
-  const rightRail = {
-    eyebrow: 'More comparisons',
-    title: 'Swap between matchups',
-    description: 'Jump into other comparison pages or return to the matrix hub to filter your own shortlist.',
-    chips: ['Matrix', 'Tool pages', 'Shortlists'],
-    links: [
-      { label: 'Compare Hub', href: '/compare-hub', meta: 'Filter every available matchup' },
-      ...COMPARISON_PAGES.filter((page) => page.slug !== comparison.slug).slice(0, 3).map((page) => ({
-        label: page.title,
-        href: `/compare/${page.slug}`,
-        meta: page.description,
-      })),
-    ],
-  }
-
-  return (
-    <div className="page">
-      <SiteNav />
-      <div className="page-body">
-        <PageRails left={leftRail} right={rightRail} />
-        <main className="content-page">
-          <section className="content-hero">
-            <p className="eyebrow">AI TOOL COMPARISON</p>
-            <h1>{comparison.title}</h1>
-            <p className="subtext">{comparison.description}</p>
-          </section>
-
-          <section className="content-shell">
-            <div className="content-stack">
-              <article className="content-card policy-card">
-                <h2>Side-by-side comparison table</h2>
-                <ComparisonTable comparison={comparison} />
-              </article>
-
-              <article className="content-card policy-card">
-                <h2>Decision guidance</h2>
-                <p>{fitSummary}</p>
-                <ul className="policy-list">
-                  <li>Step 1: define one primary outcome (speed, quality, integration, or budget).</li>
-                  <li>Step 2: test both tools using the same prompt and same deliverable.</li>
-                  <li>Step 3: compare editing time required before final use.</li>
-                  <li>Step 4: pick the winner based on consistency across repeated tasks.</li>
-                </ul>
-              </article>
-
-              <article className="content-card policy-card">
-                <h2>FAQs</h2>
-                <div className="faq-list">
-                  <FaqItem q={`Which is better: ${comparison.tools[0]} or ${comparison.tools[1]}?`} a={`The right choice depends on your workflow. Use the comparison table above, then test both free plans if available.`} />
-                  <FaqItem q={`Are ${comparison.tools[0]} and ${comparison.tools[1]} good for beginners?`} a={`Yes, but onboarding effort varies by product. Choose the one that matches your primary outcome and existing workflow.`} />
-                </div>
-              </article>
-            </div>
-          </section>
-        </main>
-      </div>
-      <SiteFooter />
-    </div>
-  )
-}
 
 function AlternativesLandingPage({ tool }) {
   const alternatives = TOOLS
     .filter((item) => item.category === tool.category && item.name !== tool.name)
     .slice(0, 6)
-  const leftRail = {
-    eyebrow: 'Top alternatives',
-    title: `${tool.name} substitutes`,
-    description: `Closer matches for teams that want a similar workflow without staying locked into ${tool.name}.`,
-    chips: [tool.category, `${alternatives.length} options`],
-    links: alternatives.slice(0, 4).map((item) => ({
-      label: item.name,
-      href: `/tools/${slugifyToolName(item.name)}`,
-      meta: item.tagline,
-    })),
-  }
-
-  const rightRail = {
-    eyebrow: 'Direct comparisons',
-    title: 'View closest matchups',
-    description: 'Use these links to see the fastest direct comparisons for this product.',
-    chips: ['Comparison pages', 'Category', 'Tool pages'],
-    links: alternatives.slice(0, 4).map((item) => ({
-      label: `${tool.name} vs ${item.name}`,
-      href: `/compare/${slugifyToolName(tool.name)}-vs-${slugifyToolName(item.name)}`,
-      meta: 'Direct head-to-head review',
-    })),
-  }
-
   return (
     <div className="page">
       <SiteNav />
       <div className="page-body">
-        <PageRails left={leftRail} right={rightRail} />
         <main className="content-page">
           <section className="content-hero">
             <p className="eyebrow">ALTERNATIVES GUIDE</p>
@@ -2147,16 +3027,7 @@ function AlternativesLandingPage({ tool }) {
                 </ul>
               </article>
 
-              <article className="content-card policy-card">
-                <h2>Direct comparisons</h2>
-                <ul className="policy-list">
-                  {alternatives.map((item) => (
-                    <li key={`${tool.name}-${item.name}`}>
-                      <a href={`/compare/${slugifyToolName(tool.name)}-vs-${slugifyToolName(item.name)}`}>{tool.name} vs {item.name}</a>
-                    </li>
-                  ))}
-                </ul>
-              </article>
+
             </div>
           </section>
         </main>
@@ -2166,114 +3037,7 @@ function AlternativesLandingPage({ tool }) {
   )
 }
 
-function CompareHubPage() {
-  const [category, setCategory] = useState('All')
-  const [useCase, setUseCase] = useState('All')
 
-  const useCaseOptions = ['All', ...OUTCOME_BLOCKS.map((entry) => entry.title)]
-  const useCaseToolSet = useCase === 'All'
-    ? null
-    : new Set(OUTCOME_BLOCKS.find((entry) => entry.title === useCase)?.tools || [])
-
-  const filteredTools = TOOLS.filter((tool) => {
-    const byCategory = category === 'All' || tool.category === category
-    const byUseCase = !useCaseToolSet || useCaseToolSet.has(tool.name)
-    return byCategory && byUseCase
-  })
-
-  const pairs = []
-  for (let index = 0; index < filteredTools.length; index += 1) {
-    for (let nestedIndex = index + 1; nestedIndex < filteredTools.length; nestedIndex += 1) {
-      const left = filteredTools[index]
-      const right = filteredTools[nestedIndex]
-      pairs.push({
-        left,
-        right,
-        slug: `${slugifyToolName(left.name)}-vs-${slugifyToolName(right.name)}`,
-      })
-    }
-  }
-
-  const leftRail = {
-    eyebrow: 'Matrix filters',
-    title: 'Tune the shortlist',
-    description: 'Use the hub to reduce the directory down to pairwise comparisons that match a category or use case.',
-    chips: [category, useCase === 'All' ? 'All use cases' : useCase],
-    links: [
-      { label: 'Home', href: '/', meta: 'Return to the main directory' },
-      { label: 'Weekly Trends', href: '/trending-ai-tools-this-week', meta: 'See current click leaders' },
-      { label: 'Tool Finder', href: '/#finder-quiz', meta: 'Get a quick recommendation' },
-    ],
-  }
-
-  const rightRail = {
-    eyebrow: 'Popular routes',
-    title: 'Open a matchup fast',
-    description: 'Jump from the hub into the comparison pages people are most likely to compare first.',
-    chips: ['ChatGPT', 'Claude', 'Midjourney', 'Copilot'],
-    links: pairs.slice(0, 4).map((pair) => ({
-      label: `${pair.left.name} vs ${pair.right.name}`,
-      href: `/compare/${pair.slug}`,
-      meta: `${pair.left.category} vs ${pair.right.category}`,
-    })),
-  }
-
-  return (
-    <div className="page">
-      <SiteNav />
-      <div className="page-body">
-        <PageRails left={leftRail} right={rightRail} />
-        <main className="content-page">
-          <section className="content-hero">
-            <p className="eyebrow">COMPARISON HUB</p>
-            <h1>AI Comparison Matrix Hub</h1>
-            <p className="subtext">Filter by category or use case and jump into pairwise tool comparisons.</p>
-          </section>
-
-          <section className="content-shell">
-            <div className="content-stack">
-              <article className="content-card policy-card">
-                <h2>Filter comparisons</h2>
-                <div className="compare-hub-filters">
-                  <label className="toolbar-field">
-                    <span>Category</span>
-                    <select value={category} onChange={(event) => setCategory(event.target.value)}>
-                      {CATEGORIES.map((entry) => (
-                        <option key={entry} value={entry}>{entry}</option>
-                      ))}
-                    </select>
-                  </label>
-                  <label className="toolbar-field">
-                    <span>Use Case</span>
-                    <select value={useCase} onChange={(event) => setUseCase(event.target.value)}>
-                      {useCaseOptions.map((entry) => (
-                        <option key={entry} value={entry}>{entry}</option>
-                      ))}
-                    </select>
-                  </label>
-                </div>
-                <p className="section-copy">{pairs.length} pairwise comparisons available</p>
-              </article>
-
-              <article className="content-card policy-card">
-                <h2>All pairwise comparison links</h2>
-                <div className="compare-hub-links">
-                  {pairs.map((pair) => (
-                    <a key={pair.slug} href={`/compare/${pair.slug}`} className="landing-link-card">
-                      <strong>{pair.left.name} vs {pair.right.name}</strong>
-                      <span>{pair.left.category} vs {pair.right.category}</span>
-                    </a>
-                  ))}
-                </div>
-              </article>
-            </div>
-          </section>
-        </main>
-      </div>
-      <SiteFooter />
-    </div>
-  )
-}
 
 function WeeklyTrendingPage({ snapshots }) {
   const weeks = Object.keys(snapshots).sort().reverse()
@@ -2285,35 +3049,10 @@ function WeeklyTrendingPage({ snapshots }) {
     .slice()
     .sort((left, right) => right.rating - left.rating)
     .slice(0, 5)
-  const leftRail = {
-    eyebrow: 'Weekly signal',
-    title: activeWeek || 'Current week',
-    description: 'The leaderboard is derived from click activity captured inside this directory.',
-    chips: ['Clicks', 'Weekly', 'Live'],
-    links: activeEntries.slice(0, 4).map(([name, clicks]) => ({
-      label: name,
-      href: `/tools/${slugifyToolName(name)}`,
-      meta: `${clicks} clicks this week`,
-    })),
-  }
-
-  const rightRail = {
-    eyebrow: 'Next step',
-    title: 'Turn traffic into actions',
-    description: 'Use the directory, newsletter, and compare hub together to keep the session moving.',
-    chips: ['Newsletter', 'Compare Hub', 'Directory'],
-    links: [
-      { label: 'Home', href: '/', meta: 'Return to the main directory' },
-      { label: 'Compare Hub', href: '/compare-hub', meta: 'Open the matrix hub' },
-      { label: 'Newsletter', href: '/#newsletter', meta: 'Get weekly picks' },
-    ],
-  }
-
   return (
     <div className="page">
       <SiteNav />
       <div className="page-body">
-        <PageRails left={leftRail} right={rightRail} />
         <main className="content-page">
           <section className="content-hero">
             <p className="eyebrow">WEEKLY TRENDS</p>
@@ -2369,57 +3108,254 @@ function WeeklyTrendingPage({ snapshots }) {
   )
 }
 
+function NewsPage({ entries, currentPage = 1, pageSize = NEWS_PAGE_SIZE }) {
+  const totalPages = Math.max(1, Math.ceil(entries.length / pageSize))
+  const safePage = Math.min(Math.max(currentPage, 1), totalPages)
+  const start = (safePage - 1) * pageSize
+  const pageEntries = entries.slice(start, start + pageSize)
+  const pageWindowStart = Math.max(1, safePage - 2)
+  const pageWindowEnd = Math.min(totalPages, pageWindowStart + 4)
+  const visiblePages = []
+
+  for (let page = pageWindowStart; page <= pageWindowEnd; page += 1) {
+    visiblePages.push(page)
+  }
+
+  const buildNewsHref = (page) => (page <= 1 ? '/news' : `/news?page=${page}`)
+
+  return (
+    <div className="page">
+      <SiteNav />
+      <div className="page-body">
+        <main className="content-page">
+          <section className="content-hero">
+            <p className="eyebrow">AI NEWS</p>
+            <h1>Latest AI News and Product Updates</h1>
+            <p className="subtext">Fresh AI headlines from trusted sources. This feed is updated automatically every day.</p>
+          </section>
+
+          <section className="content-shell">
+            <div className="content-stack">
+              <article className="content-card policy-card">
+                <h2>Daily AI news feed</h2>
+                <div className="news-grid">
+                  {pageEntries.map((item, index) => (
+                    <article key={`${item.title}-${safePage}-${index}`} className="news-card">
+                      <div className="news-card-top">
+                        <span className="news-tag">{item.tag || 'AI News'}</span>
+                        <span className="news-date">{item.date}</span>
+                      </div>
+                      <h3 className="news-title">
+                        <a className="news-title-link" href={item.link} target="_blank" rel="noopener noreferrer nofollow">{item.title}</a>
+                      </h3>
+                      <p className="news-summary">{item.summary}</p>
+                    </article>
+                  ))}
+                </div>
+
+                <nav className="news-pagination" aria-label="News pages">
+                  <a
+                    href={buildNewsHref(safePage - 1)}
+                    className={`news-page-link${safePage === 1 ? ' disabled' : ''}`}
+                    aria-disabled={safePage === 1}
+                  >
+                    Previous
+                  </a>
+
+                  <div className="news-page-numbers">
+                    {visiblePages.map((page) => (
+                      <a
+                        key={page}
+                        href={buildNewsHref(page)}
+                        className={`news-page-link${page === safePage ? ' active' : ''}`}
+                        aria-current={page === safePage ? 'page' : undefined}
+                      >
+                        {page}
+                      </a>
+                    ))}
+                  </div>
+
+                  <a
+                    href={buildNewsHref(safePage + 1)}
+                    className={`news-page-link${safePage === totalPages ? ' disabled' : ''}`}
+                    aria-disabled={safePage === totalPages}
+                  >
+                    Next
+                  </a>
+                </nav>
+              </article>
+
+              <article className="content-card policy-card">
+                <h2>More discovery paths</h2>
+                <div className="landing-links-grid">
+                  <a href="/#tools" className="landing-link-card">
+                    <strong>Browse AI Tools by Category</strong>
+                    <span>Find tools by use case, category, and rating.</span>
+                  </a>
+                  <a href="/trending-ai-tools-this-week" className="landing-link-card">
+                    <strong>Weekly leaderboard</strong>
+                    <span>See which tools are getting the most attention this week.</span>
+                  </a>
+                </div>
+              </article>
+            </div>
+          </section>
+        </main>
+      </div>
+      <SiteFooter />
+    </div>
+  )
+}
+
+function TutorialsPage({ videos }) {
+  return (
+    <div className="page">
+      <SiteNav />
+      <div className="page-body">
+        <main className="content-page">
+          <section className="content-hero">
+            <p className="eyebrow">LEARN AI TOOLS</p>
+            <h1>AI Tutorials & Guides</h1>
+            <p className="subtext">Curated YouTube tutorials and guides for learning AI tools featured in our directory.</p>
+          </section>
+
+          <section className="content-shell">
+            <div className="tutorials-grid">
+              {videos.map((video) => (
+                <div key={video.id} className="tutorial-card">
+                  <div className="video-thumbnail">
+                    <a href={`https://www.youtube.com/watch?v=${video.videoId}`} target="_blank" rel="noopener noreferrer" className="thumbnail-link">
+                      <img src={`https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`} alt={video.title} />
+                      <div className="play-button">▶</div>
+                      <div className="duration">{video.duration}</div>
+                    </a>
+                  </div>
+                  <div className="tutorial-content">
+                    <h3><a href={`https://www.youtube.com/watch?v=${video.videoId}`} target="_blank" rel="noopener noreferrer">{video.title}</a></h3>
+                    <p className="channel">{video.channel}</p>
+                    <p className="description">{video.description}</p>
+                    <div className="tutorial-meta">
+                      <span className="category-badge">{video.category}</span>
+                      <div className="tools-tags">
+                        {video.tools.map((tool) => (
+                          <span key={tool} className="tool-tag">{tool}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <a href={`https://www.youtube.com/watch?v=${video.videoId}`} target="_blank" rel="noopener noreferrer" className="watch-btn">
+                      Watch on YouTube →
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="content-shell">
+            <article className="content-card policy-card">
+              <h2>How to Get the Most From AI Tool Tutorials</h2>
+              <ul className="policy-list">
+                <li><strong>Start with basics:</strong> If you're new to AI, begin with beginner-friendly ChatGPT or Gemini guides before diving into specialized tools.</li>
+                <li><strong>Practice along:</strong> Don't just watch. Follow along with the tutorials and try the techniques in parallel.</li>
+                <li><strong>Take notes:</strong> Write down key prompts, settings, and workflows you want to remember.</li>
+                <li><strong>Experiment:</strong> After following tutorials, spend time experimenting with variations and different use cases.</li>
+                <li><strong>Join communities:</strong> Connect with other learners on Discord, Reddit, or dedicated AI tool communities.</li>
+              </ul>
+            </article>
+          </section>
+        </main>
+      </div>
+      <SiteFooter />
+    </div>
+  )
+}
+
+function ContactPage() {
+  const [formState, setFormState] = useState({
+    name: '',
+    email: '',
+    subject: 'submit-tool',
+    message: ''
+  })
+
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  return (
+    <div className="page-contact-wrapper">
+      <div className="page-body page-body-contact">
+        <main className="contact-main">
+          <section className="contact-hero">
+            <div className="contact-hero-content">
+              <h1>Contact Us</h1>
+              <p>Have a question or want to collaborate?</p>
+            </div>
+          </section>
+          <div className="contact-container">
+            <p>Contact form coming soon</p>
+          </div>
+        </main>
+      </div>
+    </div>
+  )
+}
+
 function App() {
   const normalizedPath = window.location.pathname.replace(/\/$/, '') || '/'
+  const normalizedSearch = window.location.search || ''
   const legalPage = getLegalPage(normalizedPath)
   const toolSlug = getToolSlugFromPath(normalizedPath)
   const categorySlug = getCategorySlugFromPath(normalizedPath)
   const useCaseSlug = getUseCaseSlugFromPath(normalizedPath)
-  const comparisonSlug = getComparisonSlugFromPath(normalizedPath)
+
   const alternativeSlug = getAlternativeSlugFromPath(normalizedPath)
   const toolPage = toolSlug ? getToolBySlug(toolSlug) : null
   const categoryPage = categorySlug ? getCategoryBySlug(categorySlug) : null
   const useCasePage = useCaseSlug ? getUseCaseBySlug(useCaseSlug) : null
-  const comparisonPage = comparisonSlug ? getComparisonBySlug(comparisonSlug) : null
+
   const alternativePage = alternativeSlug ? getAlternativeToolBySlug(alternativeSlug) : null
-  const compareHubPage = isCompareHubPath(normalizedPath)
+
   const weeklyTrendingPage = isWeeklyTrendingPath(normalizedPath)
+  const newsPage = isNewsPath(normalizedPath)
+  const newsPageNumber = getSafeNewsPageNumber(normalizedSearch)
   const [activeCategory, setActiveCategory] = useState('All')
   const [search, setSearch] = useState('')
-  const [sortBy, setSortBy] = useState('featured')
   const [favoritesOnly, setFavoritesOnly] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
   const [favorites, setFavorites] = useState([])
-  const [compareList, setCompareList] = useState([])
+
   const [localVisits, setLocalVisits] = useState(1)
-  const [websiteVisitors, setWebsiteVisitors] = useState(null)
+  const [websiteVisitors, setWebsiteVisitors] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('aitoolscenter-unique-visitors')
+      return stored ? parseInt(stored, 10) : 1
+    }
+    return 1
+  })
+  const [isNewVisitor, setIsNewVisitor] = useState(false)
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterStatus, setNewsletterStatus] = useState({ type: 'idle', message: '' })
   const [isSubmittingNewsletter, setIsSubmittingNewsletter] = useState(false)
-  const [toolSubmission, setToolSubmission] = useState({
-    name: '',
-    url: '',
-    category: 'Writing',
-    pricing: 'Freemium',
-    contactEmail: '',
-    description: '',
-  })
   const [userRatings, setUserRatings] = useState({})
-  const [toolErrors, setToolErrors] = useState({})
-  const [toolSubmitStatus, setToolSubmitStatus] = useState({ type: 'idle', message: '' })
-  const [isSubmittingTool, setIsSubmittingTool] = useState(false)
   const [toolClicks, setToolClicks] = useState({})
-  const [amazonClicks, setAmazonClicks] = useState({})
   const [helpfulVotes, setHelpfulVotes] = useState({})
   const [weeklyTrendSnapshots, setWeeklyTrendSnapshots] = useState({})
-  const [quizGoal, setQuizGoal] = useState('write content')
-  const [showExitIntent, setShowExitIntent] = useState(false)
-  const [exitIntentEmail, setExitIntentEmail] = useState('')
-  const [exitIntentStatus, setExitIntentStatus] = useState({ type: 'idle', message: '' })
   const [theme, setTheme] = useState(() => localStorage.getItem(LOCAL_THEME_KEY) || 'dark')
-  const heroTiltHandlers = useInteractiveTilt({ tilt: 9, shift: 12 })
   const skipInitialHashScrollRef = useRef(false)
 
   useEffect(() => {
+    // Track unique visitors on first load
+    if (typeof window !== 'undefined') {
+      const visitorId = localStorage.getItem('aitoolscenter-visitor-id')
+      if (!visitorId) {
+        const newId = 'visitor-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9)
+        localStorage.setItem('aitoolscenter-visitor-id', newId)
+        const newCount = websiteVisitors + 1
+        setWebsiteVisitors(newCount)
+        localStorage.setItem('aitoolscenter-unique-visitors', newCount.toString())
+        setIsNewVisitor(true)
+      }
+    }
     const savedFavorites = localStorage.getItem(LOCAL_FAVORITES_KEY)
     if (savedFavorites) {
       try {
@@ -2444,15 +3380,6 @@ function App() {
         setToolClicks(JSON.parse(savedClicks))
       } catch {
         setToolClicks({})
-      }
-    }
-
-    const savedAmazonClicks = localStorage.getItem(LOCAL_AMAZON_CLICKS_KEY)
-    if (savedAmazonClicks) {
-      try {
-        setAmazonClicks(JSON.parse(savedAmazonClicks))
-      } catch {
-        setAmazonClicks({})
       }
     }
 
@@ -2558,32 +3485,24 @@ function App() {
   }, [toolClicks])
 
   useEffect(() => {
-    localStorage.setItem(LOCAL_AMAZON_CLICKS_KEY, JSON.stringify(amazonClicks))
-  }, [amazonClicks])
-
-  useEffect(() => {
     localStorage.setItem(LOCAL_HELPFUL_VOTES_KEY, JSON.stringify(helpfulVotes))
   }, [helpfulVotes])
-
-  useEffect(() => {
-    if (normalizedPath !== '/' || localStorage.getItem(LOCAL_EXIT_INTENT_DISMISSED_KEY) === 'true') {
-      return
-    }
-
-    const onMouseOut = (event) => {
-      if (event.clientY <= 0) {
-        setShowExitIntent(true)
-      }
-    }
-
-    window.addEventListener('mouseout', onMouseOut)
-    return () => window.removeEventListener('mouseout', onMouseOut)
-  }, [normalizedPath])
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
     localStorage.setItem(LOCAL_THEME_KEY, theme)
   }, [theme])
+
+  useEffect(() => {
+    const syncFromStorage = () => {
+      syncAdDisplayState(getStoredConsentSettings())
+    }
+
+    syncFromStorage()
+    window.addEventListener('storage', syncFromStorage)
+
+    return () => window.removeEventListener('storage', syncFromStorage)
+  }, [])
 
   useEffect(() => {
     const consent = getStoredConsentSettings()
@@ -2648,9 +3567,13 @@ function App() {
     const matched = toolSlug ? getToolBySlug(toolSlug) : null
     const matchedCategory = categorySlug ? getCategoryBySlug(categorySlug) : null
     const matchedUseCase = useCaseSlug ? getUseCaseBySlug(useCaseSlug) : null
-    const matchedComparison = comparisonSlug ? getComparisonBySlug(comparisonSlug) : null
+
     const matchedAlternative = alternativeSlug ? getAlternativeToolBySlug(alternativeSlug) : null
     const matchedLegalPage = getLegalPage(normalizedPath)
+    const newsListingPage = isNewsPath(normalizedPath)
+    const totalNewsPages = Math.max(1, Math.ceil(aiNews.length / NEWS_PAGE_SIZE))
+    const safeNewsPage = Math.min(Math.max(newsPageNumber, 1), totalNewsPages)
+    const paginatedNews = aiNews.slice((safeNewsPage - 1) * NEWS_PAGE_SIZE, safeNewsPage * NEWS_PAGE_SIZE)
 
     if (matched) {
       setSearch((current) => current || matched.name)
@@ -2662,12 +3585,12 @@ function App() {
         ? `${matchedCategory} AI Tools, Reviews & Alternatives | AIToolsCenter.in`
       : matchedUseCase
         ? `${matchedUseCase.title} | AIToolsCenter.in`
-      : matchedComparison
-        ? `${matchedComparison.title} | AIToolsCenter.in`
       : matchedAlternative
         ? `${matchedAlternative.name} Alternatives | AIToolsCenter.in`
-      : compareHubPage
-        ? 'AI Comparison Matrix Hub | AIToolsCenter.in'
+      : newsListingPage
+        ? safeNewsPage > 1
+          ? `AI News - Page ${safeNewsPage} | AIToolsCenter.in`
+          : 'AI News | AIToolsCenter.in'
       : weeklyTrendingPage
         ? 'Trending AI Tools This Week | AIToolsCenter.in'
       : matchedLegalPage
@@ -2680,12 +3603,10 @@ function App() {
         ? (CATEGORY_SEO[matchedCategory]?.description || `Explore top ${matchedCategory} AI tools with reviews and alternatives.`)
       : matchedUseCase
         ? matchedUseCase.intro
-      : matchedComparison
-        ? matchedComparison.description
       : matchedAlternative
         ? `Explore top alternatives to ${matchedAlternative.name} and compare options by use case, pricing, and category.`
-      : compareHubPage
-        ? 'Filter AI tools and open pairwise comparisons from one matrix hub page.'
+      : newsListingPage
+        ? 'Daily AI news feed with product launches, model updates, and industry headlines.'
       : weeklyTrendingPage
         ? 'Weekly snapshot of trending AI tools based on user click activity and directory engagement.'
       : matchedLegalPage
@@ -2698,20 +3619,24 @@ function App() {
         ? `${baseUrl}/categories/${slugifyCategoryName(matchedCategory)}`
       : matchedUseCase
         ? `${baseUrl}/best-ai-tools-for/${matchedUseCase.slug}`
-      : matchedComparison
-        ? `${baseUrl}/compare/${matchedComparison.slug}`
       : matchedAlternative
         ? `${baseUrl}/alternatives-to-${slugifyToolName(matchedAlternative.name)}`
-      : compareHubPage
-        ? `${baseUrl}/compare-hub`
+      : newsListingPage
+        ? safeNewsPage > 1
+          ? `${baseUrl}/news?page=${safeNewsPage}`
+          : `${baseUrl}/news`
       : weeklyTrendingPage
         ? `${baseUrl}/trending-ai-tools-this-week`
       : matchedLegalPage
         ? `${baseUrl}${normalizedPath}`
         : `${baseUrl}/`
 
+    const robotsDirective = matchedAlternative ? 'noindex, follow' : 'index, follow'
+
     document.title = title
     upsertMeta({ attr: 'name', key: 'description', content: description })
+    upsertMeta({ attr: 'name', key: 'robots', content: robotsDirective })
+    upsertMeta({ attr: 'name', key: 'googlebot', content: robotsDirective })
     upsertMeta({ attr: 'property', key: 'og:title', content: title })
     upsertMeta({ attr: 'property', key: 'og:description', content: description })
     upsertMeta({ attr: 'property', key: 'og:url', content: canonicalUrl })
@@ -2719,20 +3644,165 @@ function App() {
     upsertMeta({ attr: 'name', key: 'twitter:description', content: description })
     upsertCanonical(canonicalUrl)
 
-    const listSchema = {
-      '@context': 'https://schema.org',
-      '@graph': [
+    const breadcrumbSecondItem = matchedCategory
+      ? { '@type': 'ListItem', position: 2, name: matchedCategory, item: `${baseUrl}/categories/${slugifyCategoryName(matchedCategory)}` }
+      : matched
+        ? { '@type': 'ListItem', position: 2, name: matched.name, item: `${baseUrl}/tools/${slugifyToolName(matched.name)}` }
+        : matchedUseCase
+          ? { '@type': 'ListItem', position: 2, name: matchedUseCase.title, item: `${baseUrl}/best-ai-tools-for/${matchedUseCase.slug}` }
+          : matchedAlternative
+            ? { '@type': 'ListItem', position: 2, name: `${matchedAlternative.name} alternatives`, item: `${baseUrl}/alternatives-to-${slugifyToolName(matchedAlternative.name)}` }
+            : newsListingPage
+              ? { '@type': 'ListItem', position: 2, name: 'AI News', item: safeNewsPage > 1 ? `${baseUrl}/news?page=${safeNewsPage}` : `${baseUrl}/news` }
+            : weeklyTrendingPage
+              ? { '@type': 'ListItem', position: 2, name: 'Weekly Trends', item: `${baseUrl}/trending-ai-tools-this-week` }
+              : matchedLegalPage
+                ? { '@type': 'ListItem', position: 2, name: matchedLegalPage.title, item: canonicalUrl }
+                : { '@type': 'ListItem', position: 2, name: 'Directory', item: `${baseUrl}/` }
+
+    const schemaGraph = [
+      {
+        '@type': 'Organization',
+        name: 'AIToolsCenter.in',
+        url: `${baseUrl}/`,
+        logo: `${baseUrl}/BingSiteAuth.xml`,
+      },
+      {
+        '@type': 'WebSite',
+        name: 'AIToolsCenter.in',
+        url: `${baseUrl}/`,
+        description: 'AI tools directory for comparisons, reviews, and discovery.',
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: `${baseUrl}/?q={search_term_string}`,
+          'query-input': 'required name=search_term_string',
+        },
+      },
+      {
+        '@type': 'WebPage',
+        name: title,
+        description,
+        url: canonicalUrl,
+        isPartOf: { '@type': 'WebSite', name: 'AIToolsCenter.in', url: `${baseUrl}/` },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${baseUrl}/` },
+          breadcrumbSecondItem,
+        ],
+      },
+    ]
+
+    if (matched) {
+      schemaGraph.push({
+        '@type': 'SoftwareApplication',
+        name: matched.name,
+        applicationCategory: matched.category,
+        operatingSystem: 'Web',
+        description: matched.tagline,
+        url: matched.link,
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'USD',
+          category: matched.badge,
+        },
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: String(matched.rating),
+          bestRating: '5',
+          ratingCount: '1',
+        },
+      })
+    } else if (matchedCategory) {
+      schemaGraph.push({
+        '@type': 'CollectionPage',
+        name: `${matchedCategory} AI Tools`,
+        description,
+        url: canonicalUrl,
+        mainEntity: {
+          '@type': 'ItemList',
+          itemListElement: TOOLS
+            .filter((tool) => tool.category === matchedCategory)
+            .map((tool, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              name: tool.name,
+              url: `${baseUrl}/tools/${slugifyToolName(tool.name)}`,
+            })),
+        },
+      })
+    } else if (matchedUseCase) {
+      schemaGraph.push(
         {
-          '@type': 'WebSite',
-          name: 'AIToolsCenter.in',
-          url: `${baseUrl}/`,
-          description: 'AI tools directory for comparisons, reviews, and discovery.',
-          potentialAction: {
-            '@type': 'SearchAction',
-            target: `${baseUrl}/?q={search_term_string}`,
-            'query-input': 'required name=search_term_string',
+          '@type': 'CollectionPage',
+          name: matchedUseCase.title,
+          description,
+          url: canonicalUrl,
+          mainEntity: {
+            '@type': 'ItemList',
+            itemListElement: matchedUseCase.toolNames.map((name, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              name,
+              url: `${baseUrl}/tools/${slugifyToolName(name)}`,
+            })),
           },
         },
+        {
+          '@type': 'FAQPage',
+          mainEntity: (matchedUseCase.faqs || []).map((item) => ({
+            '@type': 'Question',
+            name: item.q,
+            acceptedAnswer: { '@type': 'Answer', text: item.a },
+          })),
+        }
+      )
+    } else if (newsListingPage) {
+      schemaGraph.push({
+        '@type': 'CollectionPage',
+        name: safeNewsPage > 1 ? `AI News - Page ${safeNewsPage}` : 'AI News',
+        description,
+        url: canonicalUrl,
+        mainEntity: {
+          '@type': 'ItemList',
+          itemListElement: paginatedNews.map((item, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: item.title,
+            url: item.link,
+          })),
+        },
+      })
+
+      paginatedNews.forEach((item) => {
+        const datePublished = getIsoDateOrUndefined(item.date)
+        const articleSchema = {
+          '@type': 'NewsArticle',
+          headline: item.title,
+          description: item.summary,
+          url: item.link,
+          isPartOf: {
+            '@type': 'CollectionPage',
+            name: 'AI News',
+            url: `${baseUrl}/news`,
+          },
+          publisher: {
+            '@type': 'Organization',
+            name: 'AIToolsCenter.in',
+            url: `${baseUrl}/`,
+          },
+        }
+
+        if (datePublished) {
+          articleSchema.datePublished = datePublished
+        }
+
+        schemaGraph.push(articleSchema)
+      })
+    } else if (!matchedLegalPage && !matchedAlternative && !weeklyTrendingPage) {
+      schemaGraph.push(
         {
           '@type': 'ItemList',
           name: 'AI Tools Directory',
@@ -2742,27 +3812,6 @@ function App() {
             url: `${baseUrl}/tools/${slugifyToolName(tool.name)}`,
             name: tool.name,
           })),
-        },
-        {
-          '@type': 'BreadcrumbList',
-          itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: `${baseUrl}/` },
-            matchedCategory
-              ? { '@type': 'ListItem', position: 2, name: matchedCategory, item: `${baseUrl}/categories/${slugifyCategoryName(matchedCategory)}` }
-              : matched
-                ? { '@type': 'ListItem', position: 2, name: matched.name, item: `${baseUrl}/tools/${slugifyToolName(matched.name)}` }
-                : matchedUseCase
-                  ? { '@type': 'ListItem', position: 2, name: matchedUseCase.title, item: `${baseUrl}/best-ai-tools-for/${matchedUseCase.slug}` }
-                  : matchedComparison
-                    ? { '@type': 'ListItem', position: 2, name: matchedComparison.title, item: `${baseUrl}/compare/${matchedComparison.slug}` }
-                    : matchedAlternative
-                      ? { '@type': 'ListItem', position: 2, name: `${matchedAlternative.name} alternatives`, item: `${baseUrl}/alternatives-to-${slugifyToolName(matchedAlternative.name)}` }
-                      : compareHubPage
-                        ? { '@type': 'ListItem', position: 2, name: 'Comparison Hub', item: `${baseUrl}/compare-hub` }
-                        : weeklyTrendingPage
-                          ? { '@type': 'ListItem', position: 2, name: 'Weekly Trends', item: `${baseUrl}/trending-ai-tools-this-week` }
-                    : { '@type': 'ListItem', position: 2, name: 'Directory', item: `${baseUrl}/` },
-          ],
         },
         {
           '@type': 'FAQPage',
@@ -2775,129 +3824,21 @@ function App() {
             },
           })),
         },
-      ],
+        {
+          '@type': 'ItemList',
+          name: 'Latest AI News',
+          itemListElement: aiNews.slice(0, 6).map((item, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            url: item.link,
+            name: item.title,
+          })),
+        }
+      )
     }
 
-    const toolSchema = matched
-      ? {
-          '@context': 'https://schema.org',
-          '@type': 'SoftwareApplication',
-          name: matched.name,
-          applicationCategory: matched.category,
-          operatingSystem: 'Web',
-          description: matched.tagline,
-          url: matched.link,
-          offers: {
-            '@type': 'Offer',
-            price: '0',
-            priceCurrency: 'USD',
-            category: matched.badge,
-          },
-          aggregateRating: {
-            '@type': 'AggregateRating',
-            ratingValue: String(matched.rating),
-            bestRating: '5',
-            ratingCount: '1',
-          },
-          review: {
-            '@type': 'Review',
-            reviewRating: {
-              '@type': 'Rating',
-              ratingValue: String(matched.rating),
-              bestRating: '5',
-            },
-            author: {
-              '@type': 'Organization',
-              name: 'AIToolsCenter.in',
-            },
-            reviewBody: TOOL_DETAIL_WRITEUPS[matched.name] || matched.tagline,
-          },
-        }
-      : matchedCategory
-        ? {
-            '@context': 'https://schema.org',
-            '@type': 'CollectionPage',
-            name: `${matchedCategory} AI Tools`,
-            description,
-            url: canonicalUrl,
-            mainEntity: {
-              '@type': 'ItemList',
-              itemListElement: TOOLS
-                .filter((tool) => tool.category === matchedCategory)
-                .map((tool, index) => ({
-                  '@type': 'ListItem',
-                  position: index + 1,
-                  name: tool.name,
-                  url: `${baseUrl}/tools/${slugifyToolName(tool.name)}`,
-                })),
-            },
-          }
-      : matchedUseCase
-        ? {
-            '@context': 'https://schema.org',
-            '@type': 'CollectionPage',
-            name: matchedUseCase.title,
-            description,
-            url: canonicalUrl,
-            mainEntity: {
-              '@type': 'ItemList',
-              itemListElement: matchedUseCase.toolNames.map((name, index) => ({
-                '@type': 'ListItem',
-                position: index + 1,
-                name,
-                url: `${baseUrl}/tools/${slugifyToolName(name)}`,
-              })),
-            },
-          }
-      : matchedComparison
-        ? {
-            '@context': 'https://schema.org',
-            '@type': 'WebPage',
-            name: matchedComparison.title,
-            description,
-            url: canonicalUrl,
-          }
-      : matchedAlternative
-        ? {
-            '@context': 'https://schema.org',
-            '@type': 'CollectionPage',
-            name: `${matchedAlternative.name} alternatives`,
-            description,
-            url: canonicalUrl,
-          }
-      : compareHubPage
-        ? {
-            '@context': 'https://schema.org',
-            '@type': 'CollectionPage',
-            name: 'AI Comparison Matrix Hub',
-            description,
-            url: canonicalUrl,
-          }
-      : weeklyTrendingPage
-        ? {
-            '@context': 'https://schema.org',
-            '@type': 'WebPage',
-            name: 'Trending AI Tools This Week',
-            description,
-            url: canonicalUrl,
-          }
-      : matchedLegalPage
-        ? {
-            '@context': 'https://schema.org',
-            '@type': 'WebPage',
-            name: matchedLegalPage.title,
-            description: matchedLegalPage.description,
-            url: canonicalUrl,
-            isPartOf: {
-              '@type': 'WebSite',
-              name: 'AIToolsCenter.in',
-              url: `${baseUrl}/`,
-            },
-          }
-      : listSchema
-
-    upsertJsonLd(toolSchema)
-  }, [normalizedPath, toolSlug, categorySlug, useCaseSlug, comparisonSlug, alternativeSlug, compareHubPage, weeklyTrendingPage])
+    upsertJsonLd({ '@context': 'https://schema.org', '@graph': schemaGraph })
+  }, [normalizedPath, normalizedSearch, newsPageNumber, toolSlug, categorySlug, useCaseSlug, alternativeSlug, weeklyTrendingPage])
 
   const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
 
@@ -2920,31 +3861,10 @@ function App() {
     ))
   }
 
-  const toggleCompare = (toolName) => {
-    setCompareList((current) => {
-      if (current.includes(toolName)) {
-        return current.filter((name) => name !== toolName)
-      }
-
-      if (current.length >= 3) {
-        return [...current.slice(1), toolName]
-      }
-
-      return [...current, toolName]
-    })
-  }
-
   const trackToolClick = (toolName) => {
     setToolClicks((current) => ({
       ...current,
       [toolName]: (current[toolName] || 0) + 1,
-    }))
-  }
-
-  const trackAmazonClick = (itemName) => {
-    setAmazonClicks((current) => ({
-      ...current,
-      [itemName]: (current[itemName] || 0) + 1,
     }))
   }
 
@@ -2962,109 +3882,11 @@ function App() {
     })
   }
 
-  const filtered = TOOLS.filter((tool) => {
-    const matchCategory = activeCategory === 'All' || tool.category === activeCategory
-    const query = search.toLowerCase().trim()
-    const matchSearch =
-      !query ||
-      tool.name.toLowerCase().includes(query) ||
-      tool.tagline.toLowerCase().includes(query) ||
-      tool.badge.toLowerCase().includes(query) ||
-      tool.tags.some((tag) => tag.toLowerCase().includes(query))
-    const matchFavorites = !favoritesOnly || favorites.includes(tool.name)
-
-    return matchCategory && matchSearch && matchFavorites
-  }).sort((left, right) => {
-    if (sortBy === 'rating') {
-      return right.rating - left.rating || left.name.localeCompare(right.name)
-    }
-
-    if (sortBy === 'clicks') {
-      const rightClicks = toolClicks[right.name] || 0
-      const leftClicks = toolClicks[left.name] || 0
-      return rightClicks - leftClicks || right.rating - left.rating || left.name.localeCompare(right.name)
-    }
-
-    if (sortBy === 'name') {
-      return left.name.localeCompare(right.name)
-    }
-
-    return 0
-  })
-
-  const comparisonTools = compareList
-    .map((name) => TOOLS.find((tool) => tool.name === name))
-    .filter(Boolean)
-
-  const topPicks = [...TOOLS]
-    .sort((left, right) => right.rating - left.rating || left.name.localeCompare(right.name))
-    .slice(0, 3)
-
-  const dailyAmazonRecommendations = getDailyAmazonRecommendations(AMAZON_PRODUCT_POOL, AMAZON_ROTATION_SIZE)
-  const trendingTools = [...TOOLS]
-    .sort((left, right) => {
-      const rightClicks = toolClicks[right.name] || 0
-      const leftClicks = toolClicks[left.name] || 0
-      return rightClicks - leftClicks || right.rating - left.rating
-    })
-    .slice(0, 5)
-
-  const quizMatches = (() => {
-    const goal = quizGoal.toLowerCase()
-    const byGoal = TOOLS.filter((tool) => (
-      tool.category.toLowerCase().includes(goal)
-      || tool.tagline.toLowerCase().includes(goal)
-      || tool.tags.some((tag) => tag.toLowerCase().includes(goal))
-    ))
-    return (byGoal.length > 0 ? byGoal : TOOLS).slice(0, 3)
-  })()
-  const alternativeTargets = topPicks.slice(0, 3)
-
-  useEffect(() => {
-    if (typeof window === 'undefined') {
-      return
-    }
-
-    const revealNodes = Array.from(document.querySelectorAll('[data-scroll-reveal]'))
-    if (revealNodes.length === 0) {
-      return
-    }
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-      revealNodes.forEach((node) => node.classList.add('is-visible'))
-      return
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible')
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      {
-        threshold: 0.16,
-        rootMargin: '0px 0px -8% 0px',
-      },
-    )
-
-    revealNodes.forEach((node) => {
-      if (!node.classList.contains('is-visible')) {
-        observer.observe(node)
-      }
-    })
-
-    return () => observer.disconnect()
-  }, [filtered.length, comparisonTools.length, activeCategory, sortBy, favoritesOnly, search, toolClicks])
-
   const submitNewsletterEmail = async (email, source) => {
     if (import.meta.env.DEV) {
       return {
         ok: true,
-        message: 'Thanks for subscribing. (Demo mode — email not sent in local dev.)',
+        message: 'Thanks for subscribing. (Demo mode - email not sent in local dev.)',
       }
     }
 
@@ -3111,129 +3933,164 @@ function App() {
     }
   }
 
-  const handleExitIntentSubmit = async (event) => {
-    event.preventDefault()
-    setExitIntentStatus({ type: 'idle', message: '' })
+  const filtered = TOOLS.filter((tool) => {
+    const matchCategory = activeCategory === 'All' || tool.category === activeCategory
+    const query = search.toLowerCase().trim()
+    const matchSearch =
+      !query ||
+      tool.name.toLowerCase().includes(query) ||
+      tool.tagline.toLowerCase().includes(query) ||
+      tool.badge.toLowerCase().includes(query) ||
+      tool.tags.some((tag) => tag.toLowerCase().includes(query))
+    const matchFavorites = !favoritesOnly || favorites.includes(tool.name)
 
-    try {
-      const result = await submitNewsletterEmail(exitIntentEmail, 'aitoolscenter-lead-magnet')
-      if (!result.ok) {
-        setExitIntentStatus({ type: 'error', message: result.message })
-        return
+    return matchCategory && matchSearch && matchFavorites
+  })
+
+  const pageSize = 8
+  const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize))
+  const landingTools = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+  const rankedTools = [...TOOLS].sort((left, right) => right.rating - left.rating || left.name.localeCompare(right.name))
+  const aiNewsItems = aiNews.slice(0, 8)
+  const trendingCategories = CATEGORIES.filter((category) => category !== 'All')
+    .map((category) => {
+      const toolsInCategory = TOOLS.filter((tool) => tool.category === category)
+      return {
+        category,
+        count: toolsInCategory.length,
+        tools: toolsInCategory.slice(0, 3),
       }
+    })
+    .sort((left, right) => right.count - left.count || left.category.localeCompare(right.category))
+    .slice(0, 4)
 
-      setExitIntentEmail('')
-      setExitIntentStatus({ type: 'success', message: result.message })
-    } catch {
-      setExitIntentStatus({ type: 'error', message: 'Subscription failed. Please try again in a moment.' })
-    }
-  }
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [activeCategory, search, favoritesOnly])
 
-  const dismissExitIntent = () => {
-    localStorage.setItem(LOCAL_EXIT_INTENT_DISMISSED_KEY, 'true')
-    setShowExitIntent(false)
-  }
+  useEffect(() => {
+    setCurrentPage((current) => Math.min(current, totalPages))
+  }, [totalPages])
 
-  const validateToolSubmission = (payload) => {
-    const errors = {}
+  const homePanels = [
+    {
+      title: 'Latest AI',
+      eyebrow: 'Latest AI',
+      icon: '✦',
+      items: aiNewsItems.map((item) => ({
+        label: item.title,
+        href: item.link,
+        meta: item.tag || item.date,
+        external: true,
+      })),
+      footerLabel: `More new AI (${aiNews.length})`,
+      footerHref: '/news',
+    },
+    {
+      title: 'Editor Picks',
+      eyebrow: 'Selection',
+      icon: 'AI',
+      items: rankedTools.slice(0, 8).map((tool) => ({
+        label: tool.name,
+        href: `/tools/${slugifyToolName(tool.name)}`,
+        meta: tool.tagline,
+      })),
+      footerLabel: `See all tools (${TOOLS.length})`,
+      footerHref: '/#tools',
+    },
+    {
+      title: 'SuperTools',
+      eyebrow: 'SuperTools',
+      icon: '◆',
+      items: [...TOOLS]
+        .filter((tool) => ['Image', 'Video', 'Coding', 'Productivity'].includes(tool.category))
+        .sort((left, right) => right.rating - left.rating || left.name.localeCompare(right.name))
+        .slice(0, 8)
+        .map((tool) => ({
+          label: tool.name,
+          href: `/tools/${slugifyToolName(tool.name)}`,
+          meta: tool.category,
+        })),
+      footerLabel: 'Browse categories',
+      footerHref: '/categories/writing',
+    },
+    {
+      title: 'AI Chat & Assistant',
+      eyebrow: 'Chat',
+      icon: '◌',
+      items: ['ChatGPT', 'Claude', 'Gemini', 'Perplexity', 'Microsoft Copilot', 'Notion AI', 'Grammarly', 'Otter.ai']
+        .map((name) => TOOLS.find((tool) => tool.name === name))
+        .filter(Boolean)
+        .map((tool) => ({
+          label: tool.name,
+          href: `/tools/${slugifyToolName(tool.name)}`,
+          meta: tool.tagline,
+        })),
+      footerLabel: 'Browse all tools',
+      footerHref: '/#tools',
+    },
+  ]
 
-    if (!payload.name.trim()) {
-      errors.name = 'Tool name is required.'
-    }
+  const discoverCards = [
+    {
+      title: 'AI News',
+      description: 'Daily headlines, launches, and model updates in one place.',
+      href: '/news',
+      icon: '▦',
+    },
+    {
+      title: 'GPTs List',
+      description: 'Browse assistant-style tools and specialized workflows.',
+      href: '/categories/productivity',
+      icon: '＋',
+    },
+    {
+      title: 'YouTube AI',
+      description: 'Video tools, repurposing tools, and creator workflows.',
+      href: '/categories/video',
+      icon: '▶',
+    },
+  ]
 
-    if (!payload.url.trim()) {
-      errors.url = 'Tool website URL is required.'
-    } else {
-      try {
-        const parsedUrl = new URL(payload.url)
-        if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
-          errors.url = 'URL must start with http:// or https://.'
-        }
-      } catch {
-        errors.url = 'Enter a valid website URL.'
-      }
-    }
-
-    if (!payload.contactEmail.trim()) {
-      errors.contactEmail = 'Contact email is required.'
-    }
-
-    if (!payload.description.trim() || payload.description.trim().length < 30) {
-      errors.description = 'Description must be at least 30 characters.'
-    }
-
-    return errors
-  }
-
-  const handleToolInputChange = (event) => {
-    const { name, value } = event.target
-    setToolSubmission((current) => ({ ...current, [name]: value }))
-    setToolErrors((current) => ({ ...current, [name]: '' }))
-  }
-
-  const handleToolSubmit = async (event) => {
-    event.preventDefault()
-
-    const payload = {
-      name: toolSubmission.name.trim(),
-      url: toolSubmission.url.trim(),
-      category: toolSubmission.category,
-      pricing: toolSubmission.pricing,
-      contactEmail: toolSubmission.contactEmail.trim(),
-      description: toolSubmission.description.trim(),
-    }
-
-    const errors = validateToolSubmission(payload)
-    setToolErrors(errors)
-
-    if (Object.keys(errors).length > 0) {
-      setToolSubmitStatus({ type: 'error', message: 'Please fix the highlighted fields and submit again.' })
+  useEffect(() => {
+    if (typeof window === 'undefined') {
       return
     }
 
-    setIsSubmittingTool(true)
-    setToolSubmitStatus({ type: 'idle', message: '' })
-
-    try {
-      const response = await fetch(SUBMIT_TOOL_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...payload,
-          source: 'aitoolscenter-submit-tool',
-          submittedAt: new Date().toISOString(),
-        }),
-      })
-
-      if (!response.ok) {
-        throw new Error('Unable to submit at this time.')
-      }
-
-      setToolSubmission({
-        name: '',
-        url: '',
-        category: 'Writing',
-        pricing: 'Freemium',
-        contactEmail: '',
-        description: '',
-      })
-      setToolErrors({})
-      setToolSubmitStatus({
-        type: 'success',
-        message: 'Thanks. Your tool submission was received and will be reviewed shortly.',
-      })
-    } catch {
-      setToolSubmitStatus({
-        type: 'error',
-        message: 'Submission failed. Please try again in a few minutes.',
-      })
-    } finally {
-      setIsSubmittingTool(false)
+    const revealNodes = Array.from(document.querySelectorAll('[data-scroll-reveal]'))
+    if (revealNodes.length === 0) {
+      return
     }
-  }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      revealNodes.forEach((node) => node.classList.add('is-visible'))
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      {
+        threshold: 0.16,
+        rootMargin: '0px 0px -8% 0px',
+      },
+    )
+
+    revealNodes.forEach((node) => {
+      if (!node.classList.contains('is-visible')) {
+        observer.observe(node)
+      }
+    })
+
+    return () => observer.disconnect()
+  }, [filtered.length, activeCategory, favoritesOnly, search, toolClicks])
 
   if (legalPage) {
     return <LegalPage page={legalPage} />
@@ -3251,703 +4108,414 @@ function App() {
     return <UseCaseLandingPage page={useCasePage} />
   }
 
-  if (comparisonPage) {
-    return <ComparisonLandingPage comparison={comparisonPage} />
-  }
-
   if (alternativePage) {
     return <AlternativesLandingPage tool={alternativePage} />
   }
 
-  if (compareHubPage) {
-    return <CompareHubPage />
+  if (newsPage) {
+    return <NewsPage entries={aiNews} currentPage={newsPageNumber} pageSize={NEWS_PAGE_SIZE} />
   }
 
   if (weeklyTrendingPage) {
     return <WeeklyTrendingPage snapshots={weeklyTrendSnapshots} />
   }
 
+  if (isTutorialsPath(normalizedPath)) {
+    return <TutorialsPage videos={YOUTUBE_TUTORIALS} />
+  }
+
+  if (isContactPath(normalizedPath)) {
+    return (
+      <div className="page">
+        <SiteNav />
+        <ContactPage />
+        <SiteFooter />
+      </div>
+    )
+  }
+
   return (
-    <div className="page">
+    <div className="page page-apple-home page-simple-home">
       <SiteNav theme={theme} onToggleTheme={toggleTheme} />
       <div className="page-body page-body-home">
-        <PageRails
-          left={{
-            eyebrow: 'Live picks',
-            title: 'What people click most',
-            description: 'A compact view of the most relevant tools and signals on the directory today.',
-            chips: ['Favorites', 'Clicks', 'Trending'],
-            links: [
-              ...topPicks.slice(0, 2).map((tool) => ({
-                label: tool.name,
-                href: `/tools/${slugifyToolName(tool.name)}`,
-                meta: tool.tagline,
-              })),
-              ...trendingTools.slice(0, 2).map((tool) => ({
-                label: tool.name,
-                href: `/tools/${slugifyToolName(tool.name)}`,
-                meta: `${toolClicks[tool.name] || 0} clicks this week`,
-              })),
-            ],
-          }}
-          right={{
-            eyebrow: 'Quick moves',
-            title: 'Jump to a section',
-            description: 'Use these shortcuts to move across the discovery flow without hunting through the page.',
-            chips: ['Use cases', 'Tools', 'Newsletter'],
-            links: [
-              { label: 'Use Cases', href: '#use-cases', meta: 'Start with a goal' },
-              { label: 'Browse Tools', href: '#tools', meta: 'Filter the directory' },
-              { label: 'Weekly Trends', href: '/trending-ai-tools-this-week', meta: 'Open the weekly leaderboard' },
-            ],
-          }}
-        />
+        <main className="landing-tools-main">
+          
 
-        <div>
-          <header className="hero">
-            <div className="hero-grid">
-              <div className="hero-main">
-                <p className="eyebrow">UPDATED MAY 2026 • 15+ TOOLS REVIEWED</p>
-                <h1>Find the right <span className="gradient-text">AI tool</span> in 60 seconds</h1>
-                <p className="subtext">
-                  Skip the hype. Start with your outcome, then get practical tool recommendations for studying,
-                  teaching, coding, content creation, and business growth.
-                </p>
-                <div className="hero-cta-row">
-                  <a href="#use-cases" className="btn btn-primary">Find by Outcome</a>
-                  <a href="/compare-hub" className="btn btn-secondary">Open Compare Hub</a>
-                </div>
-                <div className="search-bar">
+          <header className="hero hero-simple">
+            <div className="hero-main">
+              <h1>🚀 The World's Best AI Tools</h1>
+              <p className="subtext">{TOOLS.length}+ hand-curated AI tools. Find the perfect tool for your needs quickly.</p>
+            </div>
+          </header>
+
+          <section className="landing-tools-list" id="tools">
+            <div className="search-category-bar" role="search" aria-label="Search and filter tools">
+              <div className="search-category-row">
+                <div className="search-bar search-bar-inline">
                   <input
                     type="search"
-                    placeholder="Search tools, e.g. 'image generation', 'code', 'free'…"
+                    placeholder="Search for AI tools..."
                     value={search}
                     onChange={(event) => setSearch(event.target.value)}
                     aria-label="Search AI tools"
                   />
                 </div>
-                <div className="hero-stats">
-                  <span>🎯 Outcome-first recommendations</span>
-                  <span>✅ 15+ Tools Reviewed</span>
-                  <span>★ {favorites.length} Saved Favorites</span>
-                  <span>👥 {websiteVisitors === null ? 'Live' : websiteVisitors.toLocaleString()} Website Visits</span>
-                  <span>↺ {localVisits} Visits From This Browser</span>
-                  <span>🛡️ Manually Curated Listings</span>
-                </div>
+
+                <label className="toolbar-field category-select-field">
+                  <select value={activeCategory} onChange={(event) => setActiveCategory(event.target.value)}>
+                    {CATEGORIES.map((category) => (
+                      <option key={category} value={category}>{category === 'All' ? 'All categories' : category}</option>
+                    ))}
+                  </select>
+                </label>
               </div>
 
-              <aside className="hero-visual" aria-hidden="true">
-                <div
-                  className="orbital-shell"
-                  ref={heroTiltHandlers.elementRef}
-                  onMouseMove={heroTiltHandlers.onMouseMove}
-                  onMouseLeave={heroTiltHandlers.onMouseLeave}
+              <div className="filter-pills" role="group" aria-label="Quick filters">
+                <button type="button" className={`filter-pill${favoritesOnly ? ' active' : ''}`} onClick={() => setFavoritesOnly((current) => !current)}>
+                  <span className="pill-icon">✓</span>
+                  Verified
+                </button>
+                <button type="button" className="filter-pill" onClick={() => setActiveCategory('All') || setSearch('free')}>Free</button>
+                <button type="button" className="filter-pill" onClick={() => setActiveCategory('All') || setSearch('freemium')}>Freemium</button>
+                <button type="button" className="filter-pill" onClick={() => setActiveCategory('All') || setSearch('paid')}>Paid</button>
+              </div>
+
+              <div className="filter-meta">
+                <span>📊 {filtered.length} tools</span>
+                <span>🔄 Updated daily</span>
+                <span>✅ 100% verified</span>
+              </div>
+            </div>
+
+            <div className="featured-categories-section" id="categories">
+              <div className="section-header">
+                <h2>Browse by Category</h2>
+                <p>Explore AI tools organized by function and use case</p>
+              </div>
+              <div className="categories-grid">
+                {CATEGORIES.map((category) => {
+                  if (category === 'All') return null
+                  const categoryTools = TOOLS.filter(t => t.category === category)
+                  const categoryEmojis = {
+                    Writing: '✍️',
+                    Image: '🎨',
+                    Video: '🎬',
+                    Coding: '💻',
+                    Productivity: '⚡',
+                    Automation: '🤖',
+                    Research: '🔍'
+                  }
+                  return (
+                    <button
+                      key={category}
+                      className="category-card"
+                      onClick={() => {
+                        setActiveCategory(category)
+                        setCurrentPage(1)
+                      }}
+                    >
+                      <span className="category-emoji">{categoryEmojis[category] || '📌'}</span>
+                      <h3>{category}</h3>
+                      <p className="category-count">{categoryTools.length} tools</p>
+                      <span className="explore-arrow">→</span>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+
+            <div className="all-tools-section" id="all-tools">
+              <div className="tools-section-header">
+                <h2>Browse All AI Tools ({filtered.length})</h2>
+              </div>
+
+              <div className="pagination-strip" aria-label="Tool pagination">
+                <button
+                  type="button"
+                  className="btn btn-secondary pagination-button"
+                  onClick={() => setCurrentPage((current) => Math.max(1, current - 1))}
+                  disabled={currentPage === 1}
                 >
-                  <div className="ring ring-a"></div>
-                  <div className="ring ring-b"></div>
-                  <div className="ring ring-c"></div>
-
-                  <article className="core-card">
-                    <p>AI Command Deck</p>
-                    <strong>{filtered.length} discoverable tools</strong>
-                    <span>Category: {activeCategory}</span>
-                    <div className="core-bars">
-                      <i style={{ width: '82%' }}></i>
-                      <i style={{ width: '63%' }}></i>
-                      <i style={{ width: '48%' }}></i>
-                    </div>
-                  </article>
-
-                  <div className="float-panel panel-a">
-                    <small>Live signal</small>
-                    <strong>Trending tags</strong>
-                  </div>
-                  <div className="float-panel panel-b">
-                    <small>Top category</small>
-                    <strong>{topPicks[0]?.category || 'Writing'}</strong>
-                  </div>
+                  ← Previous
+                </button>
+                <div className="pagination-pages">
+                  {Array.from({ length: totalPages }, (_, index) => {
+                    const pageNumber = index + 1
+                    return (
+                      <button
+                        key={pageNumber}
+                        type="button"
+                        className={`pagination-page${pageNumber === currentPage ? ' active' : ''}`}
+                        onClick={() => setCurrentPage(pageNumber)}
+                        aria-current={pageNumber === currentPage ? 'page' : undefined}
+                      >
+                        {pageNumber}
+                      </button>
+                    )
+                  })}
                 </div>
-              </aside>
-            </div>
-          </header>
+                <button
+                  type="button"
+                  className="btn btn-secondary pagination-button"
+                  onClick={() => setCurrentPage((current) => Math.min(totalPages, current + 1))}
+                  disabled={currentPage === totalPages}
+                >
+                  Next →
+                </button>
+              </div>
 
-      <main>
-        <section className="section" id="use-cases">
-          <div className="section-divider"></div>
-          <div className="section-heading-row">
-            <div>
-              <h2>Start with your goal, not a giant list</h2>
-              <p className="section-copy">Problem → solution → recommended tools. Pick the use case and jump to curated options.</p>
-            </div>
-            <div className="results-chip">Outcome-driven discovery</div>
-          </div>
-          <div className="outcome-grid">
-            {OUTCOME_BLOCKS.map((block, index) => (
-              <article
-                key={block.slug}
-                className={`outcome-card scroll-reveal reveal-elastic ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
-                style={{ '--reveal-delay': `${Math.min(index * 50, 220)}ms` }}
-                data-scroll-reveal
-              >
-                <span className="tag">{CATEGORY_ICONS[block.category]} {block.category}</span>
-                <h3>{block.title}</h3>
-                <p>{block.outcome}</p>
-                <div className="tool-tags">
-                  {block.tools.map((name) => (
-                    <a key={name} className="tag" href={`/tools/${slugifyToolName(name)}`}>{name}</a>
+              {filtered.length === 0 ? (
+                <div className="empty-state">
+                  <p>No AI tools found matching your search.</p>
+                </div>
+              ) : (
+                <div className="tools-grid">
+                  {landingTools.map((tool, index) => (
+                    <div key={tool.name} className="tool-card-wrapper">
+                      <ToolCard
+                        tool={tool}
+                        rank={index + 1 + (currentPage - 1) * pageSize}
+                        isFavorite={favorites.includes(tool.name)}
+                        userRating={userRatings[tool.name] || 0}
+                        helpfulVote={helpfulVotes[tool.name] || null}
+                        onToggleFavorite={toggleFavorite}
+                        onTagClick={(tag) => setSearch(tag)}
+                        onRate={rateTool}
+                        onVisit={trackToolClick}
+                        onHelpfulVote={handleHelpfulVote}
+                      />
+                    </div>
                   ))}
                 </div>
-                <a href={`/best-ai-tools-for/${block.slug}`} className="btn btn-secondary">View this guide</a>
-              </article>
-            ))}
-          </div>
-        </section>
+              )}
 
-        <AdUnit slot="3951802461" className="ad-unit-inline" />
-        <FacebookAdPlaceholder placement="Homepage: After Use Cases" className="ad-unit-inline" />
+              <div className="pagination-strip" aria-label="Tool pagination">
+                <button
+                  type="button"
+                  className="btn btn-secondary pagination-button"
+                  onClick={() => setCurrentPage((current) => Math.max(1, current - 1))}
+                  disabled={currentPage === 1}
+                >
+                  ← Previous
+                </button>
+                <div className="pagination-pages">
+                  {Array.from({ length: totalPages }, (_, index) => {
+                    const pageNumber = index + 1
+                    return (
+                      <button
+                        key={pageNumber}
+                        type="button"
+                        className={`pagination-page${pageNumber === currentPage ? ' active' : ''}`}
+                        onClick={() => setCurrentPage(pageNumber)}
+                        aria-current={pageNumber === currentPage ? 'page' : undefined}
+                      >
+                        {pageNumber}
+                      </button>
+                    )
+                  })}
+                </div>
+                <button
+                  type="button"
+                  className="btn btn-secondary pagination-button"
+                  onClick={() => setCurrentPage((current) => Math.min(totalPages, current + 1))}
+                  disabled={currentPage === totalPages}
+                >
+                  Next →
+                </button>
+              </div>
 
-        <section className="section" id="trending">
-          <div className="section-divider"></div>
-          <div className="section-heading-row">
-            <div>
-              <h2>Trending AI Tools Today</h2>
-              <p className="section-copy">Most visited tools this week based on live click behavior in this directory.</p>
+              <div className="tools-footer">
+                <span className="tools-count">Showing {landingTools.length} of {filtered.length} tools</span>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => {
+                    setActiveCategory('All')
+                    setSearch('')
+                    setFavoritesOnly(false)
+                    setCurrentPage(1)
+                  }}
+                >
+                  Clear all filters
+                </button>
+              </div>
             </div>
-            <a href="/trending-ai-tools-this-week" className="results-chip">Weekly snapshot page</a>
-          </div>
-          <div className="trending-grid">
-            {trendingTools.map((tool, index) => (
-              <article key={tool.name} className="trend-card" data-scroll-reveal>
-                <small>#{index + 1}</small>
-                <h3><a className="tool-name-link" href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a></h3>
-                <p>{tool.tagline}</p>
-                <span className="tool-click-count">{toolClicks[tool.name] || 0} clicks</span>
-              </article>
-            ))}
-          </div>
-        </section>
 
-        <AdUnit slot="6729415088" className="ad-unit-inline" />
-
-        <section className="section" id="alternatives">
-          <div className="section-divider"></div>
-          <div className="section-heading-row">
-            <div>
-              <h2>Alternatives pages for high-intent search</h2>
-              <p className="section-copy">Browse “alternatives to” pages for the most searched AI products.</p>
+            <div className="platforms-section">
+              <p className="platforms-label">🏢 POPULAR AI PLATFORMS & PUBLISHERS</p>
+              <div className="platforms-grid">
+                <button
+                  type="button"
+                  className="platform-card"
+                  onClick={() => {
+                    setActiveCategory('All')
+                    setSearch('Google')
+                    setCurrentPage(1)
+                  }}
+                  title="Filter tools by Google"
+                >
+                  <span className="platform-icon">🔵</span>
+                  Google AI
+                  <span className="platform-link-icon">→</span>
+                </button>
+                <button
+                  type="button"
+                  className="platform-card"
+                  onClick={() => {
+                    setActiveCategory('All')
+                    setSearch('OpenAI')
+                    setCurrentPage(1)
+                  }}
+                  title="Filter tools by OpenAI"
+                >
+                  <span className="platform-icon">🔴</span>
+                  OpenAI
+                  <span className="platform-link-icon">→</span>
+                </button>
+                <button
+                  type="button"
+                  className="platform-card"
+                  onClick={() => {
+                    setActiveCategory('All')
+                    setSearch('Meta')
+                    setCurrentPage(1)
+                  }}
+                  title="Filter tools by Meta"
+                >
+                  <span className="platform-icon">👥</span>
+                  Meta AI
+                  <span className="platform-link-icon">→</span>
+                </button>
+                <button
+                  type="button"
+                  className="platform-card"
+                  onClick={() => {
+                    setActiveCategory('All')
+                    setSearch('Microsoft')
+                    setCurrentPage(1)
+                  }}
+                  title="Filter tools by Microsoft"
+                >
+                  <span className="platform-icon">🪟</span>
+                  Microsoft AI
+                  <span className="platform-link-icon">→</span>
+                </button>
+                <button
+                  type="button"
+                  className="platform-card"
+                  onClick={() => {
+                    setActiveCategory('All')
+                    setSearch('Anthropic')
+                    setCurrentPage(1)
+                  }}
+                  title="Filter tools by Anthropic"
+                >
+                  <span className="platform-icon">🤖</span>
+                  Anthropic
+                  <span className="platform-link-icon">→</span>
+                </button>
+                <button
+                  type="button"
+                  className="platform-card"
+                  onClick={() => {
+                    setActiveCategory('All')
+                    setSearch('DeepMind')
+                    setCurrentPage(1)
+                  }}
+                  title="Filter tools by DeepMind"
+                >
+                  <span className="platform-icon">🧠</span>
+                  DeepMind
+                  <span className="platform-link-icon">→</span>
+                </button>
+              </div>
             </div>
-          </div>
-          <div className="landing-links-grid">
-            {alternativeTargets.map((tool) => (
-              <a key={tool.name} href={`/alternatives-to-${slugifyToolName(tool.name)}`} className="landing-link-card">
-                <strong>{tool.name} alternatives</strong>
-                <span>Compare alternatives, pricing styles, and direct matchups for {tool.name}.</span>
+          </section>
+
+          <section className="section themed-sections-grid" aria-labelledby="explore-title">
+            <h2 id="explore-title">Explore More Resources</h2>
+            <div className="themed-cards">
+              <a href="/news" className="themed-card">
+                <span className="themed-icon">📰</span>
+                <strong>AI News Today</strong>
+                <p>Latest AI news and updates in real time</p>
               </a>
-            ))}
-          </div>
-        </section>
-
-        <section className="section" id="landing-pages">
-          <div className="section-divider"></div>
-          <div className="section-heading-row">
-            <div>
-              <h2>Best AI Tools for specific professions</h2>
-              <p className="section-copy">Programmatic landing pages targeting high-intent “best for X” searches.</p>
-            </div>
-          </div>
-          <div className="landing-links-grid">
-            {USE_CASE_PAGES.map((page) => (
-              <a key={page.slug} href={`/best-ai-tools-for/${page.slug}`} className="landing-link-card">
-                <strong>{page.title}</strong>
-                <span>{page.intro}</span>
-              </a>
-            ))}
-          </div>
-        </section>
-
-        <AdUnit slot="9301754426" className="ad-unit-inline" />
-        <FacebookAdPlaceholder placement="Homepage: Before Tool Directory" className="ad-unit-inline" />
-
-        <section className="section" id="tools">
-          <div className="section-divider"></div>
-          <div className="section-heading-row">
-            <div>
-              <h2>Browse AI Tools by Category</h2>
-              <p className="section-copy">Filter the directory, save favorites, and compare up to three tools side by side.</p>
-            </div>
-            <div className="results-chip">{filtered.length} results</div>
-          </div>
-
-          <div className="category-filters" role="group" aria-label="Filter by category">
-            {CATEGORIES.map((category) => (
               <button
-                key={category}
-                className={`filter-btn${activeCategory === category ? ' active' : ''}`}
-                onClick={() => setActiveCategory(category)}
+                type="button"
+                className="themed-card"
+                onClick={() => {
+                  setSearch('')
+                  setActiveCategory('All')
+                  setCurrentPage(1)
+                  window.location.hash = '#tools'
+                }}
               >
-                <span style={{ fontSize: '0.9em' }}>{CATEGORY_ICONS[category]}</span> {category}
+                <span className="themed-icon">🏆</span>
+                <strong>Browse All {TOOLS.length} AI Tools</strong>
+                <p>All hand-curated AI tools in one place</p>
               </button>
-            ))}
-          </div>
-
-          <div className="tool-toolbar">
-            <label className="toolbar-field">
-              <span>Sort by</span>
-              <select value={sortBy} onChange={(event) => setSortBy(event.target.value)}>
-                {SORT_OPTIONS.map((option) => (
-                  <option key={option.value} value={option.value}>{option.label}</option>
-                ))}
-              </select>
-            </label>
-            <label className="checkbox-pill">
-              <input
-                type="checkbox"
-                checked={favoritesOnly}
-                onChange={(event) => setFavoritesOnly(event.target.checked)}
-              />
-              <span>Favorites only</span>
-            </label>
-            <button
-              type="button"
-              className="btn btn-secondary toolbar-button"
-              onClick={() => {
-                setActiveCategory('All')
-                setSearch('')
-                setFavoritesOnly(false)
-              }}
-            >
-              Reset Filters
-            </button>
-            <button type="button" className="btn btn-secondary toolbar-button" onClick={() => setCompareList([])}>
-              Clear Compare
-            </button>
-          </div>
-
-          <AdUnit slot="8014623952" className="ad-unit-inline" />
-
-          {filtered.length === 0 ? (
-            <p className="empty-state">No tools match your current filters. Try a different keyword or turn off favorites only.</p>
-          ) : (
-            <div className="tools-grid">
-              {filtered.map((tool, index) => (
-                <div
-                  key={tool.name}
-                  className={`scroll-reveal reveal-subtle ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
-                  style={{ '--reveal-delay': `${Math.min(index * 32, 260)}ms` }}
-                  data-scroll-reveal
-                >
-                  <ToolCard
-                    tool={tool}
-                    isFavorite={favorites.includes(tool.name)}
-                    isCompared={compareList.includes(tool.name)}
-                    userRating={userRatings[tool.name] || 0}
-                    clickCount={toolClicks[tool.name] || 0}
-                    helpfulVote={helpfulVotes[tool.name] || null}
-                    onToggleFavorite={toggleFavorite}
-                    onToggleCompare={toggleCompare}
-                    onTagClick={(tag) => setSearch(tag)}
-                    onRate={rateTool}
-                    onVisit={trackToolClick}
-                    onHelpfulVote={handleHelpfulVote}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-        </section>
-
-        <section className="section amazon-section" id="amazon-picks">
-          <div className="section-divider"></div>
-          <div className="section-heading-row">
-            <div>
-              <h2>Amazon Picks for AI Creators</h2>
-              <p className="section-copy">Hardware and accessories we recommend for faster AI workflows, research, and productivity.</p>
-            </div>
-            <div className="results-chip">{dailyAmazonRecommendations.length} picks • rotates daily</div>
-          </div>
-          <div className="amazon-grid">
-            {dailyAmazonRecommendations.map((item, index) => (
-              <div
-                key={item.name}
-                className={`scroll-reveal reveal-subtle ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
-                style={{ '--reveal-delay': `${Math.min(index * 65, 180)}ms` }}
-                data-scroll-reveal
-              >
-                <AmazonPickCard
-                  item={item}
-                  clickCount={amazonClicks[item.name] || 0}
-                  onVisit={trackAmazonClick}
-                />
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="section" id="comparison-pages">
-          <div className="section-divider"></div>
-          <div className="section-heading-row">
-            <div>
-              <h2>ChatGPT vs Claude, Midjourney vs DALL·E, and more</h2>
-              <p className="section-copy">Comparison pages are built for high-intent search and faster buying decisions.</p>
-            </div>
-          </div>
-          <article className="compare-table-shell">
-            <h3>{COMPARISON_PAGES[0].title}</h3>
-            <ComparisonTable comparison={COMPARISON_PAGES[0]} />
-          </article>
-          <div className="landing-links-grid">
-            {COMPARISON_PAGES.map((page) => (
-              <a key={page.slug} href={`/compare/${page.slug}`} className="landing-link-card">
-                <strong>{page.title}</strong>
-                <span>{page.description}</span>
+              <a href="/contact" className="themed-card">
+                <span className="themed-icon">➕</span>
+                <strong>Submit an AI</strong>
+                <p>Contribute new AI tools to the directory</p>
               </a>
-            ))}
-          </div>
-          <div className="hero-cta-row" style={{ marginTop: '1rem' }}>
-            <a href="/compare-hub" className="btn btn-secondary">Open Comparison Matrix Hub</a>
-          </div>
-        </section>
-
-        <AdUnit slot="5543871290" className="ad-unit-inline" />
-
-        <section className="section info-section" id="how-ai-works">
-          <div className="info-grid">
-            <div>
-              <h2>How AI Tools Actually Work</h2>
-              <p>
-                Most modern AI tools are powered by <strong>Large Language Models (LLMs)</strong> —
-                neural networks trained on vast amounts of text, code, and images. They predict the
-                best next output given your input (called a prompt).
-              </p>
-              <p>
-                When you type a question into ChatGPT or describe an image to Midjourney, the model
-                processes your words, understands context, and generates a response — all in seconds.
-              </p>
-              <p>
-                Newer models are <strong>multimodal</strong>, meaning they can understand and generate
-                text, images, audio, and video in a single conversation.
-              </p>
             </div>
-            <div className="info-cards">
-              {[
-                { icon: '🧠', title: 'LLMs', desc: 'Large Language Models predict outputs from your text prompts.' },
-                { icon: '🎨', title: 'Diffusion Models', desc: 'Generate images by progressively refining noise into visuals.' },
-                { icon: '⚙️', title: 'Agents', desc: 'AI agents take multi-step actions to complete complex goals.' },
-                { icon: '🔗', title: 'RAG', desc: 'Retrieval-Augmented Generation grounds AI answers in real data.' },
-              ].map((card) => (
-                <div key={card.title} className="info-card">
-                  <span className="info-icon">{card.icon}</span>
-                  <div>
-                    <strong>{card.title}</strong>
-                    <p>{card.desc}</p>
-                  </div>
-                </div>
-              ))}
+          </section>
+
+          <section className="section newsletter" id="newsletter">
+            <h2>Get the latest AI tools delivered weekly</h2>
+            <p>5 curated tools each week, no spam.</p>
+            <div className="lead-magnet-row">
+              <a className="btn btn-secondary" href="/ai-workflow-kit.pdf" target="_blank" rel="noopener noreferrer">Download Free AI Workflow Kit</a>
             </div>
-          </div>
-        </section>
-
-        <section className="section">
-          <h2>What You Can Do with AI Tools</h2>
-          <div className="use-cases-grid">
-            {[
-              { icon: '✍️', title: 'Write content faster', desc: 'Blogs, emails, social posts, ad copy, and more in minutes.' },
-              { icon: '💻', title: 'Build software', desc: 'Generate, explain, and debug code without deep expertise.' },
-              { icon: '🖼️', title: 'Create visuals', desc: 'Design logos, illustrations, and marketing images from text.' },
-              { icon: '🎬', title: 'Produce videos', desc: 'Generate cinematic short-form videos from a text description.' },
-              { icon: '📊', title: 'Analyze data', desc: 'Summarize reports, extract insights, and build dashboards.' },
-              { icon: '🤖', title: 'Automate workflows', desc: 'Connect apps and eliminate repetitive manual tasks.' },
-            ].map((useCase, index) => (
-              <div
-                key={useCase.title}
-                className={`use-case-card scroll-reveal reveal-elastic ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
-                style={{ '--reveal-delay': `${Math.min(index * 45, 220)}ms` }}
-                data-scroll-reveal
-              >
-                <span className="use-icon">{useCase.icon}</span>
-                <h3>{useCase.title}</h3>
-                <p>{useCase.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="section news-section" id="ai-news">
-          <div className="section-divider"></div>
-          <div className="section-heading-row">
-            <div>
-              <h2>AI News &amp; Updates</h2>
-              <p className="section-copy">The latest launches, model releases, and product updates from the AI world.</p>
-            </div>
-            <span className="results-chip">Updated May 2026</span>
-          </div>
-          <div className="news-grid">
-            {AI_NEWS.map((item, index) => (
-              <div
-                key={item.title}
-                className={`news-card scroll-reveal reveal-elastic ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
-                style={{ '--reveal-delay': `${Math.min(index * 48, 260)}ms` }}
-                data-scroll-reveal
-              >
-                <div className="news-card-top">
-                  <span className="news-tag">{item.tag}</span>
-                  <span className="news-date">{item.date}</span>
-                </div>
-                <h3 className="news-title">
-                  <a href={item.link} target="_blank" rel="noopener noreferrer" className="news-title-link">
-                    {item.title}
-                  </a>
-                </h3>
-                <p className="news-summary">{item.summary}</p>
-              </div>
-            ))}
-          </div>
-          <AdUnit slot="1826409753" className="ad-unit-inline" />
-        </section>
-
-        <section className="section" id="faq">
-          <div className="section-divider"></div>
-          <h2>Frequently Asked Questions</h2>
-          <div className="faq-list">
-            {FAQS.map((faq, index) => (
-              <FaqItem
-                key={faq.q}
-                q={faq.q}
-                a={faq.a}
-                className={`scroll-reveal reveal-subtle ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
-                style={{ '--reveal-delay': `${Math.min(index * 48, 220)}ms` }}
-              />
-            ))}
-          </div>
-        </section>
-
-        <section className="section submit-tool-section" id="submit-tool">
-          <h2>Submit Your Tool</h2>
-          <p className="section-copy">
-            Building an AI product? Share your tool for review and potential listing in AIToolsCenter.
-          </p>
-          <form className="submit-tool-form" onSubmit={handleToolSubmit} noValidate>
-            <label className="field-group">
-              <span>Tool name</span>
+            <form className="newsletter-form" onSubmit={handleNewsletterSubmit}>
               <input
-                name="name"
-                type="text"
-                value={toolSubmission.name}
-                onChange={handleToolInputChange}
-                placeholder="Example: PromptPilot"
-                aria-invalid={Boolean(toolErrors.name)}
-                required
-              />
-              {toolErrors.name ? <small className="field-error">{toolErrors.name}</small> : null}
-            </label>
-
-            <label className="field-group">
-              <span>Website URL</span>
-              <input
-                name="url"
-                type="url"
-                value={toolSubmission.url}
-                onChange={handleToolInputChange}
-                placeholder="https://yourtool.com"
-                aria-invalid={Boolean(toolErrors.url)}
-                required
-              />
-              {toolErrors.url ? <small className="field-error">{toolErrors.url}</small> : null}
-            </label>
-
-            <label className="field-group">
-              <span>Category</span>
-              <select
-                name="category"
-                value={toolSubmission.category}
-                onChange={handleToolInputChange}
-              >
-                {TOOL_CATEGORIES.map((category) => (
-                  <option key={category} value={category}>{category}</option>
-                ))}
-              </select>
-            </label>
-
-            <label className="field-group">
-              <span>Pricing</span>
-              <select
-                name="pricing"
-                value={toolSubmission.pricing}
-                onChange={handleToolInputChange}
-              >
-                {PRICING_OPTIONS.map((option) => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
-              </select>
-            </label>
-
-            <label className="field-group field-group-full">
-              <span>Contact email</span>
-              <input
-                name="contactEmail"
                 type="email"
-                value={toolSubmission.contactEmail}
-                onChange={handleToolInputChange}
-                placeholder="founder@yourtool.com"
-                aria-invalid={Boolean(toolErrors.contactEmail)}
+                placeholder="Enter your email address"
                 required
+                aria-label="Email address"
+                value={newsletterEmail}
+                onChange={(event) => setNewsletterEmail(event.target.value)}
               />
-              {toolErrors.contactEmail ? <small className="field-error">{toolErrors.contactEmail}</small> : null}
-            </label>
-
-            <label className="field-group field-group-full">
-              <span>What does your tool do?</span>
-              <textarea
-                name="description"
-                value={toolSubmission.description}
-                onChange={handleToolInputChange}
-                rows={5}
-                placeholder="Describe use case, who it's for, and what makes it different."
-                aria-invalid={Boolean(toolErrors.description)}
-                required
-              />
-              {toolErrors.description ? <small className="field-error">{toolErrors.description}</small> : null}
-            </label>
-
-            <div className="field-group-full submit-tool-actions">
-              <button type="submit" className="btn btn-primary" disabled={isSubmittingTool}>
-                {isSubmittingTool ? 'Submitting...' : 'Submit Tool'}
+              <button type="submit" className="btn btn-primary" disabled={isSubmittingNewsletter}>
+                {isSubmittingNewsletter ? 'Subscribing...' : 'Subscribe Free'}
               </button>
-              {toolSubmitStatus.message ? (
-                <p className={`submit-tool-status ${toolSubmitStatus.type === 'error' ? 'is-error' : 'is-success'}`}>
-                  {toolSubmitStatus.message}
-                </p>
-              ) : null}
-            </div>
-          </form>
-        </section>
-
-        <section className="section finder-section" id="finder-quiz">
-          <div className="section-divider"></div>
-          <div className="section-heading-row">
-            <div>
-              <h2>AI Tool Finder Quiz</h2>
-              <p className="section-copy">What do you want to do with AI? Choose one goal to get instant recommendations.</p>
-            </div>
-          </div>
-          <div className="quiz-shell">
-            <label className="toolbar-field">
-              <span>Primary Goal</span>
-              <select value={quizGoal} onChange={(event) => setQuizGoal(event.target.value)}>
-                <option value="write content">Write content</option>
-                <option value="video">Make videos</option>
-                <option value="coding">Code</option>
-                <option value="research">Research</option>
-                <option value="study">Study</option>
-                <option value="business">Start business</option>
-              </select>
-            </label>
-            <div className="quiz-results">
-              {quizMatches.map((tool) => (
-                <article key={tool.name} className="quiz-result-card">
-                  <h3><a className="tool-name-link" href={`/tools/${slugifyToolName(tool.name)}`}>{tool.name}</a></h3>
-                  <p>{tool.tagline}</p>
-                  <a className="btn btn-secondary" href={getToolOutboundUrl(tool)} target="_blank" rel={getToolAnchorRel(tool)}>Try {tool.name}</a>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <AdUnit slot="7482196035" className="ad-unit-inline" />
-
-        {false && (
-        <section className="section affiliate-section" id="affiliate-programs">
-          <div className="section-divider"></div>
-          <div className="section-heading-row">
-            <div>
-              <h2>💰 Earn with AI Tool Affiliate Programs</h2>
-              <p className="section-copy">Sign up for these programs and replace your links in Vercel environment variables to start earning recurring commissions.</p>
-            </div>
-            <div className="results-chip">{AFFILIATE_PROGRAMS.length} programs listed</div>
-          </div>
-          <div className="affiliate-grid">
-            {AFFILIATE_PROGRAMS.map((program) => (
-              <article key={program.name} className="affiliate-card" data-scroll-reveal>
-                <div className="affiliate-card-top">
-                  <span className="tool-badge">{program.category}</span>
-                  <span className="affiliate-commission-pill">{program.commission}</span>
-                </div>
-                <h3>{program.name}</h3>
-                {program.note ? <p className="affiliate-card-note">{program.note}</p> : null}
-                <a
-                  href={program.signup}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary affiliate-btn"
-                >
-                  Join Program →
-                </a>
-              </article>
-            ))}
-          </div>
-          <p className="affiliate-note">💡 After joining, set your tracking URL as a Vercel env var (e.g. <code>VITE_AFFILIATE_NOTION</code>) and redeploy. Tool cards will automatically use your link.</p>
-        </section>
-        )}
-
-        <section className="section newsletter" id="newsletter">
-          <h2>Get Weekly AI Tool Picks in Your Inbox</h2>
-          <p>Get 5 new AI tools every week: trending picks, free tools, prompts, and practical AI business ideas.</p>
-          <div className="lead-magnet-row">
-            <a className="btn btn-secondary" href="/ai-workflow-kit.pdf" target="_blank" rel="noopener noreferrer">Download Free AI Workflow Kit (PDF)</a>
-            <a className="btn btn-secondary" href="/ai-workflow-kit.txt" target="_blank" rel="noopener noreferrer">Text version</a>
-          </div>
-          <form className="newsletter-form" onSubmit={handleNewsletterSubmit}>
-            <input
-              type="email"
-              placeholder="Enter your email address"
-              required
-              aria-label="Email address"
-              value={newsletterEmail}
-              onChange={(event) => setNewsletterEmail(event.target.value)}
-            />
-            <button type="submit" className="btn btn-primary" disabled={isSubmittingNewsletter}>
-              {isSubmittingNewsletter ? 'Subscribing...' : 'Subscribe Free'}
-            </button>
-          </form>
-          {newsletterStatus.message ? (
-            <p className={`newsletter-status ${newsletterStatus.type === 'error' ? 'is-error' : 'is-success'}`}>
-              {newsletterStatus.message}
-            </p>
-          ) : null}
-          <p className="trust">No spam. Unsubscribe anytime. 100% free.</p>
-        </section>
-      </main>
-        </div>
-      </div>
-
-      {showExitIntent ? (
-        <section className="exit-intent-modal" role="dialog" aria-label="Free AI workflow kit" aria-live="polite">
-          <div className="exit-intent-card">
-            <button type="button" className="exit-intent-close" onClick={dismissExitIntent} aria-label="Close">
-              ×
-            </button>
-            <h3>Before you go: grab the free AI Workflow Kit</h3>
-            <p>Get practical prompts and repeatable AI workflows, plus 5 new AI tools each week.</p>
-            <form className="exit-intent-form" onSubmit={handleExitIntentSubmit}>
-              <input
-                type="email"
-                required
-                placeholder="Enter your email"
-                value={exitIntentEmail}
-                onChange={(event) => setExitIntentEmail(event.target.value)}
-                aria-label="Email for workflow kit"
-              />
-              <button type="submit" className="btn btn-primary">Get the Kit</button>
             </form>
-            {exitIntentStatus.message ? (
-              <p className={`newsletter-status ${exitIntentStatus.type === 'error' ? 'is-error' : 'is-success'}`}>
-                {exitIntentStatus.message}
+            {newsletterStatus.message ? (
+              <p className={`newsletter-status ${newsletterStatus.type === 'error' ? 'is-error' : 'is-success'}`}>
+                {newsletterStatus.message}
               </p>
             ) : null}
+            <p className="trust">No spam. Unsubscribe anytime. 100% free.</p>
+          </section>
+        </main>
+      </div>
+
+      <div className="visitors-stats-section">
+        <div className="visitors-counter-container">
+          <div className="visitor-stat">
+            <span className="stat-emoji">👥</span>
+            <div className="stat-text">
+              <p className="stat-label">Unique Visitors</p>
+              <p className="stat-number">{(websiteVisitors || 1).toLocaleString()}</p>
+            </div>
           </div>
-        </section>
-      ) : null}
+          <div className="visitor-stat">
+            <span className="stat-emoji">📊</span>
+            <div className="stat-text">
+              <p className="stat-label">Total AI Tools</p>
+              <p className="stat-number">{TOOLS.length}</p>
+            </div>
+          </div>
+          <div className="visitor-stat">
+            <span className="stat-emoji">🎓</span>
+            <div className="stat-text">
+              <p className="stat-label">Tutorial Videos</p>
+              <p className="stat-number">{YOUTUBE_TUTORIALS.length}</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <SiteFooter />
     </div>
