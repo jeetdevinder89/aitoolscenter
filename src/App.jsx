@@ -3208,6 +3208,8 @@ function NewsPage({ entries, currentPage = 1, pageSize = NEWS_PAGE_SIZE }) {
 }
 
 function TutorialsPage({ videos }) {
+  const [selectedVideo, setSelectedVideo] = useState(null)
+
   return (
     <div className="page">
       <SiteNav />
@@ -3224,15 +3226,25 @@ function TutorialsPage({ videos }) {
               {videos.map((video) => (
                 <div key={video.id} className="tutorial-card">
                   <div className="video-thumbnail">
-                    <a href={`https://www.youtube.com/watch?v=${video.videoId}`} target="_blank" rel="noopener noreferrer" className="thumbnail-link">
-                      <img src={`https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`} alt={video.title} />
+                    <button 
+                      className="thumbnail-link"
+                      onClick={() => setSelectedVideo(video.videoId)}
+                      title={`Watch ${video.title}`}
+                    >
+                      <img 
+                        src={`https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`} 
+                        alt={video.title}
+                        onError={(e) => {
+                          e.target.src = `https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`
+                        }}
+                      />
                       <div className="play-button">▶</div>
                       <div className="duration">{video.duration}</div>
-                    </a>
+                    </button>
                   </div>
                   <div className="tutorial-content">
-                    <h3><a href={`https://www.youtube.com/watch?v=${video.videoId}`} target="_blank" rel="noopener noreferrer">{video.title}</a></h3>
-                    <p className="channel">{video.channel}</p>
+                    <h3>{video.title}</h3>
+                    <p className="channel">Channel: {video.channel}</p>
                     <p className="description">{video.description}</p>
                     <div className="tutorial-meta">
                       <span className="category-badge">{video.category}</span>
@@ -3242,7 +3254,12 @@ function TutorialsPage({ videos }) {
                         ))}
                       </div>
                     </div>
-                    <a href={`https://www.youtube.com/watch?v=${video.videoId}`} target="_blank" rel="noopener noreferrer" className="watch-btn">
+                    <a 
+                      href={`https://www.youtube.com/watch?v=${video.videoId}`} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="watch-btn"
+                    >
                       Watch on YouTube →
                     </a>
                   </div>
@@ -3250,6 +3267,23 @@ function TutorialsPage({ videos }) {
               ))}
             </div>
           </section>
+
+          {selectedVideo && (
+            <section className="video-modal-overlay" onClick={() => setSelectedVideo(null)}>
+              <div className="video-modal" onClick={(e) => e.stopPropagation()}>
+                <button className="modal-close" onClick={() => setSelectedVideo(null)}>✕</button>
+                <div className="video-embed-container">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
+                    title="YouTube Video Player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+            </section>
+          )}
 
           <section className="content-shell">
             <article className="content-card policy-card">
