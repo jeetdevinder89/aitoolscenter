@@ -1056,302 +1056,244 @@ const YOUTUBE_TUTORIALS = [
   {
     id: 'chatgpt-beginner',
     title: 'ChatGPT for Beginners - Complete Guide',
-    channel: 'TechWithTim',
+    channel: 'YouTube Search',
     tools: ['ChatGPT'],
     category: 'Getting Started',
-    description: 'Complete introduction to ChatGPT covering prompting techniques, use cases, and productivity hacks.',
-    videoId: 'jHv63Uvk5VA',
-    duration: '15:42',
+    description: 'Discover beginner-friendly ChatGPT tutorials covering prompting, use cases, and productivity.',
+    videoId: null,
+    searchQuery: 'ChatGPT tutorial for beginners',
+    duration: '—',
   },
   {
     id: 'chatgpt-advanced',
-    title: 'Advanced ChatGPT Prompting Techniques',
-    channel: 'DataScience',
+    title: 'Advanced ChatGPT Prompting & Use Cases',
+    channel: 'YouTube Search',
     tools: ['ChatGPT'],
     category: 'Advanced',
-    description: 'Learn system prompts, chain-of-thought reasoning, and professional ChatGPT workflows.',
-    videoId: '9NO5dKDyhe8',
-    duration: '22:15',
+    description: 'Learn advanced prompting techniques, system prompts, and professional workflows.',
+    videoId: null,
+    searchQuery: 'advanced ChatGPT prompting techniques',
+    duration: '—',
   },
   {
     id: 'midjourney-intro',
-    title: 'Midjourney AI Art Guide - Zero to Hero',
-    channel: 'ArtByAI',
+    title: 'Midjourney AI Art - Beginner to Advanced',
+    channel: 'YouTube Search',
     tools: ['Midjourney'],
     category: 'Image Generation',
-    description: 'Step-by-step tutorial on using Midjourney to create stunning AI artwork from text prompts.',
-    videoId: 'LjqKJW6XnK0',
-    duration: '28:00',
-  },
-  {
-    id: 'midjourney-advanced',
-    title: 'Professional Midjourney Techniques',
-    channel: 'DesignThinking',
-    tools: ['Midjourney'],
-    category: 'Image Generation',
-    description: 'Advanced composition, style, and quality parameters for production-ready Midjourney images.',
-    videoId: 'ePlKfF3F7_8',
-    duration: '31:45',
+    description: 'Master Midjourney from zero to creating stunning AI artwork.',
+    videoId: null,
+    searchQuery: 'Midjourney tutorial beginner',
+    duration: '—',
   },
   {
     id: 'dalle3-tutorial',
-    title: 'DALL-E 3 Complete Tutorial',
-    channel: 'CreativeAI',
+    title: 'DALL-E 3 Image Generation Guide',
+    channel: 'YouTube Search',
     tools: ['DALL·E 3'],
     category: 'Image Generation',
-    description: 'Learn to generate high-quality images with DALL-E 3 inside ChatGPT Pro.',
-    videoId: 'C5_kpgvLlM4',
-    duration: '18:30',
+    description: 'Learn to generate high-quality images with DALL-E 3 and ChatGPT.',
+    videoId: null,
+    searchQuery: 'DALL-E 3 tutorial',
+    duration: '—',
   },
   {
     id: 'github-copilot-basics',
-    title: 'GitHub Copilot Tutorial - Code Faster',
-    channel: 'WebDev',
+    title: 'GitHub Copilot for Coding - Setup to Mastery',
+    channel: 'YouTube Search',
     tools: ['GitHub Copilot'],
     category: 'Coding',
-    description: 'Introduction to GitHub Copilot for VS Code, including setup and practical coding examples.',
-    videoId: 'SGUJFqsEBKc',
-    duration: '16:22',
-  },
-  {
-    id: 'github-copilot-advanced',
-    title: 'Advanced GitHub Copilot Workflows',
-    channel: 'DevOpsDaily',
-    tools: ['GitHub Copilot'],
-    category: 'Coding',
-    description: 'Multi-file context, chat features, and enterprise GitHub Copilot setup.',
-    videoId: 'g_B6gj0c9Uw',
-    duration: '24:18',
-  },
-  {
-    id: 'cursor-editor',
-    title: 'Cursor AI Editor - The Future of Coding',
-    channel: 'CodeWithCursor',
-    tools: ['Cursor'],
-    category: 'Coding',
-    description: 'Deep dive into Cursor editor features, composer mode, and AI-first development workflow.',
-    videoId: 'iV6wQekHLXU',
-    duration: '26:40',
+    description: 'Introduction to GitHub Copilot, setup, and practical coding examples.',
+    videoId: null,
+    searchQuery: 'GitHub Copilot tutorial',
+    duration: '—',
   },
   {
     id: 'claude-writing',
-    title: 'Claude 3 for Professional Writing',
-    channel: 'WritingAssistant',
+    title: 'Claude AI for Writing & Analysis',
+    channel: 'YouTube Search',
     tools: ['Claude'],
     category: 'Writing',
-    description: 'Using Claude for long-form writing, editing, and complex analysis tasks.',
-    videoId: 'JJE0j8f-5IM',
-    duration: '19:50',
+    description: 'Using Claude for long-form writing, editing, and complex analysis.',
+    videoId: null,
+    searchQuery: 'Claude AI writing tutorial',
+    duration: '—',
   },
   {
     id: 'gemini-productivity',
-    title: 'Google Gemini for Productivity',
-    channel: 'GoogleAI',
+    title: 'Google Gemini - Productivity & Workspace',
+    channel: 'YouTube Search',
     tools: ['Gemini'],
     category: 'Productivity',
-    description: 'Integration with Google Workspace, search, and collaborative workflows.',
-    videoId: 'uvU9OJ5AREU',
-    duration: '15:45',
+    description: 'Integration with Google Workspace and collaborative workflows.',
+    videoId: null,
+    searchQuery: 'Google Gemini AI tutorial',
+    duration: '—',
   },
   {
     id: 'runway-video-ai',
-    title: 'Runway AI - Create Videos with AI',
-    channel: 'VideoAI',
+    title: 'Runway AI - Video Generation & Editing',
+    channel: 'YouTube Search',
     tools: ['Runway'],
     category: 'Video Generation',
-    description: 'Complete Runway tutorial covering generation, editing, and motion synthesis tools.',
-    videoId: '5cF8fwgz0cE',
-    duration: '32:10',
-  },
-  {
-    id: 'perplexity-search',
-    title: 'Perplexity AI Search - Find Answers Faster',
-    channel: 'ResearchTools',
-    tools: ['Perplexity'],
-    category: 'Research',
-    description: 'Using Perplexity for researched answers with citations and sources.',
-    videoId: 'N9jNLkNPMFg',
-    duration: '12:30',
+    description: 'Create and edit videos with AI generation, motion synthesis, and effects.',
+    videoId: null,
+    searchQuery: 'Runway AI tutorial',
+    duration: '—',
   },
   {
     id: 'notion-ai',
-    title: 'Notion AI - Supercharge Your Workspace',
-    channel: 'NotionCentral',
+    title: 'Notion AI - Workspace & Automation',
+    channel: 'YouTube Search',
     tools: ['Notion AI'],
     category: 'Productivity',
-    description: 'Notion AI features including writing, summarization, and workflow automation.',
-    videoId: 'sKKjflR1dxI',
-    duration: '21:15',
+    description: 'Notion AI writing, summarization, and workflow automation features.',
+    videoId: null,
+    searchQuery: 'Notion AI features tutorial',
+    duration: '—',
   },
   {
     id: 'zapier-automation',
-    title: 'Zapier AI Automation - No Code Workflows',
-    channel: 'AutomationHQ',
+    title: 'Zapier - No-Code Workflow Automation',
+    channel: 'YouTube Search',
     tools: ['Zapier AI'],
     category: 'Automation',
-    description: 'Build AI-powered automations connecting 6000+ apps without code.',
-    videoId: 'rqYvBQXPOpk',
-    duration: '25:35',
+    description: 'Build AI-powered automations connecting 6000+ apps without coding.',
+    videoId: null,
+    searchQuery: 'Zapier automation tutorial',
+    duration: '—',
   },
   {
     id: 'grammarly-writing',
-    title: 'Grammarly AI Writing Assistant',
-    channel: 'WritingTips',
+    title: 'Grammarly - AI Writing Assistant Mastery',
+    channel: 'YouTube Search',
     tools: ['Grammarly'],
     category: 'Writing',
-    description: 'Setup, style guide, and professional grammar checking with Grammarly.',
-    videoId: 'lbpzWqYqVa0',
-    duration: '11:20',
+    description: 'Professional grammar checking, style guides, and writing enhancement.',
+    videoId: null,
+    searchQuery: 'Grammarly AI writing assistant',
+    duration: '—',
   },
   {
     id: 'otter-meetings',
-    title: 'Otter.ai - AI Meeting Transcription',
-    channel: 'ProductivityHacks',
+    title: 'Otter.ai - Meeting Transcription & Summaries',
+    channel: 'YouTube Search',
     tools: ['Otter.ai'],
     category: 'Productivity',
-    description: 'Automatic meeting transcription, summaries, and action item extraction.',
-    videoId: 'v8rnQ-SyVVA',
-    duration: '14:45',
+    description: 'Automatic meeting transcription, summarization, and action items.',
+    videoId: null,
+    searchQuery: 'Otter.ai transcription tutorial',
+    duration: '—',
   },
   {
     id: 'canva-design',
-    title: 'Canva AI - Design Like a Pro',
-    channel: 'DesignBasics',
+    title: 'Canva AI - Design & Mockups',
+    channel: 'YouTube Search',
     tools: ['Canva AI'],
     category: 'Image Generation',
-    description: 'Using Canva AI features for quick design mockups and marketing materials.',
-    videoId: 'QVNEAw0W4Bw',
-    duration: '17:55',
+    description: 'Canva AI features for quick designs, mockups, and marketing materials.',
+    videoId: null,
+    searchQuery: 'Canva AI design tutorial',
+    duration: '—',
   },
   {
     id: 'elevenlabs-voices',
-    title: 'ElevenLabs AI Voice Generator',
-    channel: 'AudioTech',
+    title: 'ElevenLabs - AI Voice Generation',
+    channel: 'YouTube Search',
     tools: ['ElevenLabs'],
     category: 'Audio & Voice',
     description: 'Create natural-sounding AI voices for podcasts, videos, and apps.',
-    videoId: 'Qo9lY0TCkYs',
-    duration: '13:20',
-  },
-  {
-    id: 'replit-ai-coding',
-    title: 'Replit AI - Code, Collaborate, Deploy',
-    channel: 'ReplitCoding',
-    tools: ['Replit AI'],
-    category: 'Coding',
-    description: 'Complete guide to Replit AI environment for solo and team coding projects.',
-    videoId: 'iVTmwgTm3Y0',
-    duration: '20:15',
+    videoId: null,
+    searchQuery: 'ElevenLabs voice generator tutorial',
+    duration: '—',
   },
   {
     id: 'leonardo-ai-design',
-    title: 'Leonardo AI - Professional Image Generation',
-    channel: 'DesignStudio',
+    title: 'Leonardo AI - Image Generation for Creators',
+    channel: 'YouTube Search',
     tools: ['Leonardo AI'],
     category: 'Image Generation',
     description: 'Advanced prompting and style control for production-quality AI images.',
-    videoId: 'i-8PQxF-LVE',
-    duration: '24:50',
-  },
-  {
-    id: 'hugging-face-models',
-    title: 'Hugging Face for AI Developers',
-    channel: 'AI Research',
-    tools: ['Hugging Face'],
-    category: 'Research & Development',
-    description: 'Access and fine-tune open-source AI models from Hugging Face.',
-    videoId: 'HyvT8ZXKXM0',
-    duration: '28:40',
+    videoId: null,
+    searchQuery: 'Leonardo AI image generation',
+    duration: '—',
   },
   {
     id: 'synthesia-videos',
     title: 'Synthesia - AI Avatar Video Creation',
-    channel: 'VideoProduction',
+    channel: 'YouTube Search',
     tools: ['Synthesia'],
     category: 'Video Generation',
     description: 'Create professional videos with AI avatars without cameras or studios.',
-    videoId: 'WB3c7TnuXHI',
-    duration: '19:25',
+    videoId: null,
+    searchQuery: 'Synthesia AI avatar video',
+    duration: '—',
   },
   {
     id: 'descript-podcast',
-    title: 'Descript - Edit Podcasts Like Text',
-    channel: 'PodcastPro',
+    title: 'Descript - Podcast & Video Editing',
+    channel: 'YouTube Search',
     tools: ['Descript'],
     category: 'Video & Audio',
-    description: 'Edit podcasts and videos by editing text transcripts with Descript.',
-    videoId: '5pxXREeVJ0s',
-    duration: '16:10',
+    description: 'Edit podcasts and videos by editing text transcripts.',
+    videoId: null,
+    searchQuery: 'Descript podcast editing tutorial',
+    duration: '—',
   },
   {
     id: 'make-automation',
-    title: 'Make - Automate Everything Without Code',
-    channel: 'AutomationExperts',
+    title: 'Make (formerly Integromat) - Workflow Automation',
+    channel: 'YouTube Search',
     tools: ['Make'],
     category: 'Automation',
-    description: 'Build complex workflows connecting apps like Slack, Google Sheets, and CRM.',
-    videoId: 'wZGVRPnNcI0',
-    duration: '27:30',
+    description: 'Build workflows connecting apps like Slack, Google Sheets, and CRM.',
+    videoId: null,
+    searchQuery: 'Make automation workflow tutorial',
+    duration: '—',
   },
   {
     id: 'n8n-workflows',
     title: 'n8n - Open Source Workflow Automation',
-    channel: 'OpenSourceAI',
+    channel: 'YouTube Search',
     tools: ['n8n'],
     category: 'Automation',
-    description: 'Self-hosted alternative to Zapier with unlimited customization.',
-    videoId: 'wQpnKwXJ-kQ',
-    duration: '22:45',
+    description: 'Self-hosted workflow automation with unlimited customization.',
+    videoId: null,
+    searchQuery: 'n8n open source automation',
+    duration: '—',
   },
   {
-    id: 'consensus-research',
-    title: 'Consensus - AI-Powered Research Search',
-    channel: 'ResearchGeek',
-    tools: ['Consensus'],
+    id: 'cursor-editor',
+    title: 'Cursor AI Editor - AI-First Coding',
+    channel: 'YouTube Search',
+    tools: ['Cursor'],
+    category: 'Coding',
+    description: 'Cursor editor features, AI assist, and modern development workflows.',
+    videoId: null,
+    searchQuery: 'Cursor AI code editor tutorial',
+    duration: '—',
+  },
+  {
+    id: 'perplexity-search',
+    title: 'Perplexity AI - Research & Answers',
+    channel: 'YouTube Search',
+    tools: ['Perplexity'],
     category: 'Research',
-    description: 'Find peer-reviewed research papers with AI-synthesized answers.',
-    videoId: 'lhPpQ4B6_cc',
-    duration: '12:55',
+    description: 'AI-powered search with citations and verified sources.',
+    videoId: null,
+    searchQuery: 'Perplexity AI search tutorial',
+    duration: '—',
   },
   {
-    id: 'heygen-avatars',
-    title: 'HeyGen - AI Avatar Video Generator',
-    channel: 'VideoMaker',
-    tools: ['HeyGen'],
-    category: 'Video Generation',
-    description: 'Create videos with realistic AI avatars without acting or filming.',
-    videoId: 'iLPB9HW8qPQ',
-    duration: '15:35',
-  },
-  {
-    id: 'pixlr-editing',
-    title: 'Pixlr - AI Photo Editing Made Easy',
-    channel: 'PhotoEditTips',
-    tools: ['Pixlr'],
-    category: 'Image Editing',
-    description: 'Quick AI-powered photo enhancements and professional editing tools.',
-    videoId: '_-8eI-j6sQc',
-    duration: '11:40',
-  },
-  {
-    id: 'ideogram-text-images',
-    title: 'Ideogram - Text-to-Image with Perfect Text',
-    channel: 'DesignAI',
-    tools: ['Ideogram'],
-    category: 'Image Generation',
-    description: 'Generate images with readable text and graphic design elements.',
-    videoId: 'C7FJTbPLYso',
-    duration: '14:20',
-  },
-  {
-    id: 'upscayl-upscaling',
-    title: 'Upscayl - Free AI Image Upscaler',
-    channel: 'ImageEnhance',
-    tools: ['Upscayl'],
-    category: 'Image Enhancement',
-    description: 'Upscale and enhance low-resolution images with open-source AI.',
-    videoId: 'V20rEFPO9qo',
-    duration: '10:25',
+    id: 'hugging-face-models',
+    title: 'Hugging Face - AI Models for Developers',
+    channel: 'YouTube Search',
+    tools: ['Hugging Face'],
+    category: 'Research & Development',
+    description: 'Access and fine-tune open-source AI models.',
+    videoId: null,
+    searchQuery: 'Hugging Face tutorial',
+    duration: '—',
   },
 ]
 
@@ -3208,8 +3150,6 @@ function NewsPage({ entries, currentPage = 1, pageSize = NEWS_PAGE_SIZE }) {
 }
 
 function TutorialsPage({ videos }) {
-  const [selectedVideo, setSelectedVideo] = useState(null)
-
   return (
     <div className="page">
       <SiteNav />
@@ -3218,33 +3158,23 @@ function TutorialsPage({ videos }) {
           <section className="content-hero">
             <p className="eyebrow">LEARN AI TOOLS</p>
             <h1>AI Tutorials & Guides</h1>
-            <p className="subtext">Curated YouTube tutorials and guides for learning AI tools featured in our directory.</p>
+            <p className="subtext">Discover YouTube tutorials covering ChatGPT, Midjourney, Claude, GitHub Copilot, and 18+ other AI tools.</p>
           </section>
 
           <section className="content-shell">
             <div className="tutorials-grid">
               {videos.map((video) => (
                 <div key={video.id} className="tutorial-card">
-                  <div className="video-thumbnail">
-                    <button 
-                      className="thumbnail-link"
-                      onClick={() => setSelectedVideo(video.videoId)}
-                      title={`Watch ${video.title}`}
-                    >
-                      <img 
-                        src={`https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`} 
-                        alt={video.title}
-                        onError={(e) => {
-                          e.target.src = `https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`
-                        }}
-                      />
-                      <div className="play-button">▶</div>
-                      <div className="duration">{video.duration}</div>
-                    </button>
+                  <div className="video-thumbnail tutorial-search-card">
+                    <div className="search-thumbnail-content">
+                      <div className="search-icon">🔍</div>
+                      <p className="search-label">YouTube Search</p>
+                      <p className="search-query">{video.searchQuery}</p>
+                    </div>
                   </div>
                   <div className="tutorial-content">
                     <h3>{video.title}</h3>
-                    <p className="channel">Channel: {video.channel}</p>
+                    <p className="channel">Topic: {video.searchQuery}</p>
                     <p className="description">{video.description}</p>
                     <div className="tutorial-meta">
                       <span className="category-badge">{video.category}</span>
@@ -3255,35 +3185,18 @@ function TutorialsPage({ videos }) {
                       </div>
                     </div>
                     <a 
-                      href={`https://www.youtube.com/watch?v=${video.videoId}`} 
+                      href={`https://www.youtube.com/results?search_query=${encodeURIComponent(video.searchQuery)}`} 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="watch-btn"
                     >
-                      Watch on YouTube →
+                      Search YouTube →
                     </a>
                   </div>
                 </div>
               ))}
             </div>
           </section>
-
-          {selectedVideo && (
-            <section className="video-modal-overlay" onClick={() => setSelectedVideo(null)}>
-              <div className="video-modal" onClick={(e) => e.stopPropagation()}>
-                <button className="modal-close" onClick={() => setSelectedVideo(null)}>✕</button>
-                <div className="video-embed-container">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
-                    title="YouTube Video Player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-              </div>
-            </section>
-          )}
 
           <section className="content-shell">
             <article className="content-card policy-card">
