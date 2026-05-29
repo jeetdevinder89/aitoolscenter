@@ -1060,7 +1060,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['ChatGPT'],
     category: 'Getting Started',
     description: 'Complete introduction to ChatGPT covering prompting techniques, use cases, and productivity hacks.',
-    videoId: '2BxqYCAEJrY',
+    videoId: 'jHv63Uvk5VA',
     duration: '15:42',
   },
   {
@@ -1070,7 +1070,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['ChatGPT'],
     category: 'Advanced',
     description: 'Learn system prompts, chain-of-thought reasoning, and professional ChatGPT workflows.',
-    videoId: 'RYwj0n9_hfI',
+    videoId: '9NO5dKDyhe8',
     duration: '22:15',
   },
   {
@@ -1080,7 +1080,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Midjourney'],
     category: 'Image Generation',
     description: 'Step-by-step tutorial on using Midjourney to create stunning AI artwork from text prompts.',
-    videoId: '5H0L-3Kqk3I',
+    videoId: 'LjqKJW6XnK0',
     duration: '28:00',
   },
   {
@@ -1090,7 +1090,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Midjourney'],
     category: 'Image Generation',
     description: 'Advanced composition, style, and quality parameters for production-ready Midjourney images.',
-    videoId: 'JKLtOvpT8rU',
+    videoId: 'ePlKfF3F7_8',
     duration: '31:45',
   },
   {
@@ -1100,7 +1100,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['DALL·E 3'],
     category: 'Image Generation',
     description: 'Learn to generate high-quality images with DALL-E 3 inside ChatGPT Pro.',
-    videoId: 'Lc5TnpIqL4s',
+    videoId: 'C5_kpgvLlM4',
     duration: '18:30',
   },
   {
@@ -1110,7 +1110,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['GitHub Copilot'],
     category: 'Coding',
     description: 'Introduction to GitHub Copilot for VS Code, including setup and practical coding examples.',
-    videoId: 'bphIXmpqPXg',
+    videoId: 'SGUJFqsEBKc',
     duration: '16:22',
   },
   {
@@ -1120,7 +1120,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['GitHub Copilot'],
     category: 'Coding',
     description: 'Multi-file context, chat features, and enterprise GitHub Copilot setup.',
-    videoId: 'XW1Qo1FVXzQ',
+    videoId: 'g_B6gj0c9Uw',
     duration: '24:18',
   },
   {
@@ -1130,7 +1130,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Cursor'],
     category: 'Coding',
     description: 'Deep dive into Cursor editor features, composer mode, and AI-first development workflow.',
-    videoId: 'WxY4J8d0RBE',
+    videoId: 'iV6wQekHLXU',
     duration: '26:40',
   },
   {
@@ -1140,7 +1140,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Claude'],
     category: 'Writing',
     description: 'Using Claude for long-form writing, editing, and complex analysis tasks.',
-    videoId: 'o1XvBiTBJEw',
+    videoId: 'JJE0j8f-5IM',
     duration: '19:50',
   },
   {
@@ -1150,7 +1150,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Gemini'],
     category: 'Productivity',
     description: 'Integration with Google Workspace, search, and collaborative workflows.',
-    videoId: 'i-tLrPuFMYE',
+    videoId: 'uvU9OJ5AREU',
     duration: '15:45',
   },
   {
@@ -1160,7 +1160,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Runway'],
     category: 'Video Generation',
     description: 'Complete Runway tutorial covering generation, editing, and motion synthesis tools.',
-    videoId: 'gdbFGlBh_oE',
+    videoId: '5cF8fwgz0cE',
     duration: '32:10',
   },
   {
@@ -1170,7 +1170,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Perplexity'],
     category: 'Research',
     description: 'Using Perplexity for researched answers with citations and sources.',
-    videoId: '3XvZ1SfvDh4',
+    videoId: 'N9jNLkNPMFg',
     duration: '12:30',
   },
   {
@@ -1180,7 +1180,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Notion AI'],
     category: 'Productivity',
     description: 'Notion AI features including writing, summarization, and workflow automation.',
-    videoId: 'GeLZHpPkE7o',
+    videoId: 'sKKjflR1dxI',
     duration: '21:15',
   },
   {
@@ -1190,7 +1190,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Zapier AI'],
     category: 'Automation',
     description: 'Build AI-powered automations connecting 6000+ apps without code.',
-    videoId: 'LrJqXKxNY4U',
+    videoId: 'rqYvBQXPOpk',
     duration: '25:35',
   },
   {
@@ -1200,7 +1200,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Grammarly'],
     category: 'Writing',
     description: 'Setup, style guide, and professional grammar checking with Grammarly.',
-    videoId: '2P9xVb0o8Yc',
+    videoId: 'lbpzWqYqVa0',
     duration: '11:20',
   },
   {
@@ -1210,7 +1210,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Otter.ai'],
     category: 'Productivity',
     description: 'Automatic meeting transcription, summaries, and action item extraction.',
-    videoId: 'H3T8kj7Hd1Y',
+    videoId: 'v8rnQ-SyVVA',
     duration: '14:45',
   },
   {
@@ -1220,7 +1220,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Canva AI'],
     category: 'Image Generation',
     description: 'Using Canva AI features for quick design mockups and marketing materials.',
-    videoId: 'jhGTe1kE8Zk',
+    videoId: 'QVNEAw0W4Bw',
     duration: '17:55',
   },
   {
@@ -1230,7 +1230,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['ElevenLabs'],
     category: 'Audio & Voice',
     description: 'Create natural-sounding AI voices for podcasts, videos, and apps.',
-    videoId: '0CKlvPT-DQY',
+    videoId: 'Qo9lY0TCkYs',
     duration: '13:20',
   },
   {
@@ -1240,7 +1240,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Replit AI'],
     category: 'Coding',
     description: 'Complete guide to Replit AI environment for solo and team coding projects.',
-    videoId: 'Hl7p2qJZS0Y',
+    videoId: 'iVTmwgTm3Y0',
     duration: '20:15',
   },
   {
@@ -1250,7 +1250,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Leonardo AI'],
     category: 'Image Generation',
     description: 'Advanced prompting and style control for production-quality AI images.',
-    videoId: 'oJRcFKMWGc0',
+    videoId: 'i-8PQxF-LVE',
     duration: '24:50',
   },
   {
@@ -1260,7 +1260,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Hugging Face'],
     category: 'Research & Development',
     description: 'Access and fine-tune open-source AI models from Hugging Face.',
-    videoId: '83dGYPw5wMs',
+    videoId: 'HyvT8ZXKXM0',
     duration: '28:40',
   },
   {
@@ -1270,7 +1270,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Synthesia'],
     category: 'Video Generation',
     description: 'Create professional videos with AI avatars without cameras or studios.',
-    videoId: '0jVNvMJGWMU',
+    videoId: 'WB3c7TnuXHI',
     duration: '19:25',
   },
   {
@@ -1280,7 +1280,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Descript'],
     category: 'Video & Audio',
     description: 'Edit podcasts and videos by editing text transcripts with Descript.',
-    videoId: 'mQNXbmH5aEE',
+    videoId: '5pxXREeVJ0s',
     duration: '16:10',
   },
   {
@@ -1290,7 +1290,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Make'],
     category: 'Automation',
     description: 'Build complex workflows connecting apps like Slack, Google Sheets, and CRM.',
-    videoId: 'QBZY_8EY_jI',
+    videoId: 'wZGVRPnNcI0',
     duration: '27:30',
   },
   {
@@ -1300,7 +1300,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['n8n'],
     category: 'Automation',
     description: 'Self-hosted alternative to Zapier with unlimited customization.',
-    videoId: '-7yrT1-lARg',
+    videoId: 'wQpnKwXJ-kQ',
     duration: '22:45',
   },
   {
@@ -1310,7 +1310,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Consensus'],
     category: 'Research',
     description: 'Find peer-reviewed research papers with AI-synthesized answers.',
-    videoId: 'B-Xe8VYE18A',
+    videoId: 'lhPpQ4B6_cc',
     duration: '12:55',
   },
   {
@@ -1320,7 +1320,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['HeyGen'],
     category: 'Video Generation',
     description: 'Create videos with realistic AI avatars without acting or filming.',
-    videoId: 'Jl5x7nWIRdI',
+    videoId: 'iLPB9HW8qPQ',
     duration: '15:35',
   },
   {
@@ -1330,7 +1330,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Pixlr'],
     category: 'Image Editing',
     description: 'Quick AI-powered photo enhancements and professional editing tools.',
-    videoId: '8aSkJhyJbvg',
+    videoId: '_-8eI-j6sQc',
     duration: '11:40',
   },
   {
@@ -1340,7 +1340,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Ideogram'],
     category: 'Image Generation',
     description: 'Generate images with readable text and graphic design elements.',
-    videoId: 'pzH4Gw3bQME',
+    videoId: 'C7FJTbPLYso',
     duration: '14:20',
   },
   {
@@ -1350,7 +1350,7 @@ const YOUTUBE_TUTORIALS = [
     tools: ['Upscayl'],
     category: 'Image Enhancement',
     description: 'Upscale and enhance low-resolution images with open-source AI.',
-    videoId: 'E7RqWjR0cC0',
+    videoId: 'V20rEFPO9qo',
     duration: '10:25',
   },
 ]
