@@ -6239,6 +6239,69 @@ body {
   font-weight: 600;
 }
 
+/* Search Card Styling for Tutorial Cards */
+.tutorial-search-card {
+  background: linear-gradient(135deg, rgba(0,194,168,0.12) 0%, rgba(247,179,43,0.08) 100%);
+  border: 1px solid rgba(0,194,168,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tutorial-search-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(0,194,168,0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.tutorial-search-card:hover {
+  background: linear-gradient(135deg, rgba(0,194,168,0.18) 0%, rgba(247,179,43,0.12) 100%);
+  border-color: rgba(0,194,168,0.4);
+  box-shadow: 0 0 30px rgba(0,194,168,0.2), inset 0 1px 0 rgba(255,255,255,0.05);
+  transform: translateY(-1px);
+}
+
+.search-thumbnail-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  text-align: center;
+  padding: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.search-icon {
+  font-size: 2.2rem;
+  animation: fadeInScale 0.5s ease-out;
+  display: block;
+}
+
+.search-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.search-query {
+  font-size: 0.95rem;
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
 .tutorial-content {
   padding: 1.2rem;
   display: flex;
