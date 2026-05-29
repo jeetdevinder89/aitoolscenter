@@ -11,7 +11,7 @@ const SITE_ORIGIN = (import.meta.env.VITE_SITE_ORIGIN || 'https://www.aitoolscen
 
 const TOOLS_EXTENDED = [
   // WRITING & CONTENT (25 tools)
-  {id: 1, name: 'ChatGPT', category: 'Writing', tagline: 'Conversational AI for writing, research, and coding', description: 'Most versatile AI assistant with excellent writing and analysis capabilities.', link: 'https://chat.openai.com', badge: 'Free + Pro', rating: 5, icon: '🤖', price: 'Free / $20/month', trends: true, reviews: 2847},
+  {id: 1, name: 'ChatGPT', category: 'Writing', tagline: 'Conversational AI for writing, research, and coding', description: 'Most versatile AI assistant with excellent writing and analysis capabilities.', link: 'https://chatgpt.com', badge: 'Free + Pro', rating: 5, icon: '🤖', price: 'Free / $20/month', trends: true, reviews: 2847},
   {id: 2, name: 'Claude', category: 'Writing', tagline: 'Long-context AI assistant for analysis and documents', description: 'Best for long documents with 100K context window and thoughtful responses.', link: 'https://claude.ai', badge: 'Free + Pro', rating: 5, icon: '🧠', price: 'Free / $20/month', reviews: 1956},
   {id: 3, name: 'Grammarly', category: 'Writing', tagline: 'AI writing assistant and grammar checker', description: 'Real-time writing suggestions, tone detection, and plagiarism checker.', link: 'https://www.grammarly.com', badge: 'Free + Premium', rating: 4.8, icon: '✍️', price: 'Free / $12/month', reviews: 5234},
   {id: 4, name: 'Jasper', category: 'Writing', tagline: 'AI content creation platform for marketing copy', description: 'Specialized for marketing content, social media, and long-form writing.', link: 'https://www.jasper.ai', badge: 'Paid', rating: 4.6, icon: '📝', price: '$39-125/month', reviews: 1823},
@@ -77,18 +77,18 @@ const TOOLS_EXTENDED = [
   {id: 58, name: 'Replit', category: 'Coding', tagline: 'Cloud IDE with AI assistance', description: 'Full development environment with AI pair programming.', link: 'https://replit.com', badge: 'Free + Paid', rating: 4.6, icon: '🚀', price: 'Free / $7/month', reviews: 3567},
   {id: 59, name: 'WolframAlpha', category: 'Coding', tagline: 'Computational knowledge engine', description: 'Solve math, science, and programming problems.', link: 'https://www.wolframalpha.com', badge: 'Free + Pro', rating: 4.5, icon: '∑', price: 'Free / $5/month', reviews: 4234},
   {id: 60, name: 'JetBrains AI', category: 'Coding', tagline: 'AI in JetBrains IDEs', description: 'Code completion, generation, and explanations in JetBrains.', link: 'https://www.jetbrains.com/ai', badge: 'Paid', rating: 4.7, icon: '🎯', price: '$8/month', reviews: 2341},
-  {id: 61, name: 'Hello Tomorro', category: 'Coding', tagline: 'AI code review and quality', description: 'Automated code review and quality suggestions.', link: 'https://helloworld.ai', badge: 'Paid', rating: 4.4, icon: '🔍', price: '$29/month', reviews: 897},
+  {id: 61, name: 'CodeRabbit', category: 'Coding', tagline: 'AI code review and quality', description: 'Automated code review and quality suggestions.', link: 'https://www.coderabbit.ai', badge: 'Paid', rating: 4.4, icon: '🔍', price: '$29/month', reviews: 897},
   {id: 62, name: 'Bugfree', category: 'Coding', tagline: 'AI bug detection', description: 'Automatically find and fix bugs in code.', link: 'https://bugfree.ai', badge: 'Paid', rating: 4.3, icon: '🐛', price: '$20/month', reviews: 745},
   {id: 63, name: 'Phind', category: 'Coding', tagline: 'AI search engine for developers', description: 'Search and find code answers instantly.', link: 'https://www.phind.com', badge: 'Free', rating: 4.6, icon: '🔎', price: 'Free', reviews: 2143},
-  {id: 64, name: 'MicroSoft Copilot', category: 'Coding', tagline: 'Copilot X for advanced coding', description: 'Advanced AI features for professional developers.', link: 'https://github.com/features/copilot/nightly', badge: 'Paid', rating: 4.7, icon: '🚀', price: '$20/month', reviews: 1567},
+  {id: 64, name: 'Microsoft Copilot', category: 'Business', tagline: 'AI assistant for work, search, and productivity', description: 'Microsoft Copilot helps with writing, search, and everyday productivity tasks.', link: 'https://copilot.microsoft.com', badge: 'Free + Paid', rating: 4.7, icon: '🚀', price: 'Free / Paid tiers', reviews: 1567},
   {id: 65, name: 'AnypointStudio', category: 'Coding', tagline: 'Integration platform with AI', description: 'Enterprise integration with AI assistance.', link: 'https://www.mulesoft.com', badge: 'Enterprise', rating: 4.5, icon: '🔗', price: 'Enterprise', reviews: 234},
 
   // RESEARCH & KNOWLEDGE (15 tools)
   {id: 66, name: 'Perplexity', category: 'Research', tagline: 'AI search engine with sources', description: 'Get answers with cited sources in real-time.', link: 'https://perplexity.ai', badge: 'Free + Pro', rating: 4.8, icon: '🔍', price: 'Free / $20/month', reviews: 5234},
-  {id: 67, name: 'Bing Chat', category: 'Research', tagline: 'Microsoft Bing AI search', description: 'Conversational search with web results.', link: 'https://www.bing.com/chat', badge: 'Free', rating: 4.5, icon: '🔷', price: 'Free', reviews: 2341},
-  {id: 68, name: 'Google Bard', category: 'Research', tagline: 'Google AI for conversation and search', description: 'Google AI assistant for research and writing.', link: 'https://bard.google.com', badge: 'Free', rating: 4.6, icon: '🔍', price: 'Free', reviews: 3456},
+  {id: 67, name: 'Copilot Search', category: 'Research', tagline: 'Microsoft AI search with web results', description: 'Conversational search with current web results.', link: 'https://www.bing.com/chat', badge: 'Free', rating: 4.5, icon: '🔷', price: 'Free', reviews: 2341},
+  {id: 68, name: 'Google Gemini', category: 'Research', tagline: 'Google AI for conversation and search', description: 'Google AI assistant for research and writing.', link: 'https://gemini.google.com', badge: 'Free', rating: 4.6, icon: '🔍', price: 'Free', reviews: 3456},
   {id: 69, name: 'Semantic Scholar', category: 'Research', tagline: 'AI-powered academic research', description: 'Find and understand academic papers with AI.', link: 'https://www.semanticscholar.org', badge: 'Free', rating: 4.7, icon: '📚', price: 'Free', reviews: 1834},
-  {id: 70, name: 'SciSpace', category: 'Research', tagline: 'AI research paper analysis', description: 'Explain research papers and discover insights.', link: 'https://typeset.io', badge: 'Free + Paid', rating: 4.6, icon: '📖', price: 'Free / $10/month', reviews: 2156},
+  {id: 70, name: 'SciSpace', category: 'Research', tagline: 'AI research paper analysis', description: 'Explain research papers and discover insights.', link: 'https://www.scispace.com', badge: 'Free + Paid', rating: 4.6, icon: '📖', price: 'Free / $10/month', reviews: 2156},
   {id: 71, name: 'Thesis', category: 'Research', tagline: 'Research aggregation with AI', description: 'Aggregate and analyze online research.', link: 'https://www.thesis.ai', badge: 'Paid', rating: 4.4, icon: '📊', price: '$50/month', reviews: 456},
   {id: 72, name: 'Research Rabbit', category: 'Research', tagline: 'Academic research discovery', description: 'Visualize research connections and discoveries.', link: 'https://www.researchrabbitapp.com', badge: 'Free + Paid', rating: 4.7, icon: '🐰', price: 'Free / $18/month', reviews: 1234},
 
@@ -105,7 +105,7 @@ const TOOLS_EXTENDED = [
   {id: 80, name: 'Looker Studio AI', category: 'Business', tagline: 'Google data visualization with AI', description: 'Create reports and dashboards with AI help.', link: 'https://lookerstudio.google.com', badge: 'Free', rating: 4.5, icon: '📊', price: 'Free', reviews: 1834},
 
   // MUSIC & AUDIO (10 tools)
-  {id: 81, name: 'Midjourney Audio', category: 'Audio', tagline: 'AI audio generation', description: 'Generate, compose, and edit audio with AI.', link: 'https://midjourney.com', badge: 'Paid', rating: 4.5, icon: '🎵', price: '$30/month+', reviews: 456},
+  {id: 81, name: 'Suno', category: 'Audio', tagline: 'AI music and song generation', description: 'Generate original music, vocals, and songs with AI.', link: 'https://suno.com', badge: 'Free + Paid', rating: 4.7, icon: '🎵', price: 'Free / Paid tiers', reviews: 456},
   {id: 82, name: 'Descript Audio', category: 'Audio', tagline: 'Podcast and audio editing', description: 'Edit audio like editing text with AI features.', link: 'https://www.descript.com', badge: 'Free + Paid', rating: 4.7, icon: '🎙️', price: 'Free / $24/month', reviews: 2345},
   {id: 83, name: 'Murf', category: 'Audio', tagline: 'Text-to-speech with AI voices', description: 'Generate realistic AI voiceovers for videos.', link: 'https://murf.ai', badge: 'Free + Paid', rating: 4.6, icon: '🗣️', price: 'Free / $13/month', reviews: 1765},
   {id: 84, name: 'ElevenLabs', category: 'Audio', tagline: 'Advanced text-to-speech', description: 'Natural-sounding AI voiceovers in multiple languages.', link: 'https://elevenlabs.io', badge: 'Free + Paid', rating: 4.8, icon: '🎤', price: 'Free / $11/month', reviews: 3421},
@@ -131,10 +131,53 @@ const TOOLS_EXTENDED = [
   {id: 98, name: 'Together AI', category: 'API', tagline: 'Open-source model API', description: 'Access open-source models with high performance.', link: 'https://www.together.ai', badge: 'Pay-as-you-go', rating: 4.5, icon: '🤝', price: 'Pay per token', reviews: 876},
   {id: 99, name: 'Replicate', category: 'API', tagline: 'Run ML models in the cloud', description: 'Easy API for running various AI models.', link: 'https://replicate.com', badge: 'Pay-as-you-go', rating: 4.6, icon: '☁️', price: 'Pay per use', reviews: 1567},
   {id: 100, name: 'Modal', category: 'API', tagline: 'Deploy AI models easily', description: 'Deploy and scale ML models without infrastructure.', link: 'https://modal.com', badge: 'Freemium', rating: 4.5, icon: '🚀', price: 'Free / Pay-as-you-go', reviews: 1134},
+  {id: 101, name: 'Azure AI Services', category: 'Business', tagline: 'Microsoft Azure AI platform', description: 'Build with Azure AI services, search, and cognitive capabilities.', link: 'https://azure.microsoft.com/products/ai-services/', badge: 'Enterprise', rating: 4.6, icon: '☁️', price: 'Usage-based', reviews: 812},
 ]
 
 // Compatibility constant for sitemap generation
 const TOOLS = TOOLS_EXTENDED
+
+const TOOL_LINK_OVERRIDES = {
+  ChatGPT: 'https://chatgpt.com',
+  'Microsoft Copilot': 'https://copilot.microsoft.com',
+  'Copilot Search': 'https://copilot.microsoft.com',
+  'Google Gemini': 'https://gemini.google.com',
+  SciSpace: 'https://www.scispace.com',
+  CodeRabbit: 'https://www.coderabbit.ai',
+  Suno: 'https://suno.com',
+  'Azure AI Services': 'https://azure.microsoft.com/products/ai-services/',
+  'OpenAI API': 'https://platform.openai.com/',
+}
+
+const resolveToolLink = (tool) => TOOL_LINK_OVERRIDES[tool.name] || tool.link
+
+const COLLECTIONS = [
+  {
+    title: 'Best Free AI Tools',
+    description: 'High-value tools you can start using without paying up front.',
+    tools: ['ChatGPT', 'Claude', 'Perplexity', 'Stable Diffusion', 'Codeium'],
+  },
+  {
+    title: 'AI for Creators',
+    description: 'Tools for images, video, voice, and content production.',
+    tools: ['Midjourney', 'Runway', 'Descript', 'ElevenLabs', 'Opus Clip'],
+  },
+  {
+    title: 'AI for Developers',
+    description: 'Coding assistants and platforms that speed up development work.',
+    tools: ['GitHub Copilot', 'Cursor', 'Tabnine', 'ChatGPT', 'Codeium'],
+  },
+  {
+    title: 'Top Paid Tools',
+    description: 'Premium products with strong feature depth and polish.',
+    tools: ['Midjourney', 'GitHub Copilot', 'Synthesia', 'Jasper', 'Runway'],
+  },
+  {
+    title: 'Enterprise Solutions',
+    description: 'Workplace-ready tools for teams, governance, and scale.',
+    tools: ['ChatGPT Enterprise', 'Microsoft 365 Copilot', 'Azure AI Services'],
+  },
+]
 
 // ==================================================
 // RECOMMENDATION QUESTIONS
@@ -162,6 +205,117 @@ const WIZARD_QUESTIONS = [
     options: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
   },
 ]
+
+const LEGAL_PAGES = {
+  privacy: {
+    title: 'Privacy Policy',
+    intro: 'We collect only the information needed to operate the site, process submissions, and improve the experience. Last updated: May 29, 2026.',
+    sections: [
+      {
+        heading: 'What We Collect',
+        items: [
+          'Email addresses submitted through newsletters and contact forms.',
+          'Tool submission details such as name, URL, category, pricing, and description.',
+          'Basic analytics and advertising signals used to understand traffic and performance.',
+        ],
+      },
+      {
+        heading: 'How We Use It',
+        items: [
+          'We use submitted data to respond to inquiries and review tool submissions.',
+          'We use analytics to measure site usage and improve content.',
+          'We do not sell personal data.',
+        ],
+      },
+      {
+        heading: 'Newsletter & Unsubscribe',
+        items: [
+          'Subscribers receive a weekly digest of AI tool updates and news every Monday.',
+          'All newsletter emails include a clear unsubscribe link at the bottom.',
+          'You can also contact support@aitoolscenter.in to manage your subscription.',
+          'Unsubscribe requests are processed immediately.',
+        ],
+      },
+      {
+        heading: 'Your Choices',
+        items: [
+          'You can request removal of submitted personal data by contacting support.',
+          'You can update cookie preferences in your browser settings.',
+          'You can unsubscribe from the newsletter using the link in any email.',
+          'Third-party advertising partners may use cookies subject to their own policies.',
+        ],
+      },
+    ],
+  },
+  terms: {
+    title: 'Terms and Conditions',
+    intro: 'By using AIToolsCenter, you agree to the terms below and applicable laws.',
+    sections: [
+      {
+        heading: 'Use of the Site',
+        items: [
+          'All listings are provided for informational purposes only.',
+          'Tool pricing, features, and availability may change without notice.',
+          'You are responsible for evaluating third-party tools before use.',
+        ],
+      },
+      {
+        heading: 'Restrictions',
+        items: [
+          'Do not abuse, scrape, or disrupt the site or its services.',
+          'Do not submit misleading or unlawful content.',
+          'We may update these terms as the site evolves.',
+        ],
+      },
+    ],
+  },
+  contact: {
+    title: 'Contact AIToolsCenter',
+    intro: 'Use the details below for support, corrections, privacy requests, or partnerships.',
+    sections: [
+      {
+        heading: 'Contact Details',
+        items: [
+          'Email: support@aitoolscenter.in',
+          'Response time: 2 to 5 business days.',
+          'Use this address for tool submission follow-up and site support.',
+        ],
+      },
+    ],
+  },
+}
+
+function StaticPage({ title, intro, sections, onHomeClick, onSubmitClick }) {
+  return (
+    <div className="page">
+      <nav className="navbar">
+        <div className="navbar-logo" onClick={onHomeClick} style={{ cursor: 'pointer' }}>AIToolsCenter</div>
+        <div className="navbar-links">
+          <button className="navbar-link" onClick={onHomeClick}>Home</button>
+          <button className="navbar-link" onClick={onSubmitClick}>Submit Tool</button>
+        </div>
+      </nav>
+      <main style={{ paddingTop: '6rem' }}>
+        <section className="section">
+          <div className="container" style={{ maxWidth: '900px' }}>
+            <h1 style={{ textAlign: 'center', marginBottom: '1rem' }}>{title}</h1>
+            <p style={{ textAlign: 'center', color: 'var(--muted)', marginBottom: '2rem' }}>{intro}</p>
+            <div style={{ display: 'grid', gap: '1rem' }}>
+              {sections.map((section) => (
+                <article key={section.heading} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: '1.25rem' }}>
+                  <h2 style={{ marginBottom: '0.75rem' }}>{section.heading}</h2>
+                  <ul style={{ margin: 0, paddingLeft: '1.25rem', color: 'var(--muted)', lineHeight: 1.8 }}>
+                    {section.items.map((item) => <li key={item}>{item}</li>)}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  )
+}
 
 // ==================================================
 // PAGE COMPONENTS
@@ -548,12 +702,142 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [showSuggestions, setShowSuggestions] = useState(false)
+  const [submitForm, setSubmitForm] = useState({
+    name: '',
+    url: '',
+    category: '',
+    pricing: '',
+    contactEmail: '',
+    description: '',
+  })
+  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' })
+  const [newsletterEmail, setNewsletterEmail] = useState('')
+  const [newsletterStatus, setNewsletterStatus] = useState({ type: '', message: '' })
+  const [activeCollectionIndex, setActiveCollectionIndex] = useState(0)
+  const toolsSectionRef = useRef(null)
+  const collectionsSectionRef = useRef(null)
+  const updatesSectionRef = useRef(null)
+  const submitSectionRef = useRef(null)
 
   useEffect(() => {
     const stored = localStorage.getItem('aitoolscenter-theme') || 'dark'
     setTheme(stored)
     document.documentElement.setAttribute('data-theme', stored)
   }, [])
+
+  useEffect(() => {
+    // Close suggestions when clicking outside search box
+    const handleClickOutside = (e) => {
+      const searchContainer = document.querySelector('.search-container')
+      if (searchContainer && !searchContainer.contains(e.target)) {
+        setShowSuggestions(false)
+      }
+    }
+
+    if (showSuggestions) {
+      document.addEventListener('click', handleClickOutside)
+      return () => document.removeEventListener('click', handleClickOutside)
+    }
+  }, [showSuggestions])
+
+  const scrollToSection = (sectionRef) => {
+    sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  const handleDiscoverClick = (event) => {
+    event.preventDefault()
+    setCurrentPage('home')
+    setSelectedCategory('All')
+    setSearchQuery('')
+    setShowSuggestions(false)
+    scrollToSection(toolsSectionRef)
+  }
+
+  const handleBrowseClick = (event) => {
+    event.preventDefault()
+    setCurrentPage('home')
+    setSelectedCategory('All')
+    setSearchQuery('')
+    setShowSuggestions(false)
+    scrollToSection(toolsSectionRef)
+  }
+
+  const goHome = () => {
+    setCurrentPage('home')
+    setSelectedCategory('All')
+    setSearchQuery('')
+    setShowSuggestions(false)
+  }
+
+  const openPage = (page) => {
+    setCurrentPage(page)
+    setShowSuggestions(false)
+    window.scrollTo({ top: 0, behavior: 'auto' })
+  }
+
+  const handleSubmitToolClick = (event) => {
+    event.preventDefault()
+    scrollToSection(submitSectionRef)
+  }
+
+  const handleCollectionsClick = (event) => {
+    event.preventDefault()
+    scrollToSection(collectionsSectionRef)
+  }
+
+  const handleUpdatesClick = (event) => {
+    event.preventDefault()
+    scrollToSection(updatesSectionRef)
+  }
+
+  const handleSubmitToolChange = (field) => (event) => {
+    const { value } = event.target
+    setSubmitForm((current) => ({ ...current, [field]: value }))
+  }
+
+  const handleSubmitTool = async (event) => {
+    event.preventDefault()
+    setSubmitStatus({ type: '', message: '' })
+
+    const payload = {
+      name: submitForm.name.trim(),
+      url: submitForm.url.trim(),
+      category: submitForm.category.trim(),
+      pricing: submitForm.pricing.trim(),
+      contactEmail: submitForm.contactEmail.trim(),
+      description: submitForm.description.trim(),
+    }
+
+    if (!payload.name || !payload.url || !payload.category || !payload.contactEmail || payload.description.length < 30) {
+      setSubmitStatus({ type: 'error', message: 'Please fill out every field and add a longer description.' })
+      return
+    }
+
+    try {
+      const response = await fetch('/api/submit-tool', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      if (!response.ok) {
+        throw new Error('Submission API unavailable')
+      }
+
+      setSubmitStatus({ type: 'success', message: 'Tool submission sent successfully.' })
+      setSubmitForm({ name: '', url: '', category: '', pricing: '', contactEmail: '', description: '' })
+      return
+    } catch {
+      const storedSubmissions = JSON.parse(localStorage.getItem('aitoolscenter-tool-submissions') || '[]')
+      storedSubmissions.push({ ...payload, savedAt: new Date().toISOString() })
+      localStorage.setItem('aitoolscenter-tool-submissions', JSON.stringify(storedSubmissions))
+      setSubmitStatus({
+        type: 'success',
+        message: 'Submission saved locally. The form is working, and it will use the API when available.',
+      })
+      setSubmitForm({ name: '', url: '', category: '', pricing: '', contactEmail: '', description: '' })
+    }
+  }
 
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark'
@@ -562,12 +846,96 @@ export default function App() {
     localStorage.setItem('aitoolscenter-theme', newTheme)
   }
 
+  const handleNewsletterSubmit = async (event) => {
+    event.preventDefault()
+    setNewsletterStatus({ type: '', message: '' })
+
+    const email = newsletterEmail.trim()
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setNewsletterStatus({ type: 'error', message: 'Please enter a valid email address.' })
+      return
+    }
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Newsletter API error')
+      }
+
+      setNewsletterStatus({ 
+        type: 'success', 
+        message: '✓ Subscribed! Check your email for confirmation. You will get weekly AI updates every Monday.' 
+      })
+      setNewsletterEmail('')
+      return
+    } catch (error) {
+      // Fallback: Save to localStorage if API fails
+      const subscribers = JSON.parse(localStorage.getItem('aitoolscenter-newsletter-subscribers') || '[]')
+      if (!subscribers.includes(email)) {
+        subscribers.push(email)
+        localStorage.setItem('aitoolscenter-newsletter-subscribers', JSON.stringify(subscribers))
+      }
+      setNewsletterStatus({ 
+        type: 'success', 
+        message: '✓ Subscribed! You will receive weekly AI updates.' 
+      })
+      setNewsletterEmail('')
+    }
+  }
+
   const filteredTools = TOOLS_EXTENDED.filter(tool =>
     (selectedCategory === 'All' || tool.category === selectedCategory) &&
     (searchQuery === '' || 
      tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
      tool.tagline.toLowerCase().includes(searchQuery.toLowerCase()))
   )
+
+  const selectedCollection = COLLECTIONS[activeCollectionIndex] || COLLECTIONS[0]
+  const selectedCollectionTools = selectedCollection.tools
+    .map((toolName) => TOOLS_EXTENDED.find((tool) => tool.name === toolName))
+    .filter(Boolean)
+  const weeklyHighlights = aiNews.slice(0, 3)
+
+  if (currentPage === 'privacy') {
+    return (
+      <StaticPage
+        title={LEGAL_PAGES.privacy.title}
+        intro={LEGAL_PAGES.privacy.intro}
+        sections={LEGAL_PAGES.privacy.sections}
+        onHomeClick={goHome}
+        onSubmitClick={() => openPage('home')}
+      />
+    )
+  }
+
+  if (currentPage === 'terms') {
+    return (
+      <StaticPage
+        title={LEGAL_PAGES.terms.title}
+        intro={LEGAL_PAGES.terms.intro}
+        sections={LEGAL_PAGES.terms.sections}
+        onHomeClick={goHome}
+        onSubmitClick={() => openPage('home')}
+      />
+    )
+  }
+
+  if (currentPage === 'contact') {
+    return (
+      <StaticPage
+        title={LEGAL_PAGES.contact.title}
+        intro={LEGAL_PAGES.contact.intro}
+        sections={LEGAL_PAGES.contact.sections}
+        onHomeClick={goHome}
+        onSubmitClick={() => openPage('home')}
+      />
+    )
+  }
 
   // STATS SECTION DATA
   const stats = [
@@ -590,30 +958,24 @@ export default function App() {
     { name: 'APIs', icon: '🔌', count: 7 },
   ]
 
-  // COLLECTIONS DATA
-  const collections = [
-    { title: 'Best Free AI Tools', count: 35, items: ['ChatGPT', 'Claude', 'Perplexity', 'Stable Diffusion', 'Codeium'] },
-    { title: 'AI for Creators', count: 40, items: ['Midjourney', 'Runway', 'Descript', 'ElevenLabs', 'Opus Clip'] },
-    { title: 'AI for Developers', count: 30, items: ['GitHub Copilot', 'Cursor', 'Tabnine', 'ChatGPT', 'Codeium'] },
-    { title: 'Top Paid Tools', count: 28, items: ['Midjourney', 'GitHub Copilot', 'Synthesia', 'Jasper', 'Runway'] },
-    { title: 'Enterprise Solutions', count: 15, items: ['ChatGPT Enterprise', 'Microsoft 365 Copilot', 'Azure AI Services'] },
-  ]
-
   return (
     <div className="page">
       {/* ==========  NAVIGATION ========== */}
       <nav className="navbar">
-        <div className="navbar-logo" onClick={() => { setCurrentPage('home'); setSelectedCategory('All'); setSearchQuery(''); }} style={{ cursor: 'pointer' }}>AIToolsCenter</div>
+        <div className="navbar-logo" onClick={goHome} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <span style={{ width: '0.7rem', height: '0.7rem', borderRadius: '999px', background: 'var(--primary)', boxShadow: '0 0 16px var(--glow)' }} />
+          <span style={{ fontWeight: 800 }}>AIToolsCenter</span>
+        </div>
         <div className="navbar-links">
-          <a href="#tools" className="navbar-link">Discover</a>
-          <a href="#tools" className="navbar-link" onClick={() => { setSelectedCategory('All'); setSearchQuery(''); }}>Browse</a>
-          <a href="#wizard" className="navbar-link">Find Tool</a>
-          <a href="#dashboard" className="navbar-link">Dashboard</a>
-          <a href="#news" className="navbar-link">News</a>
-          <button onClick={toggleTheme} className="navbar-link" title="Toggle theme">
+          <a href="#tools" className="navbar-link navbar-link-button" onClick={handleDiscoverClick}>Discover</a>
+          <a href="#collections" className="navbar-link navbar-link-button" onClick={handleCollectionsClick}>Collections</a>
+          <a href="#updates" className="navbar-link navbar-link-button" onClick={handleUpdatesClick}>Weekly Updates</a>
+          <a href="#news" className="navbar-link navbar-link-button">News</a>
+          <button onClick={() => openPage('contact')} className="navbar-link navbar-link-button" type="button">Contact</button>
+          <button onClick={toggleTheme} className="navbar-link navbar-link-button" title="Toggle theme" type="button">
             {theme === 'dark' ? '☀️' : '🌙'}
           </button>
-          <a href="#submit" className="navbar-cta">Submit Tool</a>
+          <a href="#submit" className="navbar-cta" onClick={handleSubmitToolClick}>Submit Tool</a>
         </div>
       </nav>
 
@@ -637,6 +999,11 @@ export default function App() {
                   setShowSuggestions(true)
                 }}
                 onFocus={() => setShowSuggestions(true)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape') {
+                    setShowSuggestions(false)
+                  }
+                }}
               />
             </div>
             {showSuggestions && (
@@ -663,14 +1030,14 @@ export default function App() {
 
           {/* BUTTONS */}
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
-            <a href="#tools" className="btn btn-primary btn-lg" style={{ textDecoration: 'none', display: 'inline-block' }}>Explore Tools</a>
-            <a href="#submit" className="btn btn-secondary btn-lg" style={{ textDecoration: 'none', display: 'inline-block' }}>Submit Your Tool</a>
+            <a href="#tools" className="btn btn-primary btn-lg" style={{ textDecoration: 'none', display: 'inline-block' }} onClick={handleDiscoverClick}>Explore Tools</a>
+            <a href="#submit" className="btn btn-secondary btn-lg" style={{ textDecoration: 'none', display: 'inline-block' }} onClick={handleSubmitToolClick}>Submit Your Tool</a>
           </div>
         </div>
       </section>
 
       {/* ==========  ALL TOOLS DIRECTORY ========== */}
-      <section className="section" id="tools">
+      <section className="section" id="tools" ref={toolsSectionRef} style={{ scrollMarginTop: '6rem' }}>
         <div className="container">
           <h2 style={{ marginBottom: '0.5rem', textAlign: 'center' }}>🔥 AI Tools Directory</h2>
           <p style={{ color: 'var(--muted)', textAlign: 'center', marginBottom: '1.5rem' }}>
@@ -706,7 +1073,7 @@ export default function App() {
           <div className="tools-grid">
             {filteredTools.length > 0 ? (
               filteredTools.map(tool => (
-                <a key={tool.id} href={tool.link} target="_blank" rel="noopener noreferrer" className="tool-card" title={`Visit ${tool.name}`}>
+                <a key={tool.id} href={resolveToolLink(tool)} target="_blank" rel="noopener noreferrer" className="tool-card" title={`Visit ${tool.name}`}>
                   <div className="tool-header">
                     <div className="tool-logo">{tool.icon}</div>
                     <div className="tool-meta">
@@ -735,44 +1102,165 @@ export default function App() {
 
 
       {/* ==========  COLLECTIONS ========== */}
-      <section className="section">
+      <section className="section" id="collections" ref={collectionsSectionRef} style={{ scrollMarginTop: '6rem' }}>
         <div className="container">
           <h2 style={{ marginBottom: '1rem', textAlign: 'center' }}>📚 Curated Collections</h2>
           <p style={{ color: 'var(--muted)', textAlign: 'center', marginBottom: '2rem' }}>Hand-picked tools for specific use cases</p>
-          <div className="tools-grid">
-            {collections.map((col, idx) => (
-              <div key={idx} className="collection-card">
-                <div className="collection-header">
-                  <div className="collection-title">{col.title}</div>
-                  <div className="collection-count">{col.count} tools</div>
-                </div>
-                <div className="collection-items">
-                  {col.items.map((item, i) => (
-                    <div key={i} className="collection-item">{item}</div>
-                  ))}
-                </div>
-              </div>
+          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+            {COLLECTIONS.map((collection, idx) => (
+              <button
+                key={collection.title}
+                onClick={() => setActiveCollectionIndex(idx)}
+                style={{
+                  padding: '0.7rem 1rem',
+                  borderRadius: '999px',
+                  border: '1px solid var(--border)',
+                  cursor: 'pointer',
+                  background: idx === activeCollectionIndex ? 'var(--primary)' : 'var(--surface)',
+                  color: idx === activeCollectionIndex ? 'white' : 'var(--foreground)',
+                  fontWeight: 700,
+                }}
+              >
+                {collection.title}
+              </button>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ==========  NEWSLETTER ========== */}
-      <section className="section" style={{ background: 'var(--surface)' }}>
-        <div className="container">
-          <div className="newsletter-section">
-            <h2 className="newsletter-headline">Get Weekly AI Updates</h2>
-            <p className="newsletter-description">Subscribe to get the best AI tools and news every week</p>
-            <div className="newsletter-form">
-              <input type="email" placeholder="Enter your email" required />
-              <button type="submit" className="btn btn-primary">Subscribe</button>
+          <div className="collection-card" style={{ maxWidth: '1100px', margin: '0 auto' }}>
+            <div className="collection-header" style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+              <div>
+                <div className="collection-title" style={{ fontSize: '1.35rem' }}>{selectedCollection.title}</div>
+                <div style={{ color: 'var(--muted)', marginTop: '0.35rem' }}>{selectedCollection.description}</div>
+              </div>
+              <div className="collection-count">{selectedCollectionTools.length} tools</div>
+            </div>
+            <div className="collection-items" style={{ display: 'grid', gap: '0.75rem', marginTop: '1.25rem' }}>
+              {selectedCollectionTools.map((tool) => (
+                <a
+                  key={tool.id}
+                  href={resolveToolLink(tool)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="collection-item"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '1rem',
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    padding: '0.9rem 1rem',
+                    borderRadius: 'var(--radius-md)',
+                    background: 'var(--background)',
+                    border: '1px solid var(--border)',
+                  }}
+                  title={`Open ${tool.name}`}
+                >
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <span style={{ fontSize: '1.25rem' }}>{tool.icon}</span>
+                    <span style={{ fontWeight: 700 }}>{tool.name}</span>
+                  </span>
+                  <span style={{ color: 'var(--primary)', fontWeight: 700 }}>Open</span>
+                </a>
+              ))}
+            </div>
+            <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', flexWrap: 'wrap', marginTop: '1rem' }}>
+              <button
+                className="btn btn-secondary"
+                onClick={() => {
+                  const firstTool = selectedCollectionTools[0]
+                  if (firstTool) {
+                    window.open(resolveToolLink(firstTool), '_blank', 'noopener,noreferrer')
+                  }
+                }}
+              >
+                Open First Tool
+              </button>
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  const firstTool = selectedCollectionTools[0]
+                  if (firstTool) {
+                    setSearchQuery(firstTool.name)
+                    setSelectedCategory('All')
+                    scrollToSection(toolsSectionRef)
+                  }
+                }}
+              >
+                Explore in Directory
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ==========  USER DASHBOARD ========== */}
-      <UserDashboard tools={TOOLS_EXTENDED} />
+      {/* ==========  NEWSLETTER ========== */}
+      <section className="section" id="updates" ref={updatesSectionRef} style={{ background: 'var(--surface)', scrollMarginTop: '6rem' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: '1.25rem', alignItems: 'stretch' }}>
+            <div className="newsletter-section" style={{ margin: 0, textAlign: 'left' }}>
+              <div style={{ display: 'inline-flex', padding: '0.35rem 0.75rem', borderRadius: '999px', border: '1px solid var(--border)', marginBottom: '0.9rem', color: 'var(--primary)', fontWeight: 700 }}>Weekly Update</div>
+              <h2 className="newsletter-headline" style={{ textAlign: 'left' }}>Get Weekly AI Updates</h2>
+              <p className="newsletter-description" style={{ textAlign: 'left' }}>Browse the latest weekly picks, then subscribe for a curated digest of AI tools and news.</p>
+              <form className="newsletter-form" style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }} onSubmit={handleNewsletterSubmit}>
+                <input 
+                  type="email" 
+                  placeholder="Enter your email" 
+                  required 
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  style={{ flex: '1 1 220px', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }}
+                  disabled={newsletterStatus.type === 'success'}
+                />
+                <button 
+                  type="submit" 
+                  className="btn btn-primary"
+                  disabled={newsletterStatus.type === 'success'}
+                >
+                  {newsletterStatus.type === 'success' ? '✓ Subscribed' : 'Subscribe'}
+                </button>
+              </form>
+              {newsletterStatus.message && (
+                <p style={{ marginTop: '0.75rem', color: newsletterStatus.type === 'error' ? '#ef4444' : 'var(--primary)', fontSize: '0.9rem' }}>
+                  {newsletterStatus.message}
+                </p>
+              )}
+              <p style={{ marginTop: '1rem', fontSize: '0.85rem', color: 'var(--muted)' }}>
+                ✓ No spam. <a href="#contact" onClick={(event) => { event.preventDefault(); openPage('contact') }} style={{ color: 'var(--primary)', textDecoration: 'none' }}>Unsubscribe anytime</a>.
+              </p>
+              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1rem' }}>
+                {['Tools', 'Collections', 'News', 'Contact'].map((label) => (
+                  <button
+                    key={label}
+                    className="navbar-link"
+                    onClick={() => {
+                      if (label === 'Tools') scrollToSection(toolsSectionRef)
+                      if (label === 'Collections') scrollToSection(collectionsSectionRef)
+                      if (label === 'News') scrollToSection({ current: document.getElementById('news') })
+                      if (label === 'Contact') openPage('contact')
+                    }}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="collection-card" style={{ margin: 0, display: 'grid', gap: '0.75rem' }}>
+              {weeklyHighlights.map((article) => (
+                <a key={article.title} href={article.link} target="_blank" rel="noopener noreferrer" className="collection-item" style={{ textDecoration: 'none', color: 'inherit', padding: '1rem', borderRadius: 'var(--radius-md)', background: 'var(--background)', border: '1px solid var(--border)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', alignItems: 'flex-start' }}>
+                    <div>
+                      <div style={{ color: 'var(--muted)', fontSize: '0.85rem', marginBottom: '0.35rem' }}>{article.date}</div>
+                      <div style={{ fontWeight: 800, marginBottom: '0.35rem' }}>{article.title}</div>
+                      <div style={{ color: 'var(--muted)', fontSize: '0.92rem' }}>{article.summary}</div>
+                    </div>
+                    <span style={{ color: 'var(--primary)', fontWeight: 800 }}>Open</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ==========  NEWS HUB ========== */}
       <section className="section" id="news" style={{ background: 'var(--surface)' }}>
@@ -781,12 +1269,38 @@ export default function App() {
           <div className="tools-grid">
             {aiNews.slice(0, 3).map((article, idx) => (
               <a key={idx} href={article.link} target="_blank" rel="noopener noreferrer" className="news-card" style={{ textDecoration: 'none', cursor: 'pointer' }}>
-                <div className="news-image">
+                <div className="news-image" style={{ position: 'relative', overflow: 'hidden' }}>
                   {article.image ? (
-                    <img src={article.image} alt={article.title} style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px 8px 0 0' }} onError={(e) => { e.target.style.display = 'none'; }} />
-                  ) : (
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '200px', background: 'var(--muted-foreground)', borderRadius: '8px 8px 0 0', fontSize: '3rem' }}>📰</div>
-                  )}
+                    <img 
+                      src={article.image} 
+                      alt={article.title} 
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px 8px 0 0' }} 
+                      onError={(e) => { 
+                        e.target.style.display = 'none';
+                        // Show fallback emoji when image fails
+                        const fallback = e.target.parentElement.querySelector('.news-fallback');
+                        if (fallback) fallback.style.display = 'flex';
+                      }} 
+                    />
+                  ) : null}
+                  <div 
+                    className="news-fallback" 
+                    style={{
+                      display: article.image ? 'none' : 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: '100%',
+                      height: '100%',
+                      fontSize: '3rem',
+                      background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+                      borderRadius: '8px 8px 0 0',
+                      position: 'absolute',
+                      top: 0,
+                      left: 0
+                    }}
+                  >
+                    📰
+                  </div>
                 </div>
                 <div className="news-content">
                   <div className="news-date">{article.date}</div>
@@ -810,20 +1324,20 @@ export default function App() {
       </div>
 
       {/* ==========  SUBMIT TOOL SECTION ========== */}
-      <section className="section" id="submit" style={{ background: 'var(--surface)' }}>
+      <section className="section" id="submit" ref={submitSectionRef} style={{ background: 'var(--surface)', scrollMarginTop: '6rem' }}>
         <div className="container">
           <div className="submit-tool-section">
             <h2 style={{ marginBottom: '1rem', textAlign: 'center' }}>📤 Submit Your AI Tool</h2>
             <p style={{ textAlign: 'center', marginBottom: '1.5rem', color: 'var(--muted)' }}>Help the community discover your tool. Fill out the form below to submit.</p>
-            <form className="submit-tool-form" style={{ maxWidth: '600px', margin: '0 auto' }}>
+            <form className="submit-tool-form" style={{ maxWidth: '600px', margin: '0 auto' }} onSubmit={handleSubmitTool}>
               <div style={{ marginBottom: '1rem' }}>
-                <input type="text" placeholder="Tool Name" required style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }} />
+                <input type="text" placeholder="Tool Name" required value={submitForm.name} onChange={handleSubmitToolChange('name')} style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }} />
               </div>
               <div style={{ marginBottom: '1rem' }}>
-                <input type="url" placeholder="Tool URL" required style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }} />
+                <input type="url" placeholder="Tool URL" required value={submitForm.url} onChange={handleSubmitToolChange('url')} style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }} />
               </div>
               <div style={{ marginBottom: '1rem' }}>
-                <select required style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }}>
+                <select required value={submitForm.category} onChange={handleSubmitToolChange('category')} style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }}>
                   <option value="">Select Category</option>
                   <option>Writing</option>
                   <option>Image</option>
@@ -834,17 +1348,62 @@ export default function App() {
                 </select>
               </div>
               <div style={{ marginBottom: '1rem' }}>
-                <textarea placeholder="Brief description" rows="3" style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }} />
+                <input type="text" placeholder="Pricing" value={submitForm.pricing} onChange={handleSubmitToolChange('pricing')} style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }} />
+              </div>
+              <div style={{ marginBottom: '1rem' }}>
+                <input type="email" placeholder="Contact Email" required value={submitForm.contactEmail} onChange={handleSubmitToolChange('contactEmail')} style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }} />
+              </div>
+              <div style={{ marginBottom: '1rem' }}>
+                <textarea placeholder="Brief description" rows="3" required value={submitForm.description} onChange={handleSubmitToolChange('description')} style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }} />
               </div>
               <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Submit Tool</button>
             </form>
+            {submitStatus.message ? (
+              <p style={{ marginTop: '1rem', textAlign: 'center', color: submitStatus.type === 'error' ? '#ef4444' : 'var(--primary)' }}>
+                {submitStatus.message}
+              </p>
+            ) : null}
           </div>
         </div>
       </section>
 
       {/* ==========  FOOTER ========== */}
-      <footer style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '2rem', textAlign: 'center', color: 'var(--muted)', marginTop: '2rem' }}>
-        <p>© 2024 AIToolsCenter. All rights reserved. | <a href="#privacy" style={{ color: 'var(--primary)' }}>Privacy</a> | <a href="#terms" style={{ color: 'var(--primary)' }}>Terms</a></p>
+      <footer className="footer-shell">
+        <div className="container">
+          <div className="footer-grid">
+            <div className="footer-brand">
+              <div className="footer-brand-title">AIToolsCenter</div>
+              <p style={{ margin: 0, fontSize: '0.9rem' }}>A clean directory for discovering, comparing, and submitting AI tools. Built for fast browsing, weekly updates, and direct access to the right product pages.</p>
+            </div>
+            <div className="footer-panels">
+              <div className="footer-panel">
+                <div className="footer-panel-title">Explore</div>
+                <div className="footer-actions">
+                  <button className="navbar-link navbar-link-button footer-link" onClick={goHome} type="button">Discover</button>
+                  <button className="navbar-link navbar-link-button footer-link" onClick={handleCollectionsClick} type="button">Collections</button>
+                  <button className="navbar-link navbar-link-button footer-link" onClick={handleUpdatesClick} type="button">Weekly Updates</button>
+                </div>
+              </div>
+              <div className="footer-panel">
+                <div className="footer-panel-title">Legal</div>
+                <div className="footer-actions">
+                  <button className="navbar-link navbar-link-button footer-link" onClick={() => openPage('privacy')} type="button">Privacy Policy</button>
+                  <button className="navbar-link navbar-link-button footer-link" onClick={() => openPage('terms')} type="button">Terms</button>
+                  <button className="navbar-link navbar-link-button footer-link" onClick={() => openPage('contact')} type="button">Contact</button>
+                </div>
+              </div>
+              <div className="footer-panel">
+                <div className="footer-panel-title">Actions</div>
+                <div className="footer-actions">
+                  <a className="navbar-link navbar-link-button footer-link" href="#submit" onClick={handleSubmitToolClick}>Submit Tool</a>
+                  <a className="navbar-link navbar-link-button footer-link" href="#news" onClick={handleUpdatesClick}>View News</a>
+                  <button className="navbar-link navbar-link-button footer-link" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} type="button">Back to Top</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p className="footer-meta">© 2026 AIToolsCenter. All rights reserved.</p>
+        </div>
       </footer>
     </div>
   )

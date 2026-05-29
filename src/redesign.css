@@ -2,6 +2,7 @@
   AIToolsCenter - Complete Redesign
   Premium AI Tools Discovery Platform
   ============================================================ */
+/* Force CSS reload v2 */
 
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -78,6 +79,14 @@
   --z-fixed: 300;
   --z-modal: 400;
   --z-tooltip: 500;
+  
+  /* Default to Dark Theme */
+  --bg: var(--dark-bg);
+  --surface: var(--dark-surface);
+  --card: var(--dark-card);
+  --text: var(--dark-text);
+  --muted: var(--dark-muted);
+  --border: var(--dark-border);
 }
 
 /* Light Theme */
@@ -234,16 +243,39 @@ a:hover {
 }
 
 .navbar-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.875rem;
   color: var(--muted);
   transition: color 0.2s ease;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
 }
 
 .navbar-link:hover {
   color: var(--text);
 }
 
+.navbar-link-button {
+  padding: 0.45rem 0.8rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid transparent;
+}
+
+.navbar-link-button:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--border);
+}
+
 .navbar-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: var(--grad-hero);
   color: #000;
   padding: 0.5rem 1.25rem;
@@ -254,6 +286,156 @@ a:hover {
 
 .navbar-cta:hover {
   transform: scale(1.05);
+}
+
+.footer-shell {
+  background: linear-gradient(180deg, rgba(0, 194, 168, 0.04), transparent 28%), var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 3rem 0 2rem;
+  color: var(--muted);
+  margin-top: 2rem;
+}
+
+.footer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.footer-brand {
+  flex: 0 0 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.footer-brand-title {
+  font-family: var(--headline);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.footer-panels {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(150px, 1fr));
+  gap: 1.5rem;
+  min-width: 350px;
+}
+
+.footer-panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-card);
+}
+
+.footer-panel-title {
+  font-weight: 800;
+  margin-bottom: 0.85rem;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.footer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-meta {
+  text-align: center;
+  margin: 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  width: 100%;
+  flex-basis: 100%;
+  order: 10;
+}
+
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 0.85rem;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  white-space: normal;
+  overflow-wrap: break-word;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  color: var(--text);
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+  width: 100%;
+}
+
+.footer-link:hover {
+  transform: translateY(-1px);
+  background: rgba(0, 194, 168, 0.08);
+  border-color: rgba(0, 194, 168, 0.25);
+}
+
+/* Dark Mode Footer - Explicit Colors */
+[data-theme="dark"] .footer-shell {
+  background: linear-gradient(180deg, rgba(0, 194, 168, 0.04), transparent 28%), rgba(11, 13, 28, 0.97);
+  border-top-color: rgba(255, 255, 255, 0.09);
+  color: #7a83ae;
+}
+
+[data-theme="dark"] .footer-panel {
+  background: rgba(16, 19, 40, 0.99);
+  border-color: rgba(255, 255, 255, 0.09);
+  color: #7a83ae;
+}
+
+[data-theme="dark"] .footer-panel-title {
+  color: #f0f1ff;
+}
+
+[data-theme="dark"] .footer-link {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.06);
+  color: #f0f1ff;
+}
+
+[data-theme="dark"] .footer-link:hover {
+  background: rgba(0, 194, 168, 0.15);
+  border-color: rgba(0, 194, 168, 0.4);
+  color: #33dfc2;
+}
+
+/* Light Mode Footer - Explicit Colors */
+[data-theme="light"] .footer-shell {
+  background: linear-gradient(180deg, rgba(0, 194, 168, 0.04), transparent 28%), #ffffff;
+  border-top-color: rgba(0, 0, 0, 0.08);
+  color: #5a6280;
+}
+
+[data-theme="light"] .footer-panel {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #5a6280;
+}
+
+[data-theme="light"] .footer-panel-title {
+  color: #0d0e1a;
+}
+
+[data-theme="light"] .footer-link {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #0d0e1a;
+}
+
+[data-theme="light"] .footer-link:hover {
+  background: rgba(0, 194, 168, 0.08);
+  border-color: rgba(0, 194, 168, 0.3);
+  color: #008f7d;
 }
 
 /* ============================================================
@@ -954,6 +1136,8 @@ a:hover {
   
   .navbar-links {
     gap: var(--spacing-md);
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
   
   .search-container {
@@ -975,5 +1159,23 @@ a:hover {
   .comparison-table th,
   .comparison-table td {
     padding: var(--spacing-sm);
+  }
+
+  .footer-panels {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .footer-brand {
+    flex: 0 0 auto;
+    max-width: 100%;
+  }
+
+  .footer-shell {
+    padding: 2rem 0 1.5rem;
   }
 }

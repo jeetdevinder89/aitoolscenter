@@ -41,12 +41,22 @@ def send_confirmation_email(
         message["Reply-To"] = reply_to_email
 
     html = f"""
-    <div style="font-family:Segoe UI,Arial,sans-serif;line-height:1.6;color:#111827;max-width:600px;margin:0 auto;padding:24px;">
-      <h1 style="font-size:24px;margin:0 0 16px;">Thanks for subscribing</h1>
-      <p style="margin:0 0 12px;">You are now subscribed to weekly AI tool updates from AIToolsCenter.</p>
-      <p style="margin:0 0 12px;">We will send concise updates on useful AI tools, product launches, and practical comparisons.</p>
-      <p style="margin:0 0 20px;">You can visit the site anytime at <a href=\"{site_url}\" style=\"color:#2563eb;\">{site_url}</a>.</p>
-      <p style="margin:0;color:#6b7280;font-size:14px;">AIToolsCenter</p>
+    <div style="font-family:Segoe UI,Arial,sans-serif;line-height:1.6;color:#111827;max-width:600px;margin:0 auto;padding:24px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb;">
+      <h1 style="font-size:24px;margin:0 0 16px;color:#0f172a;">✓ Thanks for subscribing!</h1>
+      <p style="margin:0 0 12px;color:#111827;">You are now subscribed to <strong>weekly AI tool updates</strong> from AIToolsCenter.</p>
+      <p style="margin:0 0 12px;color:#111827;">📬 Every Monday, we'll send you:</p>
+      <ul style="margin:0 0 16px;padding-left:20px;color:#111827;">
+        <li>Top 5 trending AI tools of the week</li>
+        <li>Latest product launches & updates</li>
+        <li>Practical tool comparisons</li>
+        <li>Curated AI news & insights</li>
+      </ul>
+      <p style="margin:0 0 20px;color:#111827;"><strong>🌐 Visit the site:</strong> <a href="{site_url}" style="color:#2563eb;text-decoration:none;">{site_url}</a></p>
+      <hr style="border:none;border-top:1px solid #e5e7eb;margin:20px 0;" />
+      <p style="margin:12px 0;color:#6b7280;font-size:13px;">📧 You're receiving this email because you subscribed to our newsletter.</p>
+      <p style="margin:0;color:#6b7280;font-size:13px;">💬 Questions? Reply to this email or contact <a href="mailto:support@aitoolscenter.in" style="color:#2563eb;text-decoration:none;">support@aitoolscenter.in</a></p>
+      <p style="margin:12px 0 0;color:#6b7280;font-size:12px;">— AIToolsCenter Team</p>
+      <p style="margin:12px 0 0;padding-top:12px;border-top:1px solid #e5e7eb;color:#9ca3af;font-size:12px;"><a href="{site_url}?unsubscribe={subscriber_email}" style="color:#9ca3af;text-decoration:underline;">Unsubscribe</a> | <a href="{site_url}#contact" style="color:#9ca3af;text-decoration:underline;">Manage preferences</a></p>
     </div>
     """
 
