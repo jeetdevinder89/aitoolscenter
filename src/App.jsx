@@ -4074,19 +4074,14 @@ function App() {
               </div>
 
               <div className="filter-pills" role="group" aria-label="Quick filters">
-                <button type="button" className={`filter-pill${favoritesOnly ? ' active' : ''}`} onClick={() => setFavoritesOnly((current) => !current)}>
-                  <span className="pill-icon">✓</span>
-                  Verified
-                </button>
-                <button type="button" className="filter-pill" onClick={() => setActiveCategory('All') || setSearch('free')}>Free</button>
-                <button type="button" className="filter-pill" onClick={() => setActiveCategory('All') || setSearch('freemium')}>Freemium</button>
-                <button type="button" className="filter-pill" onClick={() => setActiveCategory('All') || setSearch('paid')}>Paid</button>
+                <button type="button" className="filter-pill" onClick={() => setActiveCategory('All') || setSearch('free')}>🎁 Free</button>
+                <button type="button" className="filter-pill" onClick={() => setActiveCategory('All') || setSearch('freemium')}>💰 Freemium</button>
+                <button type="button" className="filter-pill" onClick={() => setActiveCategory('All') || setSearch('paid')}>💎 Paid</button>
               </div>
 
               <div className="filter-meta">
-                <span>📊 {filtered.length} tools</span>
-                <span>🔄 Updated daily</span>
-                <span>✅ 100% verified</span>
+                <span>📊 {filtered.length} tools found</span>
+                <span>🔄 Real-time updates</span>
               </div>
             </div>
 
