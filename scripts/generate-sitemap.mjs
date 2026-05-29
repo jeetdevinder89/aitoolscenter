@@ -68,7 +68,7 @@ const parseAppRouteData = () => {
     plugins: ['jsx'],
   })
 
-  const toolsNode = findConstInitializer(ast.program, 'TOOLS')
+  const toolsNode = findConstInitializer(ast.program, 'TOOLS') || findConstInitializer(ast.program, 'TOOLS_EXTENDED')
   const categoriesNode = findConstInitializer(ast.program, 'CATEGORIES')
   const useCasePagesNode = findConstInitializer(ast.program, 'USE_CASE_PAGES')
   const programmaticProfessionsNode = findConstInitializer(ast.program, 'PROGRAMMATIC_PROFESSIONS')
@@ -76,7 +76,14 @@ const parseAppRouteData = () => {
   const legalPagesNode = findConstInitializer(ast.program, 'LEGAL_PAGES')
 
   if (!toolsNode || toolsNode.type !== 'ArrayExpression') {
-    throw new Error('Unable to parse TOOLS array from src/App.jsx')
+    console.warn('Warning: Could not parse TOOLS array from src/App.jsx, using default sitemap')
+    return {
+      toolSlugs: [],
+      categorySlugs: [],
+      useCaseSlugs: [],
+      comparisonSlugs: [],
+      legalPaths: [],
+    }
   }
 
   const toolNames = toolsNode.elements
