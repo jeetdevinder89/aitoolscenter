@@ -116,7 +116,7 @@ const TOOLS_EXTENDED = [
     category: 'Research',
     tagline: 'AI search engine with real-time web sources',
     description: 'Perplexity is an AI search engine that provides answers with cited sources.',
-    link: ' https://perplexity.ai',
+    link: 'https://perplexity.ai',
     badge: 'Free + Pro',
     rating: 5,
     tags: ['Search', 'Citations', 'Research'],
@@ -166,6 +166,47 @@ const WIZARD_QUESTIONS = [
 // PAGE COMPONENTS
 // ==================================================
 
+// AdsContainer Component for Google AdSense
+function AdsContainer({ type = 'horizontal' }) {
+  return (
+    <div className={`ads-container ads-${type}`} style={{ 
+      padding: '1rem',
+      marginBottom: '1rem',
+      borderRadius: 'var(--radius-lg)',
+      background: 'var(--surface)',
+      border: '1px solid var(--border)',
+      textAlign: 'center',
+      fontSize: '0.875rem',
+      color: 'var(--muted)'
+    }}>
+      <div style={{ marginBottom: '0.5rem' }}>Advertisement</div>
+      <div style={{ 
+        height: type === 'horizontal' ? '90px' : '300px',
+        background: 'var(--background)',
+        borderRadius: 'var(--radius-md)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'var(--muted-foreground)'
+      }}>
+        {type === 'horizontal' && 'Ad Space (728x90)'}
+        {type === 'vertical' && 'Ad Space (300x250)'}
+        {type === 'square' && 'Ad Space (300x300)'}
+      </div>
+      {/* Google AdSense Script would be inserted here */}
+      {/* <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2770089511325323" 
+          crossOrigin="anonymous"></script>
+          <ins className="adsbygoogle"
+               style={{display:'block'}}
+               data-ad-client="ca-pub-2770089511325323"
+               data-ad-slot="xxxxxxxxxx"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> */}
+    </div>
+  )
+}
+
 function ComparisonEngine({ tools = TOOLS_EXTENDED }) {
   const [selectedTools, setSelectedTools] = useState([tools[0], tools[1]])
   
@@ -182,7 +223,7 @@ function ComparisonEngine({ tools = TOOLS_EXTENDED }) {
   }
 
   return (
-    <section className="section" style={{ background: 'var(--surface)' }}>
+    <section className="section" id="compare" style={{ background: 'var(--surface)' }}>
       <div className="container">
         <h2 style={{ marginBottom: '2rem', textAlign: 'center' }}>🔄 Compare AI Tools</h2>
         
@@ -304,7 +345,7 @@ function RecommendationWizard({ tools = TOOLS_EXTENDED }) {
   const progress = ((step + 1) / WIZARD_QUESTIONS.length) * 100
 
   return (
-    <section className="section" style={{ background: 'var(--surface)' }}>
+    <section className="section" id="wizard" style={{ background: 'var(--surface)' }}>
       <div className="container">
         <h2 style={{ marginBottom: '2rem', textAlign: 'center' }}>🎯 Find Your Perfect AI Tool</h2>
         
@@ -376,7 +417,7 @@ function UserDashboard({ tools = TOOLS_EXTENDED }) {
   const [comparisonHistory, setComparisonHistory] = useState([])
 
   return (
-    <section className="section" style={{ marginTop: '2rem' }}>
+    <section className="section" id="dashboard" style={{ marginTop: '2rem' }}>
       <div className="dashboard-container">
         <div className="dashboard-sidebar">
           <div className="dashboard-menu">
@@ -586,6 +627,10 @@ export default function App() {
           <p style={{ color: 'var(--muted)', textAlign: 'center', marginBottom: '2rem' }}>
             Discover the most popular AI tools trending right now
           </p>
+          
+          {/* ADS CONTAINER - AFTER TOOLS INTRO */}
+          <AdsContainer type="horizontal" />
+          
           <div className="tools-grid">
             {TOOLS_EXTENDED.filter(t => t.trending).map(tool => (
               <a key={tool.id} href={tool.link} target="_blank" rel="noopener noreferrer" className="tool-card">
@@ -684,6 +729,46 @@ export default function App() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ==========  ADS CONTAINER - AFTER NEWS ========== */}
+      <div style={{ padding: '0 1rem' }}>
+        <div className="container">
+          <AdsContainer type="horizontal" />
+        </div>
+      </div>
+
+      {/* ==========  SUBMIT TOOL SECTION ========== */}
+      <section className="section" id="submit" style={{ background: 'var(--surface)' }}>
+        <div className="container">
+          <div className="submit-tool-section">
+            <h2 style={{ marginBottom: '1rem', textAlign: 'center' }}>📤 Submit Your AI Tool</h2>
+            <p style={{ textAlign: 'center', marginBottom: '1.5rem', color: 'var(--muted)' }}>Help the community discover your tool. Fill out the form below to submit.</p>
+            <form className="submit-tool-form" style={{ maxWidth: '600px', margin: '0 auto' }}>
+              <div style={{ marginBottom: '1rem' }}>
+                <input type="text" placeholder="Tool Name" required style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }} />
+              </div>
+              <div style={{ marginBottom: '1rem' }}>
+                <input type="url" placeholder="Tool URL" required style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }} />
+              </div>
+              <div style={{ marginBottom: '1rem' }}>
+                <select required style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }}>
+                  <option value="">Select Category</option>
+                  <option>Writing</option>
+                  <option>Image</option>
+                  <option>Coding</option>
+                  <option>Video</option>
+                  <option>Research</option>
+                  <option>Productivity</option>
+                </select>
+              </div>
+              <div style={{ marginBottom: '1rem' }}>
+                <textarea placeholder="Brief description" rows="3" style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }} />
+              </div>
+              <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Submit Tool</button>
+            </form>
           </div>
         </div>
       </section>
