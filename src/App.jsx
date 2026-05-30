@@ -277,21 +277,20 @@ const LEGAL_PAGES = {
         items: [
           'Email: support@aitoolscenter.in',
           'Response time: 2 to 5 business days.',
-          'Use this address for tool submission follow-up and site support.',
+          'Use this address for newsletter management, feedback, and site support.',
         ],
       },
     ],
   },
 }
 
-function StaticPage({ title, intro, sections, onHomeClick, onSubmitClick }) {
+function StaticPage({ title, intro, sections, onHomeClick }) {
   return (
     <div className="page">
       <nav className="navbar">
         <div className="navbar-logo" onClick={onHomeClick} style={{ cursor: 'pointer' }}>AIToolsCenter</div>
         <div className="navbar-links">
           <button className="navbar-link" onClick={onHomeClick}>Home</button>
-          <button className="navbar-link" onClick={onSubmitClick}>Submit Tool</button>
         </div>
       </nav>
       <main style={{ paddingTop: '6rem' }}>
@@ -705,6 +704,8 @@ export default function App() {
   const [newsletterStatus, setNewsletterStatus] = useState({ type: '', message: '' })
   const [activeCollectionIndex, setActiveCollectionIndex] = useState(0)
   const [visitorCount, setVisitorCount] = useState(0)
+  const [showUnsubscribeModal, setShowUnsubscribeModal] = useState(false)
+  const [unsubscribeEmail, setUnsubscribeEmail] = useState('')
   const toolsSectionRef = useRef(null)
   const collectionsSectionRef = useRef(null)
   const updatesSectionRef = useRef(null)
@@ -855,6 +856,44 @@ export default function App() {
     }
   }
 
+  const handleUnsubscribeSubmit = async (event) => {
+    event.preventDefault()
+    
+    const email = unsubscribeEmail.trim()
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('Please enter a valid email address.')
+      return
+    }
+
+    try {
+      const response = await fetch('/api/unsubscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        // Remove from localStorage
+        const subscribers = JSON.parse(localStorage.getItem('aitoolscenter-newsletter-subscribers') || '[]')
+        const filtered = subscribers.filter(sub => sub !== email)
+        localStorage.setItem('aitoolscenter-newsletter-subscribers', JSON.stringify(filtered))
+        
+        alert('✓ Successfully unsubscribed. You will not receive further emails.')
+        setShowUnsubscribeModal(false)
+        setUnsubscribeEmail('')
+      } else {
+        const errorMsg = data.error || data.details || 'Unknown error'
+        console.error('Unsubscribe response error:', errorMsg)
+        alert(`Error: ${errorMsg}`)
+      }
+    } catch (error) {
+      console.error('Unsubscribe error:', error)
+      alert(`Error unsubscribing: ${error.message}`)
+    }
+  }
+
   const filteredTools = TOOLS_EXTENDED.filter(tool =>
     (selectedCategory === 'All' || tool.category === selectedCategory) &&
     (searchQuery === '' || 
@@ -875,7 +914,6 @@ export default function App() {
         intro={LEGAL_PAGES.privacy.intro}
         sections={LEGAL_PAGES.privacy.sections}
         onHomeClick={goHome}
-        onSubmitClick={() => openPage('home')}
       />
     )
   }
@@ -887,7 +925,6 @@ export default function App() {
         intro={LEGAL_PAGES.terms.intro}
         sections={LEGAL_PAGES.terms.sections}
         onHomeClick={goHome}
-        onSubmitClick={() => openPage('home')}
       />
     )
   }
@@ -899,7 +936,6 @@ export default function App() {
         intro={LEGAL_PAGES.contact.intro}
         sections={LEGAL_PAGES.contact.sections}
         onHomeClick={goHome}
-        onSubmitClick={() => openPage('home')}
       />
     )
   }
@@ -1191,7 +1227,7 @@ export default function App() {
                 </p>
               )}
               <p style={{ marginTop: '1rem', fontSize: '0.85rem', color: 'var(--muted)' }}>
-                ✓ No spam. <a href="#contact" onClick={(event) => { event.preventDefault(); openPage('contact') }} style={{ color: 'var(--primary)', textDecoration: 'none' }}>Unsubscribe anytime</a>.
+                ✓ No spam. <button onClick={() => setShowUnsubscribeModal(true)} style={{ background: 'none', border: 'none', color: 'var(--primary)', textDecoration: 'underline', cursor: 'pointer', padding: 0, font: 'inherit' }}>Unsubscribe anytime</button>.
               </p>
               <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1rem' }}>
                 {['Tools', 'Collections', 'News', 'Contact'].map((label) => (
@@ -1288,6 +1324,82 @@ export default function App() {
           <AdsContainer type="horizontal" />
         </div>
       </div>
+
+      {/* ==========  UNSUBSCRIBE MODAL ========== */}
+      {showUnsubscribeModal && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0, 0, 0, 0.5)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 9999,
+        }}>
+          <div style={{
+            background: 'var(--background)',
+            border: '1px solid var(--border)',
+            borderRadius: 'var(--radius-lg)',
+            padding: '2rem',
+            maxWidth: '400px',
+            width: '90%',
+            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.2)',
+          }}>
+            <h2 style={{ marginTop: 0, marginBottom: '1rem' }}>Unsubscribe from Newsletter</h2>
+            <p style={{ color: 'var(--muted)', marginBottom: '1.5rem' }}>
+              Enter your email address to unsubscribe from our newsletter.
+            </p>
+            <form onSubmit={handleUnsubscribeSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={unsubscribeEmail}
+                onChange={(e) => setUnsubscribeEmail(e.target.value)}
+                required
+                style={{
+                  padding: '0.75rem',
+                  borderRadius: 'var(--radius-md)',
+                  border: '1px solid var(--border)',
+                  background: 'var(--surface)',
+                  color: 'var(--foreground)',
+                  fontSize: '1rem',
+                }}
+              />
+              <div style={{ display: 'flex', gap: '0.75rem' }}>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  style={{ flex: 1 }}
+                >
+                  Unsubscribe
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowUnsubscribeModal(false)
+                    setUnsubscribeEmail('')
+                  }}
+                  style={{
+                    flex: 1,
+                    padding: '0.75rem',
+                    borderRadius: 'var(--radius-md)',
+                    border: '1px solid var(--border)',
+                    background: 'var(--surface)',
+                    color: 'var(--foreground)',
+                    cursor: 'pointer',
+                    fontSize: '1rem',
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* ==========  FOOTER ========== */}
       <footer className="footer-shell">

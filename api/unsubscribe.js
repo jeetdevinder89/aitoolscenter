@@ -17,10 +17,30 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid email format' });
     }
 
+    if (!supabaseUrl || !supabaseServiceKey) {
+      console.error('Missing Supabase environment variables');
+      return res.status(500).json({ error: 'Server configuration error', details: 'Missing Supabase credentials' });
+    }
+
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
+    // First check if email exists
+    const { data: existingRecords, error: fetchError } = await supabase
+      .from('newsletter_submissions')
+      .select('email')
+      .eq('email', email);
+
+    if (fetchError) {
+      console.error('Supabase fetch error:', fetchError);
+      return res.status(500).json({ error: 'Database error', details: fetchError.message });
+    }
+
+    if (!existingRecords || existingRecords.length === 0) {
+      return res.status(404).json({ error: 'Email not found in newsletter subscriber list' });
+    }
+
     // Mark subscriber as inactive
-    const { error } = await supabase
+    const { error: updateError } = await supabase
       .from('newsletter_submissions')
       .update({
         active: false,
@@ -28,13 +48,10 @@ export default async function handler(req, res) {
       })
       .eq('email', email);
 
-    if (error) {
-      console.error('Supabase error:', error);
-      throw error;
+    if (updateError) {
+      console.error('Supabase update error:', updateError);
+      return res.status(500).json({ error: 'Failed to update subscription', details: updateError.message });
     }
-
-    // Also remove from localStorage copy if it exists
-    // This is handled on the client side
 
     // Return HTML response for email links
     if (req.headers.accept?.includes('text/html')) {
