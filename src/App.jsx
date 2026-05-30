@@ -872,7 +872,21 @@ export default function App() {
         body: JSON.stringify({ email }),
       })
 
-      const data = await response.json()
+      let data = {}
+      const contentType = response.headers.get('content-type')
+      
+      try {
+        if (contentType && contentType.includes('application/json')) {
+          data = await response.json()
+        } else {
+          const text = await response.text()
+          console.warn('Non-JSON response:', text.substring(0, 200))
+          data = { error: 'Server error - invalid response format' }
+        }
+      } catch (parseError) {
+        console.error('Failed to parse response:', parseError)
+        data = { error: 'Server returned invalid response format' }
+      }
 
       if (response.ok) {
         // Remove from localStorage
@@ -884,7 +898,7 @@ export default function App() {
         setShowUnsubscribeModal(false)
         setUnsubscribeEmail('')
       } else {
-        const errorMsg = data.error || data.details || 'Unknown error'
+        const errorMsg = data.error || data.details || `Server error (${response.status})`
         console.error('Unsubscribe response error:', errorMsg)
         alert(`Error: ${errorMsg}`)
       }
