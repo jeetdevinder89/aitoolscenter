@@ -983,6 +983,7 @@ export default function App() {
           <a href="#collections" className="navbar-link navbar-link-button" onClick={handleCollectionsClick}>Collections</a>
           <a href="#updates" className="navbar-link navbar-link-button" onClick={handleUpdatesClick}>Weekly Updates</a>
           <a href="#news" className="navbar-link navbar-link-button">News</a>
+          <a href="#faq" className="navbar-link navbar-link-button">FAQ</a>
           <button onClick={() => openPage('contact')} className="navbar-link navbar-link-button" type="button">Contact</button>
           <button onClick={toggleTheme} className="navbar-link navbar-link-button" title="Toggle theme" type="button">
             {theme === 'dark' ? '☀️' : '🌙'}
@@ -1334,6 +1335,122 @@ export default function App() {
         </div>
       </div>
 
+      {/* ==========  FAQ SECTION ========== */}
+      <section className="section" id="faq" style={{ background: 'var(--surface)' }}>
+        <div className="container" style={{ maxWidth: '900px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <div style={{ display: 'inline-flex', padding: '0.35rem 0.75rem', borderRadius: '999px', border: '1px solid var(--border)', marginBottom: '0.9rem', color: 'var(--primary)', fontWeight: 700, fontSize: '0.85rem' }}>Common Questions</div>
+            <h2 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Frequently Asked Questions</h2>
+            <p style={{ color: 'var(--muted)', fontSize: '1.1rem' }}>Everything you need to know about AIToolsCenter</p>
+          </div>
+          
+          <div style={{ display: 'grid', gap: '1rem' }}>
+            {[
+              {
+                q: '🎯 What is AIToolsCenter?',
+                a: 'AIToolsCenter is a comprehensive directory of 100+ authentic AI tools across categories like writing, coding, image generation, video, automation, and productivity. We help you discover, compare, and choose the best AI tools for your needs.'
+              },
+              {
+                q: '🔍 How do I find the right AI tool for my needs?',
+                a: 'Use our search bar to find tools by name, or filter by category (Writing, Coding, Image, Video, etc.). You can also browse our curated collections for specific use cases. Each tool includes detailed descriptions, pricing, and ratings to help you decide.'
+              },
+              {
+                q: '⭐ How are tools rated and reviewed?',
+                a: 'Tools are rated based on features, user feedback, pricing value, and community reviews. We update ratings regularly as tools evolve. You can submit your own reviews to help other users make informed decisions.'
+              },
+              {
+                q: '💰 Do I need to pay for the tools listed?',
+                a: 'Most tools have both free and paid versions. Each tool listing shows the pricing tier (Free, Free + Pro, Paid, etc.). Click "Open" on any tool to visit their website and try them yourself.'
+              },
+              {
+                q: '📧 How often do I receive newsletter updates?',
+                a: 'Our weekly newsletter is sent every Monday at 9 AM UTC. You can subscribe for free and cancel anytime with one click. Each email includes top trending AI tools, latest news, and curated collections.'
+              },
+              {
+                q: '🚀 Can I submit my own AI tool?',
+                a: 'Yes! We welcome submissions of new AI tools. Use the "Submit Tool" button in the footer to provide details about your tool. We review submissions and add quality tools to our directory.'
+              },
+              {
+                q: '🔐 Is my email safe with you?',
+                a: 'We take privacy seriously. Your email is only used for our weekly newsletter and is never shared or sold. You can unsubscribe instantly with one click from any email.'
+              },
+              {
+                q: '📚 What categories of AI tools do you cover?',
+                a: 'We cover 20+ categories including Writing & Content, Image Generation, Video Creation, Coding & Development, Research & Knowledge, Productivity, Automation, Business Tools, and more. New categories added regularly!'
+              },
+              {
+                q: '🌐 Is AIToolsCenter free to use?',
+                a: 'Yes! AIToolsCenter is completely free. No registration required to browse tools. Our newsletter is also free. We keep it free for everyone.'
+              },
+              {
+                q: '❓ How can I get help or report an issue?',
+                a: 'Contact us at support@aitoolscenter.in or use our contact form in the footer. We respond within 24 hours. You can also find detailed information about our service in our Privacy Policy and Terms.'
+              }
+            ].map((faq, idx) => (
+              <div 
+                key={idx} 
+                style={{
+                  background: 'var(--card)',
+                  border: '1px solid var(--border)',
+                  borderRadius: 'var(--radius-lg)',
+                  padding: '1.25rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                }}
+                className="faq-item"
+                onClick={(e) => {
+                  const answer = e.currentTarget.querySelector('.faq-answer');
+                  if (answer) {
+                    answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+                    e.currentTarget.querySelector('.faq-toggle').style.transform = 
+                      answer.style.display === 'none' ? 'rotate(0deg)' : 'rotate(180deg)';
+                  }
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
+                  <div style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--text)' }}>{faq.q}</div>
+                  <div 
+                    className="faq-toggle"
+                    style={{
+                      fontSize: '1.25rem',
+                      transition: 'transform 0.3s ease',
+                      flex: '0 0 auto'
+                    }}
+                  >
+                    ▼
+                  </div>
+                </div>
+                <div 
+                  className="faq-answer"
+                  style={{
+                    display: 'none',
+                    marginTop: '0.75rem',
+                    color: 'var(--muted)',
+                    lineHeight: '1.6',
+                    paddingTop: '0.75rem',
+                    borderTop: '1px solid var(--border)'
+                  }}
+                >
+                  {faq.a}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ marginTop: '2.5rem', padding: '2rem', background: 'linear-gradient(135deg, rgba(0,194,168,0.1), rgba(247,179,43,0.05))', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)', textAlign: 'center' }}>
+            <div style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem' }}>Didn't find your answer?</div>
+            <p style={{ color: 'var(--muted)', marginBottom: '1rem' }}>We're here to help. Reach out to our support team.</p>
+            <button 
+              onClick={() => openPage('contact')}
+              className="btn btn-primary"
+              style={{ marginTop: '0.5rem' }}
+            >
+              Contact Support
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* ==========  UNSUBSCRIBE MODAL ========== */}
       {showUnsubscribeModal && (
         <div style={{
@@ -1428,11 +1545,18 @@ export default function App() {
                 </div>
               </div>
               <div className="footer-panel">
+                <div className="footer-panel-title">Help</div>
+                <div className="footer-actions">
+                  <a className="navbar-link navbar-link-button footer-link" href="#faq">FAQ</a>
+                  <button className="navbar-link navbar-link-button footer-link" onClick={() => openPage('contact')} type="button">Contact Us</button>
+                  <button className="navbar-link navbar-link-button footer-link" onClick={() => setShowUnsubscribeModal(true)} type="button">Unsubscribe</button>
+                </div>
+              </div>
+              <div className="footer-panel">
                 <div className="footer-panel-title">Legal</div>
                 <div className="footer-actions">
                   <button className="navbar-link navbar-link-button footer-link" onClick={() => openPage('privacy')} type="button">Privacy Policy</button>
                   <button className="navbar-link navbar-link-button footer-link" onClick={() => openPage('terms')} type="button">Terms</button>
-                  <button className="navbar-link navbar-link-button footer-link" onClick={() => openPage('contact')} type="button">Contact</button>
                 </div>
               </div>
               <div className="footer-panel">
