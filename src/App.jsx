@@ -714,6 +714,7 @@ export default function App() {
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterStatus, setNewsletterStatus] = useState({ type: '', message: '' })
   const [activeCollectionIndex, setActiveCollectionIndex] = useState(0)
+  const [visitorCount, setVisitorCount] = useState(0)
   const toolsSectionRef = useRef(null)
   const collectionsSectionRef = useRef(null)
   const updatesSectionRef = useRef(null)
@@ -723,6 +724,28 @@ export default function App() {
     const stored = localStorage.getItem('aitoolscenter-theme') || 'dark'
     setTheme(stored)
     document.documentElement.setAttribute('data-theme', stored)
+  }, [])
+
+  useEffect(() => {
+    // Track visitor count
+    const trackVisitor = async () => {
+      try {
+        const currentCount = parseInt(localStorage.getItem('aitoolscenter-visitor-count') || '0') + 1
+        localStorage.setItem('aitoolscenter-visitor-count', currentCount.toString())
+        setVisitorCount(currentCount)
+        
+        // Optional: Send to API for persistent tracking
+        await fetch('/api/track-visitor', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ timestamp: new Date().toISOString() }),
+        }).catch(() => {})
+      } catch (error) {
+        console.error('Error tracking visitor:', error)
+      }
+    }
+    
+    trackVisitor()
   }, [])
 
   useEffect(() => {
@@ -1402,7 +1425,7 @@ export default function App() {
               </div>
             </div>
           </div>
-          <p className="footer-meta">© 2026 AIToolsCenter. All rights reserved.</p>
+          <p className="footer-meta">© 2026 AIToolsCenter. All rights reserved. | 👥 Visitors: {visitorCount.toLocaleString()}</p>
         </div>
       </footer>
     </div>
