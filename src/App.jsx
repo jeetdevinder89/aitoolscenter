@@ -214,24 +214,24 @@ const LEGAL_PAGES = {
       {
         heading: 'What We Collect',
         items: [
-          'Email addresses submitted through newsletters and contact forms.',
-          'Tool submission details such as name, URL, category, pricing, and description.',
+          'Email addresses submitted through newsletter signup.',
           'Basic analytics and advertising signals used to understand traffic and performance.',
+          'Visitor count and engagement metrics.',
         ],
       },
       {
         heading: 'How We Use It',
         items: [
-          'We use submitted data to respond to inquiries and review tool submissions.',
-          'We use analytics to measure site usage and improve content.',
-          'We do not sell personal data.',
+          'We use email addresses to send weekly newsletters with AI tool updates and curated news.',
+          'We use analytics to measure site usage and improve content quality.',
+          'We do not sell personal data to third parties.',
         ],
       },
       {
         heading: 'Newsletter & Unsubscribe',
         items: [
-          'Subscribers receive a weekly digest of AI tool updates and news every Monday.',
-          'All newsletter emails include a clear unsubscribe link at the bottom.',
+          'Subscribers receive a weekly digest of AI tool updates and trending news every Monday at 9 AM UTC.',
+          'All newsletter emails include a clear one-click unsubscribe link at the bottom.',
           'You can also contact support@aitoolscenter.in to manage your subscription.',
           'Unsubscribe requests are processed immediately.',
         ],
@@ -239,7 +239,6 @@ const LEGAL_PAGES = {
       {
         heading: 'Your Choices',
         items: [
-          'You can request removal of submitted personal data by contacting support.',
           'You can update cookie preferences in your browser settings.',
           'You can unsubscribe from the newsletter using the link in any email.',
           'Third-party advertising partners may use cookies subject to their own policies.',
@@ -702,15 +701,6 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [showSuggestions, setShowSuggestions] = useState(false)
-  const [submitForm, setSubmitForm] = useState({
-    name: '',
-    url: '',
-    category: '',
-    pricing: '',
-    contactEmail: '',
-    description: '',
-  })
-  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' })
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterStatus, setNewsletterStatus] = useState({ type: '', message: '' })
   const [activeCollectionIndex, setActiveCollectionIndex] = useState(0)
@@ -718,7 +708,6 @@ export default function App() {
   const toolsSectionRef = useRef(null)
   const collectionsSectionRef = useRef(null)
   const updatesSectionRef = useRef(null)
-  const submitSectionRef = useRef(null)
 
   useEffect(() => {
     const stored = localStorage.getItem('aitoolscenter-theme') || 'dark'
@@ -798,11 +787,6 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'auto' })
   }
 
-  const handleSubmitToolClick = (event) => {
-    event.preventDefault()
-    scrollToSection(submitSectionRef)
-  }
-
   const handleCollectionsClick = (event) => {
     event.preventDefault()
     scrollToSection(collectionsSectionRef)
@@ -811,55 +795,6 @@ export default function App() {
   const handleUpdatesClick = (event) => {
     event.preventDefault()
     scrollToSection(updatesSectionRef)
-  }
-
-  const handleSubmitToolChange = (field) => (event) => {
-    const { value } = event.target
-    setSubmitForm((current) => ({ ...current, [field]: value }))
-  }
-
-  const handleSubmitTool = async (event) => {
-    event.preventDefault()
-    setSubmitStatus({ type: '', message: '' })
-
-    const payload = {
-      name: submitForm.name.trim(),
-      url: submitForm.url.trim(),
-      category: submitForm.category.trim(),
-      pricing: submitForm.pricing.trim(),
-      contactEmail: submitForm.contactEmail.trim(),
-      description: submitForm.description.trim(),
-    }
-
-    if (!payload.name || !payload.url || !payload.category || !payload.contactEmail || payload.description.length < 30) {
-      setSubmitStatus({ type: 'error', message: 'Please fill out every field and add a longer description.' })
-      return
-    }
-
-    try {
-      const response = await fetch('/api/submit-tool', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      })
-
-      if (!response.ok) {
-        throw new Error('Submission API unavailable')
-      }
-
-      setSubmitStatus({ type: 'success', message: 'Tool submission sent successfully.' })
-      setSubmitForm({ name: '', url: '', category: '', pricing: '', contactEmail: '', description: '' })
-      return
-    } catch {
-      const storedSubmissions = JSON.parse(localStorage.getItem('aitoolscenter-tool-submissions') || '[]')
-      storedSubmissions.push({ ...payload, savedAt: new Date().toISOString() })
-      localStorage.setItem('aitoolscenter-tool-submissions', JSON.stringify(storedSubmissions))
-      setSubmitStatus({
-        type: 'success',
-        message: 'Submission saved locally. The form is working, and it will use the API when available.',
-      })
-      setSubmitForm({ name: '', url: '', category: '', pricing: '', contactEmail: '', description: '' })
-    }
   }
 
   const toggleTheme = () => {
@@ -886,13 +821,22 @@ export default function App() {
         body: JSON.stringify({ email }),
       })
 
+      const data = await response.json()
+
       if (!response.ok) {
-        throw new Error('Newsletter API error')
+        throw new Error(data.message || 'Newsletter API error')
+      }
+
+      // Store in localStorage for real-time tracking
+      const subscribers = JSON.parse(localStorage.getItem('aitoolscenter-newsletter-subscribers') || '[]')
+      if (!subscribers.includes(email)) {
+        subscribers.push(email)
+        localStorage.setItem('aitoolscenter-newsletter-subscribers', JSON.stringify(subscribers))
       }
 
       setNewsletterStatus({ 
         type: 'success', 
-        message: '✓ Subscribed! Check your email for confirmation. You will get weekly AI updates every Monday.' 
+        message: '✓ Subscribed! Check your email for confirmation. Weekly AI updates start Monday.' 
       })
       setNewsletterEmail('')
       return
@@ -905,7 +849,7 @@ export default function App() {
       }
       setNewsletterStatus({ 
         type: 'success', 
-        message: '✓ Subscribed! You will receive weekly AI updates.' 
+        message: '✓ Subscribed! Weekly AI updates will be sent to your email.' 
       })
       setNewsletterEmail('')
     }
@@ -998,7 +942,6 @@ export default function App() {
           <button onClick={toggleTheme} className="navbar-link navbar-link-button" title="Toggle theme" type="button">
             {theme === 'dark' ? '☀️' : '🌙'}
           </button>
-          <a href="#submit" className="navbar-cta" onClick={handleSubmitToolClick}>Submit Tool</a>
         </div>
       </nav>
 
@@ -1054,7 +997,7 @@ export default function App() {
           {/* BUTTONS */}
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
             <a href="#tools" className="btn btn-primary btn-lg" style={{ textDecoration: 'none', display: 'inline-block' }} onClick={handleDiscoverClick}>Explore Tools</a>
-            <a href="#submit" className="btn btn-secondary btn-lg" style={{ textDecoration: 'none', display: 'inline-block' }} onClick={handleSubmitToolClick}>Submit Your Tool</a>
+            <a href="#updates" className="btn btn-secondary btn-lg" style={{ textDecoration: 'none', display: 'inline-block' }} onClick={handleUpdatesClick}>Subscribe for Updates</a>
           </div>
         </div>
       </section>
@@ -1346,57 +1289,13 @@ export default function App() {
         </div>
       </div>
 
-      {/* ==========  SUBMIT TOOL SECTION ========== */}
-      <section className="section" id="submit" ref={submitSectionRef} style={{ background: 'var(--surface)', scrollMarginTop: '6rem' }}>
-        <div className="container">
-          <div className="submit-tool-section">
-            <h2 style={{ marginBottom: '1rem', textAlign: 'center' }}>📤 Submit Your AI Tool</h2>
-            <p style={{ textAlign: 'center', marginBottom: '1.5rem', color: 'var(--muted)' }}>Help the community discover your tool. Fill out the form below to submit.</p>
-            <form className="submit-tool-form" style={{ maxWidth: '600px', margin: '0 auto' }} onSubmit={handleSubmitTool}>
-              <div style={{ marginBottom: '1rem' }}>
-                <input type="text" placeholder="Tool Name" required value={submitForm.name} onChange={handleSubmitToolChange('name')} style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }} />
-              </div>
-              <div style={{ marginBottom: '1rem' }}>
-                <input type="url" placeholder="Tool URL" required value={submitForm.url} onChange={handleSubmitToolChange('url')} style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }} />
-              </div>
-              <div style={{ marginBottom: '1rem' }}>
-                <select required value={submitForm.category} onChange={handleSubmitToolChange('category')} style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }}>
-                  <option value="">Select Category</option>
-                  <option>Writing</option>
-                  <option>Image</option>
-                  <option>Coding</option>
-                  <option>Video</option>
-                  <option>Research</option>
-                  <option>Productivity</option>
-                </select>
-              </div>
-              <div style={{ marginBottom: '1rem' }}>
-                <input type="text" placeholder="Pricing" value={submitForm.pricing} onChange={handleSubmitToolChange('pricing')} style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }} />
-              </div>
-              <div style={{ marginBottom: '1rem' }}>
-                <input type="email" placeholder="Contact Email" required value={submitForm.contactEmail} onChange={handleSubmitToolChange('contactEmail')} style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }} />
-              </div>
-              <div style={{ marginBottom: '1rem' }}>
-                <textarea placeholder="Brief description" rows="3" required value={submitForm.description} onChange={handleSubmitToolChange('description')} style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', background: 'var(--background)', color: 'var(--foreground)', fontSize: '1rem' }} />
-              </div>
-              <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Submit Tool</button>
-            </form>
-            {submitStatus.message ? (
-              <p style={{ marginTop: '1rem', textAlign: 'center', color: submitStatus.type === 'error' ? '#ef4444' : 'var(--primary)' }}>
-                {submitStatus.message}
-              </p>
-            ) : null}
-          </div>
-        </div>
-      </section>
-
       {/* ==========  FOOTER ========== */}
       <footer className="footer-shell">
         <div className="container">
           <div className="footer-grid">
             <div className="footer-brand">
               <div className="footer-brand-title">AIToolsCenter</div>
-              <p style={{ margin: 0, fontSize: '0.9rem' }}>A clean directory for discovering, comparing, and submitting AI tools. Built for fast browsing, weekly updates, and direct access to the right product pages.</p>
+              <p style={{ margin: 0, fontSize: '0.9rem' }}>Discover 100+ AI tools across all categories. Subscribe for weekly updates on trending tools, news, and comparisons.</p>
             </div>
             <div className="footer-panels">
               <div className="footer-panel">
@@ -1418,8 +1317,8 @@ export default function App() {
               <div className="footer-panel">
                 <div className="footer-panel-title">Actions</div>
                 <div className="footer-actions">
-                  <a className="navbar-link navbar-link-button footer-link" href="#submit" onClick={handleSubmitToolClick}>Submit Tool</a>
-                  <a className="navbar-link navbar-link-button footer-link" href="#news" onClick={handleUpdatesClick}>View News</a>
+                  <a className="navbar-link navbar-link-button footer-link" href="#news">View News</a>
+                  <button className="navbar-link navbar-link-button footer-link" onClick={handleUpdatesClick} type="button">Subscribe</button>
                   <button className="navbar-link navbar-link-button footer-link" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} type="button">Back to Top</button>
                 </div>
               </div>
