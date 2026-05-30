@@ -8,6 +8,7 @@ from email.mime.text import MIMEText
 from http.server import BaseHTTPRequestHandler
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
+from urllib.parse import quote
 
 
 EMAIL_PATTERN = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
@@ -122,9 +123,12 @@ class handler(BaseHTTPRequestHandler):
             self._write_json(400, {"error": "A valid email is required."})
             return
 
-        # First check if email already exists
+        # First check if email already exists (with proper URL encoding)
+        encoded_email = quote(email, safe='')
+        check_url = f"{supabase_url}/rest/v1/newsletter_submissions?email=eq.{encoded_email}&select=id,active"
+        
         check_request = Request(
-            f"{supabase_url}/rest/v1/newsletter_submissions?email=eq.{email}&select=id,active",
+            check_url,
             method="GET",
             headers={
                 "apikey": supabase_service_role_key,
@@ -136,17 +140,28 @@ class handler(BaseHTTPRequestHandler):
         existing_record = None
         try:
             with urlopen(check_request, timeout=20) as response:
-                existing = json.loads(response.read().decode("utf-8"))
+                response_text = response.read().decode("utf-8")
+                existing = json.loads(response_text) if response_text else []
+                
                 if existing and len(existing) > 0:
                     existing_record = existing[0]
                     # Check if already active
                     if existing_record.get("active", False):
                         self._write_json(409, {"error": "This email is already subscribed to our newsletter."})
                         return
-        except (HTTPError, URLError) as e:
-            if hasattr(e, 'code') and e.code != 404:
+                    # If inactive, we'll reactivate it below
+        except HTTPError as e:
+            if e.code == 404:
+                pass  # Email not found, will insert new
+            else:
                 self._write_json(502, {"error": "Failed to check email subscription status."})
                 return
+        except URLError as e:
+            self._write_json(502, {"error": "Failed to check email subscription status."})
+            return
+        except Exception as e:
+            self._write_json(502, {"error": "Failed to check email subscription status."})
+            return
 
         # If record exists but inactive, update it. Otherwise insert new.
         if existing_record:
