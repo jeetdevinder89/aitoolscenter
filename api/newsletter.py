@@ -122,6 +122,28 @@ class handler(BaseHTTPRequestHandler):
             self._write_json(400, {"error": "A valid email is required."})
             return
 
+        # First check if email already exists
+        check_request = Request(
+            f"{supabase_url}/rest/v1/newsletter_submissions?email=eq.{email}&select=id",
+            method="GET",
+            headers={
+                "apikey": supabase_service_role_key,
+                "Authorization": f"Bearer {supabase_service_role_key}",
+                "Content-Type": "application/json",
+            },
+        )
+
+        try:
+            with urlopen(check_request, timeout=20) as response:
+                existing = json.loads(response.read().decode("utf-8"))
+                if existing and len(existing) > 0:
+                    self._write_json(409, {"error": "This email is already subscribed to our newsletter."})
+                    return
+        except (HTTPError, URLError) as e:
+            if hasattr(e, 'code') and e.code != 404:
+                self._write_json(502, {"error": "Failed to check email subscription status."})
+                return
+
         request_body = json.dumps([
             {
                 "email": email,
@@ -147,7 +169,14 @@ class handler(BaseHTTPRequestHandler):
                 if status < 200 or status >= 300:
                     self._write_json(502, {"error": "Failed to save newsletter subscription."})
                     return
-        except (HTTPError, URLError):
+        except HTTPError as e:
+            error_body = e.read().decode("utf-8")
+            if "duplicate key" in error_body.lower() or e.code == 409:
+                self._write_json(409, {"error": "This email is already subscribed to our newsletter."})
+            else:
+                self._write_json(502, {"error": "Failed to save newsletter subscription."})
+            return
+        except URLError:
             self._write_json(502, {"error": "Failed to save newsletter subscription."})
             return
 

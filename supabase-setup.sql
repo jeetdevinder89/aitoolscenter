@@ -5,8 +5,10 @@
 
 CREATE TABLE newsletter_submissions (
   id BIGSERIAL PRIMARY KEY,
-  email TEXT NOT NULL,
-  created_at TIMESTAMP DEFAULT NOW(),
+  email TEXT NOT NULL UNIQUE,
+  active BOOLEAN DEFAULT true,
+  subscribed_at TIMESTAMP DEFAULT NOW(),
+  unsubscribed_at TIMESTAMP,
   source TEXT DEFAULT 'website'
 );
 

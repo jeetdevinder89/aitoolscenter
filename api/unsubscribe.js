@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     // First check if email exists
     const { data: existingRecords, error: fetchError } = await supabase
       .from('newsletter_submissions')
-      .select('email')
+      .select('id')
       .eq('email', email);
 
     if (fetchError) {
@@ -50,7 +50,7 @@ export default async function handler(req, res) {
 
     if (updateError) {
       console.error('Supabase update error:', updateError);
-      return res.status(500).json({ error: 'Failed to update subscription', details: updateError.message });
+      return res.status(500).json({ error: 'Failed to unsubscribe', details: updateError.message });
     }
 
     // Return JSON for API requests (POST with JSON body or explicit JSON request)
