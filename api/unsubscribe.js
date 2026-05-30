@@ -28,15 +28,22 @@ export default async function handler(req, res) {
     const { data: existingRecords, error: fetchError } = await supabase
       .from('newsletter_submissions')
       .select('id, active')
-      .eq('email', email)
-      .single();
+      .eq('email', email);
 
-    if (fetchError || !existingRecords) {
+    if (fetchError) {
       console.error('Supabase fetch error:', fetchError);
+      return res.status(500).json({ error: 'Database error', details: fetchError.message });
+    }
+
+    if (!existingRecords || existingRecords.length === 0) {
+      console.error('Email not found:', email);
       return res.status(404).json({ error: 'Email not found in newsletter subscriber list' });
     }
 
-    if (!existingRecords.active) {
+    // Get the first record (should only be one due to UNIQUE constraint, but be safe)
+    const existingRecord = existingRecords[0];
+
+    if (!existingRecord.active) {
       return res.status(400).json({ error: 'This email is already unsubscribed' });
     }
 
