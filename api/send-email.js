@@ -28,6 +28,11 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
+    // Validate email format
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) {
+      return res.status(400).json({ error: 'Invalid email format for recipient' });
+    }
+
     // Send email
     const info = await transporter.sendMail({
       from: `${fromName || 'AIToolsCenter'} <${fromEmail || smtpUsername}>`,

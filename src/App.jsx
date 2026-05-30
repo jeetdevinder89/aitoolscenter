@@ -825,7 +825,8 @@ export default function App() {
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.message || 'Newsletter API error')
+        const errorMsg = data.error || data.message || data.details || `Newsletter API error (${response.status})`
+        throw new Error(errorMsg)
       }
 
       // Store in localStorage for real-time tracking
@@ -842,17 +843,11 @@ export default function App() {
       setNewsletterEmail('')
       return
     } catch (error) {
-      // Fallback: Save to localStorage if API fails
-      const subscribers = JSON.parse(localStorage.getItem('aitoolscenter-newsletter-subscribers') || '[]')
-      if (!subscribers.includes(email)) {
-        subscribers.push(email)
-        localStorage.setItem('aitoolscenter-newsletter-subscribers', JSON.stringify(subscribers))
-      }
+      console.error('Newsletter subscription error:', error)
       setNewsletterStatus({ 
-        type: 'success', 
-        message: '✓ Subscribed! Weekly AI updates will be sent to your email.' 
+        type: 'error', 
+        message: `Error: ${error.message}` 
       })
-      setNewsletterEmail('')
     }
   }
 

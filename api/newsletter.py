@@ -57,7 +57,7 @@ def send_confirmation_email(
       <p style="margin:12px 0;color:#6b7280;font-size:13px;">📧 You're receiving this email because you subscribed to our newsletter.</p>
       <p style="margin:0;color:#6b7280;font-size:13px;">💬 Questions? Reply to this email or contact <a href="mailto:support@aitoolscenter.in" style="color:#2563eb;text-decoration:none;">support@aitoolscenter.in</a></p>
       <p style="margin:12px 0 0;color:#6b7280;font-size:12px;">— AIToolsCenter Team</p>
-      <p style="margin:12px 0 0;padding-top:12px;border-top:1px solid #e5e7eb;color:#9ca3af;font-size:12px;"><a href="https://www.aitoolscenter.in/api/unsubscribe?email={subscriber_email}" style="color:#9ca3af;text-decoration:underline;">Unsubscribe</a> | <a href="{site_url}#contact" style="color:#9ca3af;text-decoration:underline;">Manage preferences</a></p>
+      <p style="margin:12px 0 0;padding-top:12px;border-top:1px solid #e5e7eb;color:#9ca3af;font-size:12px;"><a href="https://www.aitoolscenter.in/api/unsubscribe?email={quote(subscriber_email, safe='')}" style="color:#9ca3af;text-decoration:underline;">Unsubscribe</a> | <a href="{site_url}#contact" style="color:#9ca3af;text-decoration:underline;">Manage preferences</a></p>
     </div>
     """
 
@@ -167,7 +167,7 @@ class handler(BaseHTTPRequestHandler):
         if existing_record:
             # Reactivate inactive subscription
             update_request = Request(
-                f"{supabase_url}/rest/v1/newsletter_submissions?email=eq.{email}",
+                f"{supabase_url}/rest/v1/newsletter_submissions?email=eq.{encoded_email}",
                 data=json.dumps({"active": True}).encode("utf-8"),
                 method="PATCH",
                 headers={
@@ -216,10 +216,13 @@ class handler(BaseHTTPRequestHandler):
                         self._write_json(502, {"error": "Failed to save newsletter subscription."})
                         return
             except HTTPError as e:
-                error_body = e.read().decode("utf-8")
-                if "duplicate key" in error_body.lower() or e.code == 409:
+                error_body = e.read().decode("utf-8") if e.fp else ""
+                # Check for duplicate key errors (23505 is PostgreSQL unique violation)
+                if e.code == 409 or "duplicate" in error_body.lower() or "23505" in error_body.lower():
                     self._write_json(409, {"error": "This email is already subscribed to our newsletter."})
                 else:
+                    error_msg = f"HTTP {e.code}: {error_body[:200]}" if error_body else f"HTTP {e.code}"
+                    print(f"Insert error: {error_msg}")
                     self._write_json(502, {"error": "Failed to save newsletter subscription."})
                 return
             except URLError:
