@@ -53,41 +53,44 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Failed to update subscription', details: updateError.message });
     }
 
-    // Return HTML response for email links
-    if (req.headers.accept?.includes('text/html')) {
-      return res.status(200).send(`
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <style>
-              body { font-family: Arial, sans-serif; background: #f3f4f6; margin: 0; padding: 20px; }
-              .container { max-width: 600px; margin: 0 auto; background: white; padding: 40px; border-radius: 8px; text-align: center; }
-              h1 { color: #00c2a8; margin: 0 0 20px; }
-              p { color: #6b7280; margin: 10px 0; }
-              .success { color: #16a34a; font-weight: bold; }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <h1>✓ Unsubscribed</h1>
-              <p class="success">You have been successfully unsubscribed from our newsletter.</p>
-              <p>You will no longer receive weekly AI tool updates.</p>
-              <p style="margin-top: 30px; font-size: 0.9rem;">
-                <a href="https://www.aitoolscenter.in" style="color: #2563eb;">Return to AIToolsCenter</a>
-              </p>
-            </div>
-          </body>
-        </html>
-      `);
+    // Return JSON for API requests (POST with JSON body or explicit JSON request)
+    const isJSONRequest = req.headers['content-type']?.includes('application/json') || req.method === 'POST';
+    
+    if (isJSONRequest) {
+      return res.status(200).json({
+        success: true,
+        message: 'Successfully unsubscribed from newsletter',
+        email: email,
+      });
     }
 
-    return res.status(200).json({
-      success: true,
-      message: 'Successfully unsubscribed from newsletter',
-      email: email,
-    });
+    // Return HTML for email links (GET requests)
+    return res.status(200).send(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <style>
+            body { font-family: Arial, sans-serif; background: #f3f4f6; margin: 0; padding: 20px; }
+            .container { max-width: 600px; margin: 0 auto; background: white; padding: 40px; border-radius: 8px; text-align: center; }
+            h1 { color: #00c2a8; margin: 0 0 20px; }
+            p { color: #6b7280; margin: 10px 0; }
+            .success { color: #16a34a; font-weight: bold; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <h1>✓ Unsubscribed</h1>
+            <p class="success">You have been successfully unsubscribed from our newsletter.</p>
+            <p>You will no longer receive weekly AI tool updates.</p>
+            <p style="margin-top: 30px; font-size: 0.9rem;">
+              <a href="https://www.aitoolscenter.in" style="color: #2563eb;">Return to AIToolsCenter</a>
+            </p>
+          </div>
+        </body>
+      </html>
+    `);
   } catch (error) {
     console.error('Unsubscribe error:', error);
     return res.status(500).json({
