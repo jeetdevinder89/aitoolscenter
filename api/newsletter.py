@@ -56,7 +56,7 @@ def send_confirmation_email(
       <p style="margin:12px 0;color:#6b7280;font-size:13px;">📧 You're receiving this email because you subscribed to our newsletter.</p>
       <p style="margin:0;color:#6b7280;font-size:13px;">💬 Questions? Reply to this email or contact <a href="mailto:support@aitoolscenter.in" style="color:#2563eb;text-decoration:none;">support@aitoolscenter.in</a></p>
       <p style="margin:12px 0 0;color:#6b7280;font-size:12px;">— AIToolsCenter Team</p>
-      <p style="margin:12px 0 0;padding-top:12px;border-top:1px solid #e5e7eb;color:#9ca3af;font-size:12px;"><a href="{site_url}?unsubscribe={subscriber_email}" style="color:#9ca3af;text-decoration:underline;">Unsubscribe</a> | <a href="{site_url}#contact" style="color:#9ca3af;text-decoration:underline;">Manage preferences</a></p>
+      <p style="margin:12px 0 0;padding-top:12px;border-top:1px solid #e5e7eb;color:#9ca3af;font-size:12px;"><a href="https://www.aitoolscenter.in/api/unsubscribe?email={subscriber_email}" style="color:#9ca3af;text-decoration:underline;">Unsubscribe</a> | <a href="{site_url}#contact" style="color:#9ca3af;text-decoration:underline;">Manage preferences</a></p>
     </div>
     """
 
@@ -153,14 +153,17 @@ class handler(BaseHTTPRequestHandler):
 
         confirmation_sent = False
 
-        if smtp_host and newsletter_from_email:
-            confirmation_sent = send_confirmation_email(
+        if smtp_host:
+            # Use newsletter email if configured, otherwise fall back to SMTP username
+            from_email = newsletter_from_email or smtp_username
+            if from_email:
+                confirmation_sent = send_confirmation_email(
                 smtp_host=smtp_host,
                 smtp_port=smtp_port,
                 smtp_username=smtp_username,
                 smtp_password=smtp_password,
                 smtp_use_tls=smtp_use_tls,
-                from_email=newsletter_from_email,
+                from_email=from_email,
                 reply_to_email=newsletter_reply_to_email,
                 subscriber_email=email,
                 site_url=site_url,
