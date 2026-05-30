@@ -24,19 +24,20 @@ export default async function handler(req, res) {
 
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // First check if email exists
+    // Check if email exists AND is active
     const { data: existingRecords, error: fetchError } = await supabase
       .from('newsletter_submissions')
-      .select('id')
-      .eq('email', email);
+      .select('id, active')
+      .eq('email', email)
+      .single();
 
-    if (fetchError) {
+    if (fetchError || !existingRecords) {
       console.error('Supabase fetch error:', fetchError);
-      return res.status(500).json({ error: 'Database error', details: fetchError.message });
+      return res.status(404).json({ error: 'Email not found in newsletter subscriber list' });
     }
 
-    if (!existingRecords || existingRecords.length === 0) {
-      return res.status(404).json({ error: 'Email not found in newsletter subscriber list' });
+    if (!existingRecords.active) {
+      return res.status(400).json({ error: 'This email is already unsubscribed' });
     }
 
     // Mark subscriber as inactive
@@ -53,6 +54,55 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Failed to unsubscribe', details: updateError.message });
     }
 
+    // Send unsubscribe confirmation email
+    let unsubscribeEmailSent = false;
+    const smtpHost = process.env.SMTP_HOST;
+    const smtpPort = process.env.SMTP_PORT || 587;
+    const smtpUsername = process.env.SMTP_USERNAME;
+    const smtpPassword = process.env.SMTP_PASSWORD;
+    const smtpUseTls = process.env.SMTP_USE_TLS !== 'false';
+    const newsletterFromEmail = process.env.NEWSLETTER_FROM_EMAIL;
+    const siteUrl = process.env.SITE_URL || 'https://aitoolscenter.in';
+
+    if (smtpHost && newsletterFromEmail) {
+      try {
+        const nodemailer = (await import('nodemailer')).default;
+        const transporter = nodemailer.createTransport({
+          host: smtpHost,
+          port: smtpPort,
+          secure: false,
+          auth: {
+            user: smtpUsername,
+            pass: smtpPassword,
+          },
+        });
+
+        const unsubscribeHtml = `
+          <div style="font-family:Segoe UI,Arial,sans-serif;line-height:1.6;color:#111827;max-width:600px;margin:0 auto;padding:24px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb;">
+            <h1 style="font-size:24px;margin:0 0 16px;color:#0f172a;">✓ You're unsubscribed</h1>
+            <p style="margin:0 0 12px;color:#111827;">We've removed <strong>${email}</strong> from our newsletter.</p>
+            <p style="margin:0 0 12px;color:#111827;">You won't receive any more weekly AI tool updates from us.</p>
+            <p style="margin:0 0 20px;color:#111827;">If this was a mistake, you can <a href="${siteUrl}#updates" style="color:#2563eb;text-decoration:none;">subscribe again anytime</a>.</p>
+            <hr style="border:none;border-top:1px solid #e5e7eb;margin:20px 0;" />
+            <p style="margin:0;color:#6b7280;font-size:12px;">— AIToolsCenter Team</p>
+          </div>
+        `;
+
+        await transporter.sendMail({
+          from: newsletterFromEmail,
+          to: email,
+          subject: 'You have been unsubscribed from AIToolsCenter',
+          html: unsubscribeHtml,
+        });
+
+        unsubscribeEmailSent = true;
+        console.log(`Unsubscribe email sent to ${email}`);
+      } catch (emailError) {
+        console.error('Failed to send unsubscribe email:', emailError);
+        // Don't fail the request if email fails, just log it
+      }
+    }
+
     // Return JSON for API requests (POST with JSON body or explicit JSON request)
     const isJSONRequest = req.headers['content-type']?.includes('application/json') || req.method === 'POST';
     
@@ -61,6 +111,7 @@ export default async function handler(req, res) {
         success: true,
         message: 'Successfully unsubscribed from newsletter',
         email: email,
+        emailSent: unsubscribeEmailSent,
       });
     }
 
