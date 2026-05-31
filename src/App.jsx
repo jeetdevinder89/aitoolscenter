@@ -719,6 +719,16 @@ export default function App() {
     document.documentElement.setAttribute('data-theme', stored)
   }, [])
 
+  // Scroll to top on page load and when page changes
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [currentPage])
+
+  // Also scroll to top on initial load
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   useEffect(() => {
     // Track visitor count
     const trackVisitor = async () => {
@@ -1517,23 +1527,23 @@ export default function App() {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'rgba(0, 0, 0, 0.5)',
+          background: 'rgba(0, 0, 0, 0.75)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: 9999,
         }}>
           <div style={{
-            background: 'var(--background)',
-            border: '1px solid var(--border)',
+            background: '#ffffff',
+            border: '1px solid #ddd',
             borderRadius: 'var(--radius-lg)',
             padding: '2rem',
             maxWidth: '400px',
             width: '90%',
-            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.2)',
+            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3)',
           }}>
-            <h2 style={{ marginTop: 0, marginBottom: '1rem' }}>Unsubscribe from Newsletter</h2>
-            <p style={{ color: 'var(--muted)', marginBottom: '1.5rem' }}>
+            <h2 style={{ marginTop: 0, marginBottom: '1rem', color: '#1a1a1a' }}>Unsubscribe from Newsletter</h2>
+            <p style={{ color: '#666', marginBottom: '1.5rem' }}>
               Enter your email address to unsubscribe from our newsletter.
             </p>
             <form onSubmit={handleUnsubscribeSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -1546,9 +1556,9 @@ export default function App() {
                 style={{
                   padding: '0.75rem',
                   borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--border)',
-                  background: 'var(--surface)',
-                  color: 'var(--foreground)',
+                  border: '1px solid #ddd',
+                  background: '#f9f9f9',
+                  color: '#333',
                   fontSize: '1rem',
                 }}
               />
@@ -1570,9 +1580,9 @@ export default function App() {
                     flex: 1,
                     padding: '0.75rem',
                     borderRadius: 'var(--radius-md)',
-                    border: '1px solid var(--border)',
-                    background: 'var(--surface)',
-                    color: 'var(--foreground)',
+                    border: '1px solid #ddd',
+                    background: '#f9f9f9',
+                    color: '#333',
                     cursor: 'pointer',
                     fontSize: '1rem',
                   }}
@@ -1593,25 +1603,25 @@ export default function App() {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'rgba(0, 0, 0, 0.5)',
+          background: 'rgba(0, 0, 0, 0.75)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: 9999,
         }}>
           <div style={{
-            background: 'var(--background)',
-            border: '1px solid var(--border)',
+            background: '#ffffff',
+            border: '1px solid #ddd',
             borderRadius: 'var(--radius-lg)',
             padding: '2rem',
             maxWidth: '500px',
             width: '90%',
-            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.2)',
+            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3)',
             maxHeight: '90vh',
             overflowY: 'auto',
           }}>
-            <h2 style={{ marginTop: 0, marginBottom: '0.5rem' }}>Send Us Your Feedback</h2>
-            <p style={{ color: 'var(--muted)', marginBottom: '1.5rem' }}>
+            <h2 style={{ marginTop: 0, marginBottom: '0.5rem', color: '#1a1a1a' }}>Send Us Your Feedback</h2>
+            <p style={{ color: '#666', marginBottom: '1.5rem' }}>
               Help us improve AIToolsCenter by sharing your thoughts, suggestions, or reporting issues.
             </p>
             <form onSubmit={handleFeedbackSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -1624,9 +1634,9 @@ export default function App() {
                 style={{
                   padding: '0.75rem',
                   borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--border)',
-                  background: 'var(--surface)',
-                  color: 'var(--foreground)',
+                  border: '1px solid #ddd',
+                  background: '#f9f9f9',
+                  color: '#333',
                   fontSize: '1rem',
                   fontFamily: 'inherit',
                 }}
@@ -1640,9 +1650,9 @@ export default function App() {
                 style={{
                   padding: '0.75rem',
                   borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--border)',
-                  background: 'var(--surface)',
-                  color: 'var(--foreground)',
+                  border: '1px solid #ddd',
+                  background: '#f9f9f9',
+                  color: '#333',
                   fontSize: '1rem',
                   fontFamily: 'inherit',
                 }}
@@ -1656,9 +1666,9 @@ export default function App() {
                 style={{
                   padding: '0.75rem',
                   borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--border)',
-                  background: 'var(--surface)',
-                  color: 'var(--foreground)',
+                  border: '1px solid #ddd',
+                  background: '#f9f9f9',
+                  color: '#333',
                   fontSize: '1rem',
                   fontFamily: 'inherit',
                 }}
@@ -1672,9 +1682,9 @@ export default function App() {
                 style={{
                   padding: '0.75rem',
                   borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--border)',
-                  background: 'var(--surface)',
-                  color: 'var(--foreground)',
+                  border: '1px solid #ddd',
+                  background: '#f9f9f9',
+                  color: '#333',
                   fontSize: '1rem',
                   fontFamily: 'inherit',
                   resize: 'vertical',
@@ -1713,9 +1723,9 @@ export default function App() {
                     flex: 1,
                     padding: '0.75rem',
                     borderRadius: 'var(--radius-md)',
-                    border: '1px solid var(--border)',
-                    background: 'var(--surface)',
-                    color: 'var(--foreground)',
+                    border: '1px solid #ddd',
+                    background: '#f9f9f9',
+                    color: '#333',
                     cursor: 'pointer',
                     fontSize: '1rem',
                     fontFamily: 'inherit',
