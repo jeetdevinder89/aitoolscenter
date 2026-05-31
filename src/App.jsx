@@ -1408,8 +1408,8 @@ export default function App() {
         <div className="container" style={{ maxWidth: '900px' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <div style={{ display: 'inline-flex', padding: '0.35rem 0.75rem', borderRadius: '999px', border: '1px solid var(--border)', marginBottom: '0.9rem', color: 'var(--primary)', fontWeight: 700, fontSize: '0.85rem' }}>Common Questions</div>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Frequently Asked Questions</h2>
-            <p style={{ color: 'var(--muted)', fontSize: '1.1rem' }}>Everything you need to know about AIToolsCenter</p>
+            <h2 style={{ fontSize: '2.5rem', marginBottom: '0.5rem', color: '#1a1a1a' }}>Frequently Asked Questions</h2>
+            <p style={{ color: '#666', fontSize: '1.1rem' }}>Everything you need to know about AIToolsCenter</p>
           </div>
           
           <div style={{ display: 'grid', gap: '1rem' }}>
@@ -1476,13 +1476,14 @@ export default function App() {
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
-                  <div style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--text)' }}>{faq.q}</div>
+                  <div style={{ fontWeight: 700, fontSize: '1.05rem', color: '#1a1a1a' }}>{faq.q}</div>
                   <div 
                     className="faq-toggle"
                     style={{
                       fontSize: '1.25rem',
                       transition: 'transform 0.3s ease',
-                      flex: '0 0 auto'
+                      flex: '0 0 auto',
+                      color: '#1a1a1a'
                     }}
                   >
                     ▼
@@ -1493,10 +1494,10 @@ export default function App() {
                   style={{
                     display: 'none',
                     marginTop: '0.75rem',
-                    color: 'var(--muted)',
+                    color: '#555',
                     lineHeight: '1.6',
                     paddingTop: '0.75rem',
-                    borderTop: '1px solid var(--border)'
+                    borderTop: '1px solid #ddd'
                   }}
                 >
                   {faq.a}
@@ -1506,8 +1507,8 @@ export default function App() {
           </div>
 
           <div style={{ marginTop: '2.5rem', padding: '2rem', background: 'linear-gradient(135deg, rgba(0,194,168,0.1), rgba(247,179,43,0.05))', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)', textAlign: 'center' }}>
-            <div style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem' }}>Didn't find your answer?</div>
-            <p style={{ color: 'var(--muted)', marginBottom: '1rem' }}>We're here to help. Reach out to our support team.</p>
+            <div style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem', color: '#1a1a1a' }}>Didn't find your answer?</div>
+            <p style={{ color: '#666', marginBottom: '1rem' }}>We're here to help. Reach out to our support team.</p>
             <button 
               onClick={() => openPage('contact')}
               className="btn btn-primary"
