@@ -706,6 +706,9 @@ export default function App() {
   const [visitorCount, setVisitorCount] = useState(0)
   const [showUnsubscribeModal, setShowUnsubscribeModal] = useState(false)
   const [unsubscribeEmail, setUnsubscribeEmail] = useState('')
+  const [showFeedbackModal, setShowFeedbackModal] = useState(false)
+  const [feedbackData, setFeedbackData] = useState({ name: '', email: '', subject: '', message: '' })
+  const [feedbackStatus, setFeedbackStatus] = useState({ type: '', message: '' })
   const toolsSectionRef = useRef(null)
   const collectionsSectionRef = useRef(null)
   const updatesSectionRef = useRef(null)
@@ -900,6 +903,61 @@ export default function App() {
     } catch (error) {
       console.error('Unsubscribe error:', error)
       alert(`Error unsubscribing: ${error.message}`)
+    }
+  }
+
+  const handleFeedbackSubmit = async (event) => {
+    event.preventDefault()
+    setFeedbackStatus({ type: '', message: '' })
+
+    const { name, email, subject, message } = feedbackData
+    
+    if (!name.trim() || !email.trim() || !subject.trim() || !message.trim()) {
+      setFeedbackStatus({ type: 'error', message: 'All fields are required.' })
+      return
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setFeedbackStatus({ type: 'error', message: 'Please enter a valid email address.' })
+      return
+    }
+
+    if (message.trim().length < 10) {
+      setFeedbackStatus({ type: 'error', message: 'Please provide at least 10 characters in your feedback.' })
+      return
+    }
+
+    try {
+      const response = await fetch('/api/send-feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, subject, message }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setFeedbackStatus({ 
+          type: 'success', 
+          message: '✓ Thank you! Your feedback has been sent successfully.' 
+        })
+        setFeedbackData({ name: '', email: '', subject: '', message: '' })
+        setTimeout(() => {
+          setShowFeedbackModal(false)
+          setFeedbackStatus({ type: '', message: '' })
+        }, 2000)
+      } else {
+        setFeedbackStatus({ 
+          type: 'error', 
+          message: data.error || 'Failed to send feedback. Please try again.' 
+        })
+      }
+    } catch (error) {
+      console.error('Feedback submission error:', error)
+      setFeedbackStatus({ 
+        type: 'error', 
+        message: `Error: ${error.message}` 
+      })
     }
   }
 
@@ -1527,6 +1585,150 @@ export default function App() {
         </div>
       )}
 
+      {/* ==========  FEEDBACK MODAL ========== */}
+      {showFeedbackModal && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0, 0, 0, 0.5)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 9999,
+        }}>
+          <div style={{
+            background: 'var(--background)',
+            border: '1px solid var(--border)',
+            borderRadius: 'var(--radius-lg)',
+            padding: '2rem',
+            maxWidth: '500px',
+            width: '90%',
+            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.2)',
+            maxHeight: '90vh',
+            overflowY: 'auto',
+          }}>
+            <h2 style={{ marginTop: 0, marginBottom: '0.5rem' }}>Send Us Your Feedback</h2>
+            <p style={{ color: 'var(--muted)', marginBottom: '1.5rem' }}>
+              Help us improve AIToolsCenter by sharing your thoughts, suggestions, or reporting issues.
+            </p>
+            <form onSubmit={handleFeedbackSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <input
+                type="text"
+                placeholder="Your Name"
+                value={feedbackData.name}
+                onChange={(e) => setFeedbackData({ ...feedbackData, name: e.target.value })}
+                required
+                style={{
+                  padding: '0.75rem',
+                  borderRadius: 'var(--radius-md)',
+                  border: '1px solid var(--border)',
+                  background: 'var(--surface)',
+                  color: 'var(--foreground)',
+                  fontSize: '1rem',
+                  fontFamily: 'inherit',
+                }}
+              />
+              <input
+                type="email"
+                placeholder="Your Email"
+                value={feedbackData.email}
+                onChange={(e) => setFeedbackData({ ...feedbackData, email: e.target.value })}
+                required
+                style={{
+                  padding: '0.75rem',
+                  borderRadius: 'var(--radius-md)',
+                  border: '1px solid var(--border)',
+                  background: 'var(--surface)',
+                  color: 'var(--foreground)',
+                  fontSize: '1rem',
+                  fontFamily: 'inherit',
+                }}
+              />
+              <input
+                type="text"
+                placeholder="Subject"
+                value={feedbackData.subject}
+                onChange={(e) => setFeedbackData({ ...feedbackData, subject: e.target.value })}
+                required
+                style={{
+                  padding: '0.75rem',
+                  borderRadius: 'var(--radius-md)',
+                  border: '1px solid var(--border)',
+                  background: 'var(--surface)',
+                  color: 'var(--foreground)',
+                  fontSize: '1rem',
+                  fontFamily: 'inherit',
+                }}
+              />
+              <textarea
+                placeholder="Your Feedback (minimum 10 characters)"
+                value={feedbackData.message}
+                onChange={(e) => setFeedbackData({ ...feedbackData, message: e.target.value })}
+                required
+                rows="5"
+                style={{
+                  padding: '0.75rem',
+                  borderRadius: 'var(--radius-md)',
+                  border: '1px solid var(--border)',
+                  background: 'var(--surface)',
+                  color: 'var(--foreground)',
+                  fontSize: '1rem',
+                  fontFamily: 'inherit',
+                  resize: 'vertical',
+                }}
+              />
+              
+              {feedbackStatus.message && (
+                <div style={{
+                  padding: '0.75rem',
+                  borderRadius: 'var(--radius-md)',
+                  background: feedbackStatus.type === 'success' ? 'rgba(76, 175, 80, 0.1)' : 'rgba(244, 67, 54, 0.1)',
+                  border: `1px solid ${feedbackStatus.type === 'success' ? '#4CAF50' : '#F44336'}`,
+                  color: feedbackStatus.type === 'success' ? '#4CAF50' : '#F44336',
+                  fontSize: '0.9rem',
+                }}>
+                  {feedbackStatus.message}
+                </div>
+              )}
+              
+              <div style={{ display: 'flex', gap: '0.75rem' }}>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  style={{ flex: 1 }}
+                >
+                  Send Feedback
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowFeedbackModal(false)
+                    setFeedbackData({ name: '', email: '', subject: '', message: '' })
+                    setFeedbackStatus({ type: '', message: '' })
+                  }}
+                  style={{
+                    flex: 1,
+                    padding: '0.75rem',
+                    borderRadius: 'var(--radius-md)',
+                    border: '1px solid var(--border)',
+                    background: 'var(--surface)',
+                    color: 'var(--foreground)',
+                    cursor: 'pointer',
+                    fontSize: '1rem',
+                    fontFamily: 'inherit',
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       {/* ==========  FOOTER ========== */}
       <footer className="footer-shell">
         <div className="container">
@@ -1564,6 +1766,7 @@ export default function App() {
                 <div className="footer-actions">
                   <a className="navbar-link navbar-link-button footer-link" href="#news">View News</a>
                   <button className="navbar-link navbar-link-button footer-link" onClick={handleUpdatesClick} type="button">Subscribe</button>
+                  <button className="navbar-link navbar-link-button footer-link" onClick={() => setShowFeedbackModal(true)} type="button">Feedback</button>
                   <button className="navbar-link navbar-link-button footer-link" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} type="button">Back to Top</button>
                 </div>
               </div>
