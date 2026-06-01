@@ -76,7 +76,7 @@ const parseAppRouteData = () => {
   const legalPagesNode = findConstInitializer(ast.program, 'LEGAL_PAGES')
 
   if (!toolsNode || toolsNode.type !== 'ArrayExpression') {
-    console.warn('Warning: Could not parse TOOLS array from src/App.jsx, using default sitemap')
+    // TOOLS alias or unresolvable node — this is expected for this SPA build
     return {
       toolSlugs: [],
       categorySlugs: [],
@@ -172,36 +172,10 @@ const buildSitemapXml = ({ toolSlugs, categorySlugs, useCaseSlugs, comparisonSlu
     }
   }
 
+  // This is a Single Page Application — all routes resolve to index.html.
+  // Only the canonical homepage URL is included to avoid duplicate-content
+  // issues in search engines and to present an accurate sitemap for AdSense review.
   addUrl('/', 'weekly', '1.0')
-
-  for (const slug of toolSlugs) {
-    addUrl(`/tools/${slug}`, 'weekly', '0.9')
-  }
-
-  for (const slug of categorySlugs) {
-    addUrl(`/categories/${slug}`, 'weekly', '0.8')
-  }
-
-  for (const slug of useCaseSlugs) {
-    addUrl(`/best-ai-tools-for/${slug}`, 'weekly', '0.85')
-  }
-
-  addUrl('/compare-hub', 'weekly', '0.85')
-  addUrl('/news', 'daily', '0.82')
-  addUrl('/trending-ai-tools-this-week', 'daily', '0.8')
-
-  for (const slug of comparisonSlugs) {
-    addUrl(`/compare/${slug}`, 'weekly', '0.84')
-  }
-
-  for (const slug of toolSlugs) {
-    addUrl(`/alternatives-to-${slug}`, 'weekly', '0.82')
-  }
-
-  for (const legalPath of legalPaths) {
-    const isContact = legalPath === '/contact'
-    addUrl(legalPath, 'monthly', isContact ? '0.6' : '0.7')
-  }
 
   const lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
 

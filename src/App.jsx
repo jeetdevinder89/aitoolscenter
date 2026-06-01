@@ -134,8 +134,8 @@ const TOOLS_EXTENDED = [
   {id: 101, name: 'Azure AI Services', category: 'Business', tagline: 'Microsoft Azure AI platform', description: 'Build with Azure AI services, search, and cognitive capabilities.', link: 'https://azure.microsoft.com/products/ai-services/', badge: 'Enterprise', rating: 4.6, icon: '☁️', price: 'Usage-based', reviews: 812},
 ]
 
-// Compatibility constant for sitemap generation
-const TOOLS = TOOLS_EXTENDED
+// Alias for legacy references
+const TOOLS = TOOLS_EXTENDED // eslint-disable-line no-unused-vars
 
 const TOOL_LINK_OVERRIDES = {
   ChatGPT: 'https://chatgpt.com',
@@ -321,41 +321,40 @@ function StaticPage({ title, intro, sections, onHomeClick }) {
 
 // AdsContainer Component for Google AdSense
 function AdsContainer({ type = 'horizontal' }) {
+  useEffect(() => {
+    try {
+      if (typeof window !== 'undefined' && window.adsbygoogle) {
+        (window.adsbygoogle = window.adsbygoogle || []).push({})
+      }
+    } catch (e) {
+      // adsbygoogle not ready yet
+    }
+  }, [])
+
+  const slotMap = {
+    horizontal: '1234567890', // Replace with actual ad slot IDs from AdSense dashboard
+    vertical: '0987654321',
+    square: '1122334455',
+  }
+
   return (
-    <div className={`ads-container ads-${type}`} style={{ 
-      padding: '1rem',
-      marginBottom: '1rem',
-      borderRadius: 'var(--radius-lg)',
-      background: 'var(--surface)',
-      border: '1px solid var(--border)',
-      textAlign: 'center',
-      fontSize: '0.875rem',
-      color: 'var(--muted)'
-    }}>
-      <div style={{ marginBottom: '0.5rem' }}>Advertisement</div>
-      <div style={{ 
-        height: type === 'horizontal' ? '90px' : '300px',
-        background: 'var(--background)',
-        borderRadius: 'var(--radius-md)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: 'var(--muted-foreground)'
-      }}>
-        {type === 'horizontal' && 'Ad Space (728x90)'}
-        {type === 'vertical' && 'Ad Space (300x250)'}
-        {type === 'square' && 'Ad Space (300x300)'}
-      </div>
-      {/* Google AdSense Script would be inserted here */}
-      {/* <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2770089511325323" 
-          crossOrigin="anonymous"></script>
-          <ins className="adsbygoogle"
-               style={{display:'block'}}
-               data-ad-client="ca-pub-2770089511325323"
-               data-ad-slot="xxxxxxxxxx"
-               data-ad-format="auto"
-               data-full-width-responsive="true"></ins>
-          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> */}
+    <div
+      className={`ads-container ads-${type}`}
+      style={{
+        overflow: 'hidden',
+        textAlign: 'center',
+        marginBottom: '1rem',
+      }}
+      aria-label="Advertisement"
+    >
+      <ins
+        className="adsbygoogle"
+        style={{ display: 'block' }}
+        data-ad-client="ca-pub-2770089511325323"
+        data-ad-slot={slotMap[type] || slotMap.horizontal}
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
     </div>
   )
 }
@@ -417,27 +416,27 @@ function ComparisonEngine({ tools }) {
                   ))}
                 </tr>
                 <tr>
-                  <td>Features</td>
+                  <td>Category</td>
                   {selectedTools.map(tool => (
-                    <td key={tool.id}>{tool.features.length}+</td>
+                    <td key={tool.id}>{tool.category}</td>
                   ))}
                 </tr>
                 <tr>
                   <td>Rating</td>
                   {selectedTools.map(tool => (
-                    <td key={tool.id}>{'⭐'.repeat(tool.rating)}</td>
+                    <td key={tool.id}>{'⭐'.repeat(Math.floor(tool.rating))} ({tool.rating})</td>
                   ))}
                 </tr>
                 <tr>
-                  <td>Monthly Visits</td>
+                  <td>Reviews</td>
                   {selectedTools.map(tool => (
-                    <td key={tool.id}>{tool.monthlyVisits}</td>
+                    <td key={tool.id}>{tool.reviews ? tool.reviews.toLocaleString() : 'N/A'}</td>
                   ))}
                 </tr>
                 <tr>
-                  <td>Integrations</td>
+                  <td>Pricing Tier</td>
                   {selectedTools.map(tool => (
-                    <td key={tool.id}>{tool.integrations.length}+</td>
+                    <td key={tool.id}>{tool.badge}</td>
                   ))}
                 </tr>
               </tbody>
@@ -1408,8 +1407,8 @@ export default function App() {
         <div className="container" style={{ maxWidth: '900px' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <div style={{ display: 'inline-flex', padding: '0.35rem 0.75rem', borderRadius: '999px', border: '1px solid var(--border)', marginBottom: '0.9rem', color: 'var(--primary)', fontWeight: 700, fontSize: '0.85rem' }}>Common Questions</div>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '0.5rem', color: '#1a1a1a' }}>Frequently Asked Questions</h2>
-            <p style={{ color: '#666', fontSize: '1.1rem' }}>Everything you need to know about AIToolsCenter</p>
+            <h2 style={{ fontSize: '2.5rem', marginBottom: '0.5rem', color: 'var(--foreground)' }}>Frequently Asked Questions</h2>
+            <p style={{ color: 'var(--muted)', fontSize: '1.1rem' }}>Everything you need to know about AIToolsCenter</p>
           </div>
           
           <div style={{ display: 'grid', gap: '1rem' }}>
@@ -1476,14 +1475,14 @@ export default function App() {
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
-                  <div style={{ fontWeight: 700, fontSize: '1.05rem', color: '#1a1a1a' }}>{faq.q}</div>
+                  <div style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--foreground)' }}>{faq.q}</div>
                   <div 
                     className="faq-toggle"
                     style={{
                       fontSize: '1.25rem',
                       transition: 'transform 0.3s ease',
                       flex: '0 0 auto',
-                      color: '#1a1a1a'
+                      color: 'var(--foreground)'
                     }}
                   >
                     ▼
@@ -1494,10 +1493,10 @@ export default function App() {
                   style={{
                     display: 'none',
                     marginTop: '0.75rem',
-                    color: '#555',
+                    color: 'var(--muted)',
                     lineHeight: '1.6',
                     paddingTop: '0.75rem',
-                    borderTop: '1px solid #ddd'
+                    borderTop: '1px solid var(--border)'
                   }}
                 >
                   {faq.a}
@@ -1507,8 +1506,8 @@ export default function App() {
           </div>
 
           <div style={{ marginTop: '2.5rem', padding: '2rem', background: 'linear-gradient(135deg, rgba(0,194,168,0.1), rgba(247,179,43,0.05))', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)', textAlign: 'center' }}>
-            <div style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem', color: '#1a1a1a' }}>Didn't find your answer?</div>
-            <p style={{ color: '#666', marginBottom: '1rem' }}>We're here to help. Reach out to our support team.</p>
+            <div style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--foreground)' }}>Didn't find your answer?</div>
+            <p style={{ color: 'var(--muted)', marginBottom: '1rem' }}>We're here to help. Reach out to our support team.</p>
             <button 
               onClick={() => openPage('contact')}
               className="btn btn-primary"
