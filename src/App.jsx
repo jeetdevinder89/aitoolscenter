@@ -1434,10 +1434,6 @@ export default function App() {
                 a: 'Our weekly newsletter is sent every Monday at 9 AM UTC. You can subscribe for free and cancel anytime with one click. Each email includes top trending AI tools, latest news, and curated collections.'
               },
               {
-                q: '🚀 Can I submit my own AI tool?',
-                a: 'Yes! We welcome submissions of new AI tools. Use the "Submit Tool" button in the footer to provide details about your tool. We review submissions and add quality tools to our directory.'
-              },
-              {
                 q: '🔐 Is my email safe with you?',
                 a: 'We take privacy seriously. Your email is only used for our weekly newsletter and is never shared or sold. You can unsubscribe instantly with one click from any email.'
               },
