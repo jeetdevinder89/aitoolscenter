@@ -5,7 +5,6 @@ import smtplib
 import ssl
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from http.server import BaseHTTPRequestHandler
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from urllib.parse import quote, parseaddr
@@ -80,165 +79,205 @@ def send_confirmation_email(
         return False
 
 
-class handler(BaseHTTPRequestHandler):
-    def _write_json(self, status_code: int, payload: dict) -> None:
-        body = json.dumps(payload).encode("utf-8")
-        self.send_response(status_code)
-        self.send_header("Content-Type", "application/json")
-        self.send_header("Content-Length", str(len(body)))
-        self.end_headers()
-        self.wfile.write(body)
+def handler(request):
+    """Vercel serverless function handler for newsletter subscription."""
+    try:
+        # Only accept POST and OPTIONS
+        if request.method == "OPTIONS":
+            return {
+                "statusCode": 204,
+                "headers": {"Allow": "POST, OPTIONS"},
+            }
 
-    def do_OPTIONS(self):
-        self.send_response(204)
-        self.send_header("Allow", "POST, OPTIONS")
-        self.end_headers()
+        if request.method != "POST":
+            return {
+                "statusCode": 405,
+                "headers": {"Allow": "POST, OPTIONS", "Content-Type": "application/json"},
+                "body": json.dumps({"error": "Method not allowed. Use POST to subscribe."}),
+            }
 
-    def do_POST(self):
+        # Load environment variables
+        supabase_url = os.environ.get("SUPABASE_URL", "").strip()
+        supabase_service_role_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "").strip()
+
+        smtp_host = os.environ.get("SMTP_HOST", "").strip()
+        _smtp_port_str = os.environ.get("SMTP_PORT", "587").strip()
+        smtp_port = int(_smtp_port_str) if _smtp_port_str.isdigit() else 587
+        smtp_username = os.environ.get("SMTP_USERNAME", "").strip()
+        smtp_password = os.environ.get("SMTP_PASSWORD", "").strip()
+        smtp_use_tls = env_truthy(os.environ.get("SMTP_USE_TLS", "true"))
+        newsletter_from_email = os.environ.get("NEWSLETTER_FROM_EMAIL", "").strip()
+        newsletter_reply_to_email = os.environ.get("NEWSLETTER_REPLY_TO_EMAIL", "").strip()
+        site_url = os.environ.get("SITE_URL", "https://aitoolscenter.in").strip()
+
+        if not supabase_url or not supabase_service_role_key:
+            return {
+                "statusCode": 500,
+                "headers": {"Content-Type": "application/json"},
+                "body": json.dumps({"error": "Server is not configured for newsletter submissions."}),
+            }
+
+        # Parse request body
         try:
-            supabase_url = os.environ.get("SUPABASE_URL", "")
-            supabase_service_role_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
+            if isinstance(request.body, str):
+                payload = json.loads(request.body) if request.body else {}
+            else:
+                payload = json.loads(request.body.decode("utf-8")) if request.body else {}
+        except Exception:
+            return {
+                "statusCode": 400,
+                "headers": {"Content-Type": "application/json"},
+                "body": json.dumps({"error": "Invalid request payload."}),
+            }
 
-            smtp_host = os.environ.get("SMTP_HOST", "")
-            _smtp_port_str = os.environ.get("SMTP_PORT", "587").strip()
-            smtp_port = int(_smtp_port_str) if _smtp_port_str.isdigit() else 587
-            smtp_username = os.environ.get("SMTP_USERNAME", "")
-            smtp_password = os.environ.get("SMTP_PASSWORD", "")
-            smtp_use_tls = env_truthy(os.environ.get("SMTP_USE_TLS", "true"))
-            newsletter_from_email = os.environ.get("NEWSLETTER_FROM_EMAIL", "")
-            newsletter_reply_to_email = os.environ.get("NEWSLETTER_REPLY_TO_EMAIL", "")
-            site_url = os.environ.get("SITE_URL", "https://aitoolscenter.in")
+        # Extract and validate email
+        email = str(payload.get("email", "")).strip()
+        if not email or not is_valid_email(email):
+            return {
+                "statusCode": 400,
+                "headers": {"Content-Type": "application/json"},
+                "body": json.dumps({"error": "A valid email is required."}),
+            }
 
-            if not supabase_url or not supabase_service_role_key:
-                self._write_json(500, {"error": "Server is not configured for newsletter submissions."})
-                return
+        # Check if email already exists
+        encoded_email = quote(email, safe="")
+        check_url = f"{supabase_url}/rest/v1/newsletter_submissions?email=eq.{encoded_email}&select=id,active"
 
-            try:
-                content_length = int(self.headers.get("Content-Length", "0"))
-                raw_body = self.rfile.read(content_length) if content_length > 0 else b"{}"
-                payload = json.loads(raw_body.decode("utf-8") or "{}")
-            except Exception:
-                self._write_json(400, {"error": "Invalid request payload."})
-                return
+        check_request = Request(
+            check_url,
+            method="GET",
+            headers={
+                "apikey": supabase_service_role_key,
+                "Authorization": f"Bearer {supabase_service_role_key}",
+                "Content-Type": "application/json",
+            },
+        )
 
-            email = str(payload.get("email", "")).strip()
+        existing_record = None
+        try:
+            with urlopen(check_request, timeout=20) as response:
+                response_text = response.read().decode("utf-8")
+                existing = json.loads(response_text) if response_text else []
 
-            if not email or not is_valid_email(email):
-                self._write_json(400, {"error": "A valid email is required."})
-                return
+                if existing and len(existing) > 0:
+                    existing_record = existing[0]
+                    # Check if already active
+                    if existing_record.get("active", False):
+                        return {
+                            "statusCode": 409,
+                            "headers": {"Content-Type": "application/json"},
+                            "body": json.dumps({"error": "This email is already subscribed to our newsletter."}),
+                        }
+        except HTTPError as e:
+            if e.code != 404:
+                return {
+                    "statusCode": 502,
+                    "headers": {"Content-Type": "application/json"},
+                    "body": json.dumps({"error": "Failed to check email subscription status."}),
+                }
+        except URLError:
+            return {
+                "statusCode": 502,
+                "headers": {"Content-Type": "application/json"},
+                "body": json.dumps({"error": "Failed to check email subscription status."}),
+            }
 
-            # First check if email already exists (with proper URL encoding)
-            encoded_email = quote(email, safe='')
-            check_url = f"{supabase_url}/rest/v1/newsletter_submissions?email=eq.{encoded_email}&select=id,active"
-            
-            check_request = Request(
-                check_url,
-                method="GET",
+        # Insert or update subscription
+        if existing_record:
+            # Reactivate inactive subscription
+            update_request = Request(
+                f"{supabase_url}/rest/v1/newsletter_submissions?email=eq.{encoded_email}",
+                data=json.dumps({"active": True}).encode("utf-8"),
+                method="PATCH",
                 headers={
                     "apikey": supabase_service_role_key,
                     "Authorization": f"Bearer {supabase_service_role_key}",
                     "Content-Type": "application/json",
+                    "Prefer": "return=minimal",
                 },
             )
 
-            existing_record = None
             try:
-                with urlopen(check_request, timeout=20) as response:
-                    response_text = response.read().decode("utf-8")
-                    existing = json.loads(response_text) if response_text else []
-                    
-                    if existing and len(existing) > 0:
-                        existing_record = existing[0]
-                        # Check if already active
-                        if existing_record.get("active", False):
-                            self._write_json(409, {"error": "This email is already subscribed to our newsletter."})
-                            return
-                        # If inactive, we'll reactivate it below
-            except HTTPError as e:
-                if e.code == 404:
-                    pass  # Email not found, will insert new
-                else:
-                    self._write_json(502, {"error": "Failed to check email subscription status."})
-                    return
-            except URLError as e:
-                self._write_json(502, {"error": "Failed to check email subscription status."})
-                return
-            except Exception as e:
-                self._write_json(502, {"error": "Failed to check email subscription status."})
-                return
-
-            # If record exists but inactive, update it. Otherwise insert new.
-            if existing_record:
-                # Reactivate inactive subscription
-                update_request = Request(
-                    f"{supabase_url}/rest/v1/newsletter_submissions?email=eq.{encoded_email}",
-                    data=json.dumps({"active": True}).encode("utf-8"),
-                    method="PATCH",
-                    headers={
-                        "apikey": supabase_service_role_key,
-                        "Authorization": f"Bearer {supabase_service_role_key}",
-                        "Content-Type": "application/json",
-                        "Prefer": "return=minimal",
-                    },
-                )
-                
-                try:
-                    with urlopen(update_request, timeout=20) as response:
-                        status = getattr(response, "status", 200)
-                        if status < 200 or status >= 300:
-                            self._write_json(502, {"error": "Failed to reactivate subscription."})
-                            return
-                except HTTPError as e:
-                    self._write_json(502, {"error": "Failed to reactivate subscription."})
-                    return
-            else:
-                # Insert new subscription
-                request_body = json.dumps([
+                with urlopen(update_request, timeout=20) as response:
+                    status = response.status if hasattr(response, "status") else 200
+                    if status < 200 or status >= 300:
+                        return {
+                            "statusCode": 502,
+                            "headers": {"Content-Type": "application/json"},
+                            "body": json.dumps({"error": "Failed to reactivate subscription."}),
+                        }
+            except HTTPError:
+                return {
+                    "statusCode": 502,
+                    "headers": {"Content-Type": "application/json"},
+                    "body": json.dumps({"error": "Failed to reactivate subscription."}),
+                }
+        else:
+            # Insert new subscription
+            request_body = json.dumps(
+                [
                     {
                         "email": email,
                         "active": True,
                         "source": "aitoolscenter-newsletter",
                     }
-                ]).encode("utf-8")
+                ]
+            ).encode("utf-8")
 
-                insert_request = Request(
-                    f"{supabase_url}/rest/v1/newsletter_submissions",
-                    data=request_body,
-                    method="POST",
-                    headers={
-                        "apikey": supabase_service_role_key,
-                        "Authorization": f"Bearer {supabase_service_role_key}",
-                        "Content-Type": "application/json",
-                        "Prefer": "return=minimal",
-                    },
-                )
+            insert_request = Request(
+                f"{supabase_url}/rest/v1/newsletter_submissions",
+                data=request_body,
+                method="POST",
+                headers={
+                    "apikey": supabase_service_role_key,
+                    "Authorization": f"Bearer {supabase_service_role_key}",
+                    "Content-Type": "application/json",
+                    "Prefer": "return=minimal",
+                },
+            )
 
+            try:
+                with urlopen(insert_request, timeout=20) as response:
+                    status = response.status if hasattr(response, "status") else 200
+                    if status < 200 or status >= 300:
+                        return {
+                            "statusCode": 502,
+                            "headers": {"Content-Type": "application/json"},
+                            "body": json.dumps({"error": "Failed to save newsletter subscription."}),
+                        }
+            except HTTPError as e:
+                error_body = ""
                 try:
-                    with urlopen(insert_request, timeout=20) as response:
-                        status = getattr(response, "status", 200)
-                        if status < 200 or status >= 300:
-                            self._write_json(502, {"error": "Failed to save newsletter subscription."})
-                            return
-                except HTTPError as e:
-                    error_body = e.read().decode("utf-8") if e.fp else ""
-                    # Check for duplicate key errors (23505 is PostgreSQL unique violation)
-                    if e.code == 409 or "duplicate" in error_body.lower() or "23505" in error_body.lower():
-                        self._write_json(409, {"error": "This email is already subscribed to our newsletter."})
-                    else:
-                        error_msg = f"HTTP {e.code}: {error_body[:200]}" if error_body else f"HTTP {e.code}"
-                        print(f"Insert error: {error_msg}")
-                        self._write_json(502, {"error": "Failed to save newsletter subscription."})
-                    return
-                except URLError:
-                    self._write_json(502, {"error": "Failed to save newsletter subscription."})
-                    return
+                    if e.fp:
+                        error_body = e.read().decode("utf-8")
+                except Exception:
+                    pass
 
-            confirmation_sent = False
+                if e.code == 409 or "duplicate" in error_body.lower() or "23505" in error_body.lower():
+                    return {
+                        "statusCode": 409,
+                        "headers": {"Content-Type": "application/json"},
+                        "body": json.dumps({"error": "This email is already subscribed to our newsletter."}),
+                    }
+                else:
+                    return {
+                        "statusCode": 502,
+                        "headers": {"Content-Type": "application/json"},
+                        "body": json.dumps({"error": "Failed to save newsletter subscription."}),
+                    }
+            except URLError:
+                return {
+                    "statusCode": 502,
+                    "headers": {"Content-Type": "application/json"},
+                    "body": json.dumps({"error": "Failed to save newsletter subscription."}),
+                }
 
-            if smtp_host:
-                from_email = newsletter_from_email or smtp_username
-                if from_email:
-                    confirmation_sent = send_confirmation_email(
+        # Send confirmation email
+        confirmation_sent = False
+        if smtp_host:
+            from_email = newsletter_from_email or smtp_username
+            if from_email:
+                confirmation_sent = send_confirmation_email(
                     smtp_host=smtp_host,
                     smtp_port=smtp_port,
                     smtp_username=smtp_username,
@@ -250,14 +289,19 @@ class handler(BaseHTTPRequestHandler):
                     site_url=site_url,
                 )
 
-            self._write_json(200, {"ok": True, "confirmationSent": confirmation_sent})
-        except Exception as e:
-            import traceback
-            error_details = traceback.format_exc()
-            print(f"POST /api/newsletter error: {error_details}")
-            self._write_json(500, {"error": "Internal server error. Check logs.", "details": str(e)[:200]})
+        return {
+            "statusCode": 200,
+            "headers": {"Content-Type": "application/json"},
+            "body": json.dumps({"ok": True, "confirmationSent": confirmation_sent}),
+        }
 
-    def do_GET(self):
-        self.send_response(405)
-        self.send_header("Allow", "POST")
-        self.end_headers()
+    except Exception as e:
+        import traceback
+
+        error_details = traceback.format_exc()
+        print(f"POST /api/newsletter error: {error_details}")
+        return {
+            "statusCode": 500,
+            "headers": {"Content-Type": "application/json"},
+            "body": json.dumps({"error": "Internal server error. Check logs.", "details": str(e)[:200]}),
+        }
