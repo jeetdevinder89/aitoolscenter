@@ -1997,10 +1997,13 @@ export default function App() {
   }
 
   // STATS SECTION DATA
+  const totalReviews = FILTERED_TOOLS.reduce((sum, tool) => sum + (tool.reviews || 0), 0)
+  const formattedReviews = totalReviews >= 1000 ? `${Math.round(totalReviews / 1000)}K+` : String(totalReviews)
+  
   const stats = [
     { value: '100+', label: 'Genuine AI Tools' },
     { value: '10+', label: 'Categories' },
-    { value: '50K+', label: 'User Reviews' },
+    { value: formattedReviews, label: 'User Reviews' },
   ]
 
   return (
