@@ -84,8 +84,11 @@
   --bg: var(--dark-bg);
   --surface: var(--dark-surface);
   --card: var(--dark-card);
+  --background: var(--bg);
   --text: var(--dark-text);
+  --foreground: var(--text);
   --muted: var(--dark-muted);
+  --muted-foreground: var(--muted);
   --border: var(--dark-border);
 }
 
@@ -95,8 +98,11 @@
   --bg: var(--light-bg);
   --surface: var(--light-surface);
   --card: var(--light-card);
+  --background: var(--bg);
   --text: var(--light-text);
+  --foreground: var(--text);
   --muted: var(--light-muted);
+  --muted-foreground: var(--muted);
   --border: var(--light-border);
 }
 
@@ -106,8 +112,11 @@
   --bg: var(--dark-bg);
   --surface: var(--dark-surface);
   --card: var(--dark-card);
+  --background: var(--bg);
   --text: var(--dark-text);
+  --foreground: var(--text);
   --muted: var(--dark-muted);
+  --muted-foreground: var(--muted);
   --border: var(--dark-border);
 }
 
@@ -225,6 +234,12 @@ a:hover {
 .navbar.scrolled {
   background: rgba(5, 5, 8, 0.95);
   box-shadow: var(--shadow-md);
+}
+
+[data-theme="light"] .navbar,
+[data-theme="light"] .navbar.scrolled {
+  background: rgba(248, 249, 255, 0.9);
+  border-bottom-color: rgba(0, 0, 0, 0.08);
 }
 
 .navbar-logo {

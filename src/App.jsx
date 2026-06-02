@@ -535,7 +535,7 @@ function StaticPage({ title, intro, sections, onHomeClick }) {
   )
 }
 
-function SeoLandingPage({ page, onNavigate, onHomeClick, onToolClick, visitorCount }) {
+function SeoLandingPage({ page, onNavigate, onHomeClick, onToolClick, visitorCount, theme, onToggleTheme }) {
   const titleMap = {
     tool: `${page.tool?.name} Review, Pricing & Alternatives | AIToolsCenter`,
     category: `${page.category} AI Tools Directory | AIToolsCenter`,
@@ -669,6 +669,9 @@ function SeoLandingPage({ page, onNavigate, onHomeClick, onToolClick, visitorCou
               {CATEGORY_UI_META[cat]?.icon} {cat}
             </button>
           ))}
+          <button onClick={onToggleTheme} className="navbar-link navbar-link-button" title="Toggle theme" type="button">
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
         </div>
       </nav>
 
@@ -2005,6 +2008,8 @@ export default function App() {
           onHomeClick={goHome}
           onToolClick={trackToolClick}
           visitorCount={visitorCount}
+          theme={theme}
+          onToggleTheme={toggleTheme}
         />
         <ConsentBanner onPrivacyClick={() => openPage('privacy')} cmpManaged={cmpManagedConsent} />
       </>
@@ -2657,16 +2662,16 @@ export default function App() {
           zIndex: 9999,
         }}>
           <div style={{
-            background: '#ffffff',
-            border: '1px solid #ddd',
+            background: 'var(--surface)',
+            border: '1px solid var(--border)',
             borderRadius: 'var(--radius-lg)',
             padding: '2rem',
             maxWidth: '400px',
             width: '90%',
             boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3)',
           }}>
-            <h2 style={{ marginTop: 0, marginBottom: '1rem', color: '#1a1a1a' }}>Unsubscribe from Newsletter</h2>
-            <p style={{ color: '#666', marginBottom: '1.5rem' }}>
+            <h2 style={{ marginTop: 0, marginBottom: '1rem', color: 'var(--foreground)' }}>Unsubscribe from Newsletter</h2>
+            <p style={{ color: 'var(--muted)', marginBottom: '1.5rem' }}>
               Enter your email address to unsubscribe from our newsletter.
             </p>
             <form onSubmit={handleUnsubscribeSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -2679,9 +2684,9 @@ export default function App() {
                 style={{
                   padding: '0.75rem',
                   borderRadius: 'var(--radius-md)',
-                  border: '1px solid #ddd',
-                  background: '#f9f9f9',
-                  color: '#333',
+                  border: '1px solid var(--border)',
+                  background: 'var(--background)',
+                  color: 'var(--foreground)',
                   fontSize: '1rem',
                 }}
               />
@@ -2703,9 +2708,9 @@ export default function App() {
                     flex: 1,
                     padding: '0.75rem',
                     borderRadius: 'var(--radius-md)',
-                    border: '1px solid #ddd',
-                    background: '#f9f9f9',
-                    color: '#333',
+                    border: '1px solid var(--border)',
+                    background: 'var(--background)',
+                    color: 'var(--foreground)',
                     cursor: 'pointer',
                     fontSize: '1rem',
                   }}
@@ -2733,8 +2738,8 @@ export default function App() {
           zIndex: 9999,
         }}>
           <div style={{
-            background: '#ffffff',
-            border: '1px solid #ddd',
+            background: 'var(--surface)',
+            border: '1px solid var(--border)',
             borderRadius: 'var(--radius-lg)',
             padding: '2rem',
             maxWidth: '500px',
@@ -2743,8 +2748,8 @@ export default function App() {
             maxHeight: '90vh',
             overflowY: 'auto',
           }}>
-            <h2 style={{ marginTop: 0, marginBottom: '0.5rem', color: '#1a1a1a' }}>Send Us Your Feedback</h2>
-            <p style={{ color: '#666', marginBottom: '1.5rem' }}>
+            <h2 style={{ marginTop: 0, marginBottom: '0.5rem', color: 'var(--foreground)' }}>Send Us Your Feedback</h2>
+            <p style={{ color: 'var(--muted)', marginBottom: '1.5rem' }}>
               Help us improve AIToolsCenter by sharing your thoughts, suggestions, or reporting issues.
             </p>
             <form onSubmit={handleFeedbackSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -2757,9 +2762,9 @@ export default function App() {
                 style={{
                   padding: '0.75rem',
                   borderRadius: 'var(--radius-md)',
-                  border: '1px solid #ddd',
-                  background: '#f9f9f9',
-                  color: '#333',
+                  border: '1px solid var(--border)',
+                  background: 'var(--background)',
+                  color: 'var(--foreground)',
                   fontSize: '1rem',
                   fontFamily: 'inherit',
                 }}
@@ -2773,9 +2778,9 @@ export default function App() {
                 style={{
                   padding: '0.75rem',
                   borderRadius: 'var(--radius-md)',
-                  border: '1px solid #ddd',
-                  background: '#f9f9f9',
-                  color: '#333',
+                  border: '1px solid var(--border)',
+                  background: 'var(--background)',
+                  color: 'var(--foreground)',
                   fontSize: '1rem',
                   fontFamily: 'inherit',
                 }}
@@ -2789,9 +2794,9 @@ export default function App() {
                 style={{
                   padding: '0.75rem',
                   borderRadius: 'var(--radius-md)',
-                  border: '1px solid #ddd',
-                  background: '#f9f9f9',
-                  color: '#333',
+                  border: '1px solid var(--border)',
+                  background: 'var(--background)',
+                  color: 'var(--foreground)',
                   fontSize: '1rem',
                   fontFamily: 'inherit',
                 }}
@@ -2805,9 +2810,9 @@ export default function App() {
                 style={{
                   padding: '0.75rem',
                   borderRadius: 'var(--radius-md)',
-                  border: '1px solid #ddd',
-                  background: '#f9f9f9',
-                  color: '#333',
+                  border: '1px solid var(--border)',
+                  background: 'var(--background)',
+                  color: 'var(--foreground)',
                   fontSize: '1rem',
                   fontFamily: 'inherit',
                   resize: 'vertical',
@@ -2846,9 +2851,9 @@ export default function App() {
                     flex: 1,
                     padding: '0.75rem',
                     borderRadius: 'var(--radius-md)',
-                    border: '1px solid #ddd',
-                    background: '#f9f9f9',
-                    color: '#333',
+                    border: '1px solid var(--border)',
+                    background: 'var(--background)',
+                    color: 'var(--foreground)',
                     cursor: 'pointer',
                     fontSize: '1rem',
                     fontFamily: 'inherit',
