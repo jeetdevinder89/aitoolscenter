@@ -5,10 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run sitemap:generate && vite build",
+    "build": "npm run links:check && npm run social:cards && npm run sitemap:generate && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "seo:check": "node scripts/seo-healthcheck.mjs https://www.aitoolscenter.in",
+    "links:check": "node scripts/validate-links.mjs",
+    "links:uptime": "node scripts/check-external-links.mjs",
+    "links:uptime:strict": "node scripts/check-external-links.mjs --strict",
+    "social:cards": "node scripts/generate-social-cards.mjs",
     "sitemap:generate": "node scripts/generate-sitemap.mjs",
     "news:update": "node scripts/update-ai-news.mjs",
     "toolkit:pdf": "node scripts/generate-toolkit-pdf.mjs"

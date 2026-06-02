@@ -1,0 +1,55 @@
+name: Link Uptime Monitor
+
+on:
+  schedule:
+    # Runs every Monday at 08:00 UTC
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run external link uptime check
+        run: npm run links:uptime
+        continue-on-error: true
+
+      - name: Commit updated uptime report
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: update external link uptime report [skip ci]'
+          file_pattern: 'reports/external-link-uptime.json'
+
+      - name: Upload uptime report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: link-uptime-report
+          path: reports/external-link-uptime.json
+          retention-days: 90
+
+      - name: Summarize failures
+        run: |
+          node -e "
+            const report = require('./reports/external-link-uptime.json');
+            console.log('## Link Uptime Summary');
+            console.log('Total:', report.total, '| Healthy:', report.healthy, '| Failed:', report.failed);
+            if (report.failures && report.failures.length > 0) {
+              console.log('\\nFailed URLs:');
+              report.failures.forEach(f => console.log(' -', f.url, '→', f.status || f.error));
+            }
+          "

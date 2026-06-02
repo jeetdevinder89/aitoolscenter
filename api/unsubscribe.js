@@ -67,7 +67,6 @@ export default async function handler(req, res) {
     const smtpPort = process.env.SMTP_PORT || 587;
     const smtpUsername = process.env.SMTP_USERNAME;
     const smtpPassword = process.env.SMTP_PASSWORD;
-    const smtpUseTls = process.env.SMTP_USE_TLS !== 'false';
     const newsletterFromEmail = process.env.NEWSLETTER_FROM_EMAIL;
     const siteUrl = process.env.SITE_URL || 'https://aitoolscenter.in';
 

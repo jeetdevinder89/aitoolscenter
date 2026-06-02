@@ -4,6 +4,9 @@ import './advanced-components.css'
 import aiNews from './data/ai-news.json'
 
 const SITE_ORIGIN = (import.meta.env.VITE_SITE_ORIGIN || 'https://www.aitoolscenter.in').replace(/\/$/, '')
+const ADSENSE_CLIENT_ID = (import.meta.env.VITE_ADSENSE_CLIENT_ID || '').trim()
+const PAGE_VIEWS_API = '/api/page-views'
+const LOCAL_GLOBAL_VISIT_DATE_KEY = 'aitoolscenter-global-visit-date'
 
 // ==================================================
 // COMPREHENSIVE AI TOOLS DATABASE - 100+ GENUINE TOOLS
@@ -149,7 +152,73 @@ const TOOL_LINK_OVERRIDES = {
   'OpenAI API': 'https://platform.openai.com/',
 }
 
-const resolveToolLink = (tool) => TOOL_LINK_OVERRIDES[tool.name] || tool.link
+const AMAZON_ASSOCIATE_TAG = (import.meta.env.VITE_AMAZON_ASSOCIATE_TAG || 'aitoolscenter-21').trim()
+
+const AFFILIATE_LINKS = {
+  'GitHub Copilot': (import.meta.env.VITE_AFFILIATE_COPILOT || '').trim(),
+  Cursor: (import.meta.env.VITE_AFFILIATE_CURSOR || '').trim(),
+  Tabnine: (import.meta.env.VITE_AFFILIATE_TABNINE || '').trim(),
+  Perplexity: (import.meta.env.VITE_AFFILIATE_PERPLEXITY || '').trim(),
+  Runway: (import.meta.env.VITE_AFFILIATE_RUNWAY || '').trim(),
+  'Notion AI': (import.meta.env.VITE_AFFILIATE_NOTION || '').trim(),
+  'Zapier AI': (import.meta.env.VITE_AFFILIATE_ZAPIER || '').trim(),
+  Make: (import.meta.env.VITE_AFFILIATE_MAKE || '').trim(),
+  Jasper: (import.meta.env.VITE_AFFILIATE_JASPER || '').trim(),
+  'Copy.ai': (import.meta.env.VITE_AFFILIATE_COPYAI || '').trim(),
+  Grammarly: (import.meta.env.VITE_AFFILIATE_GRAMMARLY || '').trim(),
+  Writesonic: (import.meta.env.VITE_AFFILIATE_WRITESONIC || '').trim(),
+}
+
+const AMAZON_HOST_REGEX = /(^|\.)amazon\.[a-z.]+$/i
+
+const isAmazonUrl = (url) => {
+  try {
+    const parsedUrl = new URL(url)
+    return AMAZON_HOST_REGEX.test(parsedUrl.hostname)
+  } catch {
+    return false
+  }
+}
+
+const appendAmazonAssociateTag = (url) => {
+  if (!AMAZON_ASSOCIATE_TAG) {
+    return url
+  }
+
+  try {
+    const parsedUrl = new URL(url)
+    if (!AMAZON_HOST_REGEX.test(parsedUrl.hostname)) {
+      return url
+    }
+
+    if (!parsedUrl.searchParams.has('tag')) {
+      parsedUrl.searchParams.set('tag', AMAZON_ASSOCIATE_TAG)
+    }
+
+    return parsedUrl.toString()
+  } catch {
+    return url
+  }
+}
+
+const getToolAffiliateUrl = (tool) => {
+  const envLink = AFFILIATE_LINKS[tool.name]
+  if (envLink) {
+    return appendAmazonAssociateTag(envLink)
+  }
+
+  if (tool.affiliateLink) {
+    return appendAmazonAssociateTag(tool.affiliateLink)
+  }
+
+  return null
+}
+
+const getToolOutboundUrl = (tool) => appendAmazonAssociateTag(getToolAffiliateUrl(tool) || TOOL_LINK_OVERRIDES[tool.name] || tool.link)
+
+const isAffiliateTool = (tool) => Boolean(getToolAffiliateUrl(tool)) || isAmazonUrl(TOOL_LINK_OVERRIDES[tool.name] || tool.link || '')
+
+const getToolAnchorRel = (tool) => (isAffiliateTool(tool) ? 'noopener noreferrer nofollow sponsored' : 'noopener noreferrer')
 
 const COLLECTIONS = [
   {
@@ -179,32 +248,142 @@ const COLLECTIONS = [
   },
 ]
 
+const CATEGORIES = ['All', 'Writing', 'Image', 'Video', 'Coding', 'Research', 'Audio', 'Design', 'Business', 'Productivity', 'Marketing', 'API']
+
+const CATEGORY_UI_META = {
+  Writing: { icon: '✍️', label: 'Writing AI' },
+  Image: { icon: '🖼️', label: 'Image AI' },
+  Video: { icon: '🎥', label: 'Video AI' },
+  Coding: { icon: '⚙️', label: 'Coding AI' },
+  Research: { icon: '🔬', label: 'Research' },
+  Audio: { icon: '🎵', label: 'Audio & Music' },
+  Design: { icon: '🎨', label: 'Design Tools' },
+  Business: { icon: '📊', label: 'Business AI' },
+  Productivity: { icon: '⚡', label: 'Productivity' },
+  Marketing: { icon: '📣', label: 'Marketing AI' },
+  API: { icon: '🔌', label: 'APIs' },
+}
+
+const USE_CASE_PAGES = [
+  {
+    slug: 'ai-tools-for-developers',
+    title: 'Best AI Tools for Developers in 2026',
+    description: 'Code faster with AI coding assistants, debugging tools, and API platforms built for shipping software.',
+    categories: ['Coding', 'API', 'Research'],
+  },
+  {
+    slug: 'ai-tools-for-content-creators',
+    title: 'Best AI Tools for Content Creators',
+    description: 'Create social posts, video scripts, thumbnails, and edits with a modern creator-first AI stack.',
+    categories: ['Writing', 'Image', 'Video', 'Audio'],
+  },
+  {
+    slug: 'ai-tools-for-students',
+    title: 'Best AI Tools for Students',
+    description: 'Research, summarize, and study smarter with AI assistants for notes, essays, and revision workflows.',
+    categories: ['Research', 'Writing', 'Productivity'],
+  },
+  {
+    slug: 'ai-tools-for-marketers',
+    title: 'Best AI Tools for Marketers',
+    description: 'Run SEO, campaign copy, content planning, and growth automation from one AI-powered workflow.',
+    categories: ['Marketing', 'Writing', 'Productivity', 'Business'],
+  },
+  {
+    slug: 'ai-tools-for-designers',
+    title: 'Best AI Tools for Designers',
+    description: 'Speed up visual ideation with image generation, design assistants, and editing automation.',
+    categories: ['Design', 'Image', 'Video'],
+  },
+]
+
+const COMPARISON_PAGES = [
+  { slug: 'chatgpt-vs-claude', toolA: 'ChatGPT', toolB: 'Claude', intent: 'long-form writing and analysis' },
+  { slug: 'copilot-vs-cursor', toolA: 'GitHub Copilot', toolB: 'Cursor', intent: 'developer productivity' },
+  { slug: 'midjourney-vs-dall-e-3', toolA: 'Midjourney', toolB: 'DALL-E 3', intent: 'image generation quality' },
+  { slug: 'runway-vs-synthesia', toolA: 'Runway', toolB: 'Synthesia', intent: 'AI video workflows' },
+  { slug: 'perplexity-vs-gemini', toolA: 'Perplexity', toolB: 'Google Gemini', intent: 'research and citations' },
+]
+
+const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
+const deslugify = (value) => value.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
+
+const TOOL_BY_SLUG = new Map(TOOLS_EXTENDED.map((tool) => [slugify(tool.name), tool]))
+const CATEGORY_SLUGS = new Map(CATEGORIES.filter((category) => category !== 'All').map((category) => [slugify(category), category]))
+
+const getToolBySlug = (slug) => TOOL_BY_SLUG.get(slug)
+const getCategoryBySlug = (slug) => CATEGORY_SLUGS.get(slug)
+const getUseCaseBySlug = (slug) => USE_CASE_PAGES.find((useCase) => useCase.slug === slug) || null
+const getComparisonBySlug = (slug) => COMPARISON_PAGES.find((comparison) => comparison.slug === slug) || null
+
+const resolvePathPage = (pathname) => {
+  const normalizedPath = (pathname || '/').replace(/\/$/, '') || '/'
+
+  const legalPathMap = {
+    '/privacy': 'privacy',
+    '/terms': 'terms',
+    '/affiliate-disclosure': 'affiliateDisclosure',
+    '/contact': 'contact',
+  }
+
+  if (legalPathMap[normalizedPath]) {
+    return { type: 'legal', key: legalPathMap[normalizedPath] }
+  }
+
+  if (normalizedPath === '/' || normalizedPath === '/home') {
+    return { type: 'home' }
+  }
+
+  if (normalizedPath.startsWith('/ai-tools/')) {
+    const slug = normalizedPath.replace('/ai-tools/', '')
+    const tool = getToolBySlug(slug)
+    if (tool) return { type: 'tool', tool }
+  }
+
+  if (normalizedPath.startsWith('/categories/')) {
+    const slug = normalizedPath.replace('/categories/', '')
+    const category = getCategoryBySlug(slug)
+    if (category) return { type: 'category', category }
+  }
+
+  if (normalizedPath.startsWith('/use-cases/')) {
+    const slug = normalizedPath.replace('/use-cases/', '')
+    const useCase = getUseCaseBySlug(slug)
+    if (useCase) return { type: 'useCase', useCase }
+  }
+
+  if (normalizedPath.startsWith('/compare/')) {
+    const slug = normalizedPath.replace('/compare/', '')
+    const comparison = getComparisonBySlug(slug)
+    if (comparison) return { type: 'comparison', comparison }
+  }
+
+  return { type: 'home' }
+}
+
+const getRouteSocialImagePath = (page) => {
+  if (page.type === 'category') {
+    return `/social/categories/${slugify(page.category)}.svg`
+  }
+
+  if (page.type === 'useCase') {
+    return `/social/use-cases/${page.useCase.slug}.svg`
+  }
+
+  if (page.type === 'comparison') {
+    return `/social/compare/${page.comparison.slug}.svg`
+  }
+
+  if (page.type === 'tool') {
+    return `/social/categories/${slugify(page.tool.category)}.svg`
+  }
+
+  return '/og-image.svg'
+}
+
 // ==================================================
 // RECOMMENDATION QUESTIONS
 // ==================================================
-
-const WIZARD_QUESTIONS = [
-  {
-    id: 0,
-    question: 'What is your profession?',
-    options: ['Developer', 'Writer', 'Designer', 'Marketer', 'Teacher', 'Student', 'Other'],
-  },
-  {
-    id: 1,
-    question: 'What is your primary goal?',
-    options: ['Content Creation', 'Coding/Development', 'Design/Art', 'Research', 'Productivity', 'Learning'],
-  },
-  {
-    id: 2,
-    question: 'What is your budget?',
-    options: ['Free Only', 'Under $20/month', '$20-50/month', '$50-100/month', '$100+/month'],
-  },
-  {
-    id: 3,
-    question: 'What is your experience level?',
-    options: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
-  },
-]
 
 const LEGAL_PAGES = {
   privacy: {
@@ -224,6 +403,7 @@ const LEGAL_PAGES = {
         items: [
           'We use email addresses to send weekly newsletters with AI tool updates and curated news.',
           'We use analytics to measure site usage and improve content quality.',
+          'We use outbound click data to understand which tools and recommendations are useful to visitors.',
           'We do not sell personal data to third parties.',
         ],
       },
@@ -241,7 +421,46 @@ const LEGAL_PAGES = {
         items: [
           'You can update cookie preferences in your browser settings.',
           'You can unsubscribe from the newsletter using the link in any email.',
+          'Google AdSense may use cookies to serve ads based on your visits to this and other sites. You can manage ad personalization in Google Ad Settings.',
+          'In regions where consent is required, Google Consent Mode v2 defaults are applied before ads are loaded.',
           'Third-party advertising partners may use cookies subject to their own policies.',
+          'Some outbound links may be affiliate or sponsored links, which are disclosed on the site and on our Affiliate Disclosure page.',
+        ],
+      },
+    ],
+  },
+  affiliateDisclosure: {
+    title: 'Affiliate Disclosure',
+    intro: 'AIToolsCenter may earn a commission when you click certain links and sign up or purchase through partner offers. Last updated: June 1, 2026.',
+    sections: [
+      {
+        heading: 'How Affiliate Links Work',
+        items: [
+          'Some links on this site are affiliate links, which means we may earn a commission if you take action after clicking them.',
+          'The price you pay does not increase because of our affiliate relationship.',
+          'Affiliate relationships help support the site, research, and ongoing maintenance.',
+        ],
+      },
+      {
+        heading: 'Editorial Independence',
+        items: [
+          'We aim to list tools based on relevance, utility, and user value rather than commission potential alone.',
+          'Sponsored relationships do not guarantee placement, higher rankings, or positive reviews.',
+          'You should always evaluate a tool independently before purchasing or subscribing.',
+        ],
+      },
+      {
+        heading: 'How We Label Commercial Links',
+        items: [
+          'Affiliate-ready tool cards may be marked with an Affiliate label.',
+          'Commercial outbound links use sponsored and nofollow attributes where appropriate.',
+          'General site-level disclosures appear near tool listings and in the footer for transparency.',
+        ],
+      },
+      {
+        heading: 'Questions',
+        items: [
+          'If you have questions about a recommendation or partnership, contact support@aitoolscenter.in.',
         ],
       },
     ],
@@ -256,6 +475,7 @@ const LEGAL_PAGES = {
           'All listings are provided for informational purposes only.',
           'Tool pricing, features, and availability may change without notice.',
           'You are responsible for evaluating third-party tools before use.',
+          'Some listings may contain affiliate or sponsored outbound links as disclosed on the site.',
         ],
       },
       {
@@ -315,26 +535,510 @@ function StaticPage({ title, intro, sections, onHomeClick }) {
   )
 }
 
+function SeoLandingPage({ page, onNavigate, onHomeClick, onToolClick, visitorCount }) {
+  const titleMap = {
+    tool: `${page.tool?.name} Review, Pricing & Alternatives | AIToolsCenter`,
+    category: `${page.category} AI Tools Directory | AIToolsCenter`,
+    useCase: `${page.useCase?.title} | AIToolsCenter`,
+    comparison: `${page.comparison?.toolA} vs ${page.comparison?.toolB} | AIToolsCenter`,
+  }
+
+  const descriptionMap = {
+    tool: `${page.tool?.name}: ${page.tool?.tagline}. Compare ratings, pricing, and similar tools before you choose.`,
+    category: `Explore hand-picked ${page.category} AI tools with ratings, pricing tiers, and practical use cases.`,
+    useCase: page.useCase?.description,
+    comparison: `Compare ${page.comparison?.toolA} and ${page.comparison?.toolB} for ${page.comparison?.intent}.`,
+  }
+
+  const pageTitle = titleMap[page.type]
+  const pageDescription = descriptionMap[page.type]
+
+  const categoryTools = page.type === 'category'
+    ? TOOLS_EXTENDED.filter((tool) => tool.category === page.category).slice(0, 12)
+    : []
+
+  const useCaseTools = page.type === 'useCase'
+    ? TOOLS_EXTENDED.filter((tool) => page.useCase.categories.includes(tool.category)).slice(0, 12)
+    : []
+
+  const toolAlternatives = page.type === 'tool'
+    ? TOOLS_EXTENDED
+      .filter((tool) => tool.category === page.tool.category && tool.name !== page.tool.name)
+      .slice(0, 8)
+    : []
+
+  const comparisonTools = page.type === 'comparison'
+    ? [
+      TOOLS_EXTENDED.find((tool) => tool.name === page.comparison.toolA),
+      TOOLS_EXTENDED.find((tool) => tool.name === page.comparison.toolB),
+    ].filter(Boolean)
+    : []
+
+  const parseMonthlyPrice = (priceValue) => {
+    if (!priceValue) return null
+    const normalized = String(priceValue).toLowerCase()
+    if (normalized.includes('free')) return 0
+    const numberMatch = normalized.match(/\$\s*(\d+(?:\.\d+)?)/) || normalized.match(/(\d+(?:\.\d+)?)/)
+    return numberMatch ? Number(numberMatch[1]) : null
+  }
+
+  const comparisonRows = page.type === 'comparison' && comparisonTools.length === 2
+    ? (() => {
+      const [toolA, toolB] = comparisonTools
+      const priceA = parseMonthlyPrice(toolA.price)
+      const priceB = parseMonthlyPrice(toolB.price)
+
+      const winnerByHigher = (a, b) => (a > b ? 'A' : b > a ? 'B' : 'Tie')
+      const winnerByLower = (a, b) => {
+        if (a == null || b == null) return 'Tie'
+        return a < b ? 'A' : b < a ? 'B' : 'Tie'
+      }
+
+      return [
+        {
+          label: 'Overall Rating',
+          valueA: `${toolA.rating}/5`,
+          valueB: `${toolB.rating}/5`,
+          winner: winnerByHigher(toolA.rating, toolB.rating),
+          rationale: 'Higher is better',
+        },
+        {
+          label: 'Community Reviews',
+          valueA: toolA.reviews?.toLocaleString() || 'N/A',
+          valueB: toolB.reviews?.toLocaleString() || 'N/A',
+          winner: winnerByHigher(toolA.reviews || 0, toolB.reviews || 0),
+          rationale: 'More social proof',
+        },
+        {
+          label: 'Entry Price',
+          valueA: toolA.price || 'N/A',
+          valueB: toolB.price || 'N/A',
+          winner: winnerByLower(priceA, priceB),
+          rationale: 'Lower cost wins',
+        },
+        {
+          label: 'Pricing Model',
+          valueA: toolA.badge || 'N/A',
+          valueB: toolB.badge || 'N/A',
+          winner: 'Tie',
+          rationale: 'Depends on your budget',
+        },
+        {
+          label: 'Best For',
+          valueA: toolA.tagline,
+          valueB: toolB.tagline,
+          winner: 'Tie',
+          rationale: page.comparison.intent,
+        },
+      ]
+    })()
+    : []
+
+  const featuredTools = page.type === 'category'
+    ? categoryTools
+    : page.type === 'useCase'
+      ? useCaseTools
+      : page.type === 'comparison'
+        ? comparisonTools
+        : [page.tool, ...toolAlternatives].slice(0, 10)
+
+  const pageTypeLabel = {
+    category: `${CATEGORY_UI_META[page.category]?.icon || '📁'} ${page.category} AI Tools`,
+    useCase: `🎯 Use Case`,
+    comparison: `⚡ Tool Comparison`,
+    tool: `🔧 Tool Review`,
+  }[page.type] || ''
+
+  return (
+    <div className="page">
+      <nav className="navbar">
+        <div className="navbar-logo" onClick={onHomeClick} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <span style={{ width: '0.7rem', height: '0.7rem', borderRadius: '999px', background: 'var(--primary)', boxShadow: '0 0 16px var(--glow)' }} />
+          <span style={{ fontWeight: 800 }}>AIToolsCenter</span>
+        </div>
+        <div className="navbar-links">
+          <button className="navbar-link navbar-link-button" onClick={onHomeClick} type="button">🏠 Home</button>
+          {CATEGORIES.filter((c) => c !== 'All').slice(0, 4).map((cat) => (
+            <button
+              key={cat}
+              className="navbar-link navbar-link-button"
+              onClick={() => onNavigate(`/categories/${slugify(cat)}`)}
+              type="button"
+              style={page.type === 'category' && page.category === cat ? { color: 'var(--primary)' } : {}}
+            >
+              {CATEGORY_UI_META[cat]?.icon} {cat}
+            </button>
+          ))}
+        </div>
+      </nav>
+
+      <main style={{ paddingTop: '4rem' }}>
+        {/* Hero */}
+        <section style={{
+          background: 'linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%)',
+          borderBottom: '1px solid var(--border)',
+          padding: '3rem var(--spacing-lg) 2.5rem',
+        }}>
+          <div className="container" style={{ maxWidth: '900px' }}>
+            {/* Breadcrumb */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.82rem', color: 'var(--muted)', marginBottom: '1.2rem', flexWrap: 'wrap' }}>
+              <button onClick={onHomeClick} type="button" style={{ background: 'none', border: 'none', color: 'var(--primary)', cursor: 'pointer', padding: 0, fontSize: 'inherit' }}>Home</button>
+              <span>›</span>
+              {page.type === 'category' && <span>Categories</span>}
+              {page.type === 'useCase' && <><span>Use Cases</span></>}
+              {page.type === 'comparison' && <><span>Compare</span></>}
+              {page.type === 'tool' && <><button onClick={() => onNavigate(`/categories/${slugify(page.tool?.category)}`)} type="button" style={{ background: 'none', border: 'none', color: 'var(--primary)', cursor: 'pointer', padding: 0, fontSize: 'inherit' }}>{page.tool?.category}</button></>}
+              <span>›</span>
+              <span style={{ color: 'var(--text)' }}>
+                {page.type === 'category' ? page.category : page.type === 'tool' ? page.tool?.name : page.type === 'useCase' ? page.useCase?.title : `${page.comparison?.toolA} vs ${page.comparison?.toolB}`}
+              </span>
+            </div>
+
+            {/* Type badge */}
+            <div style={{ marginBottom: '0.75rem' }}>
+              <span style={{ background: 'var(--primary)', color: '#fff', borderRadius: '999px', padding: '0.25rem 0.85rem', fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.02em' }}>
+                {pageTypeLabel}
+              </span>
+            </div>
+
+            <h1 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.6rem)', fontWeight: 800, lineHeight: 1.2, marginBottom: '0.8rem', color: 'var(--text)' }}>
+              {page.type === 'tool' ? `${page.tool?.name} — Review & Alternatives` : pageTitle.replace(' | AIToolsCenter', '')}
+            </h1>
+            <p style={{ fontSize: '1.05rem', color: 'var(--muted)', lineHeight: 1.65, maxWidth: '680px', marginBottom: '1.5rem' }}>{pageDescription}</p>
+
+            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+              <span style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '999px', padding: '0.3rem 0.9rem', fontSize: '0.82rem', color: 'var(--muted)' }}>
+                {featuredTools.length} tools listed
+              </span>
+              <span style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '999px', padding: '0.3rem 0.9rem', fontSize: '0.82rem', color: 'var(--muted)' }}>
+                Updated June 2026
+              </span>
+              {visitorCount > 0 && (
+                <span style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '999px', padding: '0.3rem 0.9rem', fontSize: '0.82rem', color: 'var(--muted)' }}>
+                  {visitorCount.toLocaleString()} live visitors
+                </span>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* SEO LANDING PAGE ADS */}
+        <section style={{ padding: '1.15rem var(--spacing-lg) 0.5rem' }}>
+          <div className="container">
+            <AdsContainer type="horizontal" />
+          </div>
+        </section>
+
+        {/* Comparison Panel */}
+        {page.type === 'comparison' && comparisonTools.length === 2 && (
+          <section style={{ padding: '2.5rem var(--spacing-lg) 1rem' }}>
+            <div className="container" style={{ display: 'grid', gap: '1rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '0.8rem', alignItems: 'stretch' }}>
+                {comparisonTools.map((tool) => (
+                  <a
+                    key={`compare-head-${tool.id}`}
+                    href={getToolOutboundUrl(tool)}
+                    target="_blank"
+                    rel={getToolAnchorRel(tool)}
+                    className="tool-card"
+                    onClick={() => onToolClick(tool, 'seo-comparison-hero')}
+                    style={{ minHeight: '100%' }}
+                  >
+                    <div className="tool-header">
+                      <div className="tool-logo">{tool.icon}</div>
+                      <div className="tool-meta">
+                        <div className="tool-name">{tool.name}</div>
+                        <div className="tool-tagline">{tool.tagline}</div>
+                      </div>
+                    </div>
+                    <div className="tool-card-top" style={{ marginTop: '0.7rem' }}>
+                      <span className="tool-badge">{tool.badge}</span>
+                      <span style={{ color: 'var(--primary)', fontWeight: 700 }}>{tool.rating}/5</span>
+                    </div>
+                    <div style={{ marginTop: '0.7rem', display: 'grid', gap: '0.25rem', fontSize: '0.84rem', color: 'var(--muted)' }}>
+                      <span><strong style={{ color: 'var(--text)' }}>Price:</strong> {tool.price}</span>
+                      <span><strong style={{ color: 'var(--text)' }}>Reviews:</strong> {(tool.reviews || 0).toLocaleString()}</span>
+                      <span><strong style={{ color: 'var(--text)' }}>Category:</strong> {tool.category}</span>
+                    </div>
+                  </a>
+                ))}
+                <div style={{ alignSelf: 'center', justifySelf: 'center', fontWeight: 800, color: 'var(--primary)', fontSize: '1.1rem' }}>VS</div>
+              </div>
+
+              <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '1rem', overflow: 'hidden' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr auto', gap: '0.75rem', padding: '0.8rem 1rem', borderBottom: '1px solid var(--border)', background: 'var(--background)', fontSize: '0.82rem', fontWeight: 700 }}>
+                  <span>Criteria</span>
+                  <span>{comparisonTools[0].name}</span>
+                  <span>{comparisonTools[1].name}</span>
+                  <span>Winner</span>
+                </div>
+                {comparisonRows.map((row) => (
+                  <div key={row.label} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr auto', gap: '0.75rem', padding: '0.75rem 1rem', borderBottom: '1px solid var(--border)', alignItems: 'center' }}>
+                    <div>
+                      <div style={{ fontWeight: 700 }}>{row.label}</div>
+                      <div style={{ fontSize: '0.76rem', color: 'var(--muted)' }}>{row.rationale}</div>
+                    </div>
+                    <div style={{ color: row.winner === 'A' ? 'var(--primary)' : 'var(--text)' }}>{row.valueA}</div>
+                    <div style={{ color: row.winner === 'B' ? 'var(--primary)' : 'var(--text)' }}>{row.valueB}</div>
+                    <div style={{
+                      justifySelf: 'end',
+                      border: '1px solid var(--border)',
+                      borderRadius: '999px',
+                      padding: '0.15rem 0.6rem',
+                      fontSize: '0.74rem',
+                      fontWeight: 700,
+                      color: row.winner === 'Tie' ? 'var(--muted)' : 'var(--primary)',
+                    }}>
+                      {row.winner === 'Tie' ? 'Tie' : row.winner === 'A' ? comparisonTools[0].name : comparisonTools[1].name}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Tools Grid */}
+        <section style={{ padding: page.type === 'comparison' ? '1rem var(--spacing-lg) 2.5rem' : '2.5rem var(--spacing-lg)' }}>
+          <div className="container">
+            {page.type !== 'comparison' && (featuredTools.length > 0 ? (
+              <div className="tools-grid">
+                {featuredTools.map((tool) => (
+                  <a
+                    key={`${page.type}-${tool.id}`}
+                    href={getToolOutboundUrl(tool)}
+                    target="_blank"
+                    rel={getToolAnchorRel(tool)}
+                    className="tool-card"
+                    onClick={() => onToolClick(tool, `seo-${page.type}`)}
+                  >
+                    <div className="tool-header">
+                      <div className="tool-logo">{tool.icon}</div>
+                      <div className="tool-meta">
+                        <div className="tool-name">{tool.name}</div>
+                        <div className="tool-tagline">{tool.tagline}</div>
+                      </div>
+                    </div>
+                    <div className="tool-card-top" style={{ marginTop: '0.6rem' }}>
+                      <span className="tool-badge">{tool.badge}</span>
+                      {isAffiliateTool(tool) && <span className="tool-affiliate-pill">Affiliate</span>}
+                    </div>
+                    <div className="tool-description" style={{ fontSize: '0.88rem', color: 'var(--muted)', marginTop: '0.6rem', lineHeight: 1.55 }}>{tool.description}</div>
+                  </a>
+                ))}
+              </div>
+            ) : (
+              <p style={{ color: 'var(--muted)', textAlign: 'center', padding: '3rem 0' }}>No tools found for this page.</p>
+            ))}
+
+            {/* Explore more */}
+            <div style={{ marginTop: '3rem', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '1rem', padding: '1.75rem' }}>
+              <h2 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '0.35rem', color: 'var(--text)' }}>Explore More Categories</h2>
+              <p style={{ fontSize: '0.85rem', color: 'var(--muted)', marginBottom: '1.1rem' }}>Browse AI tools across all categories and use cases.</p>
+              <div style={{ display: 'flex', gap: '0.55rem', flexWrap: 'wrap' }}>
+                {CATEGORIES.filter((category) => category !== 'All').map((category) => (
+                  <button
+                    key={category}
+                    className="navbar-link navbar-link-button"
+                    onClick={() => onNavigate(`/categories/${slugify(category)}`)}
+                    type="button"
+                    style={page.type === 'category' && page.category === category ? { color: 'var(--primary)', borderColor: 'var(--primary)' } : {}}
+                  >
+                    {CATEGORY_UI_META[category]?.icon} {category}
+                  </button>
+                ))}
+              </div>
+              <div style={{ display: 'flex', gap: '0.55rem', flexWrap: 'wrap', marginTop: '0.75rem' }}>
+                {USE_CASE_PAGES.map((useCase) => (
+                  <button
+                    key={useCase.slug}
+                    className="navbar-link navbar-link-button"
+                    onClick={() => onNavigate(`/use-cases/${useCase.slug}`)}
+                    type="button"
+                    style={page.type === 'useCase' && page.useCase?.slug === useCase.slug ? { color: 'var(--primary)', borderColor: 'var(--primary)' } : {}}
+                  >
+                    🎯 {useCase.title.replace('Best AI Tools for ', '')}
+                  </button>
+                ))}
+                {COMPARISON_PAGES.map((comparison) => (
+                  <button
+                    key={comparison.slug}
+                    className="navbar-link navbar-link-button"
+                    onClick={() => onNavigate(`/compare/${comparison.slug}`)}
+                    type="button"
+                  >
+                    ⚡ {comparison.toolA} vs {comparison.toolB}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+              <button
+                onClick={onHomeClick}
+                type="button"
+                style={{ background: 'var(--primary)', color: '#fff', border: 'none', borderRadius: '999px', padding: '0.65rem 1.8rem', fontWeight: 600, cursor: 'pointer', fontSize: '0.95rem' }}
+              >
+                ← Back to Full Directory
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  )
+}
+
 // ==================================================
 // PAGE COMPONENTS
 // ==================================================
 
+const IS_DEV = import.meta.env.DEV === true
+const CMP_SCRIPT_URL = (import.meta.env.VITE_CMP_SCRIPT_URL || '').trim()
+const CONSENT_STORAGE_KEY = 'aitoolscenter-consent-v1'
+const CONSENT_DEFAULTS = {
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  analytics_storage: 'denied',
+}
+const CONSENT_ACCEPT_ALL = {
+  ad_storage: 'granted',
+  ad_user_data: 'granted',
+  ad_personalization: 'granted',
+  analytics_storage: 'granted',
+}
+
+const applyConsentUpdate = (consentSettings) => {
+  if (typeof window === 'undefined') return
+
+  const payload = { ...CONSENT_DEFAULTS, ...consentSettings }
+  window.dataLayer = window.dataLayer || []
+
+  if (typeof window.gtag !== 'function') {
+    window.gtag = function gtag() {
+      window.dataLayer.push(arguments)
+    }
+  }
+
+  window.gtag('consent', 'update', payload)
+}
+
+const getStoredConsent = () => {
+  if (typeof window === 'undefined') return null
+
+  try {
+    const raw = localStorage.getItem(CONSENT_STORAGE_KEY)
+    if (!raw) return null
+
+    const parsed = JSON.parse(raw)
+    if (!parsed?.consent || typeof parsed.consent !== 'object') return null
+
+    return { ...CONSENT_DEFAULTS, ...parsed.consent }
+  } catch {
+    return null
+  }
+}
+
+const mapTcfToGoogleConsent = (tcData = {}) => {
+  if (tcData?.gdprApplies === false) {
+    return { ...CONSENT_ACCEPT_ALL }
+  }
+
+  const purposeConsents = tcData?.purpose?.consents || {}
+  const hasStorageConsent = Boolean(purposeConsents[1])
+  const hasPersonalizedAdsConsent = Boolean(purposeConsents[3]) && Boolean(purposeConsents[4])
+  const hasUserDataConsent = Boolean(purposeConsents[7]) || hasPersonalizedAdsConsent
+
+  return {
+    analytics_storage: hasStorageConsent ? 'granted' : 'denied',
+    ad_storage: hasStorageConsent ? 'granted' : 'denied',
+    ad_user_data: hasStorageConsent && hasUserDataConsent ? 'granted' : 'denied',
+    ad_personalization: hasPersonalizedAdsConsent ? 'granted' : 'denied',
+  }
+}
+
+const subscribeToTcfConsent = (onConsent) => {
+  if (typeof window === 'undefined' || typeof window.__tcfapi !== 'function') return null
+
+  let listenerId = null
+  const callback = (tcData, success) => {
+    if (!success || !tcData) return
+
+    listenerId = tcData.listenerId || listenerId
+    onConsent(tcData)
+  }
+
+  window.__tcfapi('addEventListener', 2, callback)
+
+  return () => {
+    if (!listenerId || typeof window.__tcfapi !== 'function') return
+    window.__tcfapi('removeEventListener', 2, () => {}, listenerId)
+  }
+}
+
 // AdsContainer Component for Google AdSense
 function AdsContainer({ type = 'horizontal' }) {
+  const adRef = useRef(null)
+  const [debugStatus, setDebugStatus] = useState('waiting')
+  const hasClientId = ADSENSE_CLIENT_ID.startsWith('ca-pub-')
+
   useEffect(() => {
-    try {
-      if (typeof window !== 'undefined' && window.adsbygoogle) {
-        (window.adsbygoogle = window.adsbygoogle || []).push({})
+    let attempts = 0
+
+    const tryLoadAd = () => {
+      if (!adRef.current || adRef.current.getAttribute('data-ads-loaded') === 'true') {
+        return true
       }
-    } catch (e) {
-      // adsbygoogle not ready yet
+
+      try {
+        if (typeof window !== 'undefined' && window.adsbygoogle) {
+          ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+          adRef.current.setAttribute('data-ads-loaded', 'true')
+          if (IS_DEV) setDebugStatus('pushed')
+          return true
+        }
+      } catch {
+        if (IS_DEV) setDebugStatus('error')
+      }
+
+      return false
     }
+
+    if (tryLoadAd()) {
+      return
+    }
+
+    const interval = setInterval(() => {
+      attempts += 1
+      const loaded = tryLoadAd()
+      if (loaded || attempts >= 12) {
+        clearInterval(interval)
+        if (!loaded && IS_DEV) setDebugStatus('timeout — adsbygoogle script not loaded')
+      }
+    }, 800)
+
+    return () => clearInterval(interval)
   }, [])
 
   const slotMap = {
-    horizontal: '1234567890', // Replace with actual ad slot IDs from AdSense dashboard
-    vertical: '0987654321',
-    square: '1122334455',
+    horizontal: (import.meta.env.VITE_ADSENSE_SLOT_HORIZONTAL || '').trim(),
+    vertical: (import.meta.env.VITE_ADSENSE_SLOT_VERTICAL || '').trim(),
+    square: (import.meta.env.VITE_ADSENSE_SLOT_SQUARE || '').trim(),
+  }
+
+  const activeSlot = slotMap[type] || slotMap.horizontal
+
+  if (!hasClientId) {
+    return IS_DEV ? (
+      <div className={`ads-container ads-${type}`} aria-label="Advertisement" style={{ marginBottom: '1rem' }}>
+        <div style={{ fontSize: '0.72rem', fontFamily: 'monospace', background: '#1a1a2e', color: '#fca5a5', border: '1px dashed #ef4444', borderRadius: '6px', padding: '0.4rem 0.7rem', textAlign: 'left', lineHeight: 1.6 }}>
+          <strong>Ad Debug</strong> [{type}]<br />
+          client configured: ⚠ not set<br />
+          status: skipped
+        </div>
+      </div>
+    ) : null
   }
 
   return (
@@ -347,11 +1051,34 @@ function AdsContainer({ type = 'horizontal' }) {
       }}
       aria-label="Advertisement"
     >
+      <div style={{ fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '0.35rem' }}>
+        Advertisement
+      </div>
+      {IS_DEV && (
+        <div style={{
+          fontSize: '0.72rem',
+          fontFamily: 'monospace',
+          background: '#1a1a2e',
+          color: '#a0d8ef',
+          border: '1px dashed #4f46e5',
+          borderRadius: '6px',
+          padding: '0.4rem 0.7rem',
+          marginBottom: '0.4rem',
+          textAlign: 'left',
+          lineHeight: 1.6,
+        }}>
+          <strong>Ad Debug</strong> [{type}]<br />
+          client configured: {ADSENSE_CLIENT_ID ? 'yes' : '⚠ not set'}<br />
+          slot: {activeSlot || '⚠ not set'}<br />
+          status: {debugStatus}
+        </div>
+      )}
       <ins
+        ref={adRef}
         className="adsbygoogle"
         style={{ display: 'block' }}
-        data-ad-client="ca-pub-2770089511325323"
-        data-ad-slot={slotMap[type] || slotMap.horizontal}
+        data-ad-client={ADSENSE_CLIENT_ID}
+        data-ad-slot={activeSlot}
         data-ad-format="auto"
         data-full-width-responsive="true"
       />
@@ -359,215 +1086,8 @@ function AdsContainer({ type = 'horizontal' }) {
   )
 }
 
-function ComparisonEngine({ tools }) {
-  const toolArray = tools && Array.isArray(tools) && tools.length > 1 ? tools : TOOLS_EXTENDED
-  const [selectedTools, setSelectedTools] = useState([toolArray[0], toolArray[1]])
-  
-  const features = ['Price', 'Ease of Use', 'Features', 'Integrations', 'Speed', 'Support']
-
-  const addTool = (tool) => {
-    if (!selectedTools.find(t => t.id === tool.id)) {
-      setSelectedTools([...selectedTools, tool])
-    }
-  }
-
-  const removeTool = (toolId) => {
-    setSelectedTools(selectedTools.filter(t => t.id !== toolId))
-  }
-
-  return (
-    <section className="section" id="compare" style={{ background: 'var(--surface)' }}>
-      <div className="container">
-        <h2 style={{ marginBottom: '2rem', textAlign: 'center' }}>🔄 Compare AI Tools</h2>
-        
-        <div className="comparison-wrapper">
-          <div className="comparison-header">
-            {selectedTools.map((tool, idx) => (
-              <div key={tool.id} className="comparison-select" style={{ position: 'relative' }}>
-                <select value={tool.id} disabled style={{ opacity: 0.8 }}>
-                  <option>{tool.name}</option>
-                </select>
-                <button 
-                  className="comparison-remove-btn"
-                  onClick={() => removeTool(tool.id)}
-                  style={{ position: 'absolute', right: '0.5rem', top: '50%', transform: 'translateY(-50%)' }}
-                >
-                  ✕
-                </button>
-              </div>
-            ))}
-          </div>
-
-          <div className="comparison-content">
-            <table className="comparison-table">
-              <thead>
-                <tr>
-                  <th>Feature</th>
-                  {selectedTools.map(tool => (
-                    <th key={tool.id}>{tool.name}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Price</td>
-                  {selectedTools.map(tool => (
-                    <td key={tool.id}>{tool.price}</td>
-                  ))}
-                </tr>
-                <tr>
-                  <td>Category</td>
-                  {selectedTools.map(tool => (
-                    <td key={tool.id}>{tool.category}</td>
-                  ))}
-                </tr>
-                <tr>
-                  <td>Rating</td>
-                  {selectedTools.map(tool => (
-                    <td key={tool.id}>{'⭐'.repeat(Math.floor(tool.rating))} ({tool.rating})</td>
-                  ))}
-                </tr>
-                <tr>
-                  <td>Reviews</td>
-                  {selectedTools.map(tool => (
-                    <td key={tool.id}>{tool.reviews ? tool.reviews.toLocaleString() : 'N/A'}</td>
-                  ))}
-                </tr>
-                <tr>
-                  <td>Pricing Tier</td>
-                  {selectedTools.map(tool => (
-                    <td key={tool.id}>{tool.badge}</td>
-                  ))}
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div style={{ marginTop: '2rem' }}>
-          <h3>Add Tools to Compare</h3>
-          <div className="tools-grid" style={{ marginTop: '1rem' }}>
-            {toolArray.filter(t => !selectedTools.find(st => st.id === t.id)).map(tool => (
-              <div 
-                key={tool.id}
-                style={{
-                  background: 'var(--card)',
-                  border: '1px solid var(--border)',
-                  padding: '1rem',
-                  borderRadius: 'var(--radius-md)',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                }}
-                onClick={() => addTool(tool)}
-              >
-                <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{tool.icon}</div>
-                <div style={{ fontWeight: 600 }}>{tool.name}</div>
-                <button className="btn btn-primary btn-sm" style={{ marginTop: '0.5rem', width: '100%' }}>Add</button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function RecommendationWizard({ tools }) {
-  const toolArray = tools && Array.isArray(tools) && tools.length > 0 ? tools : TOOLS_EXTENDED
-  const [step, setStep] = useState(0)
-  const [answers, setAnswers] = useState({})
-  const [recommendations, setRecommendations] = useState(null)
-
-  const handleAnswer = (answer) => {
-    const newAnswers = { ...answers, [step]: answer }
-    setAnswers(newAnswers)
-    
-    if (step < WIZARD_QUESTIONS.length - 1) {
-      setStep(step + 1)
-    } else {
-      // Generate recommendations
-      setRecommendations(tools.slice(0, 3))
-    }
-  }
-
-  const restart = () => {
-    setStep(0)
-    setAnswers({})
-    setRecommendations(null)
-  }
-
-  const progress = ((step + 1) / WIZARD_QUESTIONS.length) * 100
-
-  return (
-    <section className="section" id="wizard" style={{ background: 'var(--surface)' }}>
-      <div className="container">
-        <h2 style={{ marginBottom: '2rem', textAlign: 'center' }}>🎯 Find Your Perfect AI Tool</h2>
-        
-        <div className="wizard-container">
-          {!recommendations ? (
-            <>
-              <div className="wizard-progress">
-                {WIZARD_QUESTIONS.map((q, idx) => (
-                  <div key={idx} className={`wizard-progress-item ${idx <= step ? 'active' : ''} ${idx < step ? 'completed' : ''}`} />
-                ))}
-              </div>
-
-              <div className="wizard-step active">
-                <h3 className="wizard-question">{WIZARD_QUESTIONS[step].question}</h3>
-                <div className="wizard-options">
-                  {WIZARD_QUESTIONS[step].options.map((option, idx) => (
-                    <div
-                      key={idx}
-                      className={`wizard-option ${answers[step] === option ? 'selected' : ''}`}
-                      onClick={() => handleAnswer(option)}
-                    >
-                      {option}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="wizard-buttons">
-                <button 
-                  className="btn btn-secondary"
-                  onClick={() => step > 0 && setStep(step - 1)}
-                  disabled={step === 0}
-                >
-                  ← Back
-                </button>
-                <span style={{ color: 'var(--muted)', fontSize: '0.875rem' }}>
-                  Step {step + 1} of {WIZARD_QUESTIONS.length}
-                </span>
-              </div>
-            </>
-          ) : (
-            <>
-              <h3 className="wizard-result-title">✨ Recommended Tools For You</h3>
-              <div className="wizard-results">
-                {recommendations.map((tool, idx) => (
-                  <div key={tool.id} className="wizard-result-item">
-                    <div>
-                      <div style={{ fontWeight: 600 }}>{tool.name}</div>
-                      <div style={{ fontSize: '0.875rem', color: 'var(--muted)' }}>{tool.tagline}</div>
-                    </div>
-                    <div className="wizard-result-match">{100 - idx * 15}% Match</div>
-                  </div>
-                ))}
-              </div>
-              <button className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }} onClick={restart}>
-                Try Again
-              </button>
-            </>
-          )}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 // User Reviews Component
-function UserReviewsSection({ tools }) {
-  const toolArray = tools && Array.isArray(tools) && tools.length > 0 ? tools : TOOLS_EXTENDED
+function UserReviewsSection() {
   const sampleReviews = [
     { tool: 'ChatGPT', author: 'Sarah M.', rating: 5, text: 'ChatGPT has completely changed how I work. Incredibly versatile and reliable. Best AI investment ever!' },
     { tool: 'Claude', author: 'James K.', rating: 5, text: 'The context window is insane. Perfect for analyzing large documents. Better tone than competitors.' },
@@ -595,7 +1115,7 @@ function UserReviewsSection({ tools }) {
               <div style={{ marginBottom: '0.75rem' }}>
                 {[...Array(review.rating)].map((_, i) => <span key={i} style={{ color: '#fbbf24' }}>⭐</span>)}
               </div>
-              <p style={{ color: 'var(--foreground)', marginBottom: '1rem', fontStyle: 'italic' }}>"{review.text}"</p>
+              <p style={{ color: 'var(--foreground)', marginBottom: '1rem', fontStyle: 'italic' }}>&quot;{review.text}&quot;</p>
               <div style={{ color: 'var(--muted)', fontSize: '0.875rem' }}>— {review.author}</div>
             </div>
           ))}
@@ -605,86 +1125,154 @@ function UserReviewsSection({ tools }) {
   )
 }
 
-function UserDashboard({ tools }) {
-  const toolArray = tools && Array.isArray(tools) && tools.length > 2 ? tools : TOOLS_EXTENDED
-  const [activeTab, setActiveTab] = useState('saved')
-  const [savedTools, setSavedTools] = useState([toolArray[0], toolArray[2]])
-  const [comparisonHistory, setComparisonHistory] = useState([])
+function ConsentBanner({ onPrivacyClick, cmpManaged }) {
+  const [visible, setVisible] = useState(false)
+  const [showCustomize, setShowCustomize] = useState(false)
+  const [choices, setChoices] = useState({ analytics: false, advertising: false })
+
+  useEffect(() => {
+    if (cmpManaged) {
+      setVisible(false)
+      return
+    }
+
+    const stored = getStoredConsent()
+
+    if (stored) {
+      applyConsentUpdate(stored)
+      setChoices({
+        analytics: stored.analytics_storage === 'granted',
+        advertising: stored.ad_storage === 'granted' && stored.ad_user_data === 'granted' && stored.ad_personalization === 'granted',
+      })
+      setVisible(false)
+      return
+    }
+
+    applyConsentUpdate(CONSENT_DEFAULTS)
+    setVisible(true)
+  }, [cmpManaged])
+
+  if (cmpManaged) {
+    return null
+  }
+
+  const persistConsent = (consent, source) => {
+    const payload = { ...CONSENT_DEFAULTS, ...consent }
+
+    try {
+      localStorage.setItem(
+        CONSENT_STORAGE_KEY,
+        JSON.stringify({ consent: payload, source, updatedAt: new Date().toISOString() })
+      )
+    } catch {
+      // Ignore localStorage errors and still apply consent in-session.
+    }
+
+    applyConsentUpdate(payload)
+    setVisible(false)
+    setShowCustomize(false)
+    setChoices({
+      analytics: payload.analytics_storage === 'granted',
+      advertising: payload.ad_storage === 'granted' && payload.ad_user_data === 'granted' && payload.ad_personalization === 'granted',
+    })
+  }
+
+  const saveCustomConsent = () => {
+    persistConsent({
+      analytics_storage: choices.analytics ? 'granted' : 'denied',
+      ad_storage: choices.advertising ? 'granted' : 'denied',
+      ad_user_data: choices.advertising ? 'granted' : 'denied',
+      ad_personalization: choices.advertising ? 'granted' : 'denied',
+    }, 'custom')
+  }
+
+  if (!visible) {
+    return (
+      <button
+        type="button"
+        onClick={() => setVisible(true)}
+        style={{
+          position: 'fixed',
+          left: '1rem',
+          bottom: '1rem',
+          zIndex: 9998,
+          border: '1px solid var(--border)',
+          borderRadius: '999px',
+          background: 'var(--surface)',
+          color: 'var(--foreground)',
+          padding: '0.5rem 0.9rem',
+          fontSize: '0.8rem',
+          cursor: 'pointer',
+        }}
+      >
+        Cookie Preferences
+      </button>
+    )
+  }
 
   return (
-    <section className="section" id="dashboard" style={{ marginTop: '2rem' }}>
-      <div className="dashboard-container">
-        <div className="dashboard-sidebar">
-          <div className="dashboard-menu">
-            <div 
-              className={`dashboard-menu-item ${activeTab === 'saved' ? 'active' : ''}`}
-              onClick={() => setActiveTab('saved')}
-            >
-              💾 Saved Tools
-            </div>
-            <div 
-              className={`dashboard-menu-item ${activeTab === 'comparisons' ? 'active' : ''}`}
-              onClick={() => setActiveTab('comparisons')}
-            >
-              🔄 Comparisons
-            </div>
-            <div 
-              className={`dashboard-menu-item ${activeTab === 'profile' ? 'active' : ''}`}
-              onClick={() => setActiveTab('profile')}
-            >
-              👤 Profile
-            </div>
+    <section
+      role="dialog"
+      aria-live="polite"
+      aria-label="Cookie consent"
+      style={{
+        position: 'fixed',
+        left: '1rem',
+        right: '1rem',
+        bottom: '1rem',
+        zIndex: 9999,
+        maxWidth: '860px',
+        margin: '0 auto',
+        border: '1px solid var(--border)',
+        borderRadius: '14px',
+        background: 'var(--surface)',
+        boxShadow: '0 20px 50px rgba(0,0,0,0.25)',
+        padding: '1rem',
+      }}
+    >
+      <p style={{ margin: 0, color: 'var(--foreground)', lineHeight: 1.5, fontSize: '0.9rem' }}>
+        We use cookies for analytics and advertising. You can accept all, reject non-essential cookies, or customize settings.
+        {' '}
+        <button type="button" onClick={onPrivacyClick} style={{ background: 'none', border: 'none', color: 'var(--primary)', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}>
+          Privacy Policy
+        </button>
+      </p>
+
+      <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', marginTop: '0.8rem' }}>
+        <button type="button" className="btn btn-primary" onClick={() => persistConsent(CONSENT_ACCEPT_ALL, 'accept-all')}>Accept All</button>
+        <button type="button" className="btn btn-secondary" onClick={() => persistConsent(CONSENT_DEFAULTS, 'reject')}>Reject Non-Essential</button>
+        <button
+          type="button"
+          onClick={() => setShowCustomize((v) => !v)}
+          style={{ border: '1px solid var(--border)', borderRadius: '10px', background: 'transparent', color: 'var(--foreground)', padding: '0.55rem 0.9rem', cursor: 'pointer' }}
+        >
+          {showCustomize ? 'Hide Choices' : 'Customize'}
+        </button>
+      </div>
+
+      {showCustomize && (
+        <div style={{ marginTop: '0.8rem', borderTop: '1px solid var(--border)', paddingTop: '0.8rem', display: 'grid', gap: '0.65rem' }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--foreground)', fontSize: '0.9rem' }}>
+            <input
+              type="checkbox"
+              checked={choices.analytics}
+              onChange={(e) => setChoices((v) => ({ ...v, analytics: e.target.checked }))}
+            />
+            Allow analytics cookies
+          </label>
+          <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--foreground)', fontSize: '0.9rem' }}>
+            <input
+              type="checkbox"
+              checked={choices.advertising}
+              onChange={(e) => setChoices((v) => ({ ...v, advertising: e.target.checked }))}
+            />
+            Allow advertising and personalization cookies
+          </label>
+          <div>
+            <button type="button" className="btn btn-primary" onClick={saveCustomConsent}>Save Choices</button>
           </div>
         </div>
-
-        <div className="dashboard-content">
-          {activeTab === 'saved' && (
-            <>
-              <h2 style={{ marginBottom: '1.5rem' }}>Saved Tools ({savedTools.length})</h2>
-              <div className="tools-grid">
-                {savedTools.map(tool => (
-                  <div key={tool.id} style={{ background: 'var(--surface)', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
-                    <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{tool.icon}</div>
-                    <div style={{ fontWeight: 600 }}>{tool.name}</div>
-                    <div style={{ fontSize: '0.875rem', color: 'var(--muted)' }}>{tool.tagline}</div>
-                    <button className="btn btn-secondary" style={{ marginTop: '0.5rem', width: '100%' }}>View</button>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
-
-          {activeTab === 'comparisons' && (
-            <>
-              <h2 style={{ marginBottom: '1.5rem' }}>Comparison History</h2>
-              <div style={{ textAlign: 'center', color: 'var(--muted)', padding: '2rem' }}>
-                No comparisons yet. <a href="#compare" style={{ color: 'var(--primary)' }}>Start comparing tools</a>
-              </div>
-            </>
-          )}
-
-          {activeTab === 'profile' && (
-            <>
-              <h2 style={{ marginBottom: '1.5rem' }}>Profile Settings</h2>
-              <div style={{ maxWidth: '500px' }}>
-                <div className="form-group">
-                  <label className="form-label">Email</label>
-                  <input type="email" className="form-input" placeholder="your@email.com" />
-                </div>
-                <div className="form-group">
-                  <label className="form-label">Theme Preference</label>
-                  <select className="form-select">
-                    <option>Dark</option>
-                    <option>Light</option>
-                    <option>Auto</option>
-                  </select>
-                </div>
-                <button className="btn btn-primary">Save Changes</button>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
+      )}
     </section>
   )
 }
@@ -696,6 +1284,7 @@ function UserDashboard({ tools }) {
 export default function App() {
   const [theme, setTheme] = useState('dark')
   const [currentPage, setCurrentPage] = useState('home')
+  const [routePath, setRoutePath] = useState(() => window.location.pathname || '/')
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [showSuggestions, setShowSuggestions] = useState(false)
@@ -703,14 +1292,27 @@ export default function App() {
   const [newsletterStatus, setNewsletterStatus] = useState({ type: '', message: '' })
   const [activeCollectionIndex, setActiveCollectionIndex] = useState(0)
   const [visitorCount, setVisitorCount] = useState(0)
+  const [visitorCountError, setVisitorCountError] = useState(false)
+  const [shareStatus, setShareStatus] = useState('')
   const [showUnsubscribeModal, setShowUnsubscribeModal] = useState(false)
   const [unsubscribeEmail, setUnsubscribeEmail] = useState('')
   const [showFeedbackModal, setShowFeedbackModal] = useState(false)
+  const [cmpManagedConsent, setCmpManagedConsent] = useState(false)
   const [feedbackData, setFeedbackData] = useState({ name: '', email: '', subject: '', message: '' })
   const [feedbackStatus, setFeedbackStatus] = useState({ type: '', message: '' })
+  const [toolClicks, setToolClicks] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('aitoolscenter-tool-clicks') || '{}')
+    } catch {
+      return {}
+    }
+  })
   const toolsSectionRef = useRef(null)
   const collectionsSectionRef = useRef(null)
+  const seoHubSectionRef = useRef(null)
   const updatesSectionRef = useRef(null)
+
+  const resolvedPage = resolvePathPage(routePath)
 
   useEffect(() => {
     const stored = localStorage.getItem('aitoolscenter-theme') || 'dark'
@@ -718,10 +1320,274 @@ export default function App() {
     document.documentElement.setAttribute('data-theme', stored)
   }, [])
 
+  useEffect(() => {
+    // The stylesheet keeps ad units hidden unless this flag is present.
+    document.documentElement.setAttribute('data-ads-ready', 'true')
+  }, [])
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !CMP_SCRIPT_URL || typeof window.__tcfapi === 'function') {
+      return
+    }
+
+    if (document.querySelector('script[data-cmp-loader="external"]')) {
+      return
+    }
+
+    const script = document.createElement('script')
+    script.async = true
+    script.src = CMP_SCRIPT_URL
+    script.setAttribute('data-cmp-loader', 'external')
+    document.head.appendChild(script)
+  }, [])
+
+  useEffect(() => {
+    let cleanupTcfListener = null
+    let pollerId = null
+
+    const bindTcfListener = () => {
+      if (typeof window === 'undefined' || typeof window.__tcfapi !== 'function') {
+        return false
+      }
+
+      setCmpManagedConsent(true)
+      cleanupTcfListener = subscribeToTcfConsent((tcData) => {
+        const mapped = mapTcfToGoogleConsent(tcData)
+        applyConsentUpdate(mapped)
+      })
+
+      return true
+    }
+
+    if (!bindTcfListener()) {
+      let attempts = 0
+      pollerId = window.setInterval(() => {
+        attempts += 1
+        if (bindTcfListener() || attempts >= 25) {
+          window.clearInterval(pollerId)
+        }
+      }, 400)
+    }
+
+    return () => {
+      if (pollerId) {
+        window.clearInterval(pollerId)
+      }
+      if (cleanupTcfListener) {
+        cleanupTcfListener()
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    const onPopState = () => {
+      setRoutePath(window.location.pathname || '/')
+    }
+
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('aitoolscenter-tool-clicks', JSON.stringify(toolClicks))
+    } catch {
+      // Ignore storage errors (private mode / quotas).
+    }
+  }, [toolClicks])
+
+  useEffect(() => {
+    const setMetaTag = (selector, attribute, key, value) => {
+      let tag = document.head.querySelector(selector)
+      if (!tag) {
+        tag = document.createElement('meta')
+        tag.setAttribute(attribute, key)
+        document.head.appendChild(tag)
+      }
+      tag.setAttribute('content', value)
+    }
+
+    const setCanonical = (href) => {
+      let tag = document.head.querySelector('link[rel="canonical"]')
+      if (!tag) {
+        tag = document.createElement('link')
+        tag.setAttribute('rel', 'canonical')
+        document.head.appendChild(tag)
+      }
+      tag.setAttribute('href', href)
+    }
+
+    const setJsonLd = (id, payload) => {
+      let scriptTag = document.head.querySelector(`script[data-jsonld-id="${id}"]`)
+      if (!scriptTag) {
+        scriptTag = document.createElement('script')
+        scriptTag.type = 'application/ld+json'
+        scriptTag.setAttribute('data-jsonld-id', id)
+        document.head.appendChild(scriptTag)
+      }
+      scriptTag.textContent = JSON.stringify(payload)
+    }
+
+    let title = 'AIToolsCenter.in - Best AI Tools Directory for 2026'
+    let description = 'Discover and compare top AI tools for writing, coding, images, video, automation, and productivity.'
+
+    if (resolvedPage.type === 'tool') {
+      title = `${resolvedPage.tool.name} Review, Pricing & Alternatives | AIToolsCenter`
+      description = `${resolvedPage.tool.name}: ${resolvedPage.tool.tagline}. Compare pricing, reviews, and similar tools.`
+    } else if (resolvedPage.type === 'category') {
+      title = `${resolvedPage.category} AI Tools Directory | AIToolsCenter`
+      description = `Explore curated ${resolvedPage.category} AI tools with trusted recommendations, pricing, and quick comparisons.`
+    } else if (resolvedPage.type === 'useCase') {
+      title = `${resolvedPage.useCase.title} | AIToolsCenter`
+      description = resolvedPage.useCase.description
+    } else if (resolvedPage.type === 'comparison') {
+      title = `${resolvedPage.comparison.toolA} vs ${resolvedPage.comparison.toolB} | AIToolsCenter`
+      description = `Compare ${resolvedPage.comparison.toolA} and ${resolvedPage.comparison.toolB} for ${resolvedPage.comparison.intent}.`
+    }
+
+    const canonicalUrl = `${SITE_ORIGIN}${routePath === '/' ? '/' : routePath.replace(/\/$/, '')}`
+    const socialImageUrl = `${SITE_ORIGIN}${getRouteSocialImagePath(resolvedPage)}`
+
+    document.title = title
+    setCanonical(canonicalUrl)
+    setMetaTag('meta[name="description"]', 'name', 'description', description)
+    setMetaTag('meta[property="og:title"]', 'property', 'og:title', title)
+    setMetaTag('meta[property="og:description"]', 'property', 'og:description', description)
+    setMetaTag('meta[property="og:url"]', 'property', 'og:url', canonicalUrl)
+    setMetaTag('meta[property="og:image"]', 'property', 'og:image', socialImageUrl)
+    setMetaTag('meta[property="og:image:alt"]', 'property', 'og:image:alt', title)
+    setMetaTag('meta[name="twitter:title"]', 'name', 'twitter:title', title)
+    setMetaTag('meta[name="twitter:description"]', 'name', 'twitter:description', description)
+    setMetaTag('meta[name="twitter:image"]', 'name', 'twitter:image', socialImageUrl)
+
+    const topTools = TOOLS_EXTENDED.slice(0, 12)
+    let jsonLdPayload = {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: title,
+      description,
+      url: canonicalUrl,
+    }
+
+    if (resolvedPage.type === 'home') {
+      jsonLdPayload = {
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'WebSite',
+            name: 'AIToolsCenter.in',
+            url: SITE_ORIGIN,
+            description,
+          },
+          {
+            '@type': 'CollectionPage',
+            name: title,
+            description,
+            url: canonicalUrl,
+            mainEntity: {
+              '@type': 'ItemList',
+              itemListElement: topTools.map((tool, index) => ({
+                '@type': 'ListItem',
+                position: index + 1,
+                url: `${SITE_ORIGIN}/ai-tools/${slugify(tool.name)}`,
+                name: tool.name,
+              })),
+            },
+          },
+        ],
+      }
+    } else if (resolvedPage.type === 'tool') {
+      const tool = resolvedPage.tool
+      jsonLdPayload = {
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        name: tool.name,
+        applicationCategory: `${tool.category} AI Tool`,
+        operatingSystem: 'Web',
+        description: tool.description,
+        url: canonicalUrl,
+        offers: {
+          '@type': 'Offer',
+          priceCurrency: 'USD',
+          category: tool.badge,
+          url: getToolOutboundUrl(tool),
+        },
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: String(tool.rating),
+          reviewCount: String(tool.reviews || 1),
+          bestRating: '5',
+          worstRating: '1',
+        },
+      }
+    } else if (resolvedPage.type === 'category') {
+      const categoryTools = TOOLS_EXTENDED.filter((tool) => tool.category === resolvedPage.category).slice(0, 15)
+      jsonLdPayload = {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: title,
+        description,
+        url: canonicalUrl,
+        mainEntity: {
+          '@type': 'ItemList',
+          itemListElement: categoryTools.map((tool, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            url: `${SITE_ORIGIN}/ai-tools/${slugify(tool.name)}`,
+            name: tool.name,
+          })),
+        },
+      }
+    } else if (resolvedPage.type === 'useCase') {
+      const useCaseTools = TOOLS_EXTENDED.filter((tool) => resolvedPage.useCase.categories.includes(tool.category)).slice(0, 15)
+      jsonLdPayload = {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: title,
+        description,
+        url: canonicalUrl,
+        about: resolvedPage.useCase.categories.join(', '),
+        mainEntity: {
+          '@type': 'ItemList',
+          itemListElement: useCaseTools.map((tool, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            url: `${SITE_ORIGIN}/ai-tools/${slugify(tool.name)}`,
+            name: tool.name,
+          })),
+        },
+      }
+    } else if (resolvedPage.type === 'comparison') {
+      const comparisonTools = [
+        TOOLS_EXTENDED.find((tool) => tool.name === resolvedPage.comparison.toolA),
+        TOOLS_EXTENDED.find((tool) => tool.name === resolvedPage.comparison.toolB),
+      ].filter(Boolean)
+
+      jsonLdPayload = {
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: title,
+        description,
+        url: canonicalUrl,
+        mainEntity: {
+          '@type': 'ItemList',
+          itemListElement: comparisonTools.map((tool, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            url: `${SITE_ORIGIN}/ai-tools/${slugify(tool.name)}`,
+            name: tool.name,
+          })),
+        },
+      }
+    }
+
+    setJsonLd('route-schema', jsonLdPayload)
+  }, [resolvedPage, routePath])
+
   // Scroll to top on page load and when page changes
   useEffect(() => {
     window.scrollTo(0, 0)
-  }, [currentPage])
+  }, [currentPage, routePath])
 
   // Also scroll to top on initial load
   useEffect(() => {
@@ -729,26 +1595,76 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    // Track visitor count
-    const trackVisitor = async () => {
+    let cancelled = false
+
+    const loadVisitorCount = async () => {
+      const today = new Date().toISOString().slice(0, 10)
+      const lastCountedDate = localStorage.getItem(LOCAL_GLOBAL_VISIT_DATE_KEY)
+      const method = lastCountedDate === today ? 'GET' : 'POST'
+
       try {
-        const currentCount = parseInt(localStorage.getItem('aitoolscenter-visitor-count') || '0') + 1
-        localStorage.setItem('aitoolscenter-visitor-count', currentCount.toString())
-        setVisitorCount(currentCount)
-        
-        // Optional: Send to API for persistent tracking
-        await fetch('/api/track-visitor', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ timestamp: new Date().toISOString() }),
-        }).catch(() => {})
+        const response = await fetch(PAGE_VIEWS_API, { method })
+        if (!response.ok) throw new Error('Visitor count request failed')
+
+        const result = await response.json()
+        const count = Number(result.count)
+
+        if (!cancelled && Number.isFinite(count)) {
+          setVisitorCount(count)
+          setVisitorCountError(false)
+
+          if (method === 'POST') {
+            localStorage.setItem(LOCAL_GLOBAL_VISIT_DATE_KEY, today)
+          }
+        }
       } catch (error) {
-        console.error('Error tracking visitor:', error)
+        console.error('Error loading visitor count:', error)
+
+        try {
+          const fallbackResponse = await fetch(PAGE_VIEWS_API, { method: 'GET' })
+          if (!fallbackResponse.ok) throw new Error('Fallback visitor count request failed')
+
+          const fallbackResult = await fallbackResponse.json()
+          const fallbackCount = Number(fallbackResult.count)
+
+          if (!cancelled && Number.isFinite(fallbackCount)) {
+            setVisitorCount(fallbackCount)
+            setVisitorCountError(false)
+          }
+        } catch (fallbackError) {
+          console.error('Visitor count fallback failed:', fallbackError)
+
+          if (!cancelled) {
+            const cached = Number(localStorage.getItem('aitoolscenter-last-known-visitors') || '0')
+            setVisitorCount(Number.isFinite(cached) ? cached : 0)
+            setVisitorCountError(true)
+          }
+        }
       }
     }
-    
-    trackVisitor()
+
+    loadVisitorCount()
+
+    return () => {
+      cancelled = true
+    }
   }, [])
+
+  useEffect(() => {
+    if (Number.isFinite(visitorCount) && visitorCount > 0) {
+      localStorage.setItem('aitoolscenter-last-known-visitors', String(visitorCount))
+    }
+  }, [visitorCount])
+
+  useEffect(() => {
+    if (!shareStatus) return undefined
+
+    const timer = setTimeout(() => {
+      setShareStatus('')
+    }, 2800)
+
+    return () => clearTimeout(timer)
+  }, [shareStatus])
 
   useEffect(() => {
     // Close suggestions when clicking outside search box
@@ -769,17 +1685,30 @@ export default function App() {
     sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
-  const handleDiscoverClick = (event) => {
-    event.preventDefault()
-    setCurrentPage('home')
-    setSelectedCategory('All')
-    setSearchQuery('')
-    setShowSuggestions(false)
-    scrollToSection(toolsSectionRef)
+  const navigateTo = (pathname) => {
+    const targetPath = pathname.startsWith('/') ? pathname : `/${pathname}`
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({}, '', targetPath)
+      setRoutePath(targetPath)
+    }
   }
 
-  const handleBrowseClick = (event) => {
+  const trackToolClick = (tool, source = 'directory') => {
+    if (!tool?.name) return
+    setToolClicks((current) => ({
+      ...current,
+      [tool.name]: {
+        count: (current[tool.name]?.count || 0) + 1,
+        category: tool.category,
+        source,
+        lastClickedAt: new Date().toISOString(),
+      },
+    }))
+  }
+
+  const handleDiscoverClick = (event) => {
     event.preventDefault()
+    navigateTo('/')
     setCurrentPage('home')
     setSelectedCategory('All')
     setSearchQuery('')
@@ -788,6 +1717,7 @@ export default function App() {
   }
 
   const goHome = () => {
+    navigateTo('/')
     setCurrentPage('home')
     setSelectedCategory('All')
     setSearchQuery('')
@@ -795,6 +1725,16 @@ export default function App() {
   }
 
   const openPage = (page) => {
+    const legalPaths = {
+      privacy: '/privacy',
+      terms: '/terms',
+      affiliateDisclosure: '/affiliate-disclosure',
+      contact: '/contact',
+      home: '/',
+    }
+    if (legalPaths[page]) {
+      navigateTo(legalPaths[page])
+    }
     setCurrentPage(page)
     setShowSuggestions(false)
     window.scrollTo({ top: 0, behavior: 'auto' })
@@ -805,9 +1745,44 @@ export default function App() {
     scrollToSection(collectionsSectionRef)
   }
 
+  const handleCategoriesClick = (event) => {
+    event.preventDefault()
+    navigateTo('/')
+    setCurrentPage('home')
+    setSelectedCategory('All')
+    setSearchQuery('')
+    setShowSuggestions(false)
+    window.setTimeout(() => {
+      scrollToSection(seoHubSectionRef)
+    }, 0)
+  }
+
   const handleUpdatesClick = (event) => {
     event.preventDefault()
     scrollToSection(updatesSectionRef)
+  }
+
+  const handleShareWebsite = async () => {
+    const shareUrl = SITE_ORIGIN
+    const shareTitle = 'AIToolsCenter - Discover The Best AI Tools'
+    const shareText = 'Found a curated AI tools directory with 100+ tools, comparisons, and weekly updates.'
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: shareTitle, text: shareText, url: shareUrl })
+        setShareStatus('Thanks for sharing!')
+        return
+      } catch {
+        // Ignore user-cancelled share sheet and continue to clipboard fallback.
+      }
+    }
+
+    try {
+      await navigator.clipboard.writeText(shareUrl)
+      setShareStatus('Link copied. Share it with your network!')
+    } catch {
+      setShareStatus('Share this link: ' + shareUrl)
+    }
   }
 
   const toggleTheme = () => {
@@ -982,37 +1957,57 @@ export default function App() {
     .map((toolName) => TOOLS_EXTENDED.find((tool) => tool.name === toolName))
     .filter(Boolean)
   const weeklyHighlights = aiNews.slice(0, 3)
+  const topClickedTools = Object.entries(toolClicks)
+    .map(([toolName, data]) => ({
+      tool: TOOLS_EXTENDED.find((candidate) => candidate.name === toolName),
+      count: data?.count || 0,
+    }))
+    .filter((entry) => entry.tool && entry.count > 0)
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 8)
 
-  if (currentPage === 'privacy') {
+  const categories = CATEGORIES
+    .filter((category) => category !== 'All')
+    .map((category) => ({
+      name: category,
+      icon: CATEGORY_UI_META[category]?.icon || '•',
+      label: CATEGORY_UI_META[category]?.label || category,
+      count: TOOLS_EXTENDED.filter((tool) => tool.category === category).length,
+    }))
+
+  if (resolvedPage.type === 'legal') {
+    const legalKey = resolvedPage.key
+    const legalPage = LEGAL_PAGES[legalKey]
+
+    if (!legalPage) {
+      return null
+    }
+
     return (
-      <StaticPage
-        title={LEGAL_PAGES.privacy.title}
-        intro={LEGAL_PAGES.privacy.intro}
-        sections={LEGAL_PAGES.privacy.sections}
-        onHomeClick={goHome}
-      />
+      <>
+        <StaticPage
+          title={legalPage.title}
+          intro={legalPage.intro}
+          sections={legalPage.sections}
+          onHomeClick={goHome}
+        />
+        <ConsentBanner onPrivacyClick={() => openPage('privacy')} cmpManaged={cmpManagedConsent} />
+      </>
     )
   }
 
-  if (currentPage === 'terms') {
+  if (resolvedPage.type !== 'home') {
     return (
-      <StaticPage
-        title={LEGAL_PAGES.terms.title}
-        intro={LEGAL_PAGES.terms.intro}
-        sections={LEGAL_PAGES.terms.sections}
-        onHomeClick={goHome}
-      />
-    )
-  }
-
-  if (currentPage === 'contact') {
-    return (
-      <StaticPage
-        title={LEGAL_PAGES.contact.title}
-        intro={LEGAL_PAGES.contact.intro}
-        sections={LEGAL_PAGES.contact.sections}
-        onHomeClick={goHome}
-      />
+      <>
+        <SeoLandingPage
+          page={resolvedPage}
+          onNavigate={navigateTo}
+          onHomeClick={goHome}
+          onToolClick={trackToolClick}
+          visitorCount={visitorCount}
+        />
+        <ConsentBanner onPrivacyClick={() => openPage('privacy')} cmpManaged={cmpManagedConsent} />
+      </>
     )
   }
 
@@ -1021,20 +2016,6 @@ export default function App() {
     { value: '100+', label: 'Genuine AI Tools' },
     { value: '10+', label: 'Categories' },
     { value: '50K+', label: 'User Reviews' },
-  ]
-
-  // CATEGORIES DATA
-  const categories = [
-    { name: 'Writing AI', icon: '✍️', count: 25 },
-    { name: 'Image AI', icon: '🖼️', count: 25 },
-    { name: 'Video AI', icon: '🎥', count: 15 },
-    { name: 'Coding AI', icon: '⚙️', count: 20 },
-    { name: 'Research', icon: '🔬', count: 15 },
-    { name: 'Audio & Music', icon: '🎵', count: 10 },
-    { name: 'Design Tools', icon: '🎨', count: 10 },
-    { name: 'Business AI', icon: '📊', count: 15 },
-    { name: 'Productivity', icon: '⚡', count: 15 },
-    { name: 'APIs', icon: '🔌', count: 7 },
   ]
 
   return (
@@ -1048,6 +2029,7 @@ export default function App() {
         <div className="navbar-links">
           <a href="#tools" className="navbar-link navbar-link-button" onClick={handleDiscoverClick}>Discover</a>
           <a href="#collections" className="navbar-link navbar-link-button" onClick={handleCollectionsClick}>Collections</a>
+          <a href="#seo-hub" className="navbar-link navbar-link-button" onClick={handleCategoriesClick}>Categories</a>
           <a href="#updates" className="navbar-link navbar-link-button" onClick={handleUpdatesClick}>Weekly Updates</a>
           <a href="#news" className="navbar-link navbar-link-button">News</a>
           <a href="#faq" className="navbar-link navbar-link-button">FAQ</a>
@@ -1111,6 +2093,24 @@ export default function App() {
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
             <a href="#tools" className="btn btn-primary btn-lg" style={{ textDecoration: 'none', display: 'inline-block' }} onClick={handleDiscoverClick}>Explore Tools</a>
             <a href="#updates" className="btn btn-secondary btn-lg" style={{ textDecoration: 'none', display: 'inline-block' }} onClick={handleUpdatesClick}>Subscribe for Updates</a>
+            <button className="btn btn-secondary btn-lg hero-share-btn" type="button" onClick={handleShareWebsite}>Share Directory</button>
+          </div>
+
+          {shareStatus && <p className="hero-share-feedback">{shareStatus}</p>}
+
+          <div className="growth-strip" aria-label="Live community growth data">
+            <div className="growth-pill">
+              <span className="growth-pill-label">Live Visitors</span>
+              <strong>{visitorCount.toLocaleString()}</strong>
+            </div>
+            <div className="growth-pill">
+              <span className="growth-pill-label">Weekly Newsletter</span>
+              <strong>Fresh Every Friday</strong>
+            </div>
+            <div className="growth-pill">
+              <span className="growth-pill-label">SEO-Ready Picks</span>
+              <strong>100+ Curated Tools</strong>
+            </div>
           </div>
         </div>
       </section>
@@ -1122,6 +2122,10 @@ export default function App() {
           <p style={{ color: 'var(--muted)', textAlign: 'center', marginBottom: '1.5rem' }}>
             {searchQuery ? `Search results for "${searchQuery}"` : selectedCategory === 'All' ? 'Explore our complete directory of 100+ genuine AI tools' : `Tools in ${selectedCategory}`}
           </p>
+          <div className="affiliate-disclosure-banner">
+            <span>Disclosure: some tool links may be affiliate links, which may earn us a commission at no extra cost to you.</span>
+            <button className="affiliate-disclosure-link" onClick={() => openPage('affiliateDisclosure')} type="button">Read disclosure</button>
+          </div>
           
           {/* CATEGORY FILTER BAR */}
           <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem', alignItems: 'center' }}>
@@ -1132,17 +2136,15 @@ export default function App() {
               All Tools ({TOOLS_EXTENDED.length})
             </button>
             {categories.map((cat) => {
-              const catName = cat.name.replace(' AI', '').replace('Audio & Music', 'Audio').replace(' Tools', '');
-              const actualCategory = TOOLS_EXTENDED.filter(t => t.category === catName).length;
               return (
                 <button
-                  key={catName}
-                  onClick={() => { setSelectedCategory(catName); setSearchQuery('') }}
-                  style={selectedCategory === catName ? { background: 'var(--primary)', color: 'white', padding: '0.5rem 0.75rem', borderRadius: '2rem', border: 'none', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.9rem' } : { background: 'var(--muted-foreground)', color: 'var(--foreground)', padding: '0.5rem 0.75rem', borderRadius: '2rem', border: 'none', cursor: 'pointer', fontSize: '0.9rem' }}
+                  key={cat.name}
+                  onClick={() => { setSelectedCategory(cat.name); setSearchQuery('') }}
+                  style={selectedCategory === cat.name ? { background: 'var(--primary)', color: 'white', padding: '0.5rem 0.75rem', borderRadius: '2rem', border: 'none', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.9rem' } : { background: 'var(--muted-foreground)', color: 'var(--foreground)', padding: '0.5rem 0.75rem', borderRadius: '2rem', border: 'none', cursor: 'pointer', fontSize: '0.9rem' }}
                 >
-                  {cat.icon} {catName} ({actualCategory})
+                  {cat.icon} {cat.name} ({cat.count})
                 </button>
-              );
+              )
             })}
           </div>
           
@@ -1152,7 +2154,7 @@ export default function App() {
           <div className="tools-grid">
             {filteredTools.length > 0 ? (
               filteredTools.map(tool => (
-                <a key={tool.id} href={resolveToolLink(tool)} target="_blank" rel="noopener noreferrer" className="tool-card" title={`Visit ${tool.name}`}>
+                <a key={tool.id} href={getToolOutboundUrl(tool)} target="_blank" rel={getToolAnchorRel(tool)} className="tool-card" title={`Visit ${tool.name}`} onClick={() => trackToolClick(tool, 'directory')}>
                   <div className="tool-header">
                     <div className="tool-logo">{tool.icon}</div>
                     <div className="tool-meta">
@@ -1160,11 +2162,14 @@ export default function App() {
                       <div className="tool-tagline">{tool.tagline}</div>
                     </div>
                   </div>
+                  <div className="tool-card-top">
+                    <span className="tool-badge">{tool.badge}</span>
+                    {isAffiliateTool(tool) && <span className="tool-affiliate-pill">Affiliate</span>}
+                  </div>
                   <div className="tool-description" style={{ fontSize: '0.875rem', color: 'var(--muted)', marginTop: '0.5rem' }}>
                     {tool.description}
                   </div>
                   <div className="tool-footer">
-                    <span className="tool-badge">{tool.badge}</span>
                     <div className="tool-rating">{'⭐'.repeat(Math.floor(tool.rating))}</div>
                   </div>
                 </a>
@@ -1216,9 +2221,10 @@ export default function App() {
               {selectedCollectionTools.map((tool) => (
                 <a
                   key={tool.id}
-                  href={resolveToolLink(tool)}
+                  href={getToolOutboundUrl(tool)}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel={getToolAnchorRel(tool)}
+                  onClick={() => trackToolClick(tool, 'collection')}
                   className="collection-item"
                   style={{
                     display: 'flex',
@@ -1237,6 +2243,7 @@ export default function App() {
                   <span style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                     <span style={{ fontSize: '1.25rem' }}>{tool.icon}</span>
                     <span style={{ fontWeight: 700 }}>{tool.name}</span>
+                    {isAffiliateTool(tool) && <span className="tool-affiliate-pill">Affiliate</span>}
                   </span>
                   <span style={{ color: 'var(--primary)', fontWeight: 700 }}>Open</span>
                 </a>
@@ -1248,7 +2255,8 @@ export default function App() {
                 onClick={() => {
                   const firstTool = selectedCollectionTools[0]
                   if (firstTool) {
-                    window.open(resolveToolLink(firstTool), '_blank', 'noopener,noreferrer')
+                    trackToolClick(firstTool, 'collection-cta')
+                    window.open(getToolOutboundUrl(firstTool), '_blank', 'noopener,noreferrer')
                   }
                 }}
               >
@@ -1268,6 +2276,121 @@ export default function App() {
                 Explore in Directory
               </button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==========  SEO HUB + TRENDING ========== */}
+      <section id="seo-hub" ref={seoHubSectionRef} className="section seo-hub-section" style={{ scrollMarginTop: '6rem' }}>
+        <div className="container">
+          <div className="seo-hub-grid">
+            <article className="seo-hub-card">
+              <div className="seo-hub-header">
+                <div className="seo-hub-kicker">Discover</div>
+                <h3 className="seo-hub-title">Explore SEO Landing Pages</h3>
+                <p className="seo-hub-subtitle">Jump straight to high-intent pages for categories, use cases, and tool comparisons.</p>
+              </div>
+
+              <div className="seo-hub-group">
+                <div className="seo-hub-group-head">
+                  <span>Categories</span>
+                  <span>{categories.length} groups</span>
+                </div>
+                <div className="seo-chip-wrap">
+                  {categories.slice(0, 8).map((cat) => (
+                    <button
+                      key={`seo-cat-${cat.name}`}
+                      className="seo-chip"
+                      type="button"
+                      onClick={() => navigateTo(`/categories/${slugify(cat.name)}`)}
+                    >
+                      <span>{cat.icon}</span>
+                      <span>{cat.name}</span>
+                      <span className="seo-chip-count">{cat.count}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="seo-hub-group">
+                <div className="seo-hub-group-head">
+                  <span>Use Cases</span>
+                  <span>{USE_CASE_PAGES.length} pages</span>
+                </div>
+                <div className="seo-chip-wrap">
+                  {USE_CASE_PAGES.map((useCase) => (
+                    <button
+                      key={useCase.slug}
+                      className="seo-chip seo-chip-text"
+                      type="button"
+                      onClick={() => navigateTo(`/use-cases/${useCase.slug}`)}
+                    >
+                      <span>{deslugify(useCase.slug)}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="seo-hub-group">
+                <div className="seo-hub-group-head">
+                  <span>Comparisons</span>
+                  <span>{COMPARISON_PAGES.length} matchups</span>
+                </div>
+                <div className="seo-chip-wrap">
+                  {COMPARISON_PAGES.map((comparison) => (
+                    <button
+                      key={comparison.slug}
+                      className="seo-chip seo-chip-text"
+                      type="button"
+                      onClick={() => navigateTo(`/compare/${comparison.slug}`)}
+                    >
+                      <span>{comparison.toolA} vs {comparison.toolB}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </article>
+
+            <article className="seo-hub-card seo-hub-card-leaderboard">
+              <div className="seo-hub-header">
+                <div className="seo-hub-kicker">Live Activity</div>
+                <h3 className="seo-hub-title">Trending Tools Leaderboard</h3>
+                <p className="seo-hub-subtitle">Ranking updates as visitors click tool links across the directory.</p>
+              </div>
+
+              {topClickedTools.length === 0 ? (
+                <div className="leaderboard-empty">
+                  <div className="leaderboard-empty-title">No clicks tracked yet</div>
+                  <p>Open a few tools from the directory to start populating this leaderboard.</p>
+                  <button className="btn btn-secondary" type="button" onClick={() => scrollToSection(toolsSectionRef)}>
+                    Browse Tools
+                  </button>
+                </div>
+              ) : (
+                <div className="leaderboard-list">
+                  {topClickedTools.map((entry, index) => (
+                    <a
+                      key={`leader-${entry.tool.id}`}
+                      href={getToolOutboundUrl(entry.tool)}
+                      target="_blank"
+                      rel={getToolAnchorRel(entry.tool)}
+                      onClick={() => trackToolClick(entry.tool, 'leaderboard')}
+                      className="leaderboard-item"
+                    >
+                      <strong className="leaderboard-rank">#{index + 1}</strong>
+                      <span className="leaderboard-tool">
+                        <span>{entry.tool.icon}</span>
+                        <span>
+                          <span className="leaderboard-tool-name">{entry.tool.name}</span>
+                          <span className="leaderboard-tool-category">{entry.tool.category}</span>
+                        </span>
+                      </span>
+                      <span className="leaderboard-count">{entry.count.toLocaleString()}</span>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </article>
           </div>
         </div>
       </section>
@@ -1325,7 +2448,7 @@ export default function App() {
             </div>
             <div className="collection-card" style={{ margin: 0, display: 'grid', gap: '0.75rem' }}>
               {weeklyHighlights.map((article) => (
-                <a key={article.title} href={article.link} target="_blank" rel="noopener noreferrer" className="collection-item" style={{ textDecoration: 'none', color: 'inherit', padding: '1rem', borderRadius: 'var(--radius-md)', background: 'var(--background)', border: '1px solid var(--border)' }}>
+                <a key={article.title} href={article.link} target="_blank" rel="noopener noreferrer" className="collection-item" style={{ textDecoration: 'none', color: 'inherit', padding: '1rem', borderRadius: 'var(--radius-md)', background: 'var(--background)', border: '1px solid var(--border)' }} onClick={() => setToolClicks((current) => ({ ...current, 'News Clicks': { count: (current['News Clicks']?.count || 0) + 1, category: 'News' } }))}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', alignItems: 'flex-start' }}>
                     <div>
                       <div style={{ color: 'var(--muted)', fontSize: '0.85rem', marginBottom: '0.35rem' }}>{article.date}</div>
@@ -1347,7 +2470,7 @@ export default function App() {
           <h2 style={{ marginBottom: '1rem', textAlign: 'center' }}>📰 Latest AI News</h2>
           <div className="tools-grid">
             {aiNews.slice(0, 3).map((article, idx) => (
-              <a key={idx} href={article.link} target="_blank" rel="noopener noreferrer" className="news-card" style={{ textDecoration: 'none', cursor: 'pointer' }}>
+              <a key={idx} href={article.link} target="_blank" rel="noopener noreferrer" className="news-card" style={{ textDecoration: 'none', cursor: 'pointer' }} onClick={() => setToolClicks((current) => ({ ...current, 'News Clicks': { count: (current['News Clicks']?.count || 0) + 1, category: 'News' } }))}>
                 <div className="news-image" style={{ position: 'relative', overflow: 'hidden' }}>
                   {article.image ? (
                     <img 
@@ -1446,6 +2569,10 @@ export default function App() {
                 a: 'Yes! AIToolsCenter is completely free. No registration required to browse tools. Our newsletter is also free. We keep it free for everyone.'
               },
               {
+                q: '💼 Do you use affiliate links?',
+                a: 'Yes. Some tool links may be affiliate links, which means we may earn a commission if you sign up or buy through them. This does not increase your price, and we label commercial links and maintain a separate Affiliate Disclosure page.'
+              },
+              {
                 q: '❓ How can I get help or report an issue?',
                 a: 'Contact us at support@aitoolscenter.in or use our contact form in the footer. We respond within 24 hours. You can also find detailed information about our service in our Privacy Policy and Terms.'
               }
@@ -1502,8 +2629,8 @@ export default function App() {
           </div>
 
           <div style={{ marginTop: '2.5rem', padding: '2rem', background: 'linear-gradient(135deg, rgba(0,194,168,0.1), rgba(247,179,43,0.05))', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)', textAlign: 'center' }}>
-            <div style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--foreground)' }}>Didn't find your answer?</div>
-            <p style={{ color: 'var(--muted)', marginBottom: '1rem' }}>We're here to help. Reach out to our support team.</p>
+            <div style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--foreground)' }}>Didn&apos;t find your answer?</div>
+            <p style={{ color: 'var(--muted)', marginBottom: '1rem' }}>We&apos;re here to help. Reach out to our support team.</p>
             <button 
               onClick={() => openPage('contact')}
               className="btn btn-primary"
@@ -1764,6 +2891,7 @@ export default function App() {
                 <div className="footer-panel-title">Legal</div>
                 <div className="footer-actions">
                   <button className="navbar-link navbar-link-button footer-link" onClick={() => openPage('privacy')} type="button">Privacy Policy</button>
+                  <button className="navbar-link navbar-link-button footer-link" onClick={() => openPage('affiliateDisclosure')} type="button">Affiliate Disclosure</button>
                   <button className="navbar-link navbar-link-button footer-link" onClick={() => openPage('terms')} type="button">Terms</button>
                 </div>
               </div>
@@ -1778,9 +2906,11 @@ export default function App() {
               </div>
             </div>
           </div>
-          <p className="footer-meta">© 2026 AIToolsCenter. All rights reserved. | 👥 Visitors: {visitorCount.toLocaleString()}</p>
+          <p className="footer-meta">© 2026 AIToolsCenter. All rights reserved. | 👥 Visitors: {visitorCount.toLocaleString()} {visitorCountError ? '(cached)' : '(live)'}</p>
+          <p className="footer-disclosure">Some links on this site may be affiliate links. We may earn a commission at no extra cost to you.</p>
         </div>
       </footer>
+      <ConsentBanner onPrivacyClick={() => openPage('privacy')} cmpManaged={cmpManagedConsent} />
     </div>
   )
 }

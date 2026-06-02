@@ -1,0 +1,1253 @@
+{
+  "generatedAt": "2026-06-02T15:11:58.524Z",
+  "timeoutMs": 6000,
+  "retries": 2,
+  "concurrency": 8,
+  "total": 108,
+  "healthy": 92,
+  "failed": 16,
+  "failures": [
+    {
+      "source": "tool",
+      "label": "Claude",
+      "url": "https://claude.ai/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "SEMrush AI",
+      "url": "https://www.semrush.com/ai-content-writer",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 404"
+    },
+    {
+      "source": "tool",
+      "label": "Midjourney",
+      "url": "https://midjourney.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "Leonardo.ai",
+      "url": "https://leonardo.ai/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "NightCafe",
+      "url": "https://nightcafe.studio/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "DreamStudio",
+      "url": "https://dreamstudio.ai/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "fetch failed"
+    },
+    {
+      "source": "tool",
+      "label": "Perplexity Images",
+      "url": "https://www.perplexity.ai/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "Lexica",
+      "url": "https://lexica.art/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "Timeout after 6000ms"
+    },
+    {
+      "source": "tool",
+      "label": "Craiyon",
+      "url": "https://www.craiyon.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "Phind",
+      "url": "https://www.phind.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "SciSpace",
+      "url": "https://www.scispace.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "Thesis",
+      "url": "https://www.thesis.ai/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "fetch failed"
+    },
+    {
+      "source": "tool",
+      "label": "Make",
+      "url": "https://www.make.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "ChatGPT Enterprise",
+      "url": "https://openai.com/enterprise",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "Microsoft 365 Copilot",
+      "url": "https://www.microsoft.com/microsoft-365/business/microsoft-365-copilot",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 404"
+    },
+    {
+      "source": "tool",
+      "label": "Tableau AI",
+      "url": "https://www.tableau.com/en-us/products/new",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 404"
+    }
+  ],
+  "checks": [
+    {
+      "source": "tool",
+      "label": "ChatGPT",
+      "url": "https://chatgpt.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://chatgpt.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Claude",
+      "url": "https://claude.ai/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "Grammarly",
+      "url": "https://www.grammarly.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "GET",
+      "attempts": 1,
+      "finalUrl": "https://www.grammarly.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Jasper",
+      "url": "https://www.jasper.ai/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.jasper.ai/"
+    },
+    {
+      "source": "tool",
+      "label": "Copy.ai",
+      "url": "https://www.copy.ai/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.copy.ai/"
+    },
+    {
+      "source": "tool",
+      "label": "Writesonic",
+      "url": "https://writesonic.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://writesonic.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Rytr",
+      "url": "https://rytr.me/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://rytr.me/"
+    },
+    {
+      "source": "tool",
+      "label": "Anyword",
+      "url": "https://www.anyword.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.anyword.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Sudowrite",
+      "url": "https://www.sudowrite.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://sudowrite.com/"
+    },
+    {
+      "source": "tool",
+      "label": "QuillBot",
+      "url": "https://quillbot.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://quillbot.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Wordtune",
+      "url": "https://www.wordtune.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.wordtune.com/"
+    },
+    {
+      "source": "tool",
+      "label": "HubSpot AI",
+      "url": "https://www.hubspot.com/products/ai",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.hubspot.com/products/artificial-intelligence"
+    },
+    {
+      "source": "tool",
+      "label": "SEMrush AI",
+      "url": "https://www.semrush.com/ai-content-writer",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 404"
+    },
+    {
+      "source": "tool",
+      "label": "Notion AI",
+      "url": "https://www.notion.so/product/ai",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.notion.so/product/ai"
+    },
+    {
+      "source": "tool",
+      "label": "Character.ai",
+      "url": "https://character.ai/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://character.ai/"
+    },
+    {
+      "source": "tool",
+      "label": "Lex.page",
+      "url": "https://lex.page/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://lex.page/"
+    },
+    {
+      "source": "tool",
+      "label": "Copysmith",
+      "url": "https://www.copysmith.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://leighties-nite.com/index.html"
+    },
+    {
+      "source": "tool",
+      "label": "Outwrite",
+      "url": "https://www.outwrite.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.outwrite.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Calmly Writer",
+      "url": "https://calmlywriter.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://calmlywriter.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Fireflies AI",
+      "url": "https://fireflies.ai/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://fireflies.ai/"
+    },
+    {
+      "source": "tool",
+      "label": "Midjourney",
+      "url": "https://midjourney.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "DALL-E 3",
+      "url": "https://openai.com/dall-e-3",
+      "healthy": true,
+      "status": 200,
+      "method": "GET",
+      "attempts": 1,
+      "finalUrl": "https://openai.com/index/dall-e-3/"
+    },
+    {
+      "source": "tool",
+      "label": "Stable Diffusion",
+      "url": "https://stablediffusionweb.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://stablediffusionweb.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Adobe Firefly",
+      "url": "https://www.adobe.com/firefly",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.adobe.com/products/firefly.html"
+    },
+    {
+      "source": "tool",
+      "label": "Leonardo.ai",
+      "url": "https://leonardo.ai/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "Canva AI",
+      "url": "https://www.canva.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.canva.in/"
+    },
+    {
+      "source": "tool",
+      "label": "Microsoft Designer",
+      "url": "https://designer.microsoft.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://designer.microsoft.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Runway",
+      "url": "https://runwayml.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://runwayml.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Artbreeder",
+      "url": "https://www.artbreeder.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.artbreeder.com/"
+    },
+    {
+      "source": "tool",
+      "label": "NightCafe",
+      "url": "https://nightcafe.studio/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "DreamStudio",
+      "url": "https://dreamstudio.ai/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "fetch failed"
+    },
+    {
+      "source": "tool",
+      "label": "Wombo",
+      "url": "https://www.wombo.art/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://dream.ai/"
+    },
+    {
+      "source": "tool",
+      "label": "Fotor AI",
+      "url": "https://www.fotor.com/features/ai-image-generator",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.fotor.com/ai-image-generator/"
+    },
+    {
+      "source": "tool",
+      "label": "Perplexity Images",
+      "url": "https://www.perplexity.ai/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "Gencraft",
+      "url": "https://www.gencraft.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://gencraft.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Lexica",
+      "url": "https://lexica.art/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "Timeout after 6000ms"
+    },
+    {
+      "source": "tool",
+      "label": "Craiyon",
+      "url": "https://www.craiyon.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "DeepAI",
+      "url": "https://deepai.org/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://deepai.org/"
+    },
+    {
+      "source": "tool",
+      "label": "Bing Image Creator",
+      "url": "https://www.bing.com/images/create",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.bing.com/images/create"
+    },
+    {
+      "source": "tool",
+      "label": "Synthesia",
+      "url": "https://www.synthesia.io/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.synthesia.io/"
+    },
+    {
+      "source": "tool",
+      "label": "Descript",
+      "url": "https://www.descript.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.descript.com/"
+    },
+    {
+      "source": "tool",
+      "label": "D-ID",
+      "url": "https://www.d-id.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.d-id.com/"
+    },
+    {
+      "source": "tool",
+      "label": "HeyGen",
+      "url": "https://www.heygen.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.heygen.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Opus Clip",
+      "url": "https://www.opus.pro/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.opus.pro/"
+    },
+    {
+      "source": "tool",
+      "label": "Pictory",
+      "url": "https://pictory.ai/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://pictory.ai/"
+    },
+    {
+      "source": "tool",
+      "label": "Invideo",
+      "url": "https://invideo.io/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://invideo.io/"
+    },
+    {
+      "source": "tool",
+      "label": "Fliki",
+      "url": "https://fliki.ai/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://fliki.ai/"
+    },
+    {
+      "source": "tool",
+      "label": "Animaker",
+      "url": "https://www.animaker.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.animaker.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Loom",
+      "url": "https://www.loom.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.loom.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Qlova",
+      "url": "https://qlova.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.qlova.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Movavi",
+      "url": "https://www.movavi.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.movavi.com/"
+    },
+    {
+      "source": "tool",
+      "label": "GitHub Copilot",
+      "url": "https://github.com/features/copilot",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://github.com/features/copilot"
+    },
+    {
+      "source": "tool",
+      "label": "Cursor",
+      "url": "https://www.cursor.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://cursor.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Tabnine",
+      "url": "https://www.tabnine.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.tabnine.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Codeium",
+      "url": "https://codeium.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://windsurf.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Amazon CodeWhisperer",
+      "url": "https://aws.amazon.com/codewhisperer",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://aws.amazon.com/q/developer/"
+    },
+    {
+      "source": "tool",
+      "label": "Replit",
+      "url": "https://replit.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://replit.com/"
+    },
+    {
+      "source": "tool",
+      "label": "WolframAlpha",
+      "url": "https://www.wolframalpha.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "GET",
+      "attempts": 1,
+      "finalUrl": "https://www.wolframalpha.com/"
+    },
+    {
+      "source": "tool",
+      "label": "JetBrains AI",
+      "url": "https://www.jetbrains.com/ai",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.jetbrains.com/ai/"
+    },
+    {
+      "source": "tool",
+      "label": "CodeRabbit",
+      "url": "https://www.coderabbit.ai/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.coderabbit.ai/"
+    },
+    {
+      "source": "tool",
+      "label": "Bugfree",
+      "url": "https://bugfree.ai/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://bugfree.ai/"
+    },
+    {
+      "source": "tool",
+      "label": "Phind",
+      "url": "https://www.phind.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "Microsoft Copilot",
+      "url": "https://copilot.microsoft.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://copilot.microsoft.com/"
+    },
+    {
+      "source": "tool",
+      "label": "AnypointStudio",
+      "url": "https://www.mulesoft.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.mulesoft.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Perplexity",
+      "url": "https://perplexity.ai/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.perplexity.ai/"
+    },
+    {
+      "source": "tool",
+      "label": "Copilot Search",
+      "url": "https://www.bing.com/chat",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://copilot.microsoft.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Google Gemini",
+      "url": "https://gemini.google.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://gemini.google.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Semantic Scholar",
+      "url": "https://www.semanticscholar.org/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.semanticscholar.org/"
+    },
+    {
+      "source": "tool",
+      "label": "SciSpace",
+      "url": "https://www.scispace.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "Thesis",
+      "url": "https://www.thesis.ai/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "fetch failed"
+    },
+    {
+      "source": "tool",
+      "label": "Research Rabbit",
+      "url": "https://www.researchrabbitapp.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://app.researchrabbit.ai/"
+    },
+    {
+      "source": "tool",
+      "label": "Zapier AI",
+      "url": "https://zapier.com/ai",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://zapier.com/ai"
+    },
+    {
+      "source": "tool",
+      "label": "Make",
+      "url": "https://www.make.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "IFTTT",
+      "url": "https://ifttt.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://ifttt.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Roam Research",
+      "url": "https://roamresearch.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://roamresearch.com/"
+    },
+    {
+      "source": "tool",
+      "label": "ChatGPT Enterprise",
+      "url": "https://openai.com/enterprise",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "Microsoft 365 Copilot",
+      "url": "https://www.microsoft.com/microsoft-365/business/microsoft-365-copilot",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 404"
+    },
+    {
+      "source": "tool",
+      "label": "Tableau AI",
+      "url": "https://www.tableau.com/en-us/products/new",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 404"
+    },
+    {
+      "source": "tool",
+      "label": "Looker Studio AI",
+      "url": "https://lookerstudio.google.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://datastudio.google.com/overview"
+    },
+    {
+      "source": "tool",
+      "label": "Suno",
+      "url": "https://suno.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://suno.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Murf",
+      "url": "https://murf.ai/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://murf.ai/"
+    },
+    {
+      "source": "tool",
+      "label": "ElevenLabs",
+      "url": "https://elevenlabs.io/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://elevenlabs.io/"
+    },
+    {
+      "source": "tool",
+      "label": "Splice",
+      "url": "https://splice.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://splice.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Figma AI",
+      "url": "https://www.figma.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.figma.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Adobe XD Generative Fill",
+      "url": "https://www.adobe.com/products/xd",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://helpx.adobe.com/support/xd.html"
+    },
+    {
+      "source": "tool",
+      "label": "Remove.bg",
+      "url": "https://www.remove.bg/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.remove.bg/"
+    },
+    {
+      "source": "tool",
+      "label": "Upscayl",
+      "url": "https://upscayl.org/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://upscayl.org/"
+    },
+    {
+      "source": "tool",
+      "label": "Buffer AI",
+      "url": "https://buffer.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://buffer.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Hootsuite AI",
+      "url": "https://www.hootsuite.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.hootsuite.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Later AI",
+      "url": "https://www.later.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://later.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Sprout Social",
+      "url": "https://www.sproutsocial.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://sproutsocial.com/"
+    },
+    {
+      "source": "tool",
+      "label": "OpenAI API",
+      "url": "https://openai.com/api",
+      "healthy": true,
+      "status": 200,
+      "method": "GET",
+      "attempts": 2,
+      "finalUrl": "https://openai.com/api/"
+    },
+    {
+      "source": "tool",
+      "label": "Anthropic Claude API",
+      "url": "https://www.anthropic.com/api",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://claude.com/platform/api"
+    },
+    {
+      "source": "tool",
+      "label": "Google Generative AI",
+      "url": "https://ai.google.dev/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://ai.google.dev/"
+    },
+    {
+      "source": "tool",
+      "label": "Hugging Face",
+      "url": "https://huggingface.co/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://huggingface.co/"
+    },
+    {
+      "source": "tool",
+      "label": "Together AI",
+      "url": "https://www.together.ai/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.together.ai/"
+    },
+    {
+      "source": "tool",
+      "label": "Replicate",
+      "url": "https://replicate.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://replicate.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Modal",
+      "url": "https://modal.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://modal.com/"
+    },
+    {
+      "source": "tool",
+      "label": "Azure AI Services",
+      "url": "https://azure.microsoft.com/products/ai-services/",
+      "healthy": true,
+      "status": 200,
+      "method": "GET",
+      "attempts": 1,
+      "finalUrl": "https://azure.microsoft.com/en-us/products/ai-foundry/tools"
+    },
+    {
+      "source": "override",
+      "label": "OpenAI API",
+      "url": "https://platform.openai.com/",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://platform.openai.com/"
+    },
+    {
+      "source": "news",
+      "label": "AMD CEO Lisa Su at MIT commencement: Companies do not need people who know how to use AI tools, they need",
+      "url": "https://news.google.com/rss/articles/CBMiqwJBVV95cUxQX3Q0UnllNDdjR3Y4SWFkckliSEkzTDEycUtna1ZwYTVVd1JLanQ3RTlKSHZQWWh4UHB3S3RvTW5vaDZIamVoMXoyd2MzeGtSUE1GbzJFWG9YcUs0X1V4YTBVekdEbHRLdE41NkQ4aXBXNVNzMUJ5NGFKWHZta042N2hvRG5lTlExa0p6UmZXYzRveTFzbmhNYW4tdlZVRm1Nbjd3Tkc1V1g1N2k3ekI3QzRSY21RTkpUYkRidGllNjZMRXVnNl8tZkxoNUR2OEZzdW03bHZEaWs1aXdDNjA1NERaWC1aSmFJSXRjcUNTNzNiNVZOVVNjZ0ZCVXpZdlV5ODJkb2FydjRqNEFhWTEwUk9DNHYxNFU5YW0tVXVyVThETUNFbGs0UG1HNNIBsAJBVV95cUxQTGhSZThsWUZDZTBaRjZnU1Nfc3F4ZFBfa3IyZHBhS3Q1SVdqRG82dUNvSWZvblNuaDN2MEh1bWNJYVJWRGJqYllZTjR3c1VnbVFnN01tUUptRk54Y1lSTGQ5cGVaLTBBektpbHp0MUE2RGlxR0lnUWtfS3daUDdSeG93dGlpTllsNzh1VWJqMmsxV3E2bmFTemRaa3VPaTEyMHdiNG9JREhGNGVadUFzcVRqbmQ2NjdQb1JiSUM5UlFDNzlqVFc3SThyX1BvUzdxVERtS1M2NGExUl9aTE85dEpmX0s5OV9hLWJxaFZteC1zYVJ3Q3ZuWlRlVmtTMXFrNTF3NklzaVJjRjBkTkFSV0YyX2g1OE1ENE5SUk5Hajg4RTVsTHNmcGNRVGdVVlJN?oc=5",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://news.google.com/rss/articles/CBMiqwJBVV95cUxQX3Q0UnllNDdjR3Y4SWFkckliSEkzTDEycUtna1ZwYTVVd1JLanQ3RTlKSHZQWWh4UHB3S3RvTW5vaDZIamVoMXoyd2MzeGtSUE1GbzJFWG9YcUs0X1V4YTBVekdEbHRLdE41NkQ4aXBXNVNzMUJ5NGFKWHZta042N2hvRG5lTlExa0p6UmZXYzRveTFzbmhNYW4tdlZVRm1Nbjd3Tkc1V1g1N2k3ekI3QzRSY21RTkpUYkRidGllNjZMRXVnNl8tZkxoNUR2OEZzdW03bHZEaWs1aXdDNjA1NERaWC1aSmFJSXRjcUNTNzNiNVZOVVNjZ0ZCVXpZdlV5ODJkb2FydjRqNEFhWTEwUk9DNHYxNFU5YW0tVXVyVThETUNFbGs0UG1HNNIBsAJBVV95cUxQTGhSZThsWUZDZTBaRjZnU1Nfc3F4ZFBfa3IyZHBhS3Q1SVdqRG82dUNvSWZvblNuaDN2MEh1bWNJYVJWRGJqYllZTjR3c1VnbVFnN01tUUptRk54Y1lSTGQ5cGVaLTBBektpbHp0MUE2RGlxR0lnUWtfS3daUDdSeG93dGlpTllsNzh1VWJqMmsxV3E2bmFTemRaa3VPaTEyMHdiNG9JREhGNGVadUFzcVRqbmQ2NjdQb1JiSUM5UlFDNzlqVFc3SThyX1BvUzdxVERtS1M2NGExUl9aTE85dEpmX0s5OV9hLWJxaFZteC1zYVJ3Q3ZuWlRlVmtTMXFrNTF3NklzaVJjRjBkTkFSV0YyX2g1OE1ENE5SUk5Hajg4RTVsTHNmcGNRVGdVVlJN?oc=5&hl=en-IN&gl=IN&ceid=IN:en"
+    },
+    {
+      "source": "news",
+      "label": "AI didn't kill the junior developer, it changed the rules",
+      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE0xLWQ1N25UVVM4X1BDQ0hsVFdhQTFPSTJ1Q1VmSFduMlB2TWlMMEtsOHdNREtkVFBWV3RndkdCNkpVdGVxNERsM3VfMVRZMHZ1Q2ZwcTZOUXV0Vk1SdUdSeUd4V2FCbkk?oc=5",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE0xLWQ1N25UVVM4X1BDQ0hsVFdhQTFPSTJ1Q1VmSFduMlB2TWlMMEtsOHdNREtkVFBWV3RndkdCNkpVdGVxNERsM3VfMVRZMHZ1Q2ZwcTZOUXV0Vk1SdUdSeUd4V2FCbkk?oc=5&hl=en-IN&gl=IN&ceid=IN:en"
+    },
+    {
+      "source": "news",
+      "label": "Nvidia gives developers the tool to build secure, autonomous AI workers that scale",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNeGg3ZWpGSEhvYUlzYWJCbGpJcW9kazA4bDJLM3RHLXhYNWdiVHZDWEo2d1BUX25vZUVTangzcFYyUEx1SVBUNGpwMkdObEl5dmY2Y0hBNVZkamotX1hZSlduS29mTWJuWDBwdkdfZlhKa0JrYlUxOUtyVzNxNXY2VU5QdjY5Smc2d0VxRXpKTG9EQjhlbnRidzBZeFJySFRIalNadUV3OGhfZw?oc=5",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNeGg3ZWpGSEhvYUlzYWJCbGpJcW9kazA4bDJLM3RHLXhYNWdiVHZDWEo2d1BUX25vZUVTangzcFYyUEx1SVBUNGpwMkdObEl5dmY2Y0hBNVZkamotX1hZSlduS29mTWJuWDBwdkdfZlhKa0JrYlUxOUtyVzNxNXY2VU5QdjY5Smc2d0VxRXpKTG9EQjhlbnRidzBZeFJySFRIalNadUV3OGhfZw?oc=5&hl=en-IN&gl=IN&ceid=IN:en"
+    },
+    {
+      "source": "news",
+      "label": "10 Best AI Face Swap Tools & Apps in 2026 (Free & Paid)",
+      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9ld1JqQjlqWUM5c1dHT1k5WkVEcThZNEM5eXpFRlVsd3huUHFpd0VtcHF1UGoyR01oRHZuajdKZUxnSjlzekVtdDRjN2w0dEFUeVB5LWRkYlZKQTNE0gFcQVVfeXFMT2V3UmpCOWpZQzlzV0dPWTlaRURxOFk0Qzl5ekVGVWx3eG5QcWl3RW1wcXVQajJHTWhEdm5qN0plTGdKOXN6RW10NGM3bDR0QVR5UHktZGRiVkpBM0Q?oc=5",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9ld1JqQjlqWUM5c1dHT1k5WkVEcThZNEM5eXpFRlVsd3huUHFpd0VtcHF1UGoyR01oRHZuajdKZUxnSjlzekVtdDRjN2w0dEFUeVB5LWRkYlZKQTNE0gFcQVVfeXFMT2V3UmpCOWpZQzlzV0dPWTlaRURxOFk0Qzl5ekVGVWx3eG5QcWl3RW1wcXVQajJHTWhEdm5qN0plTGdKOXN6RW10NGM3bDR0QVR5UHktZGRiVkpBM0Q?oc=5&hl=en-IN&gl=IN&ceid=IN:en"
+    },
+    {
+      "source": "news",
+      "label": "Study highlights major gaps in online info for patients about AI and cancer",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPZHJXQXY4WjFkb083N3lJbmRVV0ZqMGlYM0ltV252LVVJZ1dvWDZMS0cwWjlnN0NucEhOcHB0ZmdnSUwwM3FqNTRRSGRiVWRKZ1loM0J1eElTY1hRVXZpeHdnWlM2NmhRUDlyNnUzNVFMbzVvX3BJNjdjazJoTkd6V2VaNA?oc=5",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPZHJXQXY4WjFkb083N3lJbmRVV0ZqMGlYM0ltV252LVVJZ1dvWDZMS0cwWjlnN0NucEhOcHB0ZmdnSUwwM3FqNTRRSGRiVWRKZ1loM0J1eElTY1hRVXZpeHdnWlM2NmhRUDlyNnUzNVFMbzVvX3BJNjdjazJoTkd6V2VaNA?oc=5&hl=en-IN&gl=IN&ceid=IN:en"
+    },
+    {
+      "source": "news",
+      "label": "Parents of children under 18 are more likely to say parents should let their children use AI tools",
+      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQVmJKX0haVnFaTUpPYnlLcnBYUV9fNHhBMEJSbFZyeDdvTUJQOGhuTDNiNmRqM3NvckRMcC1kd0x4NC1DVXVyb0VRWFlJMGpGR1ZvUzN2T3FCQ3Y0Yk5UaHhoV1RnZlZoOWtPWVVkR09WRjQxV1RnTGFYSlAxNEk1elN3UkNZUFUwT2h4cEFUWnM3c3BBYnl5WEVqcHVoZ2h6TUVWQmZ4V3JydDMyZ0JfZnh2eTlxSURHU2hMbjNWZ0ZlR2dLeGlPUmxVTDlQWWlENnlPUQ?oc=5",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQVmJKX0haVnFaTUpPYnlLcnBYUV9fNHhBMEJSbFZyeDdvTUJQOGhuTDNiNmRqM3NvckRMcC1kd0x4NC1DVXVyb0VRWFlJMGpGR1ZvUzN2T3FCQ3Y0Yk5UaHhoV1RnZlZoOWtPWVVkR09WRjQxV1RnTGFYSlAxNEk1elN3UkNZUFUwT2h4cEFUWnM3c3BBYnl5WEVqcHVoZ2h6TUVWQmZ4V3JydDMyZ0JfZnh2eTlxSURHU2hMbjNWZ0ZlR2dLeGlPUmxVTDlQWWlENnlPUQ?oc=5&hl=en-IN&gl=IN&ceid=IN:en"
+    },
+    {
+      "source": "news",
+      "label": "Artificial intelligence tools expand scientists’ impact but contract science’s focus",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBqZTlDR3VQMU05anlkUEJRbEZTRENCNkdCYlhfODFBNjJEeU1sUjJPNzZBVGwwc25qRFFSRnJWQTROc0NNSTlhcVNCSEpjOV9TYnFyXzVKSDl1UGVOTGFj?oc=5",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBqZTlDR3VQMU05anlkUEJRbEZTRENCNkdCYlhfODFBNjJEeU1sUjJPNzZBVGwwc25qRFFSRnJWQTROc0NNSTlhcVNCSEpjOV9TYnFyXzVKSDl1UGVOTGFj?oc=5&hl=en-IN&gl=IN&ceid=IN:en"
+    },
+    {
+      "source": "news",
+      "label": "Amazon shuts down internal AI leaderboard after employees inflate usage, driving up costs",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOcFdkWXNNci0xeV9UNnQyR3pWeEpUNmF5Z3JnenNwRm1xU2JLbjd5eVQ0S0ZIcHZRZHlNWVRQdVJjSmFNS1RKWDFlbTEtYk1wNC1sdTRpSVFKZkhNaHZoWEFCSDdzVGFnY0M3QTFSX0tzWnZCZ0FYcTJUS3R4SDZqcnB1cTVTOVYzZWNWbE1zT1dSU0oxa184dURXdkNDZGcwWnFWN3piTFdweVJwbGtYbVVLSktUN21zLWphblIxRDlrczZtc1hFcUtOMUtlXzBGTUlQbjlJMNIB3AFBVV95cUxPVnZ3ajBnamNyNlp0Q1dieGdPRVdGc0pfVzd1cG9tWmM2S3VvbVJQd0hZN21tbEpfRzJrbUlzWWdqYkRYTXdjZnlGRTF1eWd6ZUUyVXNKNEpnbnhZSlZOcGlYUmxfMXc5bGUxM3I4VWgwV3BKM3VNSUJLWEhrTTZIZVp3WUluU2kta1lQZm5ZaVVIaUpTQnk5amhPTTc0OFhaYzl4TkJPbjBfaWxRaEkzMWRMbnQ2VUJiQ2doUmlvTGlTTmE5MjhBaEFBd3I0Qi15ZkJVanpLOTRlTTR6?oc=5",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOcFdkWXNNci0xeV9UNnQyR3pWeEpUNmF5Z3JnenNwRm1xU2JLbjd5eVQ0S0ZIcHZRZHlNWVRQdVJjSmFNS1RKWDFlbTEtYk1wNC1sdTRpSVFKZkhNaHZoWEFCSDdzVGFnY0M3QTFSX0tzWnZCZ0FYcTJUS3R4SDZqcnB1cTVTOVYzZWNWbE1zT1dSU0oxa184dURXdkNDZGcwWnFWN3piTFdweVJwbGtYbVVLSktUN21zLWphblIxRDlrczZtc1hFcUtOMUtlXzBGTUlQbjlJMNIB3AFBVV95cUxPVnZ3ajBnamNyNlp0Q1dieGdPRVdGc0pfVzd1cG9tWmM2S3VvbVJQd0hZN21tbEpfRzJrbUlzWWdqYkRYTXdjZnlGRTF1eWd6ZUUyVXNKNEpnbnhZSlZOcGlYUmxfMXc5bGUxM3I4VWgwV3BKM3VNSUJLWEhrTTZIZVp3WUluU2kta1lQZm5ZaVVIaUpTQnk5amhPTTc0OFhaYzl4TkJPbjBfaWxRaEkzMWRMbnQ2VUJiQ2doUmlvTGlTTmE5MjhBaEFBd3I0Qi15ZkJVanpLOTRlTTR6?oc=5&hl=en-IN&gl=IN&ceid=IN:en"
+    }
+  ]
+}

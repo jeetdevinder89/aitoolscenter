@@ -2,6 +2,9 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
   if (req.method === 'OPTIONS') return res.status(200).end()
+  if (req.method !== 'GET' && req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' })
+  }
 
   const supabaseUrl = process.env.SUPABASE_URL
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -15,6 +18,17 @@ export default async function handler(req, res) {
     Authorization: `Bearer ${supabaseKey}`,
     'Content-Type': 'application/json',
     Prefer: 'return=representation',
+  }
+
+  const parseJsonSafely = async (response) => {
+    const bodyText = await response.text()
+    if (!bodyText) return null
+
+    try {
+      return JSON.parse(bodyText)
+    } catch {
+      return bodyText
+    }
   }
 
   const normalizeCount = (payload) => {
@@ -38,7 +52,7 @@ export default async function handler(req, res) {
       headers,
       body: JSON.stringify({ row_id: 'total' }),
     })
-    const data = await rpcRes.json()
+    const data = await parseJsonSafely(rpcRes)
     if (!rpcRes.ok) {
       return res.status(rpcRes.status).json({ error: 'Failed to increment page views', details: data })
     }
@@ -56,10 +70,10 @@ export default async function handler(req, res) {
     headers,
   })
   if (!getRes.ok) {
-    const details = await getRes.text()
+    const details = await parseJsonSafely(getRes)
     return res.status(getRes.status).json({ error: 'Failed to fetch page views', details })
   }
-  const rows = await getRes.json()
+  const rows = await parseJsonSafely(getRes)
   const count = rows?.[0]?.count ?? 0
   return res.status(200).json({ count })
 }

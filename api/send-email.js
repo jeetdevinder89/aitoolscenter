@@ -4,11 +4,11 @@ const smtpHost = process.env.SMTP_HOST;
 const smtpPort = process.env.SMTP_PORT || 587;
 const smtpUsername = process.env.SMTP_USERNAME;
 const smtpPassword = process.env.SMTP_PASSWORD;
+const internalApiSecret = process.env.INTERNAL_API_SECRET;
 
-// Create transporter
-const transporter = nodemailer.createTransport({
+const getTransporter = () => nodemailer.createTransport({
   host: smtpHost,
-  port: smtpPort,
+  port: Number(smtpPort),
   secure: false,
   auth: {
     user: smtpUsername,
@@ -19,6 +19,14 @@ const transporter = nodemailer.createTransport({
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  if (!internalApiSecret || req.headers['x-internal-api-secret'] !== internalApiSecret) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  if (!smtpHost || !smtpUsername || !smtpPassword) {
+    return res.status(500).json({ error: 'SMTP is not configured' });
   }
 
   try {
@@ -33,9 +41,18 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid email format for recipient' });
     }
 
+    const trustedFromEmail = fromEmail || smtpUsername;
+    const trustedFromName = fromName || 'AIToolsCenter';
+
+    // Prevent arbitrary from-header injection and ensure sender domain is controlled.
+    if (!trustedFromEmail.endsWith('@aitoolscenter.in') && trustedFromEmail !== smtpUsername) {
+      return res.status(400).json({ error: 'Invalid sender identity' });
+    }
+
     // Send email
+    const transporter = getTransporter();
     const info = await transporter.sendMail({
-      from: `${fromName || 'AIToolsCenter'} <${fromEmail || smtpUsername}>`,
+      from: `${trustedFromName} <${trustedFromEmail}>`,
       to: to,
       subject: subject,
       html: html,

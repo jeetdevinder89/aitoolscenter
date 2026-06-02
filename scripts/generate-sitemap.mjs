@@ -68,7 +68,7 @@ const parseAppRouteData = () => {
     plugins: ['jsx'],
   })
 
-  const toolsNode = findConstInitializer(ast.program, 'TOOLS') || findConstInitializer(ast.program, 'TOOLS_EXTENDED')
+  const toolsNode = findConstInitializer(ast.program, 'TOOLS_EXTENDED') || findConstInitializer(ast.program, 'TOOLS')
   const categoriesNode = findConstInitializer(ast.program, 'CATEGORIES')
   const useCasePagesNode = findConstInitializer(ast.program, 'USE_CASE_PAGES')
   const programmaticProfessionsNode = findConstInitializer(ast.program, 'PROGRAMMATIC_PROFESSIONS')
@@ -172,10 +172,39 @@ const buildSitemapXml = ({ toolSlugs, categorySlugs, useCaseSlugs, comparisonSlu
     }
   }
 
-  // This is a Single Page Application — all routes resolve to index.html.
-  // Only the canonical homepage URL is included to avoid duplicate-content
-  // issues in search engines and to present an accurate sitemap for AdSense review.
+  // This SPA uses history API routes with Vercel rewrites, so route URLs are indexable.
   addUrl('/', 'weekly', '1.0')
+  addUrl('/home', 'monthly', '0.7')
+
+  for (const slug of toolSlugs) {
+    addUrl(`/ai-tools/${slug}`, 'weekly', '0.8')
+  }
+
+  for (const slug of categorySlugs) {
+    addUrl(`/categories/${slug}`, 'weekly', '0.85')
+  }
+
+  for (const slug of useCaseSlugs) {
+    addUrl(`/use-cases/${slug}`, 'weekly', '0.82')
+  }
+
+  for (const slug of comparisonSlugs) {
+    addUrl(`/compare/${slug}`, 'weekly', '0.8')
+  }
+
+  const legalPathMap = {
+    privacy: '/privacy',
+    terms: '/terms',
+    affiliateDisclosure: '/affiliate-disclosure',
+    contact: '/contact',
+  }
+
+  for (const legalKey of legalPaths) {
+    const legalPath = legalPathMap[legalKey]
+    if (legalPath) {
+      addUrl(legalPath, 'yearly', '0.4')
+    }
+  }
 
   const lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
 

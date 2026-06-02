@@ -2,10 +2,29 @@ import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const smtpHost = process.env.SMTP_HOST;
-const smtpUsername = process.env.SMTP_USERNAME;
-const smtpPassword = process.env.SMTP_PASSWORD;
 const cronSecret = process.env.CRON_SECRET;
+const internalApiSecret = process.env.INTERNAL_API_SECRET;
+
+const isAuthorizedCronRequest = (req) => {
+  if (!cronSecret) return false;
+
+  const cronHeaderSecret = req.headers['x-vercel-cron-secret'];
+  if (cronHeaderSecret && cronHeaderSecret === cronSecret) {
+    return true;
+  }
+
+  const authHeader = req.headers.authorization || '';
+  const bearerToken = authHeader.startsWith('Bearer ') ? authHeader.slice(7).trim() : '';
+  return bearerToken === cronSecret;
+};
+
+const getRequestOrigin = (req) => {
+  const forwardedProto = req.headers['x-forwarded-proto'];
+  const protocol = (Array.isArray(forwardedProto) ? forwardedProto[0] : forwardedProto) || 'https';
+  const host = req.headers.host;
+  if (!host) return 'https://www.aitoolscenter.in';
+  return `${protocol}://${host}`;
+};
 
 // Top trending AI tools for weekly digest
 const getTrendingTools = () => {
@@ -108,10 +127,22 @@ const generateNewsletterHTML = (tools, newsItems) => {
 };
 
 export default async function handler(req, res) {
+  if (req.method !== 'GET') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
   // Verify cron secret
-  if (req.headers['x-vercel-cron-secret'] !== cronSecret) {
+  if (!isAuthorizedCronRequest(req)) {
     console.log('Invalid cron secret');
     return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  if (!supabaseUrl || !supabaseServiceKey) {
+    return res.status(500).json({ error: 'Missing Supabase credentials' });
+  }
+
+  if (!internalApiSecret) {
+    return res.status(500).json({ error: 'Missing INTERNAL_API_SECRET for internal email dispatch' });
   }
 
   try {
@@ -149,14 +180,18 @@ export default async function handler(req, res) {
 
     // Generate HTML email
     const emailHtml = generateNewsletterHTML(tools, newsItems);
+    const requestOrigin = getRequestOrigin(req);
 
     // Send emails to all subscribers
     const sendResults = await Promise.allSettled(
       subscribers.map(async (subscriber) => {
         try {
-          const response = await fetch('https://www.aitoolscenter.in/api/send-email', {
+          const response = await fetch(`${requestOrigin}/api/send-email`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+              'Content-Type': 'application/json',
+              'x-internal-api-secret': internalApiSecret,
+            },
             body: JSON.stringify({
               to: subscriber.email,
               subject: '🤖 Your Weekly AI Tools Update — Top 5 Tools + News',

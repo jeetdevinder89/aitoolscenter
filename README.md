@@ -5,9 +5,11 @@ Single-page website built with React + Vite to help users discover, compare, and
 ## What is included
 
 - AI tools directory with categories and search
-- Dedicated SEO routes for tools and categories
+- Dedicated SEO routes for tools, categories, use-cases, and comparisons
 - Favorites, sorting, and side-by-side tool comparison
 - Top 10 weekly ranked section
+- Trending leaderboard based on click analytics
+- Internal linking hub for discovery and crawl depth
 - Submit-your-tool form with validation and server-side delivery
 - AI news section with external source links
 - Educational section explaining how AI tools work
@@ -15,6 +17,7 @@ Single-page website built with React + Vite to help users discover, compare, and
 - Mobile-responsive layout
 - Branded color and typography system
 - SEO metadata, robots.txt, and sitemap.xml for indexing
+- Route-aware Open Graph/Twitter metadata and JSON-LD structured data
 
 ## Run locally
 
@@ -36,19 +39,33 @@ npm run dev
 npm run build
 ```
 
+The build now runs link validation, social card generation, sitemap generation, and then the Vite production build.
+
 ## Key files
 
 - `src/App.jsx`: page content and section structure
 - `src/index.css`: global styles and responsive design
+- `scripts/validate-links.mjs`: validates internal anchors and outbound URL structure
+- `scripts/check-external-links.mjs`: checks external link uptime and writes a health report
+- `scripts/generate-social-cards.mjs`: generates premium Open Graph social cards under `public/social/`
 - `.github/copilot-instructions.md`: setup checklist and completion status
 
 ## Customization notes
 
 - Update tool links, ratings, and categories in `src/App.jsx`.
 - Add `VITE_AMAZON_ASSOCIATE_TAG` in `.env.local` (example: `aitoolscenter-21`) to automatically append your Amazon tag to any Amazon link in tool cards.
-- For any tool/card, set `affiliateLink` in `TOOLS` when you want a custom tracking URL; otherwise `link` is used.
+- Configure affiliate URLs in `.env.local` or Vercel with variables such as `VITE_AFFILIATE_COPILOT`, `VITE_AFFILIATE_CURSOR`, `VITE_AFFILIATE_TABNINE`, `VITE_AFFILIATE_PERPLEXITY`, `VITE_AFFILIATE_RUNWAY`, `VITE_AFFILIATE_NOTION`, `VITE_AFFILIATE_ZAPIER`, `VITE_AFFILIATE_MAKE`, `VITE_AFFILIATE_JASPER`, `VITE_AFFILIATE_COPYAI`, `VITE_AFFILIATE_GRAMMARLY`, and `VITE_AFFILIATE_WRITESONIC`.
+- For any tool/card, set `affiliateLink` in `TOOLS` when you want a custom tracking URL; otherwise the site falls back to the normal tool URL.
 - Configure `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in Vercel for form handling.
-- Add affiliate links and a paid submit-your-tool flow for monetization.
+- The site includes a dedicated Affiliate Disclosure page, visible on-page disclosure messaging, and `rel="sponsored nofollow"` handling for affiliate-ready links.
+
+## Affiliate setup
+
+1. Join the affiliate programs you want to promote.
+2. Add the approved tracking URLs to your environment variables locally and in Vercel.
+3. Redeploy so the production bundle picks up the new affiliate URLs.
+4. Review the live Affiliate Disclosure, footer disclosure, and tool-card labels after deployment.
+5. Only add affiliate links for programs that allow your traffic sources and disclosure model.
 
 ## Facebook Ads Setup
 
@@ -62,6 +79,19 @@ npm run build
 Notes:
 - Consent controls are wired to the existing cookie banner.
 - CSP in `vercel.json` includes Meta Pixel domains (`connect.facebook.net`, `www.facebook.com`, `graph.facebook.com`).
+
+## CMP Setup (AdSense EEA/UK/CH)
+
+To improve AdSense approval readiness in regulated regions, connect a certified IAB TCF v2 CMP:
+
+1. Add your CMP loader script URL in environment variables:
+	- `VITE_CMP_SCRIPT_URL=https://your-cmp-provider/loader.js`
+2. Redeploy the site so the app can load the CMP script.
+3. Verify your CMP exposes `window.__tcfapi` and captures consent choices.
+4. The app automatically maps TCF consent to Google Consent Mode updates (`gtag('consent', 'update', ...)`).
+5. When a CMP is detected, the built-in local cookie banner is suppressed to avoid dual consent prompts.
+
+If no CMP is configured, the built-in local consent banner remains active.
 
 ## Toolkit PDF
 
@@ -115,6 +145,12 @@ git push origin v1.0.0
 ```
 
 - This creates a GitHub Release and uploads a `dist.zip` build artifact.
+
+## Link Monitoring
+
+- Run `npm run links:uptime` to check external link health (tools, overrides, news links).
+- Results are written to `reports/external-link-uptime.json`.
+- Use `npm run links:uptime:strict` to fail CI/deployment if any link is unreachable.
 
 ## Custom domain
 
