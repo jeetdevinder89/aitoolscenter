@@ -82,7 +82,8 @@ const sendConfirmationEmail = async (email) => {
 export default async function handler(req, res) {
   // Handle OPTIONS
   if (req.method === 'OPTIONS') {
-    return res.status(204).setHeader('Allow', 'POST, OPTIONS').end();
+    res.setHeader('Allow', 'POST, OPTIONS');
+    return res.status(204).end();
   }
 
   if (req.method !== 'POST') {
