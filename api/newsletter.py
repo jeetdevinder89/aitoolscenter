@@ -99,7 +99,8 @@ class handler(BaseHTTPRequestHandler):
         supabase_service_role_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
 
         smtp_host = os.environ.get("SMTP_HOST", "")
-        smtp_port = int(os.environ.get("SMTP_PORT", "587"))
+        _smtp_port_str = os.environ.get("SMTP_PORT", "587").strip()
+        smtp_port = int(_smtp_port_str) if _smtp_port_str.isdigit() else 587
         smtp_username = os.environ.get("SMTP_USERNAME", "")
         smtp_password = os.environ.get("SMTP_PASSWORD", "")
         smtp_use_tls = env_truthy(os.environ.get("SMTP_USE_TLS", "true"))
