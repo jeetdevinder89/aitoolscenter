@@ -1997,7 +1997,7 @@ export default function App() {
   }
 
   // STATS SECTION DATA
-  const totalReviews = FILTERED_TOOLS.reduce((sum, tool) => sum + (tool.reviews || 0), 0)
+  const totalReviews = filteredTools.reduce((sum, tool) => sum + (tool.reviews || 0), 0)
   const formattedReviews = totalReviews >= 1000 ? `${Math.round(totalReviews / 1000)}K+` : String(totalReviews)
   
   const stats = [
