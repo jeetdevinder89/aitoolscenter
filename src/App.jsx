@@ -1290,7 +1290,6 @@ export default function App() {
   const [routePath, setRoutePath] = useState(() => window.location.pathname || '/')
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
-  const [showSuggestions, setShowSuggestions] = useState(false)
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterStatus, setNewsletterStatus] = useState({ type: '', message: '' })
   const [activeCollectionIndex, setActiveCollectionIndex] = useState(0)
@@ -1669,21 +1668,6 @@ export default function App() {
     return () => clearTimeout(timer)
   }, [shareStatus])
 
-  useEffect(() => {
-    // Close suggestions when clicking outside search box
-    const handleClickOutside = (e) => {
-      const searchContainer = document.querySelector('.search-container')
-      if (searchContainer && !searchContainer.contains(e.target)) {
-        setShowSuggestions(false)
-      }
-    }
-
-    if (showSuggestions) {
-      document.addEventListener('click', handleClickOutside)
-      return () => document.removeEventListener('click', handleClickOutside)
-    }
-  }, [showSuggestions])
-
   const scrollToSection = (sectionRef) => {
     sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
@@ -1715,7 +1699,6 @@ export default function App() {
     setCurrentPage('home')
     setSelectedCategory('All')
     setSearchQuery('')
-    setShowSuggestions(false)
     scrollToSection(toolsSectionRef)
   }
 
@@ -1724,7 +1707,6 @@ export default function App() {
     setCurrentPage('home')
     setSelectedCategory('All')
     setSearchQuery('')
-    setShowSuggestions(false)
   }
 
   const openPage = (page) => {
@@ -1739,7 +1721,6 @@ export default function App() {
       navigateTo(legalPaths[page])
     }
     setCurrentPage(page)
-    setShowSuggestions(false)
     window.scrollTo({ top: 0, behavior: 'auto' })
   }
 
@@ -1754,7 +1735,6 @@ export default function App() {
     setCurrentPage('home')
     setSelectedCategory('All')
     setSearchQuery('')
-    setShowSuggestions(false)
     window.setTimeout(() => {
       scrollToSection(seoHubSectionRef)
     }, 0)
@@ -2060,28 +2040,9 @@ export default function App() {
                 type="text"
                 placeholder="Search AI tools, workflows, categories..."
                 value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value)
-                  setShowSuggestions(true)
-                }}
-                onFocus={() => setShowSuggestions(true)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Escape') {
-                    setShowSuggestions(false)
-                  }
-                }}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            {showSuggestions && (
-              <div className="search-suggestions">
-                <div className="suggestion-label">Popular Searches</div>
-                {['AI for Teachers', 'Best Coding AI', 'Free AI Tools', 'Image Generation'].map((s, i) => (
-                  <div key={i} className="suggestion-item" onClick={() => { setSearchQuery(s); setShowSuggestions(false) }}>
-                    {s}
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
 
           {/* STATS */}
