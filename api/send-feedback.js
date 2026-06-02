@@ -4,7 +4,6 @@ const smtpHost = process.env.SMTP_HOST;
 const smtpPort = process.env.SMTP_PORT || 587;
 const smtpUsername = process.env.SMTP_USERNAME;
 const smtpPassword = process.env.SMTP_PASSWORD;
-const supportEmail = 'support@aitoolscenter.in';
 
 // Create transporter
 const transporter = nodemailer.createTransport({
@@ -75,7 +74,7 @@ export default async function handler(req, res) {
     // Send email to support
     const info = await transporter.sendMail({
       from: `${name} <${smtpUsername}>`,
-      to: supportEmail,
+      to: 'support@aitoolscenter.in',
       replyTo: email,
       subject: `[User Feedback] ${subject}`,
       html: htmlBody,

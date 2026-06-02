@@ -70,7 +70,7 @@ export default async function handler(req, res) {
     const newsletterFromEmail = process.env.NEWSLETTER_FROM_EMAIL;
     const siteUrl = process.env.SITE_URL || 'https://aitoolscenter.in';
 
-    if (smtpHost && newsletterFromEmail) {
+    if (smtpHost && (newsletterFromEmail || smtpUsername)) {
       try {
         const nodemailer = (await import('nodemailer')).default;
         const transporter = nodemailer.createTransport({
@@ -95,7 +95,7 @@ export default async function handler(req, res) {
         `;
 
         await transporter.sendMail({
-          from: newsletterFromEmail,
+          from: newsletterFromEmail || smtpUsername,
           to: email,
           subject: 'You have been unsubscribed from AIToolsCenter',
           html: unsubscribeHtml,

@@ -232,7 +232,6 @@ class handler(BaseHTTPRequestHandler):
         confirmation_sent = False
 
         if smtp_host:
-            # Use newsletter email if configured, otherwise fall back to SMTP username
             from_email = newsletter_from_email or smtp_username
             if from_email:
                 confirmation_sent = send_confirmation_email(
