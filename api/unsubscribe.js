@@ -3,6 +3,13 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
+const extractEmailAddress = (value) => {
+  if (!value) return '';
+  const match = String(value).match(/<([^>]+)>/);
+  if (match) return match[1].trim();
+  return String(value).trim();
+};
+
 export default async function handler(req, res) {
   // Accept both GET and POST
   const email = req.query.email || req.body?.email;
@@ -70,7 +77,9 @@ export default async function handler(req, res) {
     const newsletterFromEmail = process.env.NEWSLETTER_FROM_EMAIL;
     const siteUrl = process.env.SITE_URL || 'https://aitoolscenter.in';
 
-    if (smtpHost && (newsletterFromEmail || smtpUsername)) {
+    const senderEmail = extractEmailAddress(newsletterFromEmail || smtpUsername);
+
+    if (smtpHost && senderEmail) {
       try {
         const nodemailer = (await import('nodemailer')).default;
         const transporter = nodemailer.createTransport({
@@ -95,7 +104,7 @@ export default async function handler(req, res) {
         `;
 
         await transporter.sendMail({
-          from: newsletterFromEmail || smtpUsername,
+          from: newsletterFromEmail || senderEmail,
           to: email,
           subject: 'You have been unsubscribed from AIToolsCenter',
           html: unsubscribeHtml,

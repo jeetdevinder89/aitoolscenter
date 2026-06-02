@@ -8,7 +8,7 @@ from email.mime.text import MIMEText
 from http.server import BaseHTTPRequestHandler
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
-from urllib.parse import quote
+from urllib.parse import quote, parseaddr
 
 
 EMAIL_PATTERN = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
@@ -37,6 +37,8 @@ def send_confirmation_email(
     message["Subject"] = "You are subscribed to AIToolsCenter updates"
     message["From"] = from_email
     message["To"] = subscriber_email
+
+    envelope_from_email = parseaddr(from_email)[1] or from_email
 
     if reply_to_email:
         message["Reply-To"] = reply_to_email
@@ -71,7 +73,7 @@ def send_confirmation_email(
             if smtp_username and smtp_password:
                 server.login(smtp_username, smtp_password)
 
-            server.sendmail(from_email, [subscriber_email], message.as_string())
+            server.sendmail(envelope_from_email, [subscriber_email], message.as_string())
 
         return True
     except Exception:

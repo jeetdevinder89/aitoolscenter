@@ -6,6 +6,13 @@ const smtpUsername = process.env.SMTP_USERNAME;
 const smtpPassword = process.env.SMTP_PASSWORD;
 const internalApiSecret = process.env.INTERNAL_API_SECRET;
 
+const extractEmailAddress = (value) => {
+  if (!value) return '';
+  const match = String(value).match(/<([^>]+)>/);
+  if (match) return match[1].trim();
+  return String(value).trim();
+};
+
 const getTransporter = () => nodemailer.createTransport({
   host: smtpHost,
   port: Number(smtpPort),
@@ -41,11 +48,10 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid email format for recipient' });
     }
 
-    const trustedFromEmail = fromEmail || smtpUsername;
+    const trustedFromEmail = extractEmailAddress(fromEmail || smtpUsername);
     const trustedFromName = fromName || 'AIToolsCenter';
 
-    // Prevent arbitrary from-header injection and ensure sender domain is controlled.
-    if (!trustedFromEmail.endsWith('@aitoolscenter.in') && trustedFromEmail !== smtpUsername) {
+    if (!trustedFromEmail || !trustedFromEmail.includes('@')) {
       return res.status(400).json({ error: 'Invalid sender identity' });
     }
 
