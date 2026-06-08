@@ -1,12 +1,22 @@
 {
-  "generatedAt": "2026-06-02T15:11:58.524Z",
+  "generatedAt": "2026-06-08T12:25:32.222Z",
   "timeoutMs": 6000,
   "retries": 2,
   "concurrency": 8,
   "total": 108,
-  "healthy": 92,
-  "failed": 16,
+  "healthy": 87,
+  "failed": 21,
   "failures": [
+    {
+      "source": "tool",
+      "label": "ChatGPT",
+      "url": "https://chatgpt.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
     {
       "source": "tool",
       "label": "Claude",
@@ -29,8 +39,28 @@
     },
     {
       "source": "tool",
+      "label": "Character.ai",
+      "url": "https://character.ai/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
       "label": "Midjourney",
       "url": "https://midjourney.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "DALL-E 3",
+      "url": "https://openai.com/dall-e-3",
       "healthy": false,
       "status": null,
       "method": "HEAD/GET",
@@ -49,6 +79,16 @@
     },
     {
       "source": "tool",
+      "label": "Canva AI",
+      "url": "https://www.canva.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
       "label": "NightCafe",
       "url": "https://nightcafe.studio/",
       "healthy": false,
@@ -59,16 +99,6 @@
     },
     {
       "source": "tool",
-      "label": "DreamStudio",
-      "url": "https://dreamstudio.ai/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "fetch failed"
-    },
-    {
-      "source": "tool",
       "label": "Perplexity Images",
       "url": "https://www.perplexity.ai/",
       "healthy": false,
@@ -76,16 +106,6 @@
       "method": "HEAD/GET",
       "attempts": 3,
       "error": "HTTP 403"
-    },
-    {
-      "source": "tool",
-      "label": "Lexica",
-      "url": "https://lexica.art/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "Timeout after 6000ms"
     },
     {
       "source": "tool",
@@ -101,6 +121,16 @@
       "source": "tool",
       "label": "Phind",
       "url": "https://www.phind.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "Perplexity",
+      "url": "https://perplexity.ai/",
       "healthy": false,
       "status": null,
       "method": "HEAD/GET",
@@ -166,6 +196,26 @@
       "method": "HEAD/GET",
       "attempts": 3,
       "error": "HTTP 404"
+    },
+    {
+      "source": "tool",
+      "label": "OpenAI API",
+      "url": "https://openai.com/api",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "override",
+      "label": "OpenAI API",
+      "url": "https://platform.openai.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
     }
   ],
   "checks": [
@@ -173,11 +223,11 @@
       "source": "tool",
       "label": "ChatGPT",
       "url": "https://chatgpt.com/",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://chatgpt.com/"
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
     },
     {
       "source": "tool",
@@ -313,11 +363,11 @@
       "source": "tool",
       "label": "Character.ai",
       "url": "https://character.ai/",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://character.ai/"
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
     },
     {
       "source": "tool",
@@ -383,11 +433,11 @@
       "source": "tool",
       "label": "DALL-E 3",
       "url": "https://openai.com/dall-e-3",
-      "healthy": true,
-      "status": 200,
-      "method": "GET",
-      "attempts": 1,
-      "finalUrl": "https://openai.com/index/dall-e-3/"
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
     },
     {
       "source": "tool",
@@ -423,11 +473,11 @@
       "source": "tool",
       "label": "Canva AI",
       "url": "https://www.canva.com/",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://www.canva.in/"
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
     },
     {
       "source": "tool",
@@ -473,11 +523,11 @@
       "source": "tool",
       "label": "DreamStudio",
       "url": "https://dreamstudio.ai/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "fetch failed"
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://brandstudio.com/"
     },
     {
       "source": "tool",
@@ -523,11 +573,11 @@
       "source": "tool",
       "label": "Lexica",
       "url": "https://lexica.art/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "Timeout after 6000ms"
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://lexica.art/"
     },
     {
       "source": "tool",
@@ -717,7 +767,7 @@
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://windsurf.com/"
+      "finalUrl": "https://devin.ai/desktop"
     },
     {
       "source": "tool",
@@ -813,11 +863,11 @@
       "source": "tool",
       "label": "Perplexity",
       "url": "https://perplexity.ai/",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://www.perplexity.ai/"
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
     },
     {
       "source": "tool",
@@ -1017,7 +1067,7 @@
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://helpx.adobe.com/support/xd.html"
+      "finalUrl": "https://helpx.adobe.com/xd/desktop.html"
     },
     {
       "source": "tool",
@@ -1083,11 +1133,11 @@
       "source": "tool",
       "label": "OpenAI API",
       "url": "https://openai.com/api",
-      "healthy": true,
-      "status": 200,
-      "method": "GET",
-      "attempts": 2,
-      "finalUrl": "https://openai.com/api/"
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
     },
     {
       "source": "tool",
@@ -1163,91 +1213,91 @@
       "source": "override",
       "label": "OpenAI API",
       "url": "https://platform.openai.com/",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://platform.openai.com/"
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
     },
     {
       "source": "news",
-      "label": "AMD CEO Lisa Su at MIT commencement: Companies do not need people who know how to use AI tools, they need",
-      "url": "https://news.google.com/rss/articles/CBMiqwJBVV95cUxQX3Q0UnllNDdjR3Y4SWFkckliSEkzTDEycUtna1ZwYTVVd1JLanQ3RTlKSHZQWWh4UHB3S3RvTW5vaDZIamVoMXoyd2MzeGtSUE1GbzJFWG9YcUs0X1V4YTBVekdEbHRLdE41NkQ4aXBXNVNzMUJ5NGFKWHZta042N2hvRG5lTlExa0p6UmZXYzRveTFzbmhNYW4tdlZVRm1Nbjd3Tkc1V1g1N2k3ekI3QzRSY21RTkpUYkRidGllNjZMRXVnNl8tZkxoNUR2OEZzdW03bHZEaWs1aXdDNjA1NERaWC1aSmFJSXRjcUNTNzNiNVZOVVNjZ0ZCVXpZdlV5ODJkb2FydjRqNEFhWTEwUk9DNHYxNFU5YW0tVXVyVThETUNFbGs0UG1HNNIBsAJBVV95cUxQTGhSZThsWUZDZTBaRjZnU1Nfc3F4ZFBfa3IyZHBhS3Q1SVdqRG82dUNvSWZvblNuaDN2MEh1bWNJYVJWRGJqYllZTjR3c1VnbVFnN01tUUptRk54Y1lSTGQ5cGVaLTBBektpbHp0MUE2RGlxR0lnUWtfS3daUDdSeG93dGlpTllsNzh1VWJqMmsxV3E2bmFTemRaa3VPaTEyMHdiNG9JREhGNGVadUFzcVRqbmQ2NjdQb1JiSUM5UlFDNzlqVFc3SThyX1BvUzdxVERtS1M2NGExUl9aTE85dEpmX0s5OV9hLWJxaFZteC1zYVJ3Q3ZuWlRlVmtTMXFrNTF3NklzaVJjRjBkTkFSV0YyX2g1OE1ENE5SUk5Hajg4RTVsTHNmcGNRVGdVVlJN?oc=5",
+      "label": "10 Best AI Tools for Students to Boost Grades in 2026",
+      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9TRl9SOFhNRW9QdFJCQnBoNTZPZ1VOT1loLWxwUW5yMFNPVHEzNXR6M3lSV2pVWDlaOTZOZV9RblBVdUotQThyV1lqMWk4RGQyWlQ2em5sYmN5SU11THp1MNIBYEFVX3lxTE9TRl9SOFhNRW9QdFJCQnBoNTZPZ1VOT1loLWxwUW5yMFNPVHEzNXR6M3lSV2pVWDlaOTZOZV9RblBVdUotQThyV1lqMWk4RGQyWlQ2em5sYmN5SU11THp1MA?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiqwJBVV95cUxQX3Q0UnllNDdjR3Y4SWFkckliSEkzTDEycUtna1ZwYTVVd1JLanQ3RTlKSHZQWWh4UHB3S3RvTW5vaDZIamVoMXoyd2MzeGtSUE1GbzJFWG9YcUs0X1V4YTBVekdEbHRLdE41NkQ4aXBXNVNzMUJ5NGFKWHZta042N2hvRG5lTlExa0p6UmZXYzRveTFzbmhNYW4tdlZVRm1Nbjd3Tkc1V1g1N2k3ekI3QzRSY21RTkpUYkRidGllNjZMRXVnNl8tZkxoNUR2OEZzdW03bHZEaWs1aXdDNjA1NERaWC1aSmFJSXRjcUNTNzNiNVZOVVNjZ0ZCVXpZdlV5ODJkb2FydjRqNEFhWTEwUk9DNHYxNFU5YW0tVXVyVThETUNFbGs0UG1HNNIBsAJBVV95cUxQTGhSZThsWUZDZTBaRjZnU1Nfc3F4ZFBfa3IyZHBhS3Q1SVdqRG82dUNvSWZvblNuaDN2MEh1bWNJYVJWRGJqYllZTjR3c1VnbVFnN01tUUptRk54Y1lSTGQ5cGVaLTBBektpbHp0MUE2RGlxR0lnUWtfS3daUDdSeG93dGlpTllsNzh1VWJqMmsxV3E2bmFTemRaa3VPaTEyMHdiNG9JREhGNGVadUFzcVRqbmQ2NjdQb1JiSUM5UlFDNzlqVFc3SThyX1BvUzdxVERtS1M2NGExUl9aTE85dEpmX0s5OV9hLWJxaFZteC1zYVJ3Q3ZuWlRlVmtTMXFrNTF3NklzaVJjRjBkTkFSV0YyX2g1OE1ENE5SUk5Hajg4RTVsTHNmcGNRVGdVVlJN?oc=5&hl=en-IN&gl=IN&ceid=IN:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9TRl9SOFhNRW9QdFJCQnBoNTZPZ1VOT1loLWxwUW5yMFNPVHEzNXR6M3lSV2pVWDlaOTZOZV9RblBVdUotQThyV1lqMWk4RGQyWlQ2em5sYmN5SU11THp1MNIBYEFVX3lxTE9TRl9SOFhNRW9QdFJCQnBoNTZPZ1VOT1loLWxwUW5yMFNPVHEzNXR6M3lSV2pVWDlaOTZOZV9RblBVdUotQThyV1lqMWk4RGQyWlQ2em5sYmN5SU11THp1MA?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "AI didn't kill the junior developer, it changed the rules",
-      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE0xLWQ1N25UVVM4X1BDQ0hsVFdhQTFPSTJ1Q1VmSFduMlB2TWlMMEtsOHdNREtkVFBWV3RndkdCNkpVdGVxNERsM3VfMVRZMHZ1Q2ZwcTZOUXV0Vk1SdUdSeUd4V2FCbkk?oc=5",
+      "label": "Square Yards launches property ChatGPT application",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxObldrV0w2dVZCcV92TlhxTW12eUZGby0wMklnajU5SEtNNTV2U2tWalZZeERDeWdEQjlmXzNkNGdybWxUUnNlTWJERWtMMW1RQWRQLXB2RmFWTVlfRy1OU2E0XzhRQUtrRlYyR3NNd3JxZU50Z2tCWXR5bHM5MVA0S1k2eFppQnl1U3NzM3ZSYWNVdlNodGhYSg?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE0xLWQ1N25UVVM4X1BDQ0hsVFdhQTFPSTJ1Q1VmSFduMlB2TWlMMEtsOHdNREtkVFBWV3RndkdCNkpVdGVxNERsM3VfMVRZMHZ1Q2ZwcTZOUXV0Vk1SdUdSeUd4V2FCbkk?oc=5&hl=en-IN&gl=IN&ceid=IN:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxObldrV0w2dVZCcV92TlhxTW12eUZGby0wMklnajU5SEtNNTV2U2tWalZZeERDeWdEQjlmXzNkNGdybWxUUnNlTWJERWtMMW1RQWRQLXB2RmFWTVlfRy1OU2E0XzhRQUtrRlYyR3NNd3JxZU50Z2tCWXR5bHM5MVA0S1k2eFppQnl1U3NzM3ZSYWNVdlNodGhYSg?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Nvidia gives developers the tool to build secure, autonomous AI workers that scale",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNeGg3ZWpGSEhvYUlzYWJCbGpJcW9kazA4bDJLM3RHLXhYNWdiVHZDWEo2d1BUX25vZUVTangzcFYyUEx1SVBUNGpwMkdObEl5dmY2Y0hBNVZkamotX1hZSlduS29mTWJuWDBwdkdfZlhKa0JrYlUxOUtyVzNxNXY2VU5QdjY5Smc2d0VxRXpKTG9EQjhlbnRidzBZeFJySFRIalNadUV3OGhfZw?oc=5",
+      "label": "Starmer to Roll Out UK Job Center Tools to Beat AI Work Threat",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPVTR5Mlh2RGVEZHhnV0cwTklHMFAxWTJQaGdUU0oyWkowN29pc0R4NGFPS2FIWmtFNWxLeEFxQ3doTFZYXzdCNlJyc21MTnc0ZUZvVjJVeDdrdHhlQW5YbGZlVWM2YXV6aGVvU0hwa1E3OXpGWVNFd0QtWnpmVWdYaWRSRkdBdkFtZ3dzLW80VF8zSWt5T25rSy1jMjVfeUk0ZkRPaGVkOURtX29TTUZ6cldKdw?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNeGg3ZWpGSEhvYUlzYWJCbGpJcW9kazA4bDJLM3RHLXhYNWdiVHZDWEo2d1BUX25vZUVTangzcFYyUEx1SVBUNGpwMkdObEl5dmY2Y0hBNVZkamotX1hZSlduS29mTWJuWDBwdkdfZlhKa0JrYlUxOUtyVzNxNXY2VU5QdjY5Smc2d0VxRXpKTG9EQjhlbnRidzBZeFJySFRIalNadUV3OGhfZw?oc=5&hl=en-IN&gl=IN&ceid=IN:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPVTR5Mlh2RGVEZHhnV0cwTklHMFAxWTJQaGdUU0oyWkowN29pc0R4NGFPS2FIWmtFNWxLeEFxQ3doTFZYXzdCNlJyc21MTnc0ZUZvVjJVeDdrdHhlQW5YbGZlVWM2YXV6aGVvU0hwa1E3OXpGWVNFd0QtWnpmVWdYaWRSRkdBdkFtZ3dzLW80VF8zSWt5T25rSy1jMjVfeUk0ZkRPaGVkOURtX29TTUZ6cldKdw?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "10 Best AI Face Swap Tools & Apps in 2026 (Free & Paid)",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9ld1JqQjlqWUM5c1dHT1k5WkVEcThZNEM5eXpFRlVsd3huUHFpd0VtcHF1UGoyR01oRHZuajdKZUxnSjlzekVtdDRjN2w0dEFUeVB5LWRkYlZKQTNE0gFcQVVfeXFMT2V3UmpCOWpZQzlzV0dPWTlaRURxOFk0Qzl5ekVGVWx3eG5QcWl3RW1wcXVQajJHTWhEdm5qN0plTGdKOXN6RW10NGM3bDR0QVR5UHktZGRiVkpBM0Q?oc=5",
+      "label": "How suite of AI tools will be used by teams, officials and fans at FIFA World Cup",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNTVkxTlZJVndSRkZmbU90LTd1UlhFVGVsRFV2MEl2NXhXY1lWSDhjdm5IU0JGeEs2VjNJQWVzalVwTTBPSU04VWdXMDljeGhCZnA2U0c3MTdRSXFhUkU3Wmp1SV93MDJFUFM2ZlVBZjF6REtBczNIOExUNEJ6Y241MFVRWnpiLUpIUEJ2RHRPODYteFJZNVg5cWVXb0tBWERtY0Q0Z1dkMnkwM2hQR3l3SkVnMG5pTWd5X1JkTGFqazlpbVc3RU0w?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9ld1JqQjlqWUM5c1dHT1k5WkVEcThZNEM5eXpFRlVsd3huUHFpd0VtcHF1UGoyR01oRHZuajdKZUxnSjlzekVtdDRjN2w0dEFUeVB5LWRkYlZKQTNE0gFcQVVfeXFMT2V3UmpCOWpZQzlzV0dPWTlaRURxOFk0Qzl5ekVGVWx3eG5QcWl3RW1wcXVQajJHTWhEdm5qN0plTGdKOXN6RW10NGM3bDR0QVR5UHktZGRiVkpBM0Q?oc=5&hl=en-IN&gl=IN&ceid=IN:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNTVkxTlZJVndSRkZmbU90LTd1UlhFVGVsRFV2MEl2NXhXY1lWSDhjdm5IU0JGeEs2VjNJQWVzalVwTTBPSU04VWdXMDljeGhCZnA2U0c3MTdRSXFhUkU3Wmp1SV93MDJFUFM2ZlVBZjF6REtBczNIOExUNEJ6Y241MFVRWnpiLUpIUEJ2RHRPODYteFJZNVg5cWVXb0tBWERtY0Q0Z1dkMnkwM2hQR3l3SkVnMG5pTWd5X1JkTGFqazlpbVc3RU0w?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Study highlights major gaps in online info for patients about AI and cancer",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPZHJXQXY4WjFkb083N3lJbmRVV0ZqMGlYM0ltV252LVVJZ1dvWDZMS0cwWjlnN0NucEhOcHB0ZmdnSUwwM3FqNTRRSGRiVWRKZ1loM0J1eElTY1hRVXZpeHdnWlM2NmhRUDlyNnUzNVFMbzVvX3BJNjdjazJoTkd6V2VaNA?oc=5",
+      "label": "500,000 NHS staff to get new artificial intelligence tools to help free up more time for patients",
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPRjJkRDZVSXo2X1YyMUpUQ3QwNXM4Nzh0R1hlRFRyX3dOZ0FReGgwUkpncFNYblFjUTM0QVJwMEhjOGxLT0lYbVJWY2c0SGd4dWpmdWhMV0VnNnhLQ1l4U0dISHQzeWdsREp3UnBqcF90ZURFVGR6UTF4SHFUR1hMYms1NkgtNGM4RmRrSDMxeDJHN0tOQlNVTVdTSkc2QWpLdzIzWG5zZk90ZlhDank0ZklDdTRsSGpPWWNGcDdqenpxX3RVVHZwZGtJY2VHa3Y0NFg3Y3Z30gHbAUFVX3lxTE5Dc3VZcl8xRWFkWnowUHBZaXRON3c5cW04S1RWUEhQdVk5azBUMW1KM3NLSV9XQjNydW5Bd1pQQjUycjY1Z1dseDRoVGpWSHBDR0MxTGhTcU91MWhQZGNtelNwSzI4d05pd2JibEdxTnE2VU9fT2RUOEc3cWd2bHhmSWpRWkhtSmxNaDFDTllSXzdsbVN5blBMNHBiM1R5b2xXeV9Ic1BRTWFwNlBIMmdCVkRmaVk1bkVSYXVZRTJGRmVfa3NDaHlRVWxpUkZHZ0NUek9JTVVkVWU5dw?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPZHJXQXY4WjFkb083N3lJbmRVV0ZqMGlYM0ltV252LVVJZ1dvWDZMS0cwWjlnN0NucEhOcHB0ZmdnSUwwM3FqNTRRSGRiVWRKZ1loM0J1eElTY1hRVXZpeHdnWlM2NmhRUDlyNnUzNVFMbzVvX3BJNjdjazJoTkd6V2VaNA?oc=5&hl=en-IN&gl=IN&ceid=IN:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPRjJkRDZVSXo2X1YyMUpUQ3QwNXM4Nzh0R1hlRFRyX3dOZ0FReGgwUkpncFNYblFjUTM0QVJwMEhjOGxLT0lYbVJWY2c0SGd4dWpmdWhMV0VnNnhLQ1l4U0dISHQzeWdsREp3UnBqcF90ZURFVGR6UTF4SHFUR1hMYms1NkgtNGM4RmRrSDMxeDJHN0tOQlNVTVdTSkc2QWpLdzIzWG5zZk90ZlhDank0ZklDdTRsSGpPWWNGcDdqenpxX3RVVHZwZGtJY2VHa3Y0NFg3Y3Z30gHbAUFVX3lxTE5Dc3VZcl8xRWFkWnowUHBZaXRON3c5cW04S1RWUEhQdVk5azBUMW1KM3NLSV9XQjNydW5Bd1pQQjUycjY1Z1dseDRoVGpWSHBDR0MxTGhTcU91MWhQZGNtelNwSzI4d05pd2JibEdxTnE2VU9fT2RUOEc3cWd2bHhmSWpRWkhtSmxNaDFDTllSXzdsbVN5blBMNHBiM1R5b2xXeV9Ic1BRTWFwNlBIMmdCVkRmaVk1bkVSYXVZRTJGRmVfa3NDaHlRVWxpUkZHZ0NUek9JTVVkVWU5dw?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Parents of children under 18 are more likely to say parents should let their children use AI tools",
-      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQVmJKX0haVnFaTUpPYnlLcnBYUV9fNHhBMEJSbFZyeDdvTUJQOGhuTDNiNmRqM3NvckRMcC1kd0x4NC1DVXVyb0VRWFlJMGpGR1ZvUzN2T3FCQ3Y0Yk5UaHhoV1RnZlZoOWtPWVVkR09WRjQxV1RnTGFYSlAxNEk1elN3UkNZUFUwT2h4cEFUWnM3c3BBYnl5WEVqcHVoZ2h6TUVWQmZ4V3JydDMyZ0JfZnh2eTlxSURHU2hMbjNWZ0ZlR2dLeGlPUmxVTDlQWWlENnlPUQ?oc=5",
+      "label": "AWS unveils new AI tools focused on startup founders",
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNNGZVcmxOTmxZQTgwWi1rZ25JMkh4Tk5pYjViZjlUb1ZrMjFlMUZkaU9ObEQ0dUFyTnhaTmRUbUdCLTRMcjdfb2VqQXZTdXR5QVI4WE4ybDFuRThJQkFBdEJZTDhUYXVELUdlWXZ6LXBjbnoxTnFFUHlOUXpWTTFoLXU0M3Nqa0MwY0E?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQVmJKX0haVnFaTUpPYnlLcnBYUV9fNHhBMEJSbFZyeDdvTUJQOGhuTDNiNmRqM3NvckRMcC1kd0x4NC1DVXVyb0VRWFlJMGpGR1ZvUzN2T3FCQ3Y0Yk5UaHhoV1RnZlZoOWtPWVVkR09WRjQxV1RnTGFYSlAxNEk1elN3UkNZUFUwT2h4cEFUWnM3c3BBYnl5WEVqcHVoZ2h6TUVWQmZ4V3JydDMyZ0JfZnh2eTlxSURHU2hMbjNWZ0ZlR2dLeGlPUmxVTDlQWWlENnlPUQ?oc=5&hl=en-IN&gl=IN&ceid=IN:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNNGZVcmxOTmxZQTgwWi1rZ25JMkh4Tk5pYjViZjlUb1ZrMjFlMUZkaU9ObEQ0dUFyTnhaTmRUbUdCLTRMcjdfb2VqQXZTdXR5QVI4WE4ybDFuRThJQkFBdEJZTDhUYXVELUdlWXZ6LXBjbnoxTnFFUHlOUXpWTTFoLXU0M3Nqa0MwY0E?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Artificial intelligence tools expand scientists’ impact but contract science’s focus",
-      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBqZTlDR3VQMU05anlkUEJRbEZTRENCNkdCYlhfODFBNjJEeU1sUjJPNzZBVGwwc25qRFFSRnJWQTROc0NNSTlhcVNCSEpjOV9TYnFyXzVKSDl1UGVOTGFj?oc=5",
+      "label": "Artificial Intelligence Is Here To Stay. Are Hawaiʻi Schools Ready?",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQQUdHS0ZweU84cHIwRnFfMWI2MjF5VjMyQ2ViVE9iMV8yOTVFcnBkZlJ4aHJLa3NFVmNFSmk3ZndZQ25UMmloZG8ybU9NN3o4ekxpOGk2SmRkclJ0RGtkZ01qbE9jYjJndXR2OGNjODV1V0FBWUZaU3M2ZlR2RlYtWXN2eE1EQXZJZ2tLYzBxbTdSSHpyaVFqX01ZVVFnZ3p1a1BmMmt6VjkzcUQw?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBqZTlDR3VQMU05anlkUEJRbEZTRENCNkdCYlhfODFBNjJEeU1sUjJPNzZBVGwwc25qRFFSRnJWQTROc0NNSTlhcVNCSEpjOV9TYnFyXzVKSDl1UGVOTGFj?oc=5&hl=en-IN&gl=IN&ceid=IN:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQQUdHS0ZweU84cHIwRnFfMWI2MjF5VjMyQ2ViVE9iMV8yOTVFcnBkZlJ4aHJLa3NFVmNFSmk3ZndZQ25UMmloZG8ybU9NN3o4ekxpOGk2SmRkclJ0RGtkZ01qbE9jYjJndXR2OGNjODV1V0FBWUZaU3M2ZlR2RlYtWXN2eE1EQXZJZ2tLYzBxbTdSSHpyaVFqX01ZVVFnZ3p1a1BmMmt6VjkzcUQw?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Amazon shuts down internal AI leaderboard after employees inflate usage, driving up costs",
-      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOcFdkWXNNci0xeV9UNnQyR3pWeEpUNmF5Z3JnenNwRm1xU2JLbjd5eVQ0S0ZIcHZRZHlNWVRQdVJjSmFNS1RKWDFlbTEtYk1wNC1sdTRpSVFKZkhNaHZoWEFCSDdzVGFnY0M3QTFSX0tzWnZCZ0FYcTJUS3R4SDZqcnB1cTVTOVYzZWNWbE1zT1dSU0oxa184dURXdkNDZGcwWnFWN3piTFdweVJwbGtYbVVLSktUN21zLWphblIxRDlrczZtc1hFcUtOMUtlXzBGTUlQbjlJMNIB3AFBVV95cUxPVnZ3ajBnamNyNlp0Q1dieGdPRVdGc0pfVzd1cG9tWmM2S3VvbVJQd0hZN21tbEpfRzJrbUlzWWdqYkRYTXdjZnlGRTF1eWd6ZUUyVXNKNEpnbnhZSlZOcGlYUmxfMXc5bGUxM3I4VWgwV3BKM3VNSUJLWEhrTTZIZVp3WUluU2kta1lQZm5ZaVVIaUpTQnk5amhPTTc0OFhaYzl4TkJPbjBfaWxRaEkzMWRMbnQ2VUJiQ2doUmlvTGlTTmE5MjhBaEFBd3I0Qi15ZkJVanpLOTRlTTR6?oc=5",
+      "label": "Salesforce expands Agentforce with AI tools for marketing teams",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNTDk5bFpadWRWOGIzTVhGUDg4RnRGcmhYSUx2YWtVMVhaNlNlcEE3WGRyUlp3TGZ2ekd6Sl9WMmV3TzRORWRrSjVwem9VVEdreU5NcjBLcnNTbEpzdndvUXlHNlctWXN6d2lPRmlkRXJJRFNibU5tUkI2ZXZfcU1idDgxNEJPdE5aN0FJQlR0UE5lYzIwcW1fLU9MVUI?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOcFdkWXNNci0xeV9UNnQyR3pWeEpUNmF5Z3JnenNwRm1xU2JLbjd5eVQ0S0ZIcHZRZHlNWVRQdVJjSmFNS1RKWDFlbTEtYk1wNC1sdTRpSVFKZkhNaHZoWEFCSDdzVGFnY0M3QTFSX0tzWnZCZ0FYcTJUS3R4SDZqcnB1cTVTOVYzZWNWbE1zT1dSU0oxa184dURXdkNDZGcwWnFWN3piTFdweVJwbGtYbVVLSktUN21zLWphblIxRDlrczZtc1hFcUtOMUtlXzBGTUlQbjlJMNIB3AFBVV95cUxPVnZ3ajBnamNyNlp0Q1dieGdPRVdGc0pfVzd1cG9tWmM2S3VvbVJQd0hZN21tbEpfRzJrbUlzWWdqYkRYTXdjZnlGRTF1eWd6ZUUyVXNKNEpnbnhZSlZOcGlYUmxfMXc5bGUxM3I4VWgwV3BKM3VNSUJLWEhrTTZIZVp3WUluU2kta1lQZm5ZaVVIaUpTQnk5amhPTTc0OFhaYzl4TkJPbjBfaWxRaEkzMWRMbnQ2VUJiQ2doUmlvTGlTTmE5MjhBaEFBd3I0Qi15ZkJVanpLOTRlTTR6?oc=5&hl=en-IN&gl=IN&ceid=IN:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNTDk5bFpadWRWOGIzTVhGUDg4RnRGcmhYSUx2YWtVMVhaNlNlcEE3WGRyUlp3TGZ2ekd6Sl9WMmV3TzRORWRrSjVwem9VVEdreU5NcjBLcnNTbEpzdndvUXlHNlctWXN6d2lPRmlkRXJJRFNibU5tUkI2ZXZfcU1idDgxNEJPdE5aN0FJQlR0UE5lYzIwcW1fLU9MVUI?oc=5&hl=en-US&gl=US&ceid=US:en"
     }
   ]
 }
