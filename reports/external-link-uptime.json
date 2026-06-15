@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-08T12:25:32.222Z",
+  "generatedAt": "2026-06-15T13:51:20.151Z",
   "timeoutMs": 6000,
   "retries": 2,
   "concurrency": 8,
@@ -1221,83 +1221,83 @@
     },
     {
       "source": "news",
-      "label": "10 Best AI Tools for Students to Boost Grades in 2026",
-      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9TRl9SOFhNRW9QdFJCQnBoNTZPZ1VOT1loLWxwUW5yMFNPVHEzNXR6M3lSV2pVWDlaOTZOZV9RblBVdUotQThyV1lqMWk4RGQyWlQ2em5sYmN5SU11THp1MNIBYEFVX3lxTE9TRl9SOFhNRW9QdFJCQnBoNTZPZ1VOT1loLWxwUW5yMFNPVHEzNXR6M3lSV2pVWDlaOTZOZV9RblBVdUotQThyV1lqMWk4RGQyWlQ2em5sYmN5SU11THp1MA?oc=5",
+      "label": "Crypto token’s 50% wipeout shows magnitude of AI-hacking threat",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQRFlQZUxkNWdIb1hIRmlRRHFNZXNrNzJGYjBncnFZYk52OTQ4aHpNbm9tRDdwcmNpcUtBcDhxNFdGajdXVlYwb3VsY0l4cFNBM2VYWV9MeHBHcE1HN1JIREVBUDBud293ZnU3NzQyR21iQzRGZTRKMEQ4aTdyVUt4TjZnb1A?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9TRl9SOFhNRW9QdFJCQnBoNTZPZ1VOT1loLWxwUW5yMFNPVHEzNXR6M3lSV2pVWDlaOTZOZV9RblBVdUotQThyV1lqMWk4RGQyWlQ2em5sYmN5SU11THp1MNIBYEFVX3lxTE9TRl9SOFhNRW9QdFJCQnBoNTZPZ1VOT1loLWxwUW5yMFNPVHEzNXR6M3lSV2pVWDlaOTZOZV9RblBVdUotQThyV1lqMWk4RGQyWlQ2em5sYmN5SU11THp1MA?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQRFlQZUxkNWdIb1hIRmlRRHFNZXNrNzJGYjBncnFZYk52OTQ4aHpNbm9tRDdwcmNpcUtBcDhxNFdGajdXVlYwb3VsY0l4cFNBM2VYWV9MeHBHcE1HN1JIREVBUDBud293ZnU3NzQyR21iQzRGZTRKMEQ4aTdyVUt4TjZnb1A?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Square Yards launches property ChatGPT application",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxObldrV0w2dVZCcV92TlhxTW12eUZGby0wMklnajU5SEtNNTV2U2tWalZZeERDeWdEQjlmXzNkNGdybWxUUnNlTWJERWtMMW1RQWRQLXB2RmFWTVlfRy1OU2E0XzhRQUtrRlYyR3NNd3JxZU50Z2tCWXR5bHM5MVA0S1k2eFppQnl1U3NzM3ZSYWNVdlNodGhYSg?oc=5",
+      "label": "Telangana plans AI-based diagnostics expansion in district hospitals to boost healthcare access",
+      "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxNRFBJRmsxSjRiV1dhaElQVEd0aERzVklZR0RhTDJMNTZWSUVxTF9Eal9jVUp4Vm8zRGV4UEpEaEVOeENKUF9BT3RMRi1NQnhyY3JJVEhMUk1Ca0NRcUhZRkZVYURFSUlDamxSSFE3MGxCTUUxQ0xnaEVHekVWWlBuNHp3RFhKdHpSRU5PQ25aMXVsOW5ONlF0M21mNHhmVThqSXZKRnctaUpybUJnejF1Z09kTjR1TnRIR2hkQ3BJUlFlSzliY3FpeWRSWE1PeVBGLTlvel91Vzg3amVMeEtza1ZnY185T2dhUVcxUlVn0gH7AUFVX3lxTFBCa3FGaTI3Q3Uyam5UZVUxNEE2MFV6WnZ1aHQ4SGREOXpha2FjeDNLM2pxSkhpb3R1d2x0b0FFcjlwV0FwVmZtWVlUbk12YzRrMnRvN2V4NElEejdLMTNTSkFpODlqMUtCZlBjWkJzc2RlSi1vOE1EanpsTmhDb2tsS00zZ0lFV2NmcHFoUlJZdkxJMU9GVWMwaEs4ckhpYmdvYlhPM3Zqd2RVdGVUQ0FMVWJEMlpISDRzRkFndGhudnhuVXZjVG93aExoVERqSHk2eTliZmNxckFwZk1TTHdLODFYVUh0eC1OakVuS2VJQ3pEVFp4V1E3ZnNF?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxObldrV0w2dVZCcV92TlhxTW12eUZGby0wMklnajU5SEtNNTV2U2tWalZZeERDeWdEQjlmXzNkNGdybWxUUnNlTWJERWtMMW1RQWRQLXB2RmFWTVlfRy1OU2E0XzhRQUtrRlYyR3NNd3JxZU50Z2tCWXR5bHM5MVA0S1k2eFppQnl1U3NzM3ZSYWNVdlNodGhYSg?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxNRFBJRmsxSjRiV1dhaElQVEd0aERzVklZR0RhTDJMNTZWSUVxTF9Eal9jVUp4Vm8zRGV4UEpEaEVOeENKUF9BT3RMRi1NQnhyY3JJVEhMUk1Ca0NRcUhZRkZVYURFSUlDamxSSFE3MGxCTUUxQ0xnaEVHekVWWlBuNHp3RFhKdHpSRU5PQ25aMXVsOW5ONlF0M21mNHhmVThqSXZKRnctaUpybUJnejF1Z09kTjR1TnRIR2hkQ3BJUlFlSzliY3FpeWRSWE1PeVBGLTlvel91Vzg3amVMeEtza1ZnY185T2dhUVcxUlVn0gH7AUFVX3lxTFBCa3FGaTI3Q3Uyam5UZVUxNEE2MFV6WnZ1aHQ4SGREOXpha2FjeDNLM2pxSkhpb3R1d2x0b0FFcjlwV0FwVmZtWVlUbk12YzRrMnRvN2V4NElEejdLMTNTSkFpODlqMUtCZlBjWkJzc2RlSi1vOE1EanpsTmhDb2tsS00zZ0lFV2NmcHFoUlJZdkxJMU9GVWMwaEs4ckhpYmdvYlhPM3Zqd2RVdGVUQ0FMVWJEMlpISDRzRkFndGhudnhuVXZjVG93aExoVERqSHk2eTliZmNxckFwZk1TTHdLODFYVUh0eC1OakVuS2VJQ3pEVFp4V1E3ZnNF?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Starmer to Roll Out UK Job Center Tools to Beat AI Work Threat",
-      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPVTR5Mlh2RGVEZHhnV0cwTklHMFAxWTJQaGdUU0oyWkowN29pc0R4NGFPS2FIWmtFNWxLeEFxQ3doTFZYXzdCNlJyc21MTnc0ZUZvVjJVeDdrdHhlQW5YbGZlVWM2YXV6aGVvU0hwa1E3OXpGWVNFd0QtWnpmVWdYaWRSRkdBdkFtZ3dzLW80VF8zSWt5T25rSy1jMjVfeUk0ZkRPaGVkOURtX29TTUZ6cldKdw?oc=5",
+      "label": "General-purpose large language models outperform specialized clinical AI tools on medical benchmarks",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE54SDl4dzQxX3BOdU9sNjRMWU8tQ29mYVpxRURxeWlZZ20zQVpramJCZVd0QlVOZmZqb3JvVkc2Qm5jaURhV3NCdVNIdUJIQTZHdjhlbEZEcDB6eG5wUDN3?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPVTR5Mlh2RGVEZHhnV0cwTklHMFAxWTJQaGdUU0oyWkowN29pc0R4NGFPS2FIWmtFNWxLeEFxQ3doTFZYXzdCNlJyc21MTnc0ZUZvVjJVeDdrdHhlQW5YbGZlVWM2YXV6aGVvU0hwa1E3OXpGWVNFd0QtWnpmVWdYaWRSRkdBdkFtZ3dzLW80VF8zSWt5T25rSy1jMjVfeUk0ZkRPaGVkOURtX29TTUZ6cldKdw?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE54SDl4dzQxX3BOdU9sNjRMWU8tQ29mYVpxRURxeWlZZ20zQVpramJCZVd0QlVOZmZqb3JvVkc2Qm5jaURhV3NCdVNIdUJIQTZHdjhlbEZEcDB6eG5wUDN3?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "How suite of AI tools will be used by teams, officials and fans at FIFA World Cup",
-      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNTVkxTlZJVndSRkZmbU90LTd1UlhFVGVsRFV2MEl2NXhXY1lWSDhjdm5IU0JGeEs2VjNJQWVzalVwTTBPSU04VWdXMDljeGhCZnA2U0c3MTdRSXFhUkU3Wmp1SV93MDJFUFM2ZlVBZjF6REtBczNIOExUNEJ6Y241MFVRWnpiLUpIUEJ2RHRPODYteFJZNVg5cWVXb0tBWERtY0Q0Z1dkMnkwM2hQR3l3SkVnMG5pTWd5X1JkTGFqazlpbVc3RU0w?oc=5",
+      "label": "Commentary: Anthropic's shock suspension of new AI tools is a wake-up call for the world",
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxONnQ3RWxUTlpqM2l2OU1hYjg1dXR5dHhLdF9qcGgtV2hhUXU2SzAtWEpnUmJjVWZRUG41YVlEZExOZksxRmw2ZEdORG5pRlNlNVZtZFNsWF80WHhMaWtUQmNYVTZ6VGR0MUZHazNteTFyWjk3d2xTdzhyMGdjSW9tMTdyVU5QeVN3UVpjejhha0FXblJDa09OcnItYUc0NEtxZTU3a2kweGc0NTZ0VV9fUklVRWJSWWJ3djFTVGFTTXRSVFZj0gHMAUFVX3lxTE5jQkF3Z1E0OXRuV1otejdudmZrNVlKYU13c1lRanFvdjZIZ3lmeGtPblFZaEhwM2dfeHp6LVpsT0hHV2J3SkZQUjMxQWZfZFVEdE5uUUpfSnpFMnA5bW55UktmLUtYM2E0V2h6T05wMTFmN3FPalBLQVdRTzJNa3FkaEpfeWVzRjJfSFlhYk0wbFRaRUQtRWYyLVdCbXl3RERmT2haM0hZb1ZUZTdRd21hTHNnWklaVzYzVlkyYmNsME1kQkxVd0NSM3U1OA?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNTVkxTlZJVndSRkZmbU90LTd1UlhFVGVsRFV2MEl2NXhXY1lWSDhjdm5IU0JGeEs2VjNJQWVzalVwTTBPSU04VWdXMDljeGhCZnA2U0c3MTdRSXFhUkU3Wmp1SV93MDJFUFM2ZlVBZjF6REtBczNIOExUNEJ6Y241MFVRWnpiLUpIUEJ2RHRPODYteFJZNVg5cWVXb0tBWERtY0Q0Z1dkMnkwM2hQR3l3SkVnMG5pTWd5X1JkTGFqazlpbVc3RU0w?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMixAFBVV95cUxONnQ3RWxUTlpqM2l2OU1hYjg1dXR5dHhLdF9qcGgtV2hhUXU2SzAtWEpnUmJjVWZRUG41YVlEZExOZksxRmw2ZEdORG5pRlNlNVZtZFNsWF80WHhMaWtUQmNYVTZ6VGR0MUZHazNteTFyWjk3d2xTdzhyMGdjSW9tMTdyVU5QeVN3UVpjejhha0FXblJDa09OcnItYUc0NEtxZTU3a2kweGc0NTZ0VV9fUklVRWJSWWJ3djFTVGFTTXRSVFZj0gHMAUFVX3lxTE5jQkF3Z1E0OXRuV1otejdudmZrNVlKYU13c1lRanFvdjZIZ3lmeGtPblFZaEhwM2dfeHp6LVpsT0hHV2J3SkZQUjMxQWZfZFVEdE5uUUpfSnpFMnA5bW55UktmLUtYM2E0V2h6T05wMTFmN3FPalBLQVdRTzJNa3FkaEpfeWVzRjJfSFlhYk0wbFRaRUQtRWYyLVdCbXl3RERmT2haM0hZb1ZUZTdRd21hTHNnWklaVzYzVlkyYmNsME1kQkxVd0NSM3U1OA?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "500,000 NHS staff to get new artificial intelligence tools to help free up more time for patients",
-      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPRjJkRDZVSXo2X1YyMUpUQ3QwNXM4Nzh0R1hlRFRyX3dOZ0FReGgwUkpncFNYblFjUTM0QVJwMEhjOGxLT0lYbVJWY2c0SGd4dWpmdWhMV0VnNnhLQ1l4U0dISHQzeWdsREp3UnBqcF90ZURFVGR6UTF4SHFUR1hMYms1NkgtNGM4RmRrSDMxeDJHN0tOQlNVTVdTSkc2QWpLdzIzWG5zZk90ZlhDank0ZklDdTRsSGpPWWNGcDdqenpxX3RVVHZwZGtJY2VHa3Y0NFg3Y3Z30gHbAUFVX3lxTE5Dc3VZcl8xRWFkWnowUHBZaXRON3c5cW04S1RWUEhQdVk5azBUMW1KM3NLSV9XQjNydW5Bd1pQQjUycjY1Z1dseDRoVGpWSHBDR0MxTGhTcU91MWhQZGNtelNwSzI4d05pd2JibEdxTnE2VU9fT2RUOEc3cWd2bHhmSWpRWkhtSmxNaDFDTllSXzdsbVN5blBMNHBiM1R5b2xXeV9Ic1BRTWFwNlBIMmdCVkRmaVk1bkVSYXVZRTJGRmVfa3NDaHlRVWxpUkZHZ0NUek9JTVVkVWU5dw?oc=5",
+      "label": "Coinbase launches tools that allow AI agents to trade and spend on users’ behalf",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1rdXRmYjRHTk5NWHYxR3NyZ3JNUTZqaTRzMk93NnpxWW1OQzRlYlBRV1JQMC1rLWxMYzZJWXhQdGkzZjI0TXlVQmdvRHBiVDFVREJmdHZBWFJEa0ctQVRZSmhXbkUyVmU2TlJPVDdQWHEyQUJyanVRZkJZM3JlQ1k?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPRjJkRDZVSXo2X1YyMUpUQ3QwNXM4Nzh0R1hlRFRyX3dOZ0FReGgwUkpncFNYblFjUTM0QVJwMEhjOGxLT0lYbVJWY2c0SGd4dWpmdWhMV0VnNnhLQ1l4U0dISHQzeWdsREp3UnBqcF90ZURFVGR6UTF4SHFUR1hMYms1NkgtNGM4RmRrSDMxeDJHN0tOQlNVTVdTSkc2QWpLdzIzWG5zZk90ZlhDank0ZklDdTRsSGpPWWNGcDdqenpxX3RVVHZwZGtJY2VHa3Y0NFg3Y3Z30gHbAUFVX3lxTE5Dc3VZcl8xRWFkWnowUHBZaXRON3c5cW04S1RWUEhQdVk5azBUMW1KM3NLSV9XQjNydW5Bd1pQQjUycjY1Z1dseDRoVGpWSHBDR0MxTGhTcU91MWhQZGNtelNwSzI4d05pd2JibEdxTnE2VU9fT2RUOEc3cWd2bHhmSWpRWkhtSmxNaDFDTllSXzdsbVN5blBMNHBiM1R5b2xXeV9Ic1BRTWFwNlBIMmdCVkRmaVk1bkVSYXVZRTJGRmVfa3NDaHlRVWxpUkZHZ0NUek9JTVVkVWU5dw?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1rdXRmYjRHTk5NWHYxR3NyZ3JNUTZqaTRzMk93NnpxWW1OQzRlYlBRV1JQMC1rLWxMYzZJWXhQdGkzZjI0TXlVQmdvRHBiVDFVREJmdHZBWFJEa0ctQVRZSmhXbkUyVmU2TlJPVDdQWHEyQUJyanVRZkJZM3JlQ1k?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "AWS unveils new AI tools focused on startup founders",
-      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNNGZVcmxOTmxZQTgwWi1rZ25JMkh4Tk5pYjViZjlUb1ZrMjFlMUZkaU9ObEQ0dUFyTnhaTmRUbUdCLTRMcjdfb2VqQXZTdXR5QVI4WE4ybDFuRThJQkFBdEJZTDhUYXVELUdlWXZ6LXBjbnoxTnFFUHlOUXpWTTFoLXU0M3Nqa0MwY0E?oc=5",
+      "label": "‘The cost of compute is far beyond the costs of the employee’: Nvidia executive says right now AI is more expensive than paying human workers",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPeV9wM2RIR2Vwai1TQTBPRERLWXBGY1A2aFRLT0F1ODducUUxbXhxTC1lWXBOMTVuTnhhSElaZmU0ZnFHUGE3cUl6VUV6MDkxaG9XQXZldnZBdjV5RTNPTnRoMWVoSTJ6U1ZoZ2wxbmx6VVdZVVNPcWtzcUxTREozcENLN1FPVl84V0U3SnRacXRlcmRzZTRGdA?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNNGZVcmxOTmxZQTgwWi1rZ25JMkh4Tk5pYjViZjlUb1ZrMjFlMUZkaU9ObEQ0dUFyTnhaTmRUbUdCLTRMcjdfb2VqQXZTdXR5QVI4WE4ybDFuRThJQkFBdEJZTDhUYXVELUdlWXZ6LXBjbnoxTnFFUHlOUXpWTTFoLXU0M3Nqa0MwY0E?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPeV9wM2RIR2Vwai1TQTBPRERLWXBGY1A2aFRLT0F1ODducUUxbXhxTC1lWXBOMTVuTnhhSElaZmU0ZnFHUGE3cUl6VUV6MDkxaG9XQXZldnZBdjV5RTNPTnRoMWVoSTJ6U1ZoZ2wxbmx6VVdZVVNPcWtzcUxTREozcENLN1FPVl84V0U3SnRacXRlcmRzZTRGdA?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Artificial Intelligence Is Here To Stay. Are Hawaiʻi Schools Ready?",
-      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQQUdHS0ZweU84cHIwRnFfMWI2MjF5VjMyQ2ViVE9iMV8yOTVFcnBkZlJ4aHJLa3NFVmNFSmk3ZndZQ25UMmloZG8ybU9NN3o4ekxpOGk2SmRkclJ0RGtkZ01qbE9jYjJndXR2OGNjODV1V0FBWUZaU3M2ZlR2RlYtWXN2eE1EQXZJZ2tLYzBxbTdSSHpyaVFqX01ZVVFnZ3p1a1BmMmt6VjkzcUQw?oc=5",
+      "label": "AI in litigation: How courts are analyzing AI privilege in the wake of Heppner",
+      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxPR3ctUkJqNEpaYUJJT2RiTWdORDk1Y0tWSHNaN1ZDTFdZZUhjLVliV2NMWXVNRFB1WUotWjVMMHpOekpsM0VXVFhGTTlOTzNmR0U5RGpYYjlsenI3b3ZGZTZtdmNwZVFoaVdqalZQLTZnTF9NSWRLeUd3LTdTYjRBY0Z6aEhGYVFNS0xsVmpXSVFhQXRxQ1Y0OGZIdTdoQ2s1MzViRHAyVkxvTDdPWHlDS2FXaWRRWTMtbWdUMjR5bXJ4N3pqT2N3QkRPT2Q2dTlZczVSdDI5OEMtRXpZUUV3WHNR?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQQUdHS0ZweU84cHIwRnFfMWI2MjF5VjMyQ2ViVE9iMV8yOTVFcnBkZlJ4aHJLa3NFVmNFSmk3ZndZQ25UMmloZG8ybU9NN3o4ekxpOGk2SmRkclJ0RGtkZ01qbE9jYjJndXR2OGNjODV1V0FBWUZaU3M2ZlR2RlYtWXN2eE1EQXZJZ2tLYzBxbTdSSHpyaVFqX01ZVVFnZ3p1a1BmMmt6VjkzcUQw?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxPR3ctUkJqNEpaYUJJT2RiTWdORDk1Y0tWSHNaN1ZDTFdZZUhjLVliV2NMWXVNRFB1WUotWjVMMHpOekpsM0VXVFhGTTlOTzNmR0U5RGpYYjlsenI3b3ZGZTZtdmNwZVFoaVdqalZQLTZnTF9NSWRLeUd3LTdTYjRBY0Z6aEhGYVFNS0xsVmpXSVFhQXRxQ1Y0OGZIdTdoQ2s1MzViRHAyVkxvTDdPWHlDS2FXaWRRWTMtbWdUMjR5bXJ4N3pqT2N3QkRPT2Q2dTlZczVSdDI5OEMtRXpZUUV3WHNR?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Salesforce expands Agentforce with AI tools for marketing teams",
-      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNTDk5bFpadWRWOGIzTVhGUDg4RnRGcmhYSUx2YWtVMVhaNlNlcEE3WGRyUlp3TGZ2ekd6Sl9WMmV3TzRORWRrSjVwem9VVEdreU5NcjBLcnNTbEpzdndvUXlHNlctWXN6d2lPRmlkRXJJRFNibU5tUkI2ZXZfcU1idDgxNEJPdE5aN0FJQlR0UE5lYzIwcW1fLU9MVUI?oc=5",
+      "label": "What We Do in the Shadows…with Shadow AI: The Growing Business Risk of Unauthorized Artificial Intelligence Tools",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNV252WVBWMFQ5N29WS1VKbGl3WHVwdFdsTVEzWC1BVkZmUENMRHp6aVF6WXZpQkxCcUktUVlJa2xtTmFrNGxOVE1iZWJTU1B1WHNid01TeDM4UktIZEdadmNtcmpKQ0N2Y1VKMXRjV29EZFZiOEs2T3ZOSFVpZGZDZVA4SVZpcDg?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNTDk5bFpadWRWOGIzTVhGUDg4RnRGcmhYSUx2YWtVMVhaNlNlcEE3WGRyUlp3TGZ2ekd6Sl9WMmV3TzRORWRrSjVwem9VVEdreU5NcjBLcnNTbEpzdndvUXlHNlctWXN6d2lPRmlkRXJJRFNibU5tUkI2ZXZfcU1idDgxNEJPdE5aN0FJQlR0UE5lYzIwcW1fLU9MVUI?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNV252WVBWMFQ5N29WS1VKbGl3WHVwdFdsTVEzWC1BVkZmUENMRHp6aVF6WXZpQkxCcUktUVlJa2xtTmFrNGxOVE1iZWJTU1B1WHNid01TeDM4UktIZEdadmNtcmpKQ0N2Y1VKMXRjV29EZFZiOEs2T3ZOSFVpZGZDZVA4SVZpcDg?oc=5&hl=en-US&gl=US&ceid=US:en"
     }
   ]
 }
