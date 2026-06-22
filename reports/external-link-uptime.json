@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-06-15T13:51:20.151Z",
+  "generatedAt": "2026-06-22T13:31:56.493Z",
   "timeoutMs": 6000,
   "retries": 2,
   "concurrency": 8,
   "total": 108,
-  "healthy": 87,
-  "failed": 21,
+  "healthy": 88,
+  "failed": 20,
   "failures": [
     {
       "source": "tool",
@@ -121,16 +121,6 @@
       "source": "tool",
       "label": "Phind",
       "url": "https://www.phind.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
-    },
-    {
-      "source": "tool",
-      "label": "Perplexity",
-      "url": "https://perplexity.ai/",
       "healthy": false,
       "status": null,
       "method": "HEAD/GET",
@@ -717,7 +707,7 @@
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://www.qlova.com/"
+      "finalUrl": "https://qlova.com/"
     },
     {
       "source": "tool",
@@ -863,11 +853,11 @@
       "source": "tool",
       "label": "Perplexity",
       "url": "https://perplexity.ai/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
+      "healthy": true,
+      "status": 200,
+      "method": "GET",
       "attempts": 3,
-      "error": "HTTP 403"
+      "finalUrl": "https://www.perplexity.ai/"
     },
     {
       "source": "tool",
@@ -1221,83 +1211,83 @@
     },
     {
       "source": "news",
-      "label": "Crypto token’s 50% wipeout shows magnitude of AI-hacking threat",
-      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQRFlQZUxkNWdIb1hIRmlRRHFNZXNrNzJGYjBncnFZYk52OTQ4aHpNbm9tRDdwcmNpcUtBcDhxNFdGajdXVlYwb3VsY0l4cFNBM2VYWV9MeHBHcE1HN1JIREVBUDBud293ZnU3NzQyR21iQzRGZTRKMEQ4aTdyVUt4TjZnb1A?oc=5",
+      "label": "Tool Calling, Explained: How AI Agents Decide What to Do Next",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOWFc4bGQ5Qkp6ZHJNXzg4Q1RKZmNicFN0ODNsbTR1VTY5bndudVI4NFNxRnBVMWJSekRaRHZMRnM5M0FYNlVvbl9WU09pOW5lcEd0d3ZRRm5EeEtJRmYtMEpzemFJYmd0X1puTmkybmh6QzVVWGVrMFJscTI4bDdKd3I1ZUd3TU9hNUdQVDVJTVNubllGUlE?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQRFlQZUxkNWdIb1hIRmlRRHFNZXNrNzJGYjBncnFZYk52OTQ4aHpNbm9tRDdwcmNpcUtBcDhxNFdGajdXVlYwb3VsY0l4cFNBM2VYWV9MeHBHcE1HN1JIREVBUDBud293ZnU3NzQyR21iQzRGZTRKMEQ4aTdyVUt4TjZnb1A?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOWFc4bGQ5Qkp6ZHJNXzg4Q1RKZmNicFN0ODNsbTR1VTY5bndudVI4NFNxRnBVMWJSekRaRHZMRnM5M0FYNlVvbl9WU09pOW5lcEd0d3ZRRm5EeEtJRmYtMEpzemFJYmd0X1puTmkybmh6QzVVWGVrMFJscTI4bDdKd3I1ZUd3TU9hNUdQVDVJTVNubllGUlE?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Telangana plans AI-based diagnostics expansion in district hospitals to boost healthcare access",
-      "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxNRFBJRmsxSjRiV1dhaElQVEd0aERzVklZR0RhTDJMNTZWSUVxTF9Eal9jVUp4Vm8zRGV4UEpEaEVOeENKUF9BT3RMRi1NQnhyY3JJVEhMUk1Ca0NRcUhZRkZVYURFSUlDamxSSFE3MGxCTUUxQ0xnaEVHekVWWlBuNHp3RFhKdHpSRU5PQ25aMXVsOW5ONlF0M21mNHhmVThqSXZKRnctaUpybUJnejF1Z09kTjR1TnRIR2hkQ3BJUlFlSzliY3FpeWRSWE1PeVBGLTlvel91Vzg3amVMeEtza1ZnY185T2dhUVcxUlVn0gH7AUFVX3lxTFBCa3FGaTI3Q3Uyam5UZVUxNEE2MFV6WnZ1aHQ4SGREOXpha2FjeDNLM2pxSkhpb3R1d2x0b0FFcjlwV0FwVmZtWVlUbk12YzRrMnRvN2V4NElEejdLMTNTSkFpODlqMUtCZlBjWkJzc2RlSi1vOE1EanpsTmhDb2tsS00zZ0lFV2NmcHFoUlJZdkxJMU9GVWMwaEs4ckhpYmdvYlhPM3Zqd2RVdGVUQ0FMVWJEMlpISDRzRkFndGhudnhuVXZjVG93aExoVERqSHk2eTliZmNxckFwZk1TTHdLODFYVUh0eC1OakVuS2VJQ3pEVFp4V1E3ZnNF?oc=5",
+      "label": "Opinion: How AI tools help small businesses thrive",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPcFpJOG9MaXRUUWYwWlEwN3hfZ05KZzJad202RURpbTh6ZFJGN3dQd1o1ZV9xbE1YMFZIV1FtNnM0YWcxQm5sSjZuT1lYUXNaZ1c2ZjAtVmx2UVJBbjNGVVpMMk1BRnFINXJCbEdxb3RMRHRuV0ZJNHNaVVpVODFSVjRqTUQ?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxNRFBJRmsxSjRiV1dhaElQVEd0aERzVklZR0RhTDJMNTZWSUVxTF9Eal9jVUp4Vm8zRGV4UEpEaEVOeENKUF9BT3RMRi1NQnhyY3JJVEhMUk1Ca0NRcUhZRkZVYURFSUlDamxSSFE3MGxCTUUxQ0xnaEVHekVWWlBuNHp3RFhKdHpSRU5PQ25aMXVsOW5ONlF0M21mNHhmVThqSXZKRnctaUpybUJnejF1Z09kTjR1TnRIR2hkQ3BJUlFlSzliY3FpeWRSWE1PeVBGLTlvel91Vzg3amVMeEtza1ZnY185T2dhUVcxUlVn0gH7AUFVX3lxTFBCa3FGaTI3Q3Uyam5UZVUxNEE2MFV6WnZ1aHQ4SGREOXpha2FjeDNLM2pxSkhpb3R1d2x0b0FFcjlwV0FwVmZtWVlUbk12YzRrMnRvN2V4NElEejdLMTNTSkFpODlqMUtCZlBjWkJzc2RlSi1vOE1EanpsTmhDb2tsS00zZ0lFV2NmcHFoUlJZdkxJMU9GVWMwaEs4ckhpYmdvYlhPM3Zqd2RVdGVUQ0FMVWJEMlpISDRzRkFndGhudnhuVXZjVG93aExoVERqSHk2eTliZmNxckFwZk1TTHdLODFYVUh0eC1OakVuS2VJQ3pEVFp4V1E3ZnNF?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPcFpJOG9MaXRUUWYwWlEwN3hfZ05KZzJad202RURpbTh6ZFJGN3dQd1o1ZV9xbE1YMFZIV1FtNnM0YWcxQm5sSjZuT1lYUXNaZ1c2ZjAtVmx2UVJBbjNGVVpMMk1BRnFINXJCbEdxb3RMRHRuV0ZJNHNaVVpVODFSVjRqTUQ?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "General-purpose large language models outperform specialized clinical AI tools on medical benchmarks",
-      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE54SDl4dzQxX3BOdU9sNjRMWU8tQ29mYVpxRURxeWlZZ20zQVpramJCZVd0QlVOZmZqb3JvVkc2Qm5jaURhV3NCdVNIdUJIQTZHdjhlbEZEcDB6eG5wUDN3?oc=5",
+      "label": "Seminar on Artificial Intelligence held at Immanuel College",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOeHJPYUtCQnRiZ2ZTWWdqRUcyRkNlTEE5V2RSRHJwLVVHNjVMa3ZaSWU1SmxfTzBlbEtVU2tINmd1b2M0T0dfNmlValVlZTJMamIxdDl6THdGWU0tTjdya3ZVUzBkMVVheld5MUhjNURSbEw2UjBIcUVjUWktOEZhTUItMC1PUzZHcFlyZ0pjTEE?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE54SDl4dzQxX3BOdU9sNjRMWU8tQ29mYVpxRURxeWlZZ20zQVpramJCZVd0QlVOZmZqb3JvVkc2Qm5jaURhV3NCdVNIdUJIQTZHdjhlbEZEcDB6eG5wUDN3?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOeHJPYUtCQnRiZ2ZTWWdqRUcyRkNlTEE5V2RSRHJwLVVHNjVMa3ZaSWU1SmxfTzBlbEtVU2tINmd1b2M0T0dfNmlValVlZTJMamIxdDl6THdGWU0tTjdya3ZVUzBkMVVheld5MUhjNURSbEw2UjBIcUVjUWktOEZhTUItMC1PUzZHcFlyZ0pjTEE?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Commentary: Anthropic's shock suspension of new AI tools is a wake-up call for the world",
-      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxONnQ3RWxUTlpqM2l2OU1hYjg1dXR5dHhLdF9qcGgtV2hhUXU2SzAtWEpnUmJjVWZRUG41YVlEZExOZksxRmw2ZEdORG5pRlNlNVZtZFNsWF80WHhMaWtUQmNYVTZ6VGR0MUZHazNteTFyWjk3d2xTdzhyMGdjSW9tMTdyVU5QeVN3UVpjejhha0FXblJDa09OcnItYUc0NEtxZTU3a2kweGc0NTZ0VV9fUklVRWJSWWJ3djFTVGFTTXRSVFZj0gHMAUFVX3lxTE5jQkF3Z1E0OXRuV1otejdudmZrNVlKYU13c1lRanFvdjZIZ3lmeGtPblFZaEhwM2dfeHp6LVpsT0hHV2J3SkZQUjMxQWZfZFVEdE5uUUpfSnpFMnA5bW55UktmLUtYM2E0V2h6T05wMTFmN3FPalBLQVdRTzJNa3FkaEpfeWVzRjJfSFlhYk0wbFRaRUQtRWYyLVdCbXl3RERmT2haM0hZb1ZUZTdRd21hTHNnWklaVzYzVlkyYmNsME1kQkxVd0NSM3U1OA?oc=5",
+      "label": "Santander Equips All Workers With AI and Seeks $1.15 Billion Business Value",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQUTBLVkNQZ0VTQjRvZVRoMFpVUEZYNTVLcTlNTmpESHZ5MlM1c0NNVHl1bHh3akFwQzdaTGIwQV9IMC1seUFPci1FOExyRXRHSnZrNmllaDItVWRaUTVsZnNQLU9EbFlsTUNfMWVQcjFlRFhrcnZqWEtQaTl4WU1QOFlxZ3BQejJhN18wZWVVUHp6TWZubWxSLURha2ZCYjdrRjNDSHg4aDdqQl81d0RZY3pBWHA0SERNZmN6SGVBZkt6VEVfR2x1UHN3QW8?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMixAFBVV95cUxONnQ3RWxUTlpqM2l2OU1hYjg1dXR5dHhLdF9qcGgtV2hhUXU2SzAtWEpnUmJjVWZRUG41YVlEZExOZksxRmw2ZEdORG5pRlNlNVZtZFNsWF80WHhMaWtUQmNYVTZ6VGR0MUZHazNteTFyWjk3d2xTdzhyMGdjSW9tMTdyVU5QeVN3UVpjejhha0FXblJDa09OcnItYUc0NEtxZTU3a2kweGc0NTZ0VV9fUklVRWJSWWJ3djFTVGFTTXRSVFZj0gHMAUFVX3lxTE5jQkF3Z1E0OXRuV1otejdudmZrNVlKYU13c1lRanFvdjZIZ3lmeGtPblFZaEhwM2dfeHp6LVpsT0hHV2J3SkZQUjMxQWZfZFVEdE5uUUpfSnpFMnA5bW55UktmLUtYM2E0V2h6T05wMTFmN3FPalBLQVdRTzJNa3FkaEpfeWVzRjJfSFlhYk0wbFRaRUQtRWYyLVdCbXl3RERmT2haM0hZb1ZUZTdRd21hTHNnWklaVzYzVlkyYmNsME1kQkxVd0NSM3U1OA?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQUTBLVkNQZ0VTQjRvZVRoMFpVUEZYNTVLcTlNTmpESHZ5MlM1c0NNVHl1bHh3akFwQzdaTGIwQV9IMC1seUFPci1FOExyRXRHSnZrNmllaDItVWRaUTVsZnNQLU9EbFlsTUNfMWVQcjFlRFhrcnZqWEtQaTl4WU1QOFlxZ3BQejJhN18wZWVVUHp6TWZubWxSLURha2ZCYjdrRjNDSHg4aDdqQl81d0RZY3pBWHA0SERNZmN6SGVBZkt6VEVfR2x1UHN3QW8?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Coinbase launches tools that allow AI agents to trade and spend on users’ behalf",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1rdXRmYjRHTk5NWHYxR3NyZ3JNUTZqaTRzMk93NnpxWW1OQzRlYlBRV1JQMC1rLWxMYzZJWXhQdGkzZjI0TXlVQmdvRHBiVDFVREJmdHZBWFJEa0ctQVRZSmhXbkUyVmU2TlJPVDdQWHEyQUJyanVRZkJZM3JlQ1k?oc=5",
+      "label": "Adobe (ADBE) Opens Its AI Tools For Free And Expands Into Commerce Media",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPZnFXbUlqcTVkUEx3MmlXR19BellVR1pERkhfX2Rrd2lDOGJ4eW55VHRhSmJCUTg3WnM2aC1IQWRlLWttTmtrRXBGdGVrRjNGU3BIa2M0YW5yZ0pLZ0ZkMy1iUHJFMTZFZEZZQ3ZRUV9rdDNNejVGV0FNYUV1QnR1S1Q4bVBEdTM5MHFSMG51eVNDZ2s?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1rdXRmYjRHTk5NWHYxR3NyZ3JNUTZqaTRzMk93NnpxWW1OQzRlYlBRV1JQMC1rLWxMYzZJWXhQdGkzZjI0TXlVQmdvRHBiVDFVREJmdHZBWFJEa0ctQVRZSmhXbkUyVmU2TlJPVDdQWHEyQUJyanVRZkJZM3JlQ1k?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPZnFXbUlqcTVkUEx3MmlXR19BellVR1pERkhfX2Rrd2lDOGJ4eW55VHRhSmJCUTg3WnM2aC1IQWRlLWttTmtrRXBGdGVrRjNGU3BIa2M0YW5yZ0pLZ0ZkMy1iUHJFMTZFZEZZQ3ZRUV9rdDNNejVGV0FNYUV1QnR1S1Q4bVBEdTM5MHFSMG51eVNDZ2s?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "‘The cost of compute is far beyond the costs of the employee’: Nvidia executive says right now AI is more expensive than paying human workers",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPeV9wM2RIR2Vwai1TQTBPRERLWXBGY1A2aFRLT0F1ODducUUxbXhxTC1lWXBOMTVuTnhhSElaZmU0ZnFHUGE3cUl6VUV6MDkxaG9XQXZldnZBdjV5RTNPTnRoMWVoSTJ6U1ZoZ2wxbmx6VVdZVVNPcWtzcUxTREozcENLN1FPVl84V0U3SnRacXRlcmRzZTRGdA?oc=5",
+      "label": "Cal State faculty push to prevent AI tools from replacing them as schools experiment",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPR3R6T1hwa0lWX0p3dTVRZ1VfX25Qa2VfcTJTNkZ4VXRnX0VwYWxWSnFSbVM0TndVQTUxWENSWmhfeFBSdFVxcXdnTTQtWmtGUEdfbE0xbzZxR2N2U0lTQWVlZldaVFJ4T1BYV01yYTlRcGhiUFd1Mm5DMG5FMW9Gc2xVcnhmMG5OcWhTUE1RX1RRTEF2b0J0T1Z2NDBqSVU1aWtOSTkyOWowd1hjY1dRWU9CbTVYLVZuUE04QTRYZlNIanM?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPeV9wM2RIR2Vwai1TQTBPRERLWXBGY1A2aFRLT0F1ODducUUxbXhxTC1lWXBOMTVuTnhhSElaZmU0ZnFHUGE3cUl6VUV6MDkxaG9XQXZldnZBdjV5RTNPTnRoMWVoSTJ6U1ZoZ2wxbmx6VVdZVVNPcWtzcUxTREozcENLN1FPVl84V0U3SnRacXRlcmRzZTRGdA?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPR3R6T1hwa0lWX0p3dTVRZ1VfX25Qa2VfcTJTNkZ4VXRnX0VwYWxWSnFSbVM0TndVQTUxWENSWmhfeFBSdFVxcXdnTTQtWmtGUEdfbE0xbzZxR2N2U0lTQWVlZldaVFJ4T1BYV01yYTlRcGhiUFd1Mm5DMG5FMW9Gc2xVcnhmMG5OcWhTUE1RX1RRTEF2b0J0T1Z2NDBqSVU1aWtOSTkyOWowd1hjY1dRWU9CbTVYLVZuUE04QTRYZlNIanM?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "AI in litigation: How courts are analyzing AI privilege in the wake of Heppner",
-      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxPR3ctUkJqNEpaYUJJT2RiTWdORDk1Y0tWSHNaN1ZDTFdZZUhjLVliV2NMWXVNRFB1WUotWjVMMHpOekpsM0VXVFhGTTlOTzNmR0U5RGpYYjlsenI3b3ZGZTZtdmNwZVFoaVdqalZQLTZnTF9NSWRLeUd3LTdTYjRBY0Z6aEhGYVFNS0xsVmpXSVFhQXRxQ1Y0OGZIdTdoQ2s1MzViRHAyVkxvTDdPWHlDS2FXaWRRWTMtbWdUMjR5bXJ4N3pqT2N3QkRPT2Q2dTlZczVSdDI5OEMtRXpZUUV3WHNR?oc=5",
+      "label": "Debut Directors Dominate Shanghai Film Festival; AI Shapes Conversation",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOREtfcjhJZ1UxSGc3MjBHX3lEcXNaVjlGdlpiWEtVUlFkaUN6ck1ka1Y5Z052TlZ3Vmp6eDBIUFRLUDJEVF9GSmptbTk1TWh6N1FtZ2tyXzhhSndXUkRXUG5sc0d2QklkSDFKTzZ2VkNLNjJRRlF5STBUcjhHUDN6a1BNWlZMMjJMeXBLaFAwU1V6anUxb1VfOW5mWG81djAzNEl5UQ?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxPR3ctUkJqNEpaYUJJT2RiTWdORDk1Y0tWSHNaN1ZDTFdZZUhjLVliV2NMWXVNRFB1WUotWjVMMHpOekpsM0VXVFhGTTlOTzNmR0U5RGpYYjlsenI3b3ZGZTZtdmNwZVFoaVdqalZQLTZnTF9NSWRLeUd3LTdTYjRBY0Z6aEhGYVFNS0xsVmpXSVFhQXRxQ1Y0OGZIdTdoQ2s1MzViRHAyVkxvTDdPWHlDS2FXaWRRWTMtbWdUMjR5bXJ4N3pqT2N3QkRPT2Q2dTlZczVSdDI5OEMtRXpZUUV3WHNR?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOREtfcjhJZ1UxSGc3MjBHX3lEcXNaVjlGdlpiWEtVUlFkaUN6ck1ka1Y5Z052TlZ3Vmp6eDBIUFRLUDJEVF9GSmptbTk1TWh6N1FtZ2tyXzhhSndXUkRXUG5sc0d2QklkSDFKTzZ2VkNLNjJRRlF5STBUcjhHUDN6a1BNWlZMMjJMeXBLaFAwU1V6anUxb1VfOW5mWG81djAzNEl5UQ?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "What We Do in the Shadows…with Shadow AI: The Growing Business Risk of Unauthorized Artificial Intelligence Tools",
-      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNV252WVBWMFQ5N29WS1VKbGl3WHVwdFdsTVEzWC1BVkZmUENMRHp6aVF6WXZpQkxCcUktUVlJa2xtTmFrNGxOVE1iZWJTU1B1WHNid01TeDM4UktIZEdadmNtcmpKQ0N2Y1VKMXRjV29EZFZiOEs2T3ZOSFVpZGZDZVA4SVZpcDg?oc=5",
+      "label": "Philippines' DICT, Google Cloud expand AI and cybersecurity partnership",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOcEdWemh3M2JlLXJvS2FuYnFoU1ZSbWNhWGNqeTNKSG5KcTM4RlYyRVZGdzhfYTh6Zmp6c3k2aE1JNlh4eDVYcnRzQ1psOUxtc1NSMWVIMnIxTjhKNDE2VnY0blhnZlJZOVhvcnc3Ym05U2p1YnJTa2tDYXA0elBxN2dEbnUzTXlmZmJ4Mjk2a1ZyNEVvV0NUWXZzTGhtS0VVVThMSU9qRTg?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNV252WVBWMFQ5N29WS1VKbGl3WHVwdFdsTVEzWC1BVkZmUENMRHp6aVF6WXZpQkxCcUktUVlJa2xtTmFrNGxOVE1iZWJTU1B1WHNid01TeDM4UktIZEdadmNtcmpKQ0N2Y1VKMXRjV29EZFZiOEs2T3ZOSFVpZGZDZVA4SVZpcDg?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOcEdWemh3M2JlLXJvS2FuYnFoU1ZSbWNhWGNqeTNKSG5KcTM4RlYyRVZGdzhfYTh6Zmp6c3k2aE1JNlh4eDVYcnRzQ1psOUxtc1NSMWVIMnIxTjhKNDE2VnY0blhnZlJZOVhvcnc3Ym05U2p1YnJTa2tDYXA0elBxN2dEbnUzTXlmZmJ4Mjk2a1ZyNEVvV0NUWXZzTGhtS0VVVThMSU9qRTg?oc=5&hl=en-US&gl=US&ceid=US:en"
     }
   ]
 }
