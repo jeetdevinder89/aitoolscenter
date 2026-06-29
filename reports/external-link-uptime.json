@@ -1,22 +1,12 @@
 {
-  "generatedAt": "2026-06-22T13:31:56.493Z",
+  "generatedAt": "2026-06-29T12:28:02.899Z",
   "timeoutMs": 6000,
   "retries": 2,
   "concurrency": 8,
   "total": 108,
-  "healthy": 88,
-  "failed": 20,
+  "healthy": 90,
+  "failed": 18,
   "failures": [
-    {
-      "source": "tool",
-      "label": "ChatGPT",
-      "url": "https://chatgpt.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
-    },
     {
       "source": "tool",
       "label": "Claude",
@@ -36,16 +26,6 @@
       "method": "HEAD/GET",
       "attempts": 3,
       "error": "HTTP 404"
-    },
-    {
-      "source": "tool",
-      "label": "Character.ai",
-      "url": "https://character.ai/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
     },
     {
       "source": "tool",
@@ -71,16 +51,6 @@
       "source": "tool",
       "label": "Leonardo.ai",
       "url": "https://leonardo.ai/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
-    },
-    {
-      "source": "tool",
-      "label": "Canva AI",
-      "url": "https://www.canva.com/",
       "healthy": false,
       "status": null,
       "method": "HEAD/GET",
@@ -121,6 +91,16 @@
       "source": "tool",
       "label": "Phind",
       "url": "https://www.phind.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "Perplexity",
+      "url": "https://perplexity.ai/",
       "healthy": false,
       "status": null,
       "method": "HEAD/GET",
@@ -213,11 +193,11 @@
       "source": "tool",
       "label": "ChatGPT",
       "url": "https://chatgpt.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://chatgpt.com/"
     },
     {
       "source": "tool",
@@ -353,11 +333,11 @@
       "source": "tool",
       "label": "Character.ai",
       "url": "https://character.ai/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://character.ai/"
     },
     {
       "source": "tool",
@@ -463,11 +443,11 @@
       "source": "tool",
       "label": "Canva AI",
       "url": "https://www.canva.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
+      "healthy": true,
+      "status": 200,
+      "method": "GET",
       "attempts": 3,
-      "error": "HTTP 403"
+      "finalUrl": "https://www.canva.com/"
     },
     {
       "source": "tool",
@@ -707,7 +687,7 @@
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://qlova.com/"
+      "finalUrl": "https://www.qlova.com/"
     },
     {
       "source": "tool",
@@ -853,11 +833,11 @@
       "source": "tool",
       "label": "Perplexity",
       "url": "https://perplexity.ai/",
-      "healthy": true,
-      "status": 200,
-      "method": "GET",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
       "attempts": 3,
-      "finalUrl": "https://www.perplexity.ai/"
+      "error": "HTTP 403"
     },
     {
       "source": "tool",
@@ -1211,83 +1191,83 @@
     },
     {
       "source": "news",
-      "label": "Tool Calling, Explained: How AI Agents Decide What to Do Next",
-      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOWFc4bGQ5Qkp6ZHJNXzg4Q1RKZmNicFN0ODNsbTR1VTY5bndudVI4NFNxRnBVMWJSekRaRHZMRnM5M0FYNlVvbl9WU09pOW5lcEd0d3ZRRm5EeEtJRmYtMEpzemFJYmd0X1puTmkybmh6QzVVWGVrMFJscTI4bDdKd3I1ZUd3TU9hNUdQVDVJTVNubllGUlE?oc=5",
+      "label": "Hrvatski Telekom Inspires AI-Driven Storytelling Through ‘Create and Cheer with AI’",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOczg2Um9Hc0daejJTMDhkb0xWWjFlZGRKdktkUW9VUmx4V2c4Wm1YWFhjNDVuMDVPUUU4eUUtaXZpQmxmcnBMZVZfUGNlS1JmZDVPMVNROUN4VlZnbmoyblVXVEgwUDNwcUtwOUZJdUtoQTJKdlEzWDg0akdJS2Vab1dKZENnR3o5aEhNVHhKTUFhZmZGODhGcjJRLWVfdlZiTDFDTUZpVTR5clZmbnBmSjZ5R2Y5WHpnNzQxcmtyWFFTTnlqZjBzVVBnRlczVEZMN1E?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOWFc4bGQ5Qkp6ZHJNXzg4Q1RKZmNicFN0ODNsbTR1VTY5bndudVI4NFNxRnBVMWJSekRaRHZMRnM5M0FYNlVvbl9WU09pOW5lcEd0d3ZRRm5EeEtJRmYtMEpzemFJYmd0X1puTmkybmh6QzVVWGVrMFJscTI4bDdKd3I1ZUd3TU9hNUdQVDVJTVNubllGUlE?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOczg2Um9Hc0daejJTMDhkb0xWWjFlZGRKdktkUW9VUmx4V2c4Wm1YWFhjNDVuMDVPUUU4eUUtaXZpQmxmcnBMZVZfUGNlS1JmZDVPMVNROUN4VlZnbmoyblVXVEgwUDNwcUtwOUZJdUtoQTJKdlEzWDg0akdJS2Vab1dKZENnR3o5aEhNVHhKTUFhZmZGODhGcjJRLWVfdlZiTDFDTUZpVTR5clZmbnBmSjZ5R2Y5WHpnNzQxcmtyWFFTTnlqZjBzVVBnRlczVEZMN1E?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Opinion: How AI tools help small businesses thrive",
-      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPcFpJOG9MaXRUUWYwWlEwN3hfZ05KZzJad202RURpbTh6ZFJGN3dQd1o1ZV9xbE1YMFZIV1FtNnM0YWcxQm5sSjZuT1lYUXNaZ1c2ZjAtVmx2UVJBbjNGVVpMMk1BRnFINXJCbEdxb3RMRHRuV0ZJNHNaVVpVODFSVjRqTUQ?oc=5",
+      "label": "IndiaMart doubles down on AI to curb fake listings",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPYW1UWndCb0h0NDQ2LUZ1cDBrVm9PcXpsTW9CMDA1ZW9BTzNFZGJtaGpQcGxVNDFkRzJldzlDVlpJRlh5QVZhX0xPaWJuMTh5U1FZcmo5OXRjVHZGTklfQlR3LTV6RGlyZGJocEl6bkRPU2FzRXp0RGxQTGFrMkluZGdFT1hwNUFKUTJ1MGR2X0dqZw?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPcFpJOG9MaXRUUWYwWlEwN3hfZ05KZzJad202RURpbTh6ZFJGN3dQd1o1ZV9xbE1YMFZIV1FtNnM0YWcxQm5sSjZuT1lYUXNaZ1c2ZjAtVmx2UVJBbjNGVVpMMk1BRnFINXJCbEdxb3RMRHRuV0ZJNHNaVVpVODFSVjRqTUQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPYW1UWndCb0h0NDQ2LUZ1cDBrVm9PcXpsTW9CMDA1ZW9BTzNFZGJtaGpQcGxVNDFkRzJldzlDVlpJRlh5QVZhX0xPaWJuMTh5U1FZcmo5OXRjVHZGTklfQlR3LTV6RGlyZGJocEl6bkRPU2FzRXp0RGxQTGFrMkluZGdFT1hwNUFKUTJ1MGR2X0dqZw?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Seminar on Artificial Intelligence held at Immanuel College",
-      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOeHJPYUtCQnRiZ2ZTWWdqRUcyRkNlTEE5V2RSRHJwLVVHNjVMa3ZaSWU1SmxfTzBlbEtVU2tINmd1b2M0T0dfNmlValVlZTJMamIxdDl6THdGWU0tTjdya3ZVUzBkMVVheld5MUhjNURSbEw2UjBIcUVjUWktOEZhTUItMC1PUzZHcFlyZ0pjTEE?oc=5",
+      "label": "China's New AI Cybersecurity Tool On Par With Anthropic's Mythos",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNckxfTDRiTzRMVjl1OV96UDBGNlRJYzZGOUlrZzVEVXNwSE5WZU9ISHItN0swUFV5UWI0b2t3dFJDLTVYV21kNHBwamRiZWVVQ0tiZE50N3hFaVBubXJZU2NLdUpydV85aDRUeHViQ01YWGlIX0dEUkRTRC1WTi1zVkVyYkYyUEdYUlNuQVZ5SEFkUmxMbUNJNFk4QTcyUnNtQXg5MzNn0gGuAUFVX3lxTE9BZ1huYXpJZmk4MnR2SW8xUXBfaTJCbURDRHBhajNqaXJNWHdqQlpOenpzZXZUVEQ0MnNMbnhjaU1FWFlvM0xoYXZqTjN6RWZId29SbXY2NU9YNlpET0tmWVRoSlJRM2F3Wm5RaEJxZGJhalh6Q2pTTzM1Y2RUX1lMSEJWaHVhR2llTG44WHhhZjYyRkNBWlRWYkwtT0c3Uk9xZVdfV2dILXU1WktpUQ?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOeHJPYUtCQnRiZ2ZTWWdqRUcyRkNlTEE5V2RSRHJwLVVHNjVMa3ZaSWU1SmxfTzBlbEtVU2tINmd1b2M0T0dfNmlValVlZTJMamIxdDl6THdGWU0tTjdya3ZVUzBkMVVheld5MUhjNURSbEw2UjBIcUVjUWktOEZhTUItMC1PUzZHcFlyZ0pjTEE?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNckxfTDRiTzRMVjl1OV96UDBGNlRJYzZGOUlrZzVEVXNwSE5WZU9ISHItN0swUFV5UWI0b2t3dFJDLTVYV21kNHBwamRiZWVVQ0tiZE50N3hFaVBubXJZU2NLdUpydV85aDRUeHViQ01YWGlIX0dEUkRTRC1WTi1zVkVyYkYyUEdYUlNuQVZ5SEFkUmxMbUNJNFk4QTcyUnNtQXg5MzNn0gGuAUFVX3lxTE9BZ1huYXpJZmk4MnR2SW8xUXBfaTJCbURDRHBhajNqaXJNWHdqQlpOenpzZXZUVEQ0MnNMbnhjaU1FWFlvM0xoYXZqTjN6RWZId29SbXY2NU9YNlpET0tmWVRoSlJRM2F3Wm5RaEJxZGJhalh6Q2pTTzM1Y2RUX1lMSEJWaHVhR2llTG44WHhhZjYyRkNBWlRWYkwtT0c3Uk9xZVdfV2dILXU1WktpUQ?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Santander Equips All Workers With AI and Seeks $1.15 Billion Business Value",
-      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQUTBLVkNQZ0VTQjRvZVRoMFpVUEZYNTVLcTlNTmpESHZ5MlM1c0NNVHl1bHh3akFwQzdaTGIwQV9IMC1seUFPci1FOExyRXRHSnZrNmllaDItVWRaUTVsZnNQLU9EbFlsTUNfMWVQcjFlRFhrcnZqWEtQaTl4WU1QOFlxZ3BQejJhN18wZWVVUHp6TWZubWxSLURha2ZCYjdrRjNDSHg4aDdqQl81d0RZY3pBWHA0SERNZmN6SGVBZkt6VEVfR2x1UHN3QW8?oc=5",
+      "label": "How Communication Science Study Program USU Responds to Artificial Intelligence (AI)",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPaEh6ODN5Mk8zUGRfR1ZxcnlzS2t3RFFpT3BmYjJPSGJMb2tLRkdocHJoV0NPSk01dE16RUs2cWJUS0JERUdBckZJdmd6RENWckhOTlRicFpzcmRzRHg3WnpjNFRDbGxER3JDcm9fUG45Mm1FalpZeVB6SlpXWkxEMEhGQ25jRVp1N1BOaFRoY1dGa00wVFlXZllFM1I5YW93NVBGRQ?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQUTBLVkNQZ0VTQjRvZVRoMFpVUEZYNTVLcTlNTmpESHZ5MlM1c0NNVHl1bHh3akFwQzdaTGIwQV9IMC1seUFPci1FOExyRXRHSnZrNmllaDItVWRaUTVsZnNQLU9EbFlsTUNfMWVQcjFlRFhrcnZqWEtQaTl4WU1QOFlxZ3BQejJhN18wZWVVUHp6TWZubWxSLURha2ZCYjdrRjNDSHg4aDdqQl81d0RZY3pBWHA0SERNZmN6SGVBZkt6VEVfR2x1UHN3QW8?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPaEh6ODN5Mk8zUGRfR1ZxcnlzS2t3RFFpT3BmYjJPSGJMb2tLRkdocHJoV0NPSk01dE16RUs2cWJUS0JERUdBckZJdmd6RENWckhOTlRicFpzcmRzRHg3WnpjNFRDbGxER3JDcm9fUG45Mm1FalpZeVB6SlpXWkxEMEhGQ25jRVp1N1BOaFRoY1dGa00wVFlXZllFM1I5YW93NVBGRQ?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Adobe (ADBE) Opens Its AI Tools For Free And Expands Into Commerce Media",
-      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPZnFXbUlqcTVkUEx3MmlXR19BellVR1pERkhfX2Rrd2lDOGJ4eW55VHRhSmJCUTg3WnM2aC1IQWRlLWttTmtrRXBGdGVrRjNGU3BIa2M0YW5yZ0pLZ0ZkMy1iUHJFMTZFZEZZQ3ZRUV9rdDNNejVGV0FNYUV1QnR1S1Q4bVBEdTM5MHFSMG51eVNDZ2s?oc=5",
+      "label": "HTML: The Key for AI Agents to Create Graphics",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQdlc1Z0F3cEhFbmZEVTAwZUZocGJKQmhsVXRHSDZ6eE5VLWJiWVpGZ1NNZl84Uk5yVEljR0kzS1VRRmw0bWJBT25DV2htVm5CSkFhMTZDaXFQZU5DQnBWa09TcWpUdkstVjFvRldyLTRSdENZc0dRY0JacHZUVkN0c1NfMmZIWlZuUmQ1a211dGExd0N3TnFIVGh6T1JRY1B1d0R0Y0x4SUdMb1M3?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPZnFXbUlqcTVkUEx3MmlXR19BellVR1pERkhfX2Rrd2lDOGJ4eW55VHRhSmJCUTg3WnM2aC1IQWRlLWttTmtrRXBGdGVrRjNGU3BIa2M0YW5yZ0pLZ0ZkMy1iUHJFMTZFZEZZQ3ZRUV9rdDNNejVGV0FNYUV1QnR1S1Q4bVBEdTM5MHFSMG51eVNDZ2s?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQdlc1Z0F3cEhFbmZEVTAwZUZocGJKQmhsVXRHSDZ6eE5VLWJiWVpGZ1NNZl84Uk5yVEljR0kzS1VRRmw0bWJBT25DV2htVm5CSkFhMTZDaXFQZU5DQnBWa09TcWpUdkstVjFvRldyLTRSdENZc0dRY0JacHZUVkN0c1NfMmZIWlZuUmQ1a211dGExd0N3TnFIVGh6T1JRY1B1d0R0Y0x4SUdMb1M3?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Cal State faculty push to prevent AI tools from replacing them as schools experiment",
-      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPR3R6T1hwa0lWX0p3dTVRZ1VfX25Qa2VfcTJTNkZ4VXRnX0VwYWxWSnFSbVM0TndVQTUxWENSWmhfeFBSdFVxcXdnTTQtWmtGUEdfbE0xbzZxR2N2U0lTQWVlZldaVFJ4T1BYV01yYTlRcGhiUFd1Mm5DMG5FMW9Gc2xVcnhmMG5OcWhTUE1RX1RRTEF2b0J0T1Z2NDBqSVU1aWtOSTkyOWowd1hjY1dRWU9CbTVYLVZuUE04QTRYZlNIanM?oc=5",
+      "label": "ChatGPT is the most popular AI tool for people in the US",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOMWp5NnA5TzQ1M0pVOUIzd3ZfWDZZSnFIWTEtUnBnRGJ3Nk5vQ2FvdENValpEcmxwMGJodFF2SlM2bm4zemg5Vkp6OXlYMjBUbnd2VkdvZVBKY1JkQm1XWWktR0lQU0pFRE1ZcFhzd2QxdlZjTDBkdkxiUm9SNWJFa0FLTElObUpTNjhid0xIZ2ZPdGUxUWFxei1PQVVjUWhzdkF2Ug?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPR3R6T1hwa0lWX0p3dTVRZ1VfX25Qa2VfcTJTNkZ4VXRnX0VwYWxWSnFSbVM0TndVQTUxWENSWmhfeFBSdFVxcXdnTTQtWmtGUEdfbE0xbzZxR2N2U0lTQWVlZldaVFJ4T1BYV01yYTlRcGhiUFd1Mm5DMG5FMW9Gc2xVcnhmMG5OcWhTUE1RX1RRTEF2b0J0T1Z2NDBqSVU1aWtOSTkyOWowd1hjY1dRWU9CbTVYLVZuUE04QTRYZlNIanM?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOMWp5NnA5TzQ1M0pVOUIzd3ZfWDZZSnFIWTEtUnBnRGJ3Nk5vQ2FvdENValpEcmxwMGJodFF2SlM2bm4zemg5Vkp6OXlYMjBUbnd2VkdvZVBKY1JkQm1XWWktR0lQU0pFRE1ZcFhzd2QxdlZjTDBkdkxiUm9SNWJFa0FLTElObUpTNjhid0xIZ2ZPdGUxUWFxei1PQVVjUWhzdkF2Ug?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Debut Directors Dominate Shanghai Film Festival; AI Shapes Conversation",
-      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOREtfcjhJZ1UxSGc3MjBHX3lEcXNaVjlGdlpiWEtVUlFkaUN6ck1ka1Y5Z052TlZ3Vmp6eDBIUFRLUDJEVF9GSmptbTk1TWh6N1FtZ2tyXzhhSndXUkRXUG5sc0d2QklkSDFKTzZ2VkNLNjJRRlF5STBUcjhHUDN6a1BNWlZMMjJMeXBLaFAwU1V6anUxb1VfOW5mWG81djAzNEl5UQ?oc=5",
+      "label": "City Government and Schools in Oregon Introduce AI Tools",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOTXF1SDV4WEdITWVFUThlZEdRd1J3S2RtQ0VXQmptbEhKMV9jVW1sVU43R0ZuYmdlV0lIUEIzVWVWclltd2JzVUc3VGkxTnlWRnM0WVFMWjBJajYtU1loWlhTOU9ndHlPd3BhcGtYUUpiUklRREpIVTZpb3BSMTNUSEctWVZjZWdsNmcyaUZhTnMyTFdwYXRPblQyQWd6MFhweUtWN3E2aw?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOREtfcjhJZ1UxSGc3MjBHX3lEcXNaVjlGdlpiWEtVUlFkaUN6ck1ka1Y5Z052TlZ3Vmp6eDBIUFRLUDJEVF9GSmptbTk1TWh6N1FtZ2tyXzhhSndXUkRXUG5sc0d2QklkSDFKTzZ2VkNLNjJRRlF5STBUcjhHUDN6a1BNWlZMMjJMeXBLaFAwU1V6anUxb1VfOW5mWG81djAzNEl5UQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOTXF1SDV4WEdITWVFUThlZEdRd1J3S2RtQ0VXQmptbEhKMV9jVW1sVU43R0ZuYmdlV0lIUEIzVWVWclltd2JzVUc3VGkxTnlWRnM0WVFMWjBJajYtU1loWlhTOU9ndHlPd3BhcGtYUUpiUklRREpIVTZpb3BSMTNUSEctWVZjZWdsNmcyaUZhTnMyTFdwYXRPblQyQWd6MFhweUtWN3E2aw?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Philippines' DICT, Google Cloud expand AI and cybersecurity partnership",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOcEdWemh3M2JlLXJvS2FuYnFoU1ZSbWNhWGNqeTNKSG5KcTM4RlYyRVZGdzhfYTh6Zmp6c3k2aE1JNlh4eDVYcnRzQ1psOUxtc1NSMWVIMnIxTjhKNDE2VnY0blhnZlJZOVhvcnc3Ym05U2p1YnJTa2tDYXA0elBxN2dEbnUzTXlmZmJ4Mjk2a1ZyNEVvV0NUWXZzTGhtS0VVVThMSU9qRTg?oc=5",
+      "label": "Artificial Intelligence Tools Provide New Ways To Understand Customer Intent Across Digital Channels",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNZ2tzcXVhYnB6RFY3cWYzOHNjcTdZQVpOQ3VLYXAyZlpaY2RlaFNrZlE2X1pLUmNfeXFHVEtwR2l0Zjktc1BRbjRlZHhZb1hPNkhVNXpfUW42MVRZUWVFejE4R3daODZWOGtkM2dNcUtrclUyZWJKNHRBMHJnbFcxeEdZN1dzb3o3bTF3TTc3alBRM2FGUUI0THZqeUdFR3NGWHN5YXpTZ1lhU1NJeW5HbTlXQQ?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOcEdWemh3M2JlLXJvS2FuYnFoU1ZSbWNhWGNqeTNKSG5KcTM4RlYyRVZGdzhfYTh6Zmp6c3k2aE1JNlh4eDVYcnRzQ1psOUxtc1NSMWVIMnIxTjhKNDE2VnY0blhnZlJZOVhvcnc3Ym05U2p1YnJTa2tDYXA0elBxN2dEbnUzTXlmZmJ4Mjk2a1ZyNEVvV0NUWXZzTGhtS0VVVThMSU9qRTg?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNZ2tzcXVhYnB6RFY3cWYzOHNjcTdZQVpOQ3VLYXAyZlpaY2RlaFNrZlE2X1pLUmNfeXFHVEtwR2l0Zjktc1BRbjRlZHhZb1hPNkhVNXpfUW42MVRZUWVFejE4R3daODZWOGtkM2dNcUtrclUyZWJKNHRBMHJnbFcxeEdZN1dzb3o3bTF3TTc3alBRM2FGUUI0THZqeUdFR3NGWHN5YXpTZ1lhU1NJeW5HbTlXQQ?oc=5&hl=en-US&gl=US&ceid=US:en"
     }
   ]
 }
