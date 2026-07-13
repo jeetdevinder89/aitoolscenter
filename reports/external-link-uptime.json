@@ -1,22 +1,12 @@
 {
-  "generatedAt": "2026-07-06T12:00:19.957Z",
+  "generatedAt": "2026-07-13T10:56:08.893Z",
   "timeoutMs": 6000,
   "retries": 2,
   "concurrency": 8,
   "total": 108,
-  "healthy": 87,
-  "failed": 21,
+  "healthy": 89,
+  "failed": 19,
   "failures": [
-    {
-      "source": "tool",
-      "label": "ChatGPT",
-      "url": "https://chatgpt.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
-    },
     {
       "source": "tool",
       "label": "Claude",
@@ -206,16 +196,6 @@
       "method": "HEAD/GET",
       "attempts": 3,
       "error": "HTTP 403"
-    },
-    {
-      "source": "override",
-      "label": "OpenAI API",
-      "url": "https://platform.openai.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
     }
   ],
   "checks": [
@@ -223,11 +203,11 @@
       "source": "tool",
       "label": "ChatGPT",
       "url": "https://chatgpt.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
+      "healthy": true,
+      "status": 200,
+      "method": "GET",
+      "attempts": 1,
+      "finalUrl": "https://chatgpt.com/"
     },
     {
       "source": "tool",
@@ -576,7 +556,7 @@
       "healthy": true,
       "status": 200,
       "method": "HEAD",
-      "attempts": 1,
+      "attempts": 2,
       "finalUrl": "https://lexica.art/"
     },
     {
@@ -716,7 +696,7 @@
       "healthy": true,
       "status": 200,
       "method": "HEAD",
-      "attempts": 2,
+      "attempts": 1,
       "finalUrl": "https://www.qlova.com/"
     },
     {
@@ -1213,91 +1193,91 @@
       "source": "override",
       "label": "OpenAI API",
       "url": "https://platform.openai.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 2,
+      "finalUrl": "https://platform.openai.com/"
     },
     {
       "source": "news",
-      "label": "Traditional infrastructure security tools evaluate artificial intelligence workloads as isolated applications, completely missing how overprivileged identities bridge legacy estates to cloud architectures. Threat actors do not need to execute complex prompt injectio",
-      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNSkstMkdDZm1XeEVCZG5CNEkybXNIemo0amtQUDF2cGRBRkJUVmtXLWxlamJlOTY1bEdrSElTREZwVWJSaldZSFVya2NlV1BsLWZwMmhKZURJR1hlMHRING5JWnNoaXJVUXNwcktndFF0MXNkd243NXhZS0pJUnY3eXNVMkxBdGUwaXRoelNBZThwU2pWSkpMNkRBYXBSWEdJQmR0M0tsbktTMl84YmhhRkNxckE5TDA1c1BrVzNMRVBJR1lfVlBSbQ?oc=5",
+      "label": "New AI tool predicts breast cancer recurrence faster",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQbXNJTmNmX0VZYkEzUWE0TDM2cV9GTUFXSy05TnFHZVpIcHVnSXRiNFNXZDRDMG52bXRSWE9qd3lUQnJoT2JjRGFGQjdHVy1hX3ZxUTJwcXVjY0FNWV9BclBUOEM2aHpXV0x4MXFnYnEydW1laFRuSEo4VGNxTnRoanRCRC0wZnZOY3BlTXVlTHRnX1BQSUE?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNSkstMkdDZm1XeEVCZG5CNEkybXNIemo0amtQUDF2cGRBRkJUVmtXLWxlamJlOTY1bEdrSElTREZwVWJSaldZSFVya2NlV1BsLWZwMmhKZURJR1hlMHRING5JWnNoaXJVUXNwcktndFF0MXNkd243NXhZS0pJUnY3eXNVMkxBdGUwaXRoelNBZThwU2pWSkpMNkRBYXBSWEdJQmR0M0tsbktTMl84YmhhRkNxckE5TDA1c1BrVzNMRVBJR1lfVlBSbQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQbXNJTmNmX0VZYkEzUWE0TDM2cV9GTUFXSy05TnFHZVpIcHVnSXRiNFNXZDRDMG52bXRSWE9qd3lUQnJoT2JjRGFGQjdHVy1hX3ZxUTJwcXVjY0FNWV9BclBUOEM2aHpXV0x4MXFnYnEydW1laFRuSEo4VGNxTnRoanRCRC0wZnZOY3BlTXVlTHRnX1BQSUE?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "AI-powered tools can trace missing persons faster, with more accuracy, say experts",
-      "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxPU0hZMWdra0d5VVphQVBadWNDNzRPQjJBYkV3REtNLXhQS240dGF1SHVBMUpNaUZ0bV9TR1JsUURFa0h0LWI2WHYya2cwUEpLTEF5dVFzLURGaDN6OGo5OExrTng3alJPdnNWTndvN1IxRzJLclotZVdqZmpPNFFCT3NKNEFXMi1pRjdwbzVaMURPVXlUdTdnYTZKYzB5a2xLY01BcDJUbEdXWVhmZnhfSUtDam1DNG5yVGNseG1JQTJ5VkZ3SUU1RWV2WlBTRDJJSHBvNU5qUTNsTTRpUjJtenZTNkHSAesBQVVfeXFMTUtKeHdhZlVPcGFsWUlSMmh1NEstTXltWDhKbFVhaEQ2Q1pqUndocjhWQTRrTmwtWlhjei1sS0FWQ3lBWjJvejVzS09FVnNzX3YyV21xbU5sc0hBSklBdTBxRDY5TU1xMlQyWkljRTlxemd1eVQ3RUF0Q3NCLVo4LUl6WUxEdExnM09IcXo0VmxEZ3VYNmJiajhLN051cEI5WHRSQnZqN2tqZjJBa3JRNjZIekM0MXpUelFIdklNcGhURU5qSWZRc2ZLV0RvNWUzaGFPdHQ4aklRZjdXZmJQM3A0eXdRcjd3b01yVQ?oc=5",
+      "label": "Starbucks develops in-house AI tools to replace Microsoft, IBM software, saving millions",
+      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQWkNJdHNsR0M0MWc4bFRxTmdxUDhJVjY0RGFoWUNWRWpIN2RUZzIwOWd3d3hNOElqc3Q2cmNEZnNCZjNtVWNVTWduREVRd0hGZk9kdG5HVENQNlBma3VhWll6emR0ZE54ai1DQjJDSTlXUTdMRmJmNk5uQ3hjWjVQcFVfYWNnc0Z1NFVtalNPR282dzBWTE80aGNBTURhX0pkWlhkdnhqYkltVkxNTGRvc0F0TTR3anYzYmo2Z3ZGVU0ya0xuTDV2S0V4SkdfcTdyM1p3MF9jbjBmdU1xRVHSAeMBQVVfeXFMT3ViRVNBUVVleGFRMWNPYTNjUWdUeXQ4STFSTk42WTJTOTVMVHNEcGlTQ3lUQTgwU1Z5NE1vd0J0cXR5U1Q1V3VQT25qYjFPdlp2VW5CdDhOS01ObnByczltUzZuU1l6b2tnSkVMZTZybEN1SlowQXVDa1VfaGVoXzRhWWpQQzRKUXEtVXJLOVFxbjFpLUtlWl9YZVVPWmJVeW1Yc3lQZEt0V3NuX1FSOHNBX2hBYzU4Zl9mQWZ0Ti1WNmVGZW5NZlo2VGhkMXN4OXZLWWJBMUhZcmRWQThRTUNmOHc?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxPU0hZMWdra0d5VVphQVBadWNDNzRPQjJBYkV3REtNLXhQS240dGF1SHVBMUpNaUZ0bV9TR1JsUURFa0h0LWI2WHYya2cwUEpLTEF5dVFzLURGaDN6OGo5OExrTng3alJPdnNWTndvN1IxRzJLclotZVdqZmpPNFFCT3NKNEFXMi1pRjdwbzVaMURPVXlUdTdnYTZKYzB5a2xLY01BcDJUbEdXWVhmZnhfSUtDam1DNG5yVGNseG1JQTJ5VkZ3SUU1RWV2WlBTRDJJSHBvNU5qUTNsTTRpUjJtenZTNkHSAesBQVVfeXFMTUtKeHdhZlVPcGFsWUlSMmh1NEstTXltWDhKbFVhaEQ2Q1pqUndocjhWQTRrTmwtWlhjei1sS0FWQ3lBWjJvejVzS09FVnNzX3YyV21xbU5sc0hBSklBdTBxRDY5TU1xMlQyWkljRTlxemd1eVQ3RUF0Q3NCLVo4LUl6WUxEdExnM09IcXo0VmxEZ3VYNmJiajhLN051cEI5WHRSQnZqN2tqZjJBa3JRNjZIekM0MXpUelFIdklNcGhURU5qSWZRc2ZLV0RvNWUzaGFPdHQ4aklRZjdXZmJQM3A0eXdRcjd3b01yVQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQWkNJdHNsR0M0MWc4bFRxTmdxUDhJVjY0RGFoWUNWRWpIN2RUZzIwOWd3d3hNOElqc3Q2cmNEZnNCZjNtVWNVTWduREVRd0hGZk9kdG5HVENQNlBma3VhWll6emR0ZE54ai1DQjJDSTlXUTdMRmJmNk5uQ3hjWjVQcFVfYWNnc0Z1NFVtalNPR282dzBWTE80aGNBTURhX0pkWlhkdnhqYkltVkxNTGRvc0F0TTR3anYzYmo2Z3ZGVU0ya0xuTDV2S0V4SkdfcTdyM1p3MF9jbjBmdU1xRVHSAeMBQVVfeXFMT3ViRVNBUVVleGFRMWNPYTNjUWdUeXQ4STFSTk42WTJTOTVMVHNEcGlTQ3lUQTgwU1Z5NE1vd0J0cXR5U1Q1V3VQT25qYjFPdlp2VW5CdDhOS01ObnByczltUzZuU1l6b2tnSkVMZTZybEN1SlowQXVDa1VfaGVoXzRhWWpQQzRKUXEtVXJLOVFxbjFpLUtlWl9YZVVPWmJVeW1Yc3lQZEt0V3NuX1FSOHNBX2hBYzU4Zl9mQWZ0Ti1WNmVGZW5NZlo2VGhkMXN4OXZLWWJBMUhZcmRWQThRTUNmOHc?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "How to use artificial intelligence to strengthen scientific processes and scholarly output",
-      "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxORG9DQ3dhS0c3c1RuYXJXZHhrMjZsTU1HWmVZLVg1VWJ4Vi1RdHNTVVVfdjI4Z3ZqWUpiNkZuSmFqME9rd2NISEVhSGxXNE41cjhXeEtBdWNVaHowLTk3MjJ0aFRCeFc2Y29qVE5kc1hvT0JZcEVJdFNFUGx5bFp0NGZJcm9SdkNrajMtZWtGX0s5WkpkU3NKTkdPczRWM2dPX0l3dVIzLV9vbHpKZFE0NHEyeXhjVTZTWU1SWFp3Y0hnbnlkeFBBaWxxOW5Xc3dUXzRyUm9VdnZBTVFxREh3?oc=5",
+      "label": "New Data Finds AI Tools Are Quietly Exhausting Your Team, but There’s a Solution",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNZi02eTNsRGJsQU5xXzYzQWk5SFJBUGZWb2QwM0hnTmRuSkhBZkVqU3Btd0xSUHVfdFVTcWFGT1dtZm5Zc3ZiWVVBXzJmS0JYdUctTGhVOUx4bXZJM19oOG9HWjFqdzJGM1ZnZWNUVWNqUGppdXI5V2tjdUNzM3lNVW1MRDlfdkJaR0Q2MG9LMzBubEFEVHlkZQ?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxORG9DQ3dhS0c3c1RuYXJXZHhrMjZsTU1HWmVZLVg1VWJ4Vi1RdHNTVVVfdjI4Z3ZqWUpiNkZuSmFqME9rd2NISEVhSGxXNE41cjhXeEtBdWNVaHowLTk3MjJ0aFRCeFc2Y29qVE5kc1hvT0JZcEVJdFNFUGx5bFp0NGZJcm9SdkNrajMtZWtGX0s5WkpkU3NKTkdPczRWM2dPX0l3dVIzLV9vbHpKZFE0NHEyeXhjVTZTWU1SWFp3Y0hnbnlkeFBBaWxxOW5Xc3dUXzRyUm9VdnZBTVFxREh3?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNZi02eTNsRGJsQU5xXzYzQWk5SFJBUGZWb2QwM0hnTmRuSkhBZkVqU3Btd0xSUHVfdFVTcWFGT1dtZm5Zc3ZiWVVBXzJmS0JYdUctTGhVOUx4bXZJM19oOG9HWjFqdzJGM1ZnZWNUVWNqUGppdXI5V2tjdUNzM3lNVW1MRDlfdkJaR0Q2MG9LMzBubEFEVHlkZQ?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Is AI ruining our skills? Early results are in—and they’re not good",
-      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQTHBhUkxjcVdSM2NMNlZMTThOT1piM0U5LVoya0U2bmJwcUNXTDlFMjVMNjZyTWdmMUpzMndYam42aVYzWUhFZjNKUlhlSWZYclpXbzdEUGkwbjNsWGpDZWMtYWtBM1MtN3A1cFM1Q3ZMdWN4T2NpSUdaeDlyd3pJRkJxMjRBSnpfLWp6OFRlQzFCQ3FSN0VaRVpsM2tTdFl0VmliY3dHMWZ3SWp0cFE?oc=5",
+      "label": "Making AI Tools Work for Low-Resource Maternity Wards",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOeE9rZzd2UTdiUVctU2JJSE5XQk5uSjZZVzVvTUhlNVJpeWVFSWdvakFuUXV1NFQxRDhXSFRMRElsMHZwbmJGWHEwTV9GQzRYcWVfQ1dPeHlFSnJNb1hfeElvdEw4SkRuM25ZWlJnQWVPS1RoU1NjOHhyQl9SRXhuWm4wLVl5cU85eVA4X3NGdDBFNm9NWXNzSU9sQQ?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQTHBhUkxjcVdSM2NMNlZMTThOT1piM0U5LVoya0U2bmJwcUNXTDlFMjVMNjZyTWdmMUpzMndYam42aVYzWUhFZjNKUlhlSWZYclpXbzdEUGkwbjNsWGpDZWMtYWtBM1MtN3A1cFM1Q3ZMdWN4T2NpSUdaeDlyd3pJRkJxMjRBSnpfLWp6OFRlQzFCQ3FSN0VaRVpsM2tTdFl0VmliY3dHMWZ3SWp0cFE?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOeE9rZzd2UTdiUVctU2JJSE5XQk5uSjZZVzVvTUhlNVJpeWVFSWdvakFuUXV1NFQxRDhXSFRMRElsMHZwbmJGWHEwTV9GQzRYcWVfQ1dPeHlFSnJNb1hfeElvdEw4SkRuM25ZWlJnQWVPS1RoU1NjOHhyQl9SRXhuWm4wLVl5cU85eVA4X3NGdDBFNm9NWXNzSU9sQQ?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "At one rural New Mexico hospital, doctors turn to AI tools",
-      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOSnR6Qmh3NU5oS1YteldHR2FiWW5iOTRLMS1KakJGTWtaWjBGSjNPSE1jVGxfWGRnemdKQ3N4RnEtVXhDU3BxOEQzVEFtZnpxeVozTGhMakp1ZkxfenlUQnowbklTRzE0aXAyTGdVZEpxcEZRa1Q3NUhBUnNkUExfajk3NG1xczltSGpJa1BzeUs0SWRHcm83OW43QWlXOVZhbHFmN0Vn?oc=5",
+      "label": "Meta removes Instagram’s AI remix option",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQakljd050QUNJbWg1Vk1UWE80TTVsUDFfLU1FQ1lJcjdRRk1RREtfUmVxQXZqS1h5MXRhZUxKQnhSUGpGTzlaamVQcDc3czFaRmE2ZmIxQllBTlBBR2E5MTNCLW1ma1d4WHU0MnlCdlF0eWVsc0JVbU1xTWdwN2k1M0l5OURSUGRnSVFNWFFR?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOSnR6Qmh3NU5oS1YteldHR2FiWW5iOTRLMS1KakJGTWtaWjBGSjNPSE1jVGxfWGRnemdKQ3N4RnEtVXhDU3BxOEQzVEFtZnpxeVozTGhMakp1ZkxfenlUQnowbklTRzE0aXAyTGdVZEpxcEZRa1Q3NUhBUnNkUExfajk3NG1xczltSGpJa1BzeUs0SWRHcm83OW43QWlXOVZhbHFmN0Vn?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQakljd050QUNJbWg1Vk1UWE80TTVsUDFfLU1FQ1lJcjdRRk1RREtfUmVxQXZqS1h5MXRhZUxKQnhSUGpGTzlaamVQcDc3czFaRmE2ZmIxQllBTlBBR2E5MTNCLW1ma1d4WHU0MnlCdlF0eWVsc0JVbU1xTWdwN2k1M0l5OURSUGRnSVFNWFFR?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Microsoft Merges Enterprise and Consumer Copilot Apps",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQdjlERVhXbmtLS2RnNDE5UTRaMVA1azJyZVFxQU82R0RVSExRbEswTE1iRGh6X21QSnRnU25MbGdwek9ha0QwR0Z2a0hlN2lFaUxhQ1B5SkJsbTZIWXNrZHpUZ0JZXzdoejEzNklPaWFwLW1qbVJTVnNaV2Y5RmUxOXJYczJxSFFHMXZ5SnZBQ0VOdk9aWFFMaEtkcE1kQjdSbHVQNlFpVWJwVktxZTFlag?oc=5",
+      "label": "Meta withdraws its controversial AI image feature",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPRGVhQ2R4dFpWcUFFdVo4WjQ1WVlKMy04VENjZlVPN1hPNy1XZFhzOWJzMlJlYkF3eGNtN3B6dXN1UjZGV01vRkdDYlpiR1lqOEhyd2pqRGhyclRuaWtidGhnd1lmTHdHQlFZRmdpNzVXUTB5NlUtTzh0aGd5VzM3YkNScGN3cjRhaFRRZWVDeWZkZUNlLVAwU18yVTRpbEpN?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQdjlERVhXbmtLS2RnNDE5UTRaMVA1azJyZVFxQU82R0RVSExRbEswTE1iRGh6X21QSnRnU25MbGdwek9ha0QwR0Z2a0hlN2lFaUxhQ1B5SkJsbTZIWXNrZHpUZ0JZXzdoejEzNklPaWFwLW1qbVJTVnNaV2Y5RmUxOXJYczJxSFFHMXZ5SnZBQ0VOdk9aWFFMaEtkcE1kQjdSbHVQNlFpVWJwVktxZTFlag?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPRGVhQ2R4dFpWcUFFdVo4WjQ1WVlKMy04VENjZlVPN1hPNy1XZFhzOWJzMlJlYkF3eGNtN3B6dXN1UjZGV01vRkdDYlpiR1lqOEhyd2pqRGhyclRuaWtidGhnd1lmTHdHQlFZRmdpNzVXUTB5NlUtTzh0aGd5VzM3YkNScGN3cjRhaFRRZWVDeWZkZUNlLVAwU18yVTRpbEpN?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "X Launches MCP Server to Bring AI Tools Closer to Real-Time Social Data",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOeDNsNHhkSXNETDFDbU5rZUlkcEQwX1hDZDNBdnNnSEEyZVFKZVl4RmNlaEg1cExQc1MwZDJxanFBN3hJc2xJemlvc0NjNURKOFhVNWNLc3ZtbloyWTVJa1kyc2VsVFF4RXpuUXRPT3pMZDN2MDJOOGlLOFBEeXlVZjRMeHJJdHZtbG94MEx5emdfWE5vNUVCVg?oc=5",
+      "label": "5 Best AI Tools for Startups in 2026",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPYUNIdFRlaGJ0UXNUcWFFNTF5NXVhcThMYldRUlhtRjduX3JsMFRYdTgtNC1ZVjBGQzNkX3kyTVBiM0hBVFg3V3p2bERGcjQ2blBYTHMxWWxvYVl3Z295S3FkSHFFUEZGT0k4bnJMRTFOSWl1M1o0ckxDb3pNOVEyODY5aE9JTHNpbFNSNjB4Rl9zbThKQlpsWFZHdzVUNWxu?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOeDNsNHhkSXNETDFDbU5rZUlkcEQwX1hDZDNBdnNnSEEyZVFKZVl4RmNlaEg1cExQc1MwZDJxanFBN3hJc2xJemlvc0NjNURKOFhVNWNLc3ZtbloyWTVJa1kyc2VsVFF4RXpuUXRPT3pMZDN2MDJOOGlLOFBEeXlVZjRMeHJJdHZtbG94MEx5emdfWE5vNUVCVg?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPYUNIdFRlaGJ0UXNUcWFFNTF5NXVhcThMYldRUlhtRjduX3JsMFRYdTgtNC1ZVjBGQzNkX3kyTVBiM0hBVFg3V3p2bERGcjQ2blBYTHMxWWxvYVl3Z295S3FkSHFFUEZGT0k4bnJMRTFOSWl1M1o0ckxDb3pNOVEyODY5aE9JTHNpbFNSNjB4Rl9zbThKQlpsWFZHdzVUNWxu?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Australian office staff flout AI rules, study finds",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNaDdrVk5lUm1fYkZoRHFDRURHUGxzN1phaVFmaW5uSHNxVHBVVFBIWV9waFJqMm1kVzZOVmUtNTFNV1RBemt2SmptM3RraWZoUlB1cVlCMGh2b0hTdG9mMlAwQ0NwM2FGQlM3c2E2b2FDdmlHY0lpMGdfVjYtdU1pbU1WWnZRVjMxeHNhTkZn?oc=5",
+      "label": "How CFOs are using AI-based finance tools to boost revenue",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNR09BOG5QLWI3MU56MklZS3NmaVBRR2tINHpvY05QSXppMVFXVGZhZ29Lbzg0YVRzZmkxVXg5MFU1UWdkOFFzYnZYS3NfUm5RU3RxVmRUTzdGSVc2ZEl6WXF3OWJOZFppdlo0V2NaWDN6UGpBamhrVjliOFhpcGJTSTBVLW05R3VDWnZIN1hYMDJWNE9fc2xEdmlQSng0dw?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNaDdrVk5lUm1fYkZoRHFDRURHUGxzN1phaVFmaW5uSHNxVHBVVFBIWV9waFJqMm1kVzZOVmUtNTFNV1RBemt2SmptM3RraWZoUlB1cVlCMGh2b0hTdG9mMlAwQ0NwM2FGQlM3c2E2b2FDdmlHY0lpMGdfVjYtdU1pbU1WWnZRVjMxeHNhTkZn?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMingFBVV95cUxNR09BOG5QLWI3MU56MklZS3NmaVBRR2tINHpvY05QSXppMVFXVGZhZ29Lbzg0YVRzZmkxVXg5MFU1UWdkOFFzYnZYS3NfUm5RU3RxVmRUTzdGSVc2ZEl6WXF3OWJOZFppdlo0V2NaWDN6UGpBamhrVjliOFhpcGJTSTBVLW05R3VDWnZIN1hYMDJWNE9fc2xEdmlQSng0dw?oc=5&hl=en-US&gl=US&ceid=US:en"
     }
   ]
 }
