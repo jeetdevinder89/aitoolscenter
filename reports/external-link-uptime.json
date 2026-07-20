@@ -1,12 +1,22 @@
 {
-  "generatedAt": "2026-07-13T10:56:08.893Z",
+  "generatedAt": "2026-07-20T10:47:24.070Z",
   "timeoutMs": 6000,
   "retries": 2,
   "concurrency": 8,
   "total": 108,
-  "healthy": 89,
-  "failed": 19,
+  "healthy": 87,
+  "failed": 21,
   "failures": [
+    {
+      "source": "tool",
+      "label": "ChatGPT",
+      "url": "https://chatgpt.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
     {
       "source": "tool",
       "label": "Claude",
@@ -196,6 +206,16 @@
       "method": "HEAD/GET",
       "attempts": 3,
       "error": "HTTP 403"
+    },
+    {
+      "source": "override",
+      "label": "OpenAI API",
+      "url": "https://platform.openai.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
     }
   ],
   "checks": [
@@ -203,11 +223,11 @@
       "source": "tool",
       "label": "ChatGPT",
       "url": "https://chatgpt.com/",
-      "healthy": true,
-      "status": 200,
-      "method": "GET",
-      "attempts": 1,
-      "finalUrl": "https://chatgpt.com/"
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
     },
     {
       "source": "tool",
@@ -556,7 +576,7 @@
       "healthy": true,
       "status": 200,
       "method": "HEAD",
-      "attempts": 2,
+      "attempts": 1,
       "finalUrl": "https://lexica.art/"
     },
     {
@@ -1193,91 +1213,91 @@
       "source": "override",
       "label": "OpenAI API",
       "url": "https://platform.openai.com/",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 2,
-      "finalUrl": "https://platform.openai.com/"
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
     },
     {
       "source": "news",
-      "label": "New AI tool predicts breast cancer recurrence faster",
-      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQbXNJTmNmX0VZYkEzUWE0TDM2cV9GTUFXSy05TnFHZVpIcHVnSXRiNFNXZDRDMG52bXRSWE9qd3lUQnJoT2JjRGFGQjdHVy1hX3ZxUTJwcXVjY0FNWV9BclBUOEM2aHpXV0x4MXFnYnEydW1laFRuSEo4VGNxTnRoanRCRC0wZnZOY3BlTXVlTHRnX1BQSUE?oc=5",
+      "label": "AI SEO: How Artificial Intelligence Is Changing Search Engine Optimization",
+      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOLUFRZnBUR3V5VVdKcHlTR0pMbkRGR1YtNlBGYmIyMUNwNDV3YUcyMHlORVJ1WEZSQ1hvRUlNRlpiVk14eTBQdkpnc1ZyMENKbl9DbVhMcDR0R2l6VTFGRmdiT0o3MG5LSXc2MkVqbXd6d0Z0cVQwenFQVlpzOEppVnYzSV9nTXdpbTRNMnAxUDJlcjAtc3g1VkluSVpSV0RfOGt1M2V3aTgzb0ZVczdRb1hoem5waUt0b05tT3dQZ3Q?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQbXNJTmNmX0VZYkEzUWE0TDM2cV9GTUFXSy05TnFHZVpIcHVnSXRiNFNXZDRDMG52bXRSWE9qd3lUQnJoT2JjRGFGQjdHVy1hX3ZxUTJwcXVjY0FNWV9BclBUOEM2aHpXV0x4MXFnYnEydW1laFRuSEo4VGNxTnRoanRCRC0wZnZOY3BlTXVlTHRnX1BQSUE?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOLUFRZnBUR3V5VVdKcHlTR0pMbkRGR1YtNlBGYmIyMUNwNDV3YUcyMHlORVJ1WEZSQ1hvRUlNRlpiVk14eTBQdkpnc1ZyMENKbl9DbVhMcDR0R2l6VTFGRmdiT0o3MG5LSXc2MkVqbXd6d0Z0cVQwenFQVlpzOEppVnYzSV9nTXdpbTRNMnAxUDJlcjAtc3g1VkluSVpSV0RfOGt1M2V3aTgzb0ZVczdRb1hoem5waUt0b05tT3dQZ3Q?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Starbucks develops in-house AI tools to replace Microsoft, IBM software, saving millions",
-      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQWkNJdHNsR0M0MWc4bFRxTmdxUDhJVjY0RGFoWUNWRWpIN2RUZzIwOWd3d3hNOElqc3Q2cmNEZnNCZjNtVWNVTWduREVRd0hGZk9kdG5HVENQNlBma3VhWll6emR0ZE54ai1DQjJDSTlXUTdMRmJmNk5uQ3hjWjVQcFVfYWNnc0Z1NFVtalNPR282dzBWTE80aGNBTURhX0pkWlhkdnhqYkltVkxNTGRvc0F0TTR3anYzYmo2Z3ZGVU0ya0xuTDV2S0V4SkdfcTdyM1p3MF9jbjBmdU1xRVHSAeMBQVVfeXFMT3ViRVNBUVVleGFRMWNPYTNjUWdUeXQ4STFSTk42WTJTOTVMVHNEcGlTQ3lUQTgwU1Z5NE1vd0J0cXR5U1Q1V3VQT25qYjFPdlp2VW5CdDhOS01ObnByczltUzZuU1l6b2tnSkVMZTZybEN1SlowQXVDa1VfaGVoXzRhWWpQQzRKUXEtVXJLOVFxbjFpLUtlWl9YZVVPWmJVeW1Yc3lQZEt0V3NuX1FSOHNBX2hBYzU4Zl9mQWZ0Ti1WNmVGZW5NZlo2VGhkMXN4OXZLWWJBMUhZcmRWQThRTUNmOHc?oc=5",
+      "label": "OpenAI CFO Sarah Friar to companies questioning return on their AI investments: Don't rush to the cheapest AI model, buy AI tools that ...",
+      "url": "https://news.google.com/rss/articles/CBMiuwJBVV95cUxObG1xQnFJeldYeGJjM0VEYlRuVndhQ0h1MlU5amZGa1ltRlJzMlQya2loN2Z3Y05fY256R2htcTNfWFZPTXVGcGg0a2k5MHJkU2JyU3hidGRITHd6eWJRVndnSzc2aVVSenZlQkl3U2ZCaWlRN3J1UTdWTHNCRXlrUW1hVjRsRXlNajhrMVNpNERaUHhQdThibE5Mc2p1d1c3WlRTczktc09YTnlEdi04Sk16UjRFeFlSS1NCd2phZFFUbEFtZ3dfX19QQmNEcE9VUkR1TjRXUVFmMWdFV2VkWlg3cjBwdTljNlpTZmp4ZF9KSGUxR1RQUW1PcDQ2WUZnNUJrU2drRmRxMnFxdkJxazBTMlJGdERXMzlSa0R0Z2VYb1R2UVJsR0VLVmQtbEdWRE15THpUb3lrYzg?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQWkNJdHNsR0M0MWc4bFRxTmdxUDhJVjY0RGFoWUNWRWpIN2RUZzIwOWd3d3hNOElqc3Q2cmNEZnNCZjNtVWNVTWduREVRd0hGZk9kdG5HVENQNlBma3VhWll6emR0ZE54ai1DQjJDSTlXUTdMRmJmNk5uQ3hjWjVQcFVfYWNnc0Z1NFVtalNPR282dzBWTE80aGNBTURhX0pkWlhkdnhqYkltVkxNTGRvc0F0TTR3anYzYmo2Z3ZGVU0ya0xuTDV2S0V4SkdfcTdyM1p3MF9jbjBmdU1xRVHSAeMBQVVfeXFMT3ViRVNBUVVleGFRMWNPYTNjUWdUeXQ4STFSTk42WTJTOTVMVHNEcGlTQ3lUQTgwU1Z5NE1vd0J0cXR5U1Q1V3VQT25qYjFPdlp2VW5CdDhOS01ObnByczltUzZuU1l6b2tnSkVMZTZybEN1SlowQXVDa1VfaGVoXzRhWWpQQzRKUXEtVXJLOVFxbjFpLUtlWl9YZVVPWmJVeW1Yc3lQZEt0V3NuX1FSOHNBX2hBYzU4Zl9mQWZ0Ti1WNmVGZW5NZlo2VGhkMXN4OXZLWWJBMUhZcmRWQThRTUNmOHc?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiuwJBVV95cUxObG1xQnFJeldYeGJjM0VEYlRuVndhQ0h1MlU5amZGa1ltRlJzMlQya2loN2Z3Y05fY256R2htcTNfWFZPTXVGcGg0a2k5MHJkU2JyU3hidGRITHd6eWJRVndnSzc2aVVSenZlQkl3U2ZCaWlRN3J1UTdWTHNCRXlrUW1hVjRsRXlNajhrMVNpNERaUHhQdThibE5Mc2p1d1c3WlRTczktc09YTnlEdi04Sk16UjRFeFlSS1NCd2phZFFUbEFtZ3dfX19QQmNEcE9VUkR1TjRXUVFmMWdFV2VkWlg3cjBwdTljNlpTZmp4ZF9KSGUxR1RQUW1PcDQ2WUZnNUJrU2drRmRxMnFxdkJxazBTMlJGdERXMzlSa0R0Z2VYb1R2UVJsR0VLVmQtbEdWRE15THpUb3lrYzg?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "New Data Finds AI Tools Are Quietly Exhausting Your Team, but There’s a Solution",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNZi02eTNsRGJsQU5xXzYzQWk5SFJBUGZWb2QwM0hnTmRuSkhBZkVqU3Btd0xSUHVfdFVTcWFGT1dtZm5Zc3ZiWVVBXzJmS0JYdUctTGhVOUx4bXZJM19oOG9HWjFqdzJGM1ZnZWNUVWNqUGppdXI5V2tjdUNzM3lNVW1MRDlfdkJaR0Q2MG9LMzBubEFEVHlkZQ?oc=5",
+      "label": "Lawsuit says AI tool disproportionately places Black prisoners in maximum security in Ontario",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQZ0I2Vk1YZFk1cElLTnRid09RV09FdUZ1NE5uUlBVdVUyX3d3RDZEbFo3b256YllwcGtMWTFwUWVnTUNYeHZLTTJsT3A4S25qYTlPNjNjTjIwSWtOYm9iMmxkUTRPRDJHOEx0cklIanhudVlLd08zLXlFQ2JzdEhtOVF2cl9ud2p6SXhJWVdvNmxLR1RUTTk1QVdKUkk?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNZi02eTNsRGJsQU5xXzYzQWk5SFJBUGZWb2QwM0hnTmRuSkhBZkVqU3Btd0xSUHVfdFVTcWFGT1dtZm5Zc3ZiWVVBXzJmS0JYdUctTGhVOUx4bXZJM19oOG9HWjFqdzJGM1ZnZWNUVWNqUGppdXI5V2tjdUNzM3lNVW1MRDlfdkJaR0Q2MG9LMzBubEFEVHlkZQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQZ0I2Vk1YZFk1cElLTnRid09RV09FdUZ1NE5uUlBVdVUyX3d3RDZEbFo3b256YllwcGtMWTFwUWVnTUNYeHZLTTJsT3A4S25qYTlPNjNjTjIwSWtOYm9iMmxkUTRPRDJHOEx0cklIanhudVlLd08zLXlFQ2JzdEhtOVF2cl9ud2p6SXhJWVdvNmxLR1RUTTk1QVdKUkk?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Making AI Tools Work for Low-Resource Maternity Wards",
-      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOeE9rZzd2UTdiUVctU2JJSE5XQk5uSjZZVzVvTUhlNVJpeWVFSWdvakFuUXV1NFQxRDhXSFRMRElsMHZwbmJGWHEwTV9GQzRYcWVfQ1dPeHlFSnJNb1hfeElvdEw4SkRuM25ZWlJnQWVPS1RoU1NjOHhyQl9SRXhuWm4wLVl5cU85eVA4X3NGdDBFNm9NWXNzSU9sQQ?oc=5",
+      "label": "TikTok report explores creative AI optimization for brands",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOS2w1XzJVRnFsS2tXZ0VBMU1yTU1TWFVrMmZIcDRKcG9NcG9TWFpndWpTdm5NTXJ4MlhwT2paS05iRzJTMDB3M19WMGM0emI1TkdPazZRLU93MHdMU2x5NmpzZ2RxVjYtZXA0bzQ4c1RVTC1odHM1VGVPT19ETHZvV1RaQS0wRFBxOGo0Tk4xYzdXa0FtNEZ1UVZPWHUwc09MZ1FXZHZWOA?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOeE9rZzd2UTdiUVctU2JJSE5XQk5uSjZZVzVvTUhlNVJpeWVFSWdvakFuUXV1NFQxRDhXSFRMRElsMHZwbmJGWHEwTV9GQzRYcWVfQ1dPeHlFSnJNb1hfeElvdEw4SkRuM25ZWlJnQWVPS1RoU1NjOHhyQl9SRXhuWm4wLVl5cU85eVA4X3NGdDBFNm9NWXNzSU9sQQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOS2w1XzJVRnFsS2tXZ0VBMU1yTU1TWFVrMmZIcDRKcG9NcG9TWFpndWpTdm5NTXJ4MlhwT2paS05iRzJTMDB3M19WMGM0emI1TkdPazZRLU93MHdMU2x5NmpzZ2RxVjYtZXA0bzQ4c1RVTC1odHM1VGVPT19ETHZvV1RaQS0wRFBxOGo0Tk4xYzdXa0FtNEZ1UVZPWHUwc09MZ1FXZHZWOA?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Meta removes Instagram’s AI remix option",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQakljd050QUNJbWg1Vk1UWE80TTVsUDFfLU1FQ1lJcjdRRk1RREtfUmVxQXZqS1h5MXRhZUxKQnhSUGpGTzlaamVQcDc3czFaRmE2ZmIxQllBTlBBR2E5MTNCLW1ma1d4WHU0MnlCdlF0eWVsc0JVbU1xTWdwN2k1M0l5OURSUGRnSVFNWFFR?oc=5",
+      "label": "Artificial intelligence is exposing what's wrong with modern education",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQYWxUUmtoQURpb0tfQmJ5NVNMb19hZDhGSTZhWVphUGdGTk1jLUF4NElJY1dVRUl3SUlUT2hfSzRsMTB0STZtVnF0b0FoMmEwSEg4LWp0RnBZTkxBdGJ0WnRQeHJBWUo1eXQ4OFVXN3ZPTktFRV9fNkVKQlBLWGN0V2NROU5qSVVvRzNtcWotakt5YzQxUUcxT3R2SUxFdw?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQakljd050QUNJbWg1Vk1UWE80TTVsUDFfLU1FQ1lJcjdRRk1RREtfUmVxQXZqS1h5MXRhZUxKQnhSUGpGTzlaamVQcDc3czFaRmE2ZmIxQllBTlBBR2E5MTNCLW1ma1d4WHU0MnlCdlF0eWVsc0JVbU1xTWdwN2k1M0l5OURSUGRnSVFNWFFR?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMingFBVV95cUxQYWxUUmtoQURpb0tfQmJ5NVNMb19hZDhGSTZhWVphUGdGTk1jLUF4NElJY1dVRUl3SUlUT2hfSzRsMTB0STZtVnF0b0FoMmEwSEg4LWp0RnBZTkxBdGJ0WnRQeHJBWUo1eXQ4OFVXN3ZPTktFRV9fNkVKQlBLWGN0V2NROU5qSVVvRzNtcWotakt5YzQxUUcxT3R2SUxFdw?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Meta withdraws its controversial AI image feature",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPRGVhQ2R4dFpWcUFFdVo4WjQ1WVlKMy04VENjZlVPN1hPNy1XZFhzOWJzMlJlYkF3eGNtN3B6dXN1UjZGV01vRkdDYlpiR1lqOEhyd2pqRGhyclRuaWtidGhnd1lmTHdHQlFZRmdpNzVXUTB5NlUtTzh0aGd5VzM3YkNScGN3cjRhaFRRZWVDeWZkZUNlLVAwU18yVTRpbEpN?oc=5",
+      "label": "Genius Bar AI tools spark concerns over employee monitoring & evaluation",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNUG9iWkw3Z01ORjhqb3E2WFcxcnpQNE8zYTJEcXNVT3JoNFNMVGtJMjJVYXJMekY0Nndod1dkem1qMjMzd05zRU0yUFUzeUpiYm9HMEFrNnVKaXNoaFQwQ2dvZjdfMmtMVGxKVzY4WWZyZzVuUzJfWUdGZVlQM3NYYzFjQTRxRXlYU0lLcmw1TXl6VU1CQnJ2VE1nQUJoT28tcGFHMXRKVERmajJMZHBNZzN6bw?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPRGVhQ2R4dFpWcUFFdVo4WjQ1WVlKMy04VENjZlVPN1hPNy1XZFhzOWJzMlJlYkF3eGNtN3B6dXN1UjZGV01vRkdDYlpiR1lqOEhyd2pqRGhyclRuaWtidGhnd1lmTHdHQlFZRmdpNzVXUTB5NlUtTzh0aGd5VzM3YkNScGN3cjRhaFRRZWVDeWZkZUNlLVAwU18yVTRpbEpN?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNUG9iWkw3Z01ORjhqb3E2WFcxcnpQNE8zYTJEcXNVT3JoNFNMVGtJMjJVYXJMekY0Nndod1dkem1qMjMzd05zRU0yUFUzeUpiYm9HMEFrNnVKaXNoaFQwQ2dvZjdfMmtMVGxKVzY4WWZyZzVuUzJfWUdGZVlQM3NYYzFjQTRxRXlYU0lLcmw1TXl6VU1CQnJ2VE1nQUJoT28tcGFHMXRKVERmajJMZHBNZzN6bw?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "5 Best AI Tools for Startups in 2026",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPYUNIdFRlaGJ0UXNUcWFFNTF5NXVhcThMYldRUlhtRjduX3JsMFRYdTgtNC1ZVjBGQzNkX3kyTVBiM0hBVFg3V3p2bERGcjQ2blBYTHMxWWxvYVl3Z295S3FkSHFFUEZGT0k4bnJMRTFOSWl1M1o0ckxDb3pNOVEyODY5aE9JTHNpbFNSNjB4Rl9zbThKQlpsWFZHdzVUNWxu?oc=5",
+      "label": "George Lucas Claims That Future Filmmakers Will Inevitably Use AI Tools",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOaW9uOVVZU0NEcnBSOTJFejFYM09UbnZ3dmxOdmJCUEFWTG1tZkItckEzSjhBV1dsMVlUR21qY2FHM202TGN2VVJJazBoZTdocnZ6ZEZWbVNrcWk0UjRXa0kteTBUQTFvZ1NFTk96Q3hmTjdZZTBPMThid05jUUdWSGVJSWhQM2R1M0VXQWhzOHg5ZDk2bFNrNjVPWTVCNlpaTlh4WHRSUC0tUGdSbDdxQUkzbEIyQ0k?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPYUNIdFRlaGJ0UXNUcWFFNTF5NXVhcThMYldRUlhtRjduX3JsMFRYdTgtNC1ZVjBGQzNkX3kyTVBiM0hBVFg3V3p2bERGcjQ2blBYTHMxWWxvYVl3Z295S3FkSHFFUEZGT0k4bnJMRTFOSWl1M1o0ckxDb3pNOVEyODY5aE9JTHNpbFNSNjB4Rl9zbThKQlpsWFZHdzVUNWxu?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOaW9uOVVZU0NEcnBSOTJFejFYM09UbnZ3dmxOdmJCUEFWTG1tZkItckEzSjhBV1dsMVlUR21qY2FHM202TGN2VVJJazBoZTdocnZ6ZEZWbVNrcWk0UjRXa0kteTBUQTFvZ1NFTk96Q3hmTjdZZTBPMThid05jUUdWSGVJSWhQM2R1M0VXQWhzOHg5ZDk2bFNrNjVPWTVCNlpaTlh4WHRSUC0tUGdSbDdxQUkzbEIyQ0k?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "How CFOs are using AI-based finance tools to boost revenue",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNR09BOG5QLWI3MU56MklZS3NmaVBRR2tINHpvY05QSXppMVFXVGZhZ29Lbzg0YVRzZmkxVXg5MFU1UWdkOFFzYnZYS3NfUm5RU3RxVmRUTzdGSVc2ZEl6WXF3OWJOZFppdlo0V2NaWDN6UGpBamhrVjliOFhpcGJTSTBVLW05R3VDWnZIN1hYMDJWNE9fc2xEdmlQSng0dw?oc=5",
+      "label": "20+ Best AI Tools for Business to Automate and Scale",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNUWRlUXFKaUJwRnhCci0xWGxYQTF6YTZmQ2trekUteFNWUzRnTFV2cFFqVTROdVRUNWFqY2ZDUmtWMDYwWVZOaHUwNWkyLVVzbi1RemlZVHFIU0UyRk9IOXRha01uTWlzR1hCUlkwVFduUW5WaDZDTVE0NXhOVHFMM0FlWnlxQ2diUkxrUUo0UFNnekpL?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMingFBVV95cUxNR09BOG5QLWI3MU56MklZS3NmaVBRR2tINHpvY05QSXppMVFXVGZhZ29Lbzg0YVRzZmkxVXg5MFU1UWdkOFFzYnZYS3NfUm5RU3RxVmRUTzdGSVc2ZEl6WXF3OWJOZFppdlo0V2NaWDN6UGpBamhrVjliOFhpcGJTSTBVLW05R3VDWnZIN1hYMDJWNE9fc2xEdmlQSng0dw?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNUWRlUXFKaUJwRnhCci0xWGxYQTF6YTZmQ2trekUteFNWUzRnTFV2cFFqVTROdVRUNWFqY2ZDUmtWMDYwWVZOaHUwNWkyLVVzbi1RemlZVHFIU0UyRk9IOXRha01uTWlzR1hCUlkwVFduUW5WaDZDTVE0NXhOVHFMM0FlWnlxQ2diUkxrUUo0UFNnekpL?oc=5&hl=en-US&gl=US&ceid=US:en"
     }
   ]
 }
