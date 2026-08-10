@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-03T11:18:00.448Z",
+  "generatedAt": "2026-08-10T09:14:36.462Z",
   "timeoutMs": 6000,
   "retries": 2,
   "concurrency": 8,
   "total": 108,
-  "healthy": 86,
-  "failed": 22,
+  "healthy": 85,
+  "failed": 23,
   "failures": [
     {
       "source": "tool",
@@ -111,6 +111,16 @@
       "source": "tool",
       "label": "Craiyon",
       "url": "https://www.craiyon.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "Qlova",
+      "url": "https://qlova.com/",
       "healthy": false,
       "status": null,
       "method": "HEAD/GET",
@@ -723,11 +733,11 @@
       "source": "tool",
       "label": "Qlova",
       "url": "https://qlova.com/",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 2,
-      "finalUrl": "https://www.qlova.com/"
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
     },
     {
       "source": "tool",
@@ -1231,83 +1241,83 @@
     },
     {
       "source": "news",
-      "label": "“AI tools will not replace doctors, but they will save us work”",
-      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9vUUhpM1BzZGJXRXVSX2pWbkgyY2ZkZ0NyWURob3Y2MVM4UTZjS1YzYTMtUWRqdG9mMldsMGRsUWg1NHdhT1l5M1M0S0xBTExQa1BpODFMdjF4cmdBZnlSODVROVJpcVU?oc=5",
+      "label": "Kimsuky Develops AI Tools to Automate Cyberattacks, Researchers Say - Межа. Новини України.",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE0yY0JoM3AzTmpEdVliTHhaUzUyNTRWVkpoNEdKQ09Kdm9XVzlOa2YxeExJSnJXVVJ4dHpEM29XdWRlbDhvZnBMLWFZbDJHMnZ5a3J1eThMVWE5Wk1wdkNTRzNpWHJDaDg0?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9vUUhpM1BzZGJXRXVSX2pWbkgyY2ZkZ0NyWURob3Y2MVM4UTZjS1YzYTMtUWRqdG9mMldsMGRsUWg1NHdhT1l5M1M0S0xBTExQa1BpODFMdjF4cmdBZnlSODVROVJpcVU?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE0yY0JoM3AzTmpEdVliTHhaUzUyNTRWVkpoNEdKQ09Kdm9XVzlOa2YxeExJSnJXVVJ4dHpEM29XdWRlbDhvZnBMLWFZbDJHMnZ5a3J1eThMVWE5Wk1wdkNTRzNpWHJDaDg0?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Expanding the battlefield: Corporate AI as the new cyberattack vector",
-      "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOaTg0WVphT0RGN0JsSDF4bjZCNkN3SlFPWDBCV1BLcmxpMFlZeHVRN25LSm5CakY3cGRqQ3BDdDZtOUY5Y25GOVdYci1pb2ZUUnhuUDY1ZWtkWkFTVXJiU1d0eWtRbHFPZHRrdWU2S0NITGs1b0dyc0ZSZS04a0JneUFMaGl2a2pLRzZDWllnNC1vSjdQWER0d0ZqWjBBdWM1eWdBZktMMGREUTI2YmFhMTRnR1huVzRQSERVcDhOMkJISmhycFdoRnc0TVJxMVRubWxyODBYc2U?oc=5",
+      "label": "ChatGPT, Gemini, Claude, and other AI tools — just $69.97 today only",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNVUtnQUFUaWNERGNVWHdwZ18wRkxESnI4RTI2WHlGMlNiTWRFRk5idU1hOGN2WVZzVGZseW9zTzNZcDdLaVJsYXh2aUNGZ3hZXzJsczJDNkJvMHN4TnluNG44QnY5OTZocTlITHpiRTRrWk1LUHpyRGhHYWphOE5LT0pxRXFCTVpVUXBj?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOaTg0WVphT0RGN0JsSDF4bjZCNkN3SlFPWDBCV1BLcmxpMFlZeHVRN25LSm5CakY3cGRqQ3BDdDZtOUY5Y25GOVdYci1pb2ZUUnhuUDY1ZWtkWkFTVXJiU1d0eWtRbHFPZHRrdWU2S0NITGs1b0dyc0ZSZS04a0JneUFMaGl2a2pLRzZDWllnNC1vSjdQWER0d0ZqWjBBdWM1eWdBZktMMGREUTI2YmFhMTRnR1huVzRQSERVcDhOMkJISmhycFdoRnc0TVJxMVRubWxyODBYc2U?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNVUtnQUFUaWNERGNVWHdwZ18wRkxESnI4RTI2WHlGMlNiTWRFRk5idU1hOGN2WVZzVGZseW9zTzNZcDdLaVJsYXh2aUNGZ3hZXzJsczJDNkJvMHN4TnluNG44QnY5OTZocTlITHpiRTRrWk1LUHpyRGhHYWphOE5LT0pxRXFCTVpVUXBj?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "UNESCO and CECC/SICA Present Regional Assessment on Artificial Intelligence and Cultural and Creative Industries",
-      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNY1ZjeGtuWjZxeW9GZEZ0LW9ZdTltU3NxdlM0bnl1TUt3cU9wOS01enF5dmxQSkpFejUwa3IzWTFsc0hCZ2hnRmh3MDIyNFB1SlBsYkFmVjlHU0VzUXBrVTFvQ0Y4RUpTVEp2ckczR3NWYkFSWXFlbTVYOWdyMzhtUG5vSkhnMUhjN0dqX0M1RUpmdGxyVWlwQTRjNVFBRzYzaURHQkE5SWR1NVU2eWlXdGp1Q3VtWElETjQxOHo5M1M0eV9RWEwyRUpmdmlSQQ?oc=5",
+      "label": "How AI Weather Forecasts Are Transforming Farming In Telangana",
+      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQY2cwLWVDZ3VnTkJnTVRtS1UzYmVrTEpNTmc0VlZnSjBJUVc1NVl5RUxreHpYQWdNMGd4bDlYS0R6NnZYZk0wSHg5MkdMNlFGdW5kWGVQa0ZPRDhzcDVTWDBLNFd2TURWbzAzMkU5b2dBOW1WM0hveUpYcUtfeThJRW5ZbmNucjlwMDcyZUpBNTZoUzRUUHJfaVRZWVVZRmZkbm1oYXhodXhMZ1gxc0HSAbABQVVfeXFMUGRvRkhwUFEtN3U2NFJWQjFab0pMLTVSbjRicFhBakhTZWEybC1hZ1BBdW41SXZaWTY5SUdyN0w0dS1aUGwtZW54NTkwSDRfSDk4ZnRaaW4xcEVENEdpV2VRQTdPRnIyb3VYdm5pd2ozX09TTHRobGFZYWhRZGljeUxKQTlIY2lxN1hTekFMNHpkVmNKMkY0cDlNMVJfTFBydkpZTzY1VnRHcWhwdExCTms?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNY1ZjeGtuWjZxeW9GZEZ0LW9ZdTltU3NxdlM0bnl1TUt3cU9wOS01enF5dmxQSkpFejUwa3IzWTFsc0hCZ2hnRmh3MDIyNFB1SlBsYkFmVjlHU0VzUXBrVTFvQ0Y4RUpTVEp2ckczR3NWYkFSWXFlbTVYOWdyMzhtUG5vSkhnMUhjN0dqX0M1RUpmdGxyVWlwQTRjNVFBRzYzaURHQkE5SWR1NVU2eWlXdGp1Q3VtWElETjQxOHo5M1M0eV9RWEwyRUpmdmlSQQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQY2cwLWVDZ3VnTkJnTVRtS1UzYmVrTEpNTmc0VlZnSjBJUVc1NVl5RUxreHpYQWdNMGd4bDlYS0R6NnZYZk0wSHg5MkdMNlFGdW5kWGVQa0ZPRDhzcDVTWDBLNFd2TURWbzAzMkU5b2dBOW1WM0hveUpYcUtfeThJRW5ZbmNucjlwMDcyZUpBNTZoUzRUUHJfaVRZWVVZRmZkbm1oYXhodXhMZ1gxc0HSAbABQVVfeXFMUGRvRkhwUFEtN3U2NFJWQjFab0pMLTVSbjRicFhBakhTZWEybC1hZ1BBdW41SXZaWTY5SUdyN0w0dS1aUGwtZW54NTkwSDRfSDk4ZnRaaW4xcEVENEdpV2VRQTdPRnIyb3VYdm5pd2ozX09TTHRobGFZYWhRZGljeUxKQTlIY2lxN1hTekFMNHpkVmNKMkY0cDlNMVJfTFBydkpZTzY1VnRHcWhwdExCTms?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Google Uses Artificial Intelligence to Find Chrome Vulnerabilities Before They Become Bigger Threats",
-      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPT1JHZkx2UmgwSXZpcmVmTEdCSFoxYkhYMDdQeEFTOGloQUZrekdDbjlkdEhBSUlOWW13NUREeWtHcGpQWVRJckNYd1FfNTVVTXJvRm5MS1BiZzlabmFNNnNHT09DbGx1MGpINGN0Rno0VC1mT1lSTFpRTVVEU04tQk9XVDRZQThuWmhLdkFwdkVpeERt?oc=5",
+      "label": "Profit Motives Could Erode AI Tools Doctors Utilize | Newswise",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxORmlYbDRyWUt6UGtxSEJUSk5XZXFpd05yZzZLbnh1N2VyazgzOXg2TVRJdlhab09WazN0clFTM2Nja0J1eXowcFd6cGVCNjcxNnh3WlExWS1GRmFtdUdiTkVzZTMyZ3pEeXhEMUVzQ2s1Qkk4d0NJQ3lEV2FPUHJ5VEFyck9sZ250N1VqQWxB0gGOAUFVX3lxTE5GaVhsNHJZS3pQa3FIQlRKTldlcWl3TnJnNktueHU3ZXJrODM5eDZNVEl2WFpvT1ZrM3RyUVMzY2NrQnV5ejBwV3pwZUI2NzE2eHdaUTFZLUZGYW11R2JORXNlMzJnekR5eEQxRXNDazVCSTh3Q0lDeURXYU9QcnlUQXJyT2xnbnQ3VWpBbEE?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPT1JHZkx2UmgwSXZpcmVmTEdCSFoxYkhYMDdQeEFTOGloQUZrekdDbjlkdEhBSUlOWW13NUREeWtHcGpQWVRJckNYd1FfNTVVTXJvRm5MS1BiZzlabmFNNnNHT09DbGx1MGpINGN0Rno0VC1mT1lSTFpRTVVEU04tQk9XVDRZQThuWmhLdkFwdkVpeERt?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMijgFBVV95cUxORmlYbDRyWUt6UGtxSEJUSk5XZXFpd05yZzZLbnh1N2VyazgzOXg2TVRJdlhab09WazN0clFTM2Nja0J1eXowcFd6cGVCNjcxNnh3WlExWS1GRmFtdUdiTkVzZTMyZ3pEeXhEMUVzQ2s1Qkk4d0NJQ3lEV2FPUHJ5VEFyck9sZ250N1VqQWxB0gGOAUFVX3lxTE5GaVhsNHJZS3pQa3FIQlRKTldlcWl3TnJnNktueHU3ZXJrODM5eDZNVEl2WFpvT1ZrM3RyUVMzY2NrQnV5ejBwV3pwZUI2NzE2eHdaUTFZLUZGYW11R2JORXNlMzJnekR5eEQxRXNDazVCSTh3Q0lDeURXYU9QcnlUQXJyT2xnbnQ3VWpBbEE?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "AI Act",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFB3Um0wTW9MYVN3ZnEwZU1sMWxDTnNHYjM4cjg0OGhWa2k5N3Ywb3VfU2pVdEhlR0NqUVdwYUw5Zm82WFNUaGhGZ0o2anZxN2p5MFBiRURiQlJEMkNpLXZ3UEtUbjMzTDJoYzVtRjF1UWNpcVZnQnVUVnhCb1Jwdw?oc=5",
+      "label": "Saudi Arabia’s Use of AI Tools Surges to 45.2%, More Than Doubling in a Year",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOSng2TTA3Rld5SXJZZnFPdTlPZ2Jhem0yOVRFaEZJdTk5Q01qNDV6NW1pdTBaY2FTUllFUExMV21mMnF0bjl5WHhLQmNkVWdTaFNKdl9iRDJGb0NhNm9vVUlKN2Y1LXBZdWt3bXpjVmE5UXlOVlh1cUFqMGF4OVdTdFFwVExoQjJQci1BZTB6NHctdWdpNjRScHdvM1AzSmdmal8tQmpRY3FOVWI3NkZzOQ?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTFB3Um0wTW9MYVN3ZnEwZU1sMWxDTnNHYjM4cjg0OGhWa2k5N3Ywb3VfU2pVdEhlR0NqUVdwYUw5Zm82WFNUaGhGZ0o2anZxN2p5MFBiRURiQlJEMkNpLXZ3UEtUbjMzTDJoYzVtRjF1UWNpcVZnQnVUVnhCb1Jwdw?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOSng2TTA3Rld5SXJZZnFPdTlPZ2Jhem0yOVRFaEZJdTk5Q01qNDV6NW1pdTBaY2FTUllFUExMV21mMnF0bjl5WHhLQmNkVWdTaFNKdl9iRDJGb0NhNm9vVUlKN2Y1LXBZdWt3bXpjVmE5UXlOVlh1cUFqMGF4OVdTdFFwVExoQjJQci1BZTB6NHctdWdpNjRScHdvM1AzSmdmal8tQmpRY3FOVWI3NkZzOQ?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Why companies are hiring workers back after AI-driven layoffs",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOMks1M0lodGs5dGRGa1FpcmsyMTVuQlBzb215Wm5oMEwzMVVZQTNNQUVqUFZUZ09TaGJoRklKRWtIa0U2d0ttNVlMeU1NbENvRWdLbWhyMlBnSXNBZmFSYmJMQzZmVEliWjdUcVp1c0lxaXAzZTU0QWRuVjRvUktUajJ5VmM5Tk5aSEtzVzhFbm1wYWlzUEdOcw?oc=5",
+      "label": "US Navy aircraft experiment with AI tools",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNR2U4OThiM2s2a1lTQ2pxdXhJNDFjT0hBWXVKNkFxbDVQWUUteXZFUE41UmVPeG9rMEo2MGNIUHktVEtXRnQ0VTJXdUhvUHRJUlRBcEJRLVlTdVcwb2l1V2JKM05aaURLaUpmWEtnU0NpZ2tPUms5bVlDS1lLZkhtdnhrXzN2Wm44WC1McmdYbHNoSUtO?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOMks1M0lodGs5dGRGa1FpcmsyMTVuQlBzb215Wm5oMEwzMVVZQTNNQUVqUFZUZ09TaGJoRklKRWtIa0U2d0ttNVlMeU1NbENvRWdLbWhyMlBnSXNBZmFSYmJMQzZmVEliWjdUcVp1c0lxaXAzZTU0QWRuVjRvUktUajJ5VmM5Tk5aSEtzVzhFbm1wYWlzUEdOcw?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNR2U4OThiM2s2a1lTQ2pxdXhJNDFjT0hBWXVKNkFxbDVQWUUteXZFUE41UmVPeG9rMEo2MGNIUHktVEtXRnQ0VTJXdUhvUHRJUlRBcEJRLVlTdVcwb2l1V2JKM05aaURLaUpmWEtnU0NpZ2tPUms5bVlDS1lLZkhtdnhrXzN2Wm44WC1McmdYbHNoSUtO?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "How AI Tools Are Quietly Changing Student Life In India",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPRllRelV5b3ltS1BLZi1qSmxKc0RsMlpHbWFDOTdkcnIteWZQenltQTcySzNHbTlubEFHZlh4eEFnSzFDRi1pd2hkejNDMTJWN3FBY0lWcXlueGhyVDhHVlAzLUdmN1o3N1R5UndKczZ4enEwQk1kVi1TZDNEOWl2dmdLN2sxc0pxU3lKckNFTDJrbWJoUkpOMg?oc=5",
+      "label": "North Korean hacking group builds AI tools for cyberattacks, report says",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNTTM0VnQ2S3MzSjk1RTlkeFJPc3NoYVJHQjU3Y1JoQTZuU0lfWlV4Wm4xWkN6Y2JjM0E2azJYTi1YOHVXdFFzN2ZVNzhsdnhWclJyLTdFV1FmWEdWMnR4S1ctbllrT29iaFFGY3NqN0hKLVRRSlU3WWJfUTFnM3FvQ2NaUlpzU3UyN3JDckRQbmNZd3NYQ0JISjFDamR5amNUT00yNk9DQjY2ekwwZ0VxZjF3M2VwQ2RsWXVjSQ?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPRllRelV5b3ltS1BLZi1qSmxKc0RsMlpHbWFDOTdkcnIteWZQenltQTcySzNHbTlubEFHZlh4eEFnSzFDRi1pd2hkejNDMTJWN3FBY0lWcXlueGhyVDhHVlAzLUdmN1o3N1R5UndKczZ4enEwQk1kVi1TZDNEOWl2dmdLN2sxc0pxU3lKckNFTDJrbWJoUkpOMg?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNTTM0VnQ2S3MzSjk1RTlkeFJPc3NoYVJHQjU3Y1JoQTZuU0lfWlV4Wm4xWkN6Y2JjM0E2azJYTi1YOHVXdFFzN2ZVNzhsdnhWclJyLTdFV1FmWEdWMnR4S1ctbllrT29iaFFGY3NqN0hKLVRRSlU3WWJfUTFnM3FvQ2NaUlpzU3UyN3JDckRQbmNZd3NYQ0JISjFDamR5amNUT00yNk9DQjY2ekwwZ0VxZjF3M2VwQ2RsWXVjSQ?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Google rolls back satellite image AI tool in less than 24 hours after launch, says: We have also seen peo",
-      "url": "https://news.google.com/rss/articles/CBMiswJBVV95cUxORTkzLU1yUkNvb0FJRlBubEJNaWZPcGJhX01pMTBXUGRjTnVmSlBoQkgxSVY2eThicnAwb0tzRUFSdThFWWZvQ1RjTUt6WEhlcl9QeExsX2ctSEdPMVVJQ3NDT0hjNnNFY1hpd0tzWDA5QUNyc1FGN1hyM010aTBCcEIxTGE0ZmduOTJnV2hFZWtQb1d6QXNHQ3hRY3IxdnFKSXhsYVRHUHpycVNCWFZlWEZuLWNldFFhTHpGUlhPUnE3VjlYQjktRXQ0RFIwYWVlZVl0Vi1ua2ItbE96aUVvVXQzWkFDVzRaMmRNcFJrQ0hvcVNIVFlJVXFnQjljR0FSNjdxTjU2NV95dndXdUU0OFpaXzYzR3d5WjlBQVFsbkRfSEVyVXNmSkxxbFNlcVE2ZFRv0gG4AkFVX3lxTE9xQjRGMFc5LXd2R2ZLbWoydTczcTlWNWNkblNSSnZVSjBMM19Jel9hd2ZtOExPbG90Nl95R1FLVkZ4QkxoR3Q0LWVaSVhkSkwwTHRQU3ljQ1VGSGRFNmc5Z0N3aXppcWIxYndTUTVLWnlfMkw5eVFneHZacG1iOGc4Yl9lY29VRFI2aG5YOHM2dzctWFo4MnF1VWZvbGo2b2ZsdER4R2JpWWFxWkpBcHR6NHItZEUzVU03cFBoLWNPUXFVc2NMci1zT0YwWU5XcTQtNXp4dEpsUnJxbWhVR25pWVhaOVBpcjF1OWFjTXlxTWFlVExqdUNEeWoyVnZEMHpXYU1sRVpxM2ZweXBaR05KS05CVHI3NGkwTEdqeUFKS1c2Mmt2bXdPbl9rLXNmN2VvUG1uZ3E0OA?oc=5",
+      "label": "AI is helping design engineers shorten the path from challenge to solution",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPQTNkcWJ3eHU3RmdzaVpESTBBdmZRNnB2WTVIMXpodlM5REZWTUpvQ1p6eURyLWVkVVQ2V0d4NkRXR3Z1SmpMZDROX1pfRE5hd01zVm9ITlpuNUZVZ0U1bk8wMlpuRW04cWFTVWhxQ19yNU9JTWphekFyVzdEdFhvLTQtSDVFX1dvZE80Vnh5YUs2ZUMzRUN3d1Nn?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiswJBVV95cUxORTkzLU1yUkNvb0FJRlBubEJNaWZPcGJhX01pMTBXUGRjTnVmSlBoQkgxSVY2eThicnAwb0tzRUFSdThFWWZvQ1RjTUt6WEhlcl9QeExsX2ctSEdPMVVJQ3NDT0hjNnNFY1hpd0tzWDA5QUNyc1FGN1hyM010aTBCcEIxTGE0ZmduOTJnV2hFZWtQb1d6QXNHQ3hRY3IxdnFKSXhsYVRHUHpycVNCWFZlWEZuLWNldFFhTHpGUlhPUnE3VjlYQjktRXQ0RFIwYWVlZVl0Vi1ua2ItbE96aUVvVXQzWkFDVzRaMmRNcFJrQ0hvcVNIVFlJVXFnQjljR0FSNjdxTjU2NV95dndXdUU0OFpaXzYzR3d5WjlBQVFsbkRfSEVyVXNmSkxxbFNlcVE2ZFRv0gG4AkFVX3lxTE9xQjRGMFc5LXd2R2ZLbWoydTczcTlWNWNkblNSSnZVSjBMM19Jel9hd2ZtOExPbG90Nl95R1FLVkZ4QkxoR3Q0LWVaSVhkSkwwTHRQU3ljQ1VGSGRFNmc5Z0N3aXppcWIxYndTUTVLWnlfMkw5eVFneHZacG1iOGc4Yl9lY29VRFI2aG5YOHM2dzctWFo4MnF1VWZvbGo2b2ZsdER4R2JpWWFxWkpBcHR6NHItZEUzVU03cFBoLWNPUXFVc2NMci1zT0YwWU5XcTQtNXp4dEpsUnJxbWhVR25pWVhaOVBpcjF1OWFjTXlxTWFlVExqdUNEeWoyVnZEMHpXYU1sRVpxM2ZweXBaR05KS05CVHI3NGkwTEdqeUFKS1c2Mmt2bXdPbl9rLXNmN2VvUG1uZ3E0OA?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPQTNkcWJ3eHU3RmdzaVpESTBBdmZRNnB2WTVIMXpodlM5REZWTUpvQ1p6eURyLWVkVVQ2V0d4NkRXR3Z1SmpMZDROX1pfRE5hd01zVm9ITlpuNUZVZ0U1bk8wMlpuRW04cWFTVWhxQ19yNU9JTWphekFyVzdEdFhvLTQtSDVFX1dvZE80Vnh5YUs2ZUMzRUN3d1Nn?oc=5&hl=en-US&gl=US&ceid=US:en"
     }
   ]
 }
