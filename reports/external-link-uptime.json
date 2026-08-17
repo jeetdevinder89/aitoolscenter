@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-10T09:14:36.462Z",
+  "generatedAt": "2026-08-17T08:36:58.933Z",
   "timeoutMs": 6000,
   "retries": 2,
   "concurrency": 8,
   "total": 108,
-  "healthy": 85,
-  "failed": 23,
+  "healthy": 83,
+  "failed": 25,
   "failures": [
     {
       "source": "tool",
@@ -21,6 +21,16 @@
       "source": "tool",
       "label": "Claude",
       "url": "https://claude.ai/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "QuillBot",
+      "url": "https://quillbot.com/",
       "healthy": false,
       "status": null,
       "method": "HEAD/GET",
@@ -109,6 +119,16 @@
     },
     {
       "source": "tool",
+      "label": "Lexica",
+      "url": "https://lexica.art/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "fetch failed"
+    },
+    {
+      "source": "tool",
       "label": "Craiyon",
       "url": "https://www.craiyon.com/",
       "healthy": false,
@@ -119,13 +139,13 @@
     },
     {
       "source": "tool",
-      "label": "Qlova",
-      "url": "https://qlova.com/",
+      "label": "Codeium",
+      "url": "https://codeium.com/",
       "healthy": false,
       "status": null,
       "method": "HEAD/GET",
       "attempts": 3,
-      "error": "HTTP 403"
+      "error": "HTTP 429"
     },
     {
       "source": "tool",
@@ -333,11 +353,11 @@
       "source": "tool",
       "label": "QuillBot",
       "url": "https://quillbot.com/",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://quillbot.com/"
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
     },
     {
       "source": "tool",
@@ -593,11 +613,11 @@
       "source": "tool",
       "label": "Lexica",
       "url": "https://lexica.art/",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://lexica.art/"
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "fetch failed"
     },
     {
       "source": "tool",
@@ -733,11 +753,11 @@
       "source": "tool",
       "label": "Qlova",
       "url": "https://qlova.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.qlova.com/"
     },
     {
       "source": "tool",
@@ -783,11 +803,11 @@
       "source": "tool",
       "label": "Codeium",
       "url": "https://codeium.com/",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://devin.ai/desktop"
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 429"
     },
     {
       "source": "tool",
@@ -1241,83 +1261,83 @@
     },
     {
       "source": "news",
-      "label": "Kimsuky Develops AI Tools to Automate Cyberattacks, Researchers Say - Межа. Новини України.",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE0yY0JoM3AzTmpEdVliTHhaUzUyNTRWVkpoNEdKQ09Kdm9XVzlOa2YxeExJSnJXVVJ4dHpEM29XdWRlbDhvZnBMLWFZbDJHMnZ5a3J1eThMVWE5Wk1wdkNTRzNpWHJDaDg0?oc=5",
+      "label": "Train students to use artificial intelligence tools responsibly, CJI tells law schools",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPOWhiM0ptSW5vMjVOOU5tWGhjbkxpN1FNQjF0MDl4VW1MM25Hc3N0SHZGV1NwRkZZbS1sYjY5Z0cxV2ZZUXdaS2VVU3J0aHZKUFlpbFBvM3BsNFcxZFRJVlQzSDdvSktfUnNqbDFKa3VteGFrZUhDVjVLYWp4SG9sTXR0V2N0MG5GQTVxT2Zuc0JxWkRGUmFJRm1SZzBsZlBNeS1OUFl0NmR5UXNq0gGzAUFVX3lxTE45SDFuVVJ2RzVuemFqTmo3NVhEbWdSVU9POXpVd0NZWXBNT1R4ZlhEdWRyM3lhb0JSX2lvdHJ6U0ptVm9MaE5sMEtydXQ5WWxRSi1rTThoX25JWVdyWEJGdDV3bUZyVXBUQXlaUWdaQVZaSWtaZEdPVGdZRVVpbHdPSmZuRGJiZFdyc3hLTVlzaTdlbUlRWTVoT0NyNjRQWEc3cXp5THdOdFAzT01KODJWcmtR?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE0yY0JoM3AzTmpEdVliTHhaUzUyNTRWVkpoNEdKQ09Kdm9XVzlOa2YxeExJSnJXVVJ4dHpEM29XdWRlbDhvZnBMLWFZbDJHMnZ5a3J1eThMVWE5Wk1wdkNTRzNpWHJDaDg0?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPOWhiM0ptSW5vMjVOOU5tWGhjbkxpN1FNQjF0MDl4VW1MM25Hc3N0SHZGV1NwRkZZbS1sYjY5Z0cxV2ZZUXdaS2VVU3J0aHZKUFlpbFBvM3BsNFcxZFRJVlQzSDdvSktfUnNqbDFKa3VteGFrZUhDVjVLYWp4SG9sTXR0V2N0MG5GQTVxT2Zuc0JxWkRGUmFJRm1SZzBsZlBNeS1OUFl0NmR5UXNq0gGzAUFVX3lxTE45SDFuVVJ2RzVuemFqTmo3NVhEbWdSVU9POXpVd0NZWXBNT1R4ZlhEdWRyM3lhb0JSX2lvdHJ6U0ptVm9MaE5sMEtydXQ5WWxRSi1rTThoX25JWVdyWEJGdDV3bUZyVXBUQXlaUWdaQVZaSWtaZEdPVGdZRVVpbHdPSmZuRGJiZFdyc3hLTVlzaTdlbUlRWTVoT0NyNjRQWEc3cXp5THdOdFAzT01KODJWcmtR?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "ChatGPT, Gemini, Claude, and other AI tools — just $69.97 today only",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNVUtnQUFUaWNERGNVWHdwZ18wRkxESnI4RTI2WHlGMlNiTWRFRk5idU1hOGN2WVZzVGZseW9zTzNZcDdLaVJsYXh2aUNGZ3hZXzJsczJDNkJvMHN4TnluNG44QnY5OTZocTlITHpiRTRrWk1LUHpyRGhHYWphOE5LT0pxRXFCTVpVUXBj?oc=5",
+      "label": "Tap potential of AI tools to drive projects and planning process: LSG Minister K.M. Shaji",
+      "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxNMjV2MGk4R3lDVlBYZ0NPNk9lOUdHT0EzTnVUMUVsaFA0NEdKaXk5el9MOUZMeWJHSTNfTkg3a3BBQVhQSjBBdzgwRlM5eTFmempJTEdRZHdsakZESDJBZTVSTGhWa3VQRXpsbkZKRl9uTXgxeU0xdTJnaDB4VzJ0S3BrOTlUQ05VTlBCMnlROUlMbE5Bd0IzOFVjeDByT25KM1NZc3RPLTdNNzVEVnhrQTBsOU1oaHo0NFdpOVFaODZoY3FFSXE0RmVKc2dTRTdCc29VMGpRNVk4NjIzMDYwdXJ4VGFnMWfSAe4BQVVfeXFMTnhqWjNSdXV5OXR6a0ZPdXdSd0gxX09jRndkdWlOQXRyT1N6STZ5TDNPNnJnamx4dGg2LW4weXp3c0hSVFNWWmYyMndXQUdGUVdmODZFV3pWWHpOdW4tdHl0ZDZOV3lZUDJ6bk5lb0x4QkZLWnBZYVc2elBoMFFMRl9HenA2dnVCaVhOWTN6N2RPUmYtblpsWlNhU1poZHdhb0tfNHd1cnlKVHRueW91c0tncVJ1R09SV21vVFY4NEprYkZPelFxemdwUkEtSTY5Tm1GLW1FVHF4Z0t0TnJ3UU5ya0FsVXlvXzV2MURhZw?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNVUtnQUFUaWNERGNVWHdwZ18wRkxESnI4RTI2WHlGMlNiTWRFRk5idU1hOGN2WVZzVGZseW9zTzNZcDdLaVJsYXh2aUNGZ3hZXzJsczJDNkJvMHN4TnluNG44QnY5OTZocTlITHpiRTRrWk1LUHpyRGhHYWphOE5LT0pxRXFCTVpVUXBj?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxNMjV2MGk4R3lDVlBYZ0NPNk9lOUdHT0EzTnVUMUVsaFA0NEdKaXk5el9MOUZMeWJHSTNfTkg3a3BBQVhQSjBBdzgwRlM5eTFmempJTEdRZHdsakZESDJBZTVSTGhWa3VQRXpsbkZKRl9uTXgxeU0xdTJnaDB4VzJ0S3BrOTlUQ05VTlBCMnlROUlMbE5Bd0IzOFVjeDByT25KM1NZc3RPLTdNNzVEVnhrQTBsOU1oaHo0NFdpOVFaODZoY3FFSXE0RmVKc2dTRTdCc29VMGpRNVk4NjIzMDYwdXJ4VGFnMWfSAe4BQVVfeXFMTnhqWjNSdXV5OXR6a0ZPdXdSd0gxX09jRndkdWlOQXRyT1N6STZ5TDNPNnJnamx4dGg2LW4weXp3c0hSVFNWWmYyMndXQUdGUVdmODZFV3pWWHpOdW4tdHl0ZDZOV3lZUDJ6bk5lb0x4QkZLWnBZYVc2elBoMFFMRl9HenA2dnVCaVhOWTN6N2RPUmYtblpsWlNhU1poZHdhb0tfNHd1cnlKVHRueW91c0tncVJ1R09SV21vVFY4NEprYkZPelFxemdwUkEtSTY5Tm1GLW1FVHF4Z0t0TnJ3UU5ya0FsVXlvXzV2MURhZw?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "How AI Weather Forecasts Are Transforming Farming In Telangana",
-      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQY2cwLWVDZ3VnTkJnTVRtS1UzYmVrTEpNTmc0VlZnSjBJUVc1NVl5RUxreHpYQWdNMGd4bDlYS0R6NnZYZk0wSHg5MkdMNlFGdW5kWGVQa0ZPRDhzcDVTWDBLNFd2TURWbzAzMkU5b2dBOW1WM0hveUpYcUtfeThJRW5ZbmNucjlwMDcyZUpBNTZoUzRUUHJfaVRZWVVZRmZkbm1oYXhodXhMZ1gxc0HSAbABQVVfeXFMUGRvRkhwUFEtN3U2NFJWQjFab0pMLTVSbjRicFhBakhTZWEybC1hZ1BBdW41SXZaWTY5SUdyN0w0dS1aUGwtZW54NTkwSDRfSDk4ZnRaaW4xcEVENEdpV2VRQTdPRnIyb3VYdm5pd2ozX09TTHRobGFZYWhRZGljeUxKQTlIY2lxN1hTekFMNHpkVmNKMkY0cDlNMVJfTFBydkpZTzY1VnRHcWhwdExCTms?oc=5",
+      "label": "CJI Surya Kant Advises Against Prohibiting AI Tools In Law Schools; Says Students Must Be Taught To Use...",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQVGJ3cV9DR0FTLUQ5T0I2TkJLd0pYWU5uLW5yNVJ0Q2FycnFfTEFkd1VoLUZCeVVMbTBsQlhqWXJXUlZBOXhJT0l1ejRCVXRkaUVLOWpSTzY1YzBZRVQtOTBxcGI2Wl9iTTZweEZudkwydWdwcTNRcVRFQjd0dU9OUkxKRDd1V0pRRkc5Ry1LcXlsMF9keExhZEhYUE5pMVpmNzRRSmhpZXJEZzM2SmlEaNIBtgFBVV95cUxOVkx4MDBsQzQyRWtSTkFha2lsS3U1NGtnWlI1SGpNenJNNTVScnpmMnRuUDRYQk5MOVBoSnJlT0s3OUJ4eUg5anctXzBqdEJvRHdZcVZrYVZTaWFYZllDWmJTSWtSZjBHN1BOdU8xcHlLR3lEVl80aEItblI3c0MxVE9weXhyU01XbW04V1JpZ1ZhcVFxa2NjenpRTWs1NU1OUGxnUVBDdnF5bzBkeWpYa09ENVl3QQ?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQY2cwLWVDZ3VnTkJnTVRtS1UzYmVrTEpNTmc0VlZnSjBJUVc1NVl5RUxreHpYQWdNMGd4bDlYS0R6NnZYZk0wSHg5MkdMNlFGdW5kWGVQa0ZPRDhzcDVTWDBLNFd2TURWbzAzMkU5b2dBOW1WM0hveUpYcUtfeThJRW5ZbmNucjlwMDcyZUpBNTZoUzRUUHJfaVRZWVVZRmZkbm1oYXhodXhMZ1gxc0HSAbABQVVfeXFMUGRvRkhwUFEtN3U2NFJWQjFab0pMLTVSbjRicFhBakhTZWEybC1hZ1BBdW41SXZaWTY5SUdyN0w0dS1aUGwtZW54NTkwSDRfSDk4ZnRaaW4xcEVENEdpV2VRQTdPRnIyb3VYdm5pd2ozX09TTHRobGFZYWhRZGljeUxKQTlIY2lxN1hTekFMNHpkVmNKMkY0cDlNMVJfTFBydkpZTzY1VnRHcWhwdExCTms?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQVGJ3cV9DR0FTLUQ5T0I2TkJLd0pYWU5uLW5yNVJ0Q2FycnFfTEFkd1VoLUZCeVVMbTBsQlhqWXJXUlZBOXhJT0l1ejRCVXRkaUVLOWpSTzY1YzBZRVQtOTBxcGI2Wl9iTTZweEZudkwydWdwcTNRcVRFQjd0dU9OUkxKRDd1V0pRRkc5Ry1LcXlsMF9keExhZEhYUE5pMVpmNzRRSmhpZXJEZzM2SmlEaNIBtgFBVV95cUxOVkx4MDBsQzQyRWtSTkFha2lsS3U1NGtnWlI1SGpNenJNNTVScnpmMnRuUDRYQk5MOVBoSnJlT0s3OUJ4eUg5anctXzBqdEJvRHdZcVZrYVZTaWFYZllDWmJTSWtSZjBHN1BOdU8xcHlLR3lEVl80aEItblI3c0MxVE9weXhyU01XbW04V1JpZ1ZhcVFxa2NjenpRTWs1NU1OUGxnUVBDdnF5bzBkeWpYa09ENVl3QQ?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Profit Motives Could Erode AI Tools Doctors Utilize | Newswise",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxORmlYbDRyWUt6UGtxSEJUSk5XZXFpd05yZzZLbnh1N2VyazgzOXg2TVRJdlhab09WazN0clFTM2Nja0J1eXowcFd6cGVCNjcxNnh3WlExWS1GRmFtdUdiTkVzZTMyZ3pEeXhEMUVzQ2s1Qkk4d0NJQ3lEV2FPUHJ5VEFyck9sZ250N1VqQWxB0gGOAUFVX3lxTE5GaVhsNHJZS3pQa3FIQlRKTldlcWl3TnJnNktueHU3ZXJrODM5eDZNVEl2WFpvT1ZrM3RyUVMzY2NrQnV5ejBwV3pwZUI2NzE2eHdaUTFZLUZGYW11R2JORXNlMzJnekR5eEQxRXNDazVCSTh3Q0lDeURXYU9QcnlUQXJyT2xnbnQ3VWpBbEE?oc=5",
+      "label": "Evolve your marketing with new AI tools",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1wd0NkZTluX05pTzdhWGZETEc4cHFGbEVJZmduVndhUzF3bjNXNVYzUG1sMVllR2xzUURLX0hnLVpBcnM4NVEyUS13NVN3TTJpSG55R3lDU0lBNmd2V1haWUdlTjF4dlduWWF3bURNVUl4anRkdFY2Tk9TTGN1ZWs?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMijgFBVV95cUxORmlYbDRyWUt6UGtxSEJUSk5XZXFpd05yZzZLbnh1N2VyazgzOXg2TVRJdlhab09WazN0clFTM2Nja0J1eXowcFd6cGVCNjcxNnh3WlExWS1GRmFtdUdiTkVzZTMyZ3pEeXhEMUVzQ2s1Qkk4d0NJQ3lEV2FPUHJ5VEFyck9sZ250N1VqQWxB0gGOAUFVX3lxTE5GaVhsNHJZS3pQa3FIQlRKTldlcWl3TnJnNktueHU3ZXJrODM5eDZNVEl2WFpvT1ZrM3RyUVMzY2NrQnV5ejBwV3pwZUI2NzE2eHdaUTFZLUZGYW11R2JORXNlMzJnekR5eEQxRXNDazVCSTh3Q0lDeURXYU9QcnlUQXJyT2xnbnQ3VWpBbEE?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1wd0NkZTluX05pTzdhWGZETEc4cHFGbEVJZmduVndhUzF3bjNXNVYzUG1sMVllR2xzUURLX0hnLVpBcnM4NVEyUS13NVN3TTJpSG55R3lDU0lBNmd2V1haWUdlTjF4dlduWWF3bURNVUl4anRkdFY2Tk9TTGN1ZWs?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Saudi Arabia’s Use of AI Tools Surges to 45.2%, More Than Doubling in a Year",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOSng2TTA3Rld5SXJZZnFPdTlPZ2Jhem0yOVRFaEZJdTk5Q01qNDV6NW1pdTBaY2FTUllFUExMV21mMnF0bjl5WHhLQmNkVWdTaFNKdl9iRDJGb0NhNm9vVUlKN2Y1LXBZdWt3bXpjVmE5UXlOVlh1cUFqMGF4OVdTdFFwVExoQjJQci1BZTB6NHctdWdpNjRScHdvM1AzSmdmal8tQmpRY3FOVWI3NkZzOQ?oc=5",
+      "label": "The AI Validation Gap: Decision Support Tools Are Outrunning Their Own Evidence",
+      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOejdGUTNvTXRCZkw4NmZ1Z0hBM05XOWF0OVRzWHEwUFJ6b1NPMWNLV2xpY3RiLTBWcXJVMWE3ajhPOXRUdWc4LVhLd0t3QUhEd0xtU1lSN1RDQ2ZZTE01VTlnc1lyUGFJUjNFNmdoMVl3cUdwU3RvdHFjcjV6T0lWWTl1S2NtU2k0UDN5UlYxZVk0dFo5Z3g5cU1iei1LV2VFZjNtMWdVRklhbF85TVA0N2JKNmJjUFpRN19lXzdhLUxiMzB6bS1VeWd2ZVhFYkJ3Z3Vj?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOSng2TTA3Rld5SXJZZnFPdTlPZ2Jhem0yOVRFaEZJdTk5Q01qNDV6NW1pdTBaY2FTUllFUExMV21mMnF0bjl5WHhLQmNkVWdTaFNKdl9iRDJGb0NhNm9vVUlKN2Y1LXBZdWt3bXpjVmE5UXlOVlh1cUFqMGF4OVdTdFFwVExoQjJQci1BZTB6NHctdWdpNjRScHdvM1AzSmdmal8tQmpRY3FOVWI3NkZzOQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOejdGUTNvTXRCZkw4NmZ1Z0hBM05XOWF0OVRzWHEwUFJ6b1NPMWNLV2xpY3RiLTBWcXJVMWE3ajhPOXRUdWc4LVhLd0t3QUhEd0xtU1lSN1RDQ2ZZTE01VTlnc1lyUGFJUjNFNmdoMVl3cUdwU3RvdHFjcjV6T0lWWTl1S2NtU2k0UDN5UlYxZVk0dFo5Z3g5cU1iei1LV2VFZjNtMWdVRklhbF85TVA0N2JKNmJjUFpRN19lXzdhLUxiMzB6bS1VeWd2ZVhFYkJ3Z3Vj?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "US Navy aircraft experiment with AI tools",
-      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNR2U4OThiM2s2a1lTQ2pxdXhJNDFjT0hBWXVKNkFxbDVQWUUteXZFUE41UmVPeG9rMEo2MGNIUHktVEtXRnQ0VTJXdUhvUHRJUlRBcEJRLVlTdVcwb2l1V2JKM05aaURLaUpmWEtnU0NpZ2tPUms5bVlDS1lLZkhtdnhrXzN2Wm44WC1McmdYbHNoSUtO?oc=5",
+      "label": "Compare Top 21 Manufacturing AI Solutions & Software",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE41V0llMHJ5d0Z1RjB6SlBRQ1oxbm9ZRnVKa0Z0U0NlTFVTcVlsQ0VXQUp2MmlzQTJUMXRONTVJa1owN2ZQX3NNd2JsVFd5UUR5N3RSczJWMkpObnMxMHc?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNR2U4OThiM2s2a1lTQ2pxdXhJNDFjT0hBWXVKNkFxbDVQWUUteXZFUE41UmVPeG9rMEo2MGNIUHktVEtXRnQ0VTJXdUhvUHRJUlRBcEJRLVlTdVcwb2l1V2JKM05aaURLaUpmWEtnU0NpZ2tPUms5bVlDS1lLZkhtdnhrXzN2Wm44WC1McmdYbHNoSUtO?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE41V0llMHJ5d0Z1RjB6SlBRQ1oxbm9ZRnVKa0Z0U0NlTFVTcVlsQ0VXQUp2MmlzQTJUMXRONTVJa1owN2ZQX3NNd2JsVFd5UUR5N3RSczJWMkpObnMxMHc?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "North Korean hacking group builds AI tools for cyberattacks, report says",
-      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNTTM0VnQ2S3MzSjk1RTlkeFJPc3NoYVJHQjU3Y1JoQTZuU0lfWlV4Wm4xWkN6Y2JjM0E2azJYTi1YOHVXdFFzN2ZVNzhsdnhWclJyLTdFV1FmWEdWMnR4S1ctbllrT29iaFFGY3NqN0hKLVRRSlU3WWJfUTFnM3FvQ2NaUlpzU3UyN3JDckRQbmNZd3NYQ0JISjFDamR5amNUT00yNk9DQjY2ekwwZ0VxZjF3M2VwQ2RsWXVjSQ?oc=5",
+      "label": "AI could ease doctor workload by automating paperwork amid healthcare worker shortage",
+      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxQTHdTUjZZYnlGbE01X2JpQ3VCWGhzWGktcXQ3ODJHNU9pOHZXSHJsRTB6elNfQWd6dUFZaFBRVEpWNEZCaFdTQmZXUzBSa0dQT0VpdzZYdlRNVTlKZTRFLV9EVDVyQWplS2lqMnpKTjBiM01sZVZ1UW5RTnZIdEpEMndyUUlLSlF3TnpXLWQ3bUlUYTlHS0NPd2Y2QjVmb0hveVZCekRkcHZhZTkzVkt5RUw5S2l6UzRWTUw1ZzVfTElCVGxHdlQ4clBiRGpqQXRIZVg0SHFQU1BMSmlwRG9SVlFlM0g3bi13WmYtVS0zZHrSAfYBQVVfeXFMTjY0SFdMY0hfVGdLa3NaZk91WGotS2JuTVZaTXhUMkhETWtWTGJxR1NhMU56a2dlLWc3SmxEMjFoQnlVWlZzZXo4cDNjbm1nTXRzOUdiN2tYWHpvcDlKV05teWZFUkl6eTFWbjVDVVR3alZoQTQwS1dDakFjRXJrMnZMamJ4aVdCODRzS2tXbmFBNDI3Qzl0ME9uT0E4bk1zU0Z6cWtWdXZHSGpObkVrampTRXo5QVFuOGo1enRiaWtnTE9oWWNJS0ZIZ1pxTTdEcG5iQTh1N3ZlSnNyV1F5bFNqNlRqR3Y0bF9sZmFxTWM0OTU3QVNn?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNTTM0VnQ2S3MzSjk1RTlkeFJPc3NoYVJHQjU3Y1JoQTZuU0lfWlV4Wm4xWkN6Y2JjM0E2azJYTi1YOHVXdFFzN2ZVNzhsdnhWclJyLTdFV1FmWEdWMnR4S1ctbllrT29iaFFGY3NqN0hKLVRRSlU3WWJfUTFnM3FvQ2NaUlpzU3UyN3JDckRQbmNZd3NYQ0JISjFDamR5amNUT00yNk9DQjY2ekwwZ0VxZjF3M2VwQ2RsWXVjSQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxQTHdTUjZZYnlGbE01X2JpQ3VCWGhzWGktcXQ3ODJHNU9pOHZXSHJsRTB6elNfQWd6dUFZaFBRVEpWNEZCaFdTQmZXUzBSa0dQT0VpdzZYdlRNVTlKZTRFLV9EVDVyQWplS2lqMnpKTjBiM01sZVZ1UW5RTnZIdEpEMndyUUlLSlF3TnpXLWQ3bUlUYTlHS0NPd2Y2QjVmb0hveVZCekRkcHZhZTkzVkt5RUw5S2l6UzRWTUw1ZzVfTElCVGxHdlQ4clBiRGpqQXRIZVg0SHFQU1BMSmlwRG9SVlFlM0g3bi13WmYtVS0zZHrSAfYBQVVfeXFMTjY0SFdMY0hfVGdLa3NaZk91WGotS2JuTVZaTXhUMkhETWtWTGJxR1NhMU56a2dlLWc3SmxEMjFoQnlVWlZzZXo4cDNjbm1nTXRzOUdiN2tYWHpvcDlKV05teWZFUkl6eTFWbjVDVVR3alZoQTQwS1dDakFjRXJrMnZMamJ4aVdCODRzS2tXbmFBNDI3Qzl0ME9uT0E4bk1zU0Z6cWtWdXZHSGpObkVrampTRXo5QVFuOGo1enRiaWtnTE9oWWNJS0ZIZ1pxTTdEcG5iQTh1N3ZlSnNyV1F5bFNqNlRqR3Y0bF9sZmFxTWM0OTU3QVNn?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "AI is helping design engineers shorten the path from challenge to solution",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPQTNkcWJ3eHU3RmdzaVpESTBBdmZRNnB2WTVIMXpodlM5REZWTUpvQ1p6eURyLWVkVVQ2V0d4NkRXR3Z1SmpMZDROX1pfRE5hd01zVm9ITlpuNUZVZ0U1bk8wMlpuRW04cWFTVWhxQ19yNU9JTWphekFyVzdEdFhvLTQtSDVFX1dvZE80Vnh5YUs2ZUMzRUN3d1Nn?oc=5",
+      "label": "4 AI learning tools I'd use if I went back to college today",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQeEN3T09PZkQ5bXBCWFdvLXhSM1A2UHd5ZEF1alJ2U0Q0Qms1dXFPVlJOQ2x4dzZnQlk3QU9fWnNhVlp3M2kxR3ZZbXc0OXRCZThmY08tY3pWMmdGVk81WEs0Z29XLTBaOFlnMkwzYUNVaGtsM3YtQlR5VzFWdG5MNVNMWU55Nl9SVlJJ?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPQTNkcWJ3eHU3RmdzaVpESTBBdmZRNnB2WTVIMXpodlM5REZWTUpvQ1p6eURyLWVkVVQ2V0d4NkRXR3Z1SmpMZDROX1pfRE5hd01zVm9ITlpuNUZVZ0U1bk8wMlpuRW04cWFTVWhxQ19yNU9JTWphekFyVzdEdFhvLTQtSDVFX1dvZE80Vnh5YUs2ZUMzRUN3d1Nn?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQeEN3T09PZkQ5bXBCWFdvLXhSM1A2UHd5ZEF1alJ2U0Q0Qms1dXFPVlJOQ2x4dzZnQlk3QU9fWnNhVlp3M2kxR3ZZbXc0OXRCZThmY08tY3pWMmdGVk81WEs0Z29XLTBaOFlnMkwzYUNVaGtsM3YtQlR5VzFWdG5MNVNMWU55Nl9SVlJJ?oc=5&hl=en-US&gl=US&ceid=US:en"
     }
   ]
 }
