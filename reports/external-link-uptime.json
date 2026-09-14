@@ -1,22 +1,12 @@
 {
-  "generatedAt": "2026-09-07T13:54:35.671Z",
+  "generatedAt": "2026-09-14T14:40:56.336Z",
   "timeoutMs": 6000,
   "retries": 2,
   "concurrency": 8,
   "total": 108,
-  "healthy": 86,
-  "failed": 22,
+  "healthy": 84,
+  "failed": 24,
   "failures": [
-    {
-      "source": "tool",
-      "label": "ChatGPT",
-      "url": "https://chatgpt.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
-    },
     {
       "source": "tool",
       "label": "Claude",
@@ -46,6 +36,16 @@
       "method": "HEAD/GET",
       "attempts": 3,
       "error": "HTTP 404"
+    },
+    {
+      "source": "tool",
+      "label": "Character.ai",
+      "url": "https://character.ai/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
     },
     {
       "source": "tool",
@@ -79,6 +79,16 @@
     },
     {
       "source": "tool",
+      "label": "Canva AI",
+      "url": "https://www.canva.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
       "label": "NightCafe",
       "url": "https://nightcafe.studio/",
       "healthy": false,
@@ -96,6 +106,16 @@
       "method": "HEAD/GET",
       "attempts": 3,
       "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "Lexica",
+      "url": "https://lexica.art/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 500"
     },
     {
       "source": "tool",
@@ -233,11 +253,11 @@
       "source": "tool",
       "label": "ChatGPT",
       "url": "https://chatgpt.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
       "attempts": 3,
-      "error": "HTTP 403"
+      "finalUrl": "https://chatgpt.com/"
     },
     {
       "source": "tool",
@@ -373,11 +393,11 @@
       "source": "tool",
       "label": "Character.ai",
       "url": "https://character.ai/",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://character.ai/"
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
     },
     {
       "source": "tool",
@@ -483,11 +503,11 @@
       "source": "tool",
       "label": "Canva AI",
       "url": "https://www.canva.com/",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://www.canva.com/"
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
     },
     {
       "source": "tool",
@@ -583,11 +603,11 @@
       "source": "tool",
       "label": "Lexica",
       "url": "https://lexica.art/",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://lexica.art/"
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 500"
     },
     {
       "source": "tool",
@@ -1231,83 +1251,83 @@
     },
     {
       "source": "news",
-      "label": "AI Should Help Researchers Be Even More Creative, Not Think Less",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQVGV1cUNGckx2NWFuUUFXcVctTTB1X2Z0N2ZIbFJtTFA1V1VYaFdmZ2k1NkdZVF9vb1dqdlY3eDk1SGN4aDZUZm5JT0lGT19yX09UYXZMNUYyZTFrQjV5VVNDVW5BTng4VnpCdkMtakFCUTFWUVNKN21JekQ2OVB3YXVsRl9lOHlDcWZiS0RxWm91NU1fS1NHZG1vOUJENmRU?oc=5",
+      "label": "What are the five pros and cons of artificial intelligence?",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPUkJUcjZydEhPb3Itel9PUVFhWFpZcm5GRE1UYUhQQWxRYjdLbmp0RTg4T050Q0N3UGtral9HSFEzc2NXcWFnd3FwOUhPS0tpc0k4cXFZOHJuWHJ1TUYzN1ItMUNxMGRDbDNiMlZYV205eERMTk9uUjg3NzJleUdYOG0zSEIzU2RHTDZCRjROMU9qZW14MXh1SnU1MlFrWkkt0gGmAUFVX3lxTE1PXy1fNFdzYUxKLUVpWWN0RjhGaEp4ZnJXOFVEOGZ6RkxYb0NKUDR5SkliWmZTSXpYR3U1RFdVc0ZPM0FuVll2cF9lbnRpcTN5ZWVWbm1mTVdobklyaVlqUGdRSlFaMEg5SVNTa1AyR25HN0pOUHptdnVmY01JQmRDZUxUbTV1OXl1Z2JjRDI5UXBRR1N5MzJqZWRHd1gxN1ZZZ1U2cHc?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQVGV1cUNGckx2NWFuUUFXcVctTTB1X2Z0N2ZIbFJtTFA1V1VYaFdmZ2k1NkdZVF9vb1dqdlY3eDk1SGN4aDZUZm5JT0lGT19yX09UYXZMNUYyZTFrQjV5VVNDVW5BTng4VnpCdkMtakFCUTFWUVNKN21JekQ2OVB3YXVsRl9lOHlDcWZiS0RxWm91NU1fS1NHZG1vOUJENmRU?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPUkJUcjZydEhPb3Itel9PUVFhWFpZcm5GRE1UYUhQQWxRYjdLbmp0RTg4T050Q0N3UGtral9HSFEzc2NXcWFnd3FwOUhPS0tpc0k4cXFZOHJuWHJ1TUYzN1ItMUNxMGRDbDNiMlZYV205eERMTk9uUjg3NzJleUdYOG0zSEIzU2RHTDZCRjROMU9qZW14MXh1SnU1MlFrWkkt0gGmAUFVX3lxTE1PXy1fNFdzYUxKLUVpWWN0RjhGaEp4ZnJXOFVEOGZ6RkxYb0NKUDR5SkliWmZTSXpYR3U1RFdVc0ZPM0FuVll2cF9lbnRpcTN5ZWVWbm1mTVdobklyaVlqUGdRSlFaMEg5SVNTa1AyR25HN0pOUHptdnVmY01JQmRDZUxUbTV1OXl1Z2JjRDI5UXBRR1N5MzJqZWRHd1gxN1ZZZ1U2cHc?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Teaching AI use in music for intercultural perspectives | THE Campus Learn, Share, Connect",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQUDZMQTVTX3ZwNUVIX3RCNEFweXFEb1BjRTNMWWo1VzFieVB5WkFCNkxfY1NXOFROVXNDWmNCaHA2WGtKT1JKWjdYMEh6Y0NGUTV6QkZOOEQ5LS1GS0FPZHdUM3pYb1A1dDR2RWVybVFNT2ZJTVhEUzNwVUJGZWJUdFptMDNXVkp6LXVCeGt6Zlk5ZTRZRkY4?oc=5",
+      "label": "Your ’80s style AI photo is temporary: What happens to images you upload?",
+      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOS19sOGtORnVTV1lhMFlma1dRRnA2UkxMaVZ3UEFtY0t4NU9PaHpYVkpXRWZ3QkwzcjllZFl1OFJlTExhUmZaTzNuaF9HLUJONGNwejVFTWxtWFRMcmhLVFRyTVNYS0dsWUF3ZXllanFZMFJiNWUxM2VVYkNxZi1scWtvR3BjYkh1V0VFX2Zzc0hfRjdrQWpTWUNsR0V3NjQ4SUQwN3pkTDJjTXhndXllZDQ4WlVDSDMwYVo4WlVQRELSAccBQVVfeXFMUDRKbXUwQUlGemZRRWFMR0JkSGc2N2VRc0c1eDNyZ3ZMa25QeXQzaXBfLUxDcXRSMVB2bnFuZ09lMUdXRlRTYTE0TUFpR0hiZGZSeTdsMmJQYnRSMWZHemlSa2Y0QUV0TzRwVDZFY3NXTnhjLUJKTUl4emUtSlF0ZDg2a3VGSC05OF8xcDZsekNKcWE0S20zZ1oyQ1J0UmdqUkpUaHdKcm9YLUFqWkxNcW1JbU1XWmtvdnVkVmM1RDBSWi1zSTBpRQ?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQUDZMQTVTX3ZwNUVIX3RCNEFweXFEb1BjRTNMWWo1VzFieVB5WkFCNkxfY1NXOFROVXNDWmNCaHA2WGtKT1JKWjdYMEh6Y0NGUTV6QkZOOEQ5LS1GS0FPZHdUM3pYb1A1dDR2RWVybVFNT2ZJTVhEUzNwVUJGZWJUdFptMDNXVkp6LXVCeGt6Zlk5ZTRZRkY4?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOS19sOGtORnVTV1lhMFlma1dRRnA2UkxMaVZ3UEFtY0t4NU9PaHpYVkpXRWZ3QkwzcjllZFl1OFJlTExhUmZaTzNuaF9HLUJONGNwejVFTWxtWFRMcmhLVFRyTVNYS0dsWUF3ZXllanFZMFJiNWUxM2VVYkNxZi1scWtvR3BjYkh1V0VFX2Zzc0hfRjdrQWpTWUNsR0V3NjQ4SUQwN3pkTDJjTXhndXllZDQ4WlVDSDMwYVo4WlVQRELSAccBQVVfeXFMUDRKbXUwQUlGemZRRWFMR0JkSGc2N2VRc0c1eDNyZ3ZMa25QeXQzaXBfLUxDcXRSMVB2bnFuZ09lMUdXRlRTYTE0TUFpR0hiZGZSeTdsMmJQYnRSMWZHemlSa2Y0QUV0TzRwVDZFY3NXTnhjLUJKTUl4emUtSlF0ZDg2a3VGSC05OF8xcDZsekNKcWE0S20zZ1oyQ1J0UmdqUkpUaHdKcm9YLUFqWkxNcW1JbU1XWmtvdnVkVmM1RDBSWi1zSTBpRQ?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Usage of artificial intelligence (AI) tools to ensure sustainable growth of Indian poultry industry",
-      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQZVBEZ2p0U1VxN3FxVVpMUEgtelBjOF9Pblp6ZnlOR1hpd2ZaSHZtMV9Hd2JFd0xQTHdXNVVNQkQ2RUJrb1gxRmEzYmhqRzZXdDhFanNrenZoZnVCMDVQX3JFSEtCMXVRWWJ4cW42OFlNRGlndXI2QzR5N2NiVEprbTJiRDYydG9VaHM2a1RfWjRaMk1hQmhtYmZ4aGxzR0I0U3EyRTJyTXFla1dMeXpzOWZTa0NGWHJXbDlGa29n?oc=5",
+      "label": "UNESCO launches new tools to reinforce ethical AI Governance at global forum in Riyadh, Saudi Arabia",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQcFdhalJ5OUpQenQ2Y080RUdhT3h1N0M1ZGJGUEEzTEpaXzJvTGZOZUMxNFdfZHNPYlBMUV9iYnpXcEtRdnlQcnNja0NTbWpOWVBSTUtoUndRYmt2U196eTBFYXpHQ3R6SXdUenJHcWFCSGZXeXNKZWFxWkszVG5oLTk4ZFNEOUhiYTBndzlRYnI4V0Zmbi1vV0ZCRGFFYW8tb0U1MG0tMmhWOFBGMkp6Q3ZnVlFfeGZ6X0JlLUJreXFOZ1E?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQZVBEZ2p0U1VxN3FxVVpMUEgtelBjOF9Pblp6ZnlOR1hpd2ZaSHZtMV9Hd2JFd0xQTHdXNVVNQkQ2RUJrb1gxRmEzYmhqRzZXdDhFanNrenZoZnVCMDVQX3JFSEtCMXVRWWJ4cW42OFlNRGlndXI2QzR5N2NiVEprbTJiRDYydG9VaHM2a1RfWjRaMk1hQmhtYmZ4aGxzR0I0U3EyRTJyTXFla1dMeXpzOWZTa0NGWHJXbDlGa29n?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQcFdhalJ5OUpQenQ2Y080RUdhT3h1N0M1ZGJGUEEzTEpaXzJvTGZOZUMxNFdfZHNPYlBMUV9iYnpXcEtRdnlQcnNja0NTbWpOWVBSTUtoUndRYmt2U196eTBFYXpHQ3R6SXdUenJHcWFCSGZXeXNKZWFxWkszVG5oLTk4ZFNEOUhiYTBndzlRYnI4V0Zmbi1vV0ZCRGFFYW8tb0U1MG0tMmhWOFBGMkp6Q3ZnVlFfeGZ6X0JlLUJreXFOZ1E?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Why is New York City pausing some AI tools in schools? | Explained",
-      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNamtHb0xYUnZkM1ZiTnEtWGR0MGM4Rkt5SXRYNnQwUEtzQmxFdXYxUjAxc09pOVViMHU0eUxLUkZHOExmNEg1QkxMOW45ZGw2UnY3YnFfSG12SllSWlMtYXZpY08tMnVmZmx4UFl2cjRLc0E0cFdpckNoQzdfNkJVdGFIdzBqcUlYaW1WNTY0WHpLbGg1UHBFeW9YTUFmVmN3dkVIb25ZN3NGUjgxU1V4ZHdSMFNYQWdiQlBQQ2dBcU5PZm1jVUHSAcwBQVVfeXFMTmtUd2ZzYzVuVUtYQU5pRjdpOG5lNHNFc1BwaFVjNV9KLUEzT25HYWhKRllwbWd0TWhCanY2RXQ4YVM5VFRlalgxRkVXTlpmYlFyMlp4dmVJSEhDdHVlcnJ1UVU1eDNNclV6Q0JpVUdER3VVVmluWnBfTWoyemRvdmxUUFBjX3p5V01od0dTX2wxRnduWGJfd0hvblA1OGI5YTBQVl9mLVBHbm5BM0FoR1I5SGpFcWtYQmhqcC1jcHp2RFp3MzB3MEZ3VmxH?oc=5",
+      "label": "AI tools are making ‘experts’ out of stock traders in mainland China, Hong Kong",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPdGwzYjhERTl4eVJhekE3c1UyOVViRFZxQ3plYVNyeXFpcHVhaXhnemVlYzVLMW5VdjAzemdKU19tUHA3bkNoNXhhMFZYRVR0Vk5UUHNFMzFEdkZ4NzRXQU45cFBhM0FFV0pfakpFOTVpUjlJRGdYNnNra3FCWlNpV2w5M0JucmpfLWNDMWtRRV91VkZ4SjhBdXpYaV8zQmFwUzViV3lRR2ZpaDBGUHlVMlpKYWJOMXdEZ282b014ZmpKbFhieFHSAcYBQVVfeXFMT0VhZkg2by1Ibk94SnhPaGpYVGdyekdtV1NLMjloc3ZNbTFqdHE2dEpVU2NjYks0bkdwc08tNno1OXRjU2V0cTNyLXhoVkEtejRreVRhUUNqUk9ONTlRSTI5b3FLQ2FfZWZybmlONnd2dmhSVTRfbVJyODhyaXZXR21MUVg3VFZva0JkYllGbldLZHF3cElZX3dRbmllamVmX3Y5di1KM0p5ZXQ3R2pZVklaWFVLcGxXSWZiZmFUVWRESF9HYWJR?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNamtHb0xYUnZkM1ZiTnEtWGR0MGM4Rkt5SXRYNnQwUEtzQmxFdXYxUjAxc09pOVViMHU0eUxLUkZHOExmNEg1QkxMOW45ZGw2UnY3YnFfSG12SllSWlMtYXZpY08tMnVmZmx4UFl2cjRLc0E0cFdpckNoQzdfNkJVdGFIdzBqcUlYaW1WNTY0WHpLbGg1UHBFeW9YTUFmVmN3dkVIb25ZN3NGUjgxU1V4ZHdSMFNYQWdiQlBQQ2dBcU5PZm1jVUHSAcwBQVVfeXFMTmtUd2ZzYzVuVUtYQU5pRjdpOG5lNHNFc1BwaFVjNV9KLUEzT25HYWhKRllwbWd0TWhCanY2RXQ4YVM5VFRlalgxRkVXTlpmYlFyMlp4dmVJSEhDdHVlcnJ1UVU1eDNNclV6Q0JpVUdER3VVVmluWnBfTWoyemRvdmxUUFBjX3p5V01od0dTX2wxRnduWGJfd0hvblA1OGI5YTBQVl9mLVBHbm5BM0FoR1I5SGpFcWtYQmhqcC1jcHp2RFp3MzB3MEZ3VmxH?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPdGwzYjhERTl4eVJhekE3c1UyOVViRFZxQ3plYVNyeXFpcHVhaXhnemVlYzVLMW5VdjAzemdKU19tUHA3bkNoNXhhMFZYRVR0Vk5UUHNFMzFEdkZ4NzRXQU45cFBhM0FFV0pfakpFOTVpUjlJRGdYNnNra3FCWlNpV2w5M0JucmpfLWNDMWtRRV91VkZ4SjhBdXpYaV8zQmFwUzViV3lRR2ZpaDBGUHlVMlpKYWJOMXdEZ282b014ZmpKbFhieFHSAcYBQVVfeXFMT0VhZkg2by1Ibk94SnhPaGpYVGdyekdtV1NLMjloc3ZNbTFqdHE2dEpVU2NjYks0bkdwc08tNno1OXRjU2V0cTNyLXhoVkEtejRreVRhUUNqUk9ONTlRSTI5b3FLQ2FfZWZybmlONnd2dmhSVTRfbVJyODhyaXZXR21MUVg3VFZva0JkYllGbldLZHF3cElZX3dRbmllamVmX3Y5di1KM0p5ZXQ3R2pZVklaWFVLcGxXSWZiZmFUVWRESF9HYWJR?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Thailand launches programme to expand public access to AI tools",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNYXkxOV9fUExCNDlvZlA1MElUS1NXU0RTYUNRZG5BdTBTRDd2Tk5USHpDaHF5Y3lZSkRlaTlYNHRGTlYzOWhJaGVCR0xIQUdXN0wyaTFhZGlDNUJpY2dEdmNIVFM1RFR2QUNoNjdaNGUyV2V6QjdDTkZFU2FiVnNESmdGUFY0eS1HWGhWN2Z0c0RzdUN1MFVV?oc=5",
+      "label": "Department of War Seeks AI Tools to Track Space & Missile Threats",
+      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9JRVYtaWt1M3YtYnZaaGhHSlBZVnlwTzR4WnZacTRkeUZEM3IzcU9MazRwQTFHV2s4Mkl0Ymw5VFJoa3FfY09hTkNHcnhvdWZfZ0lfalhFQURZZGVsSk02bUNOZVdiSzdNbnJLRm9RQXdPem9LWjhhYmVhLVc?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNYXkxOV9fUExCNDlvZlA1MElUS1NXU0RTYUNRZG5BdTBTRDd2Tk5USHpDaHF5Y3lZSkRlaTlYNHRGTlYzOWhJaGVCR0xIQUdXN0wyaTFhZGlDNUJpY2dEdmNIVFM1RFR2QUNoNjdaNGUyV2V6QjdDTkZFU2FiVnNESmdGUFY0eS1HWGhWN2Z0c0RzdUN1MFVV?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9JRVYtaWt1M3YtYnZaaGhHSlBZVnlwTzR4WnZacTRkeUZEM3IzcU9MazRwQTFHV2s4Mkl0Ymw5VFJoa3FfY09hTkNHcnhvdWZfZ0lfalhFQURZZGVsSk02bUNOZVdiSzdNbnJLRm9RQXdPem9LWjhhYmVhLVc?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "How generative AI helps SenseTime turn a profit even as Chinese peers struggle",
-      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPbmZpUUdxSzUtUGVra3VYNGx6ZGNwYWc5MmIwUHZGWEc2RElMTHRfTEpjZ2FCdVRsRi1zZkZOVlRRMGxTdi0wMjBBQlF0cTlndkVhbjdGbEZ1cWFrQy1Qc0pScF9rd181Ym1JOEJ6c09tbHdLU1pDQm5vOG5obGFLRXpiRF92emJfQWJ4WlZTTG90czBuQmRzZUdFaTQ1YUF4bWoxcnM3YTRsVW5RTUlGRHpucWlqMHlDQjlQd05vSk5VNHViQ3fSAcYBQVVfeXFMUFFJQ1FnNVZRZ19ObTRSNE9ZN204OXZDS2xmdmlCR3lQWUE4NGpwUEtvSjVuTkc3WThtNW8xVFY3TmNyU0ZSaGktcF9PME5jSUdGc2lRdE1FbE9aMGJEbnoyYU9BNkJYaDlsRHFrX1VVdG5rQ2R0elVlUFByVFM5b1cwTXNPTmtuc3JNdWozTDVDeDMzenZvcVRBSDc5d05BTHo4TXJQazBRNUpPeFJRZUtodjlsSGlaY0hUcmpsX1IwMnA4UjV3?oc=5",
+      "label": "Meta highlights creation tools for AI glasses",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPY1FhdUxmZTJPSFFMWEk4eHlTUm91dkRzUWhtYnV1Vy1WbWhGekpvVk9sZlBTTk1zSlFCYVp4dzNtN1JjbjQwSkE1MklXS0U5LVVSTFN4Rnk0YjhzRFhDVkhpNW84UGVkdlhVWnBQOW52Q2hvay1pMlN5ZzdJU2hRMjZuWWpjdlAteHJDSTRjNzlNNTBWUlE?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPbmZpUUdxSzUtUGVra3VYNGx6ZGNwYWc5MmIwUHZGWEc2RElMTHRfTEpjZ2FCdVRsRi1zZkZOVlRRMGxTdi0wMjBBQlF0cTlndkVhbjdGbEZ1cWFrQy1Qc0pScF9rd181Ym1JOEJ6c09tbHdLU1pDQm5vOG5obGFLRXpiRF92emJfQWJ4WlZTTG90czBuQmRzZUdFaTQ1YUF4bWoxcnM3YTRsVW5RTUlGRHpucWlqMHlDQjlQd05vSk5VNHViQ3fSAcYBQVVfeXFMUFFJQ1FnNVZRZ19ObTRSNE9ZN204OXZDS2xmdmlCR3lQWUE4NGpwUEtvSjVuTkc3WThtNW8xVFY3TmNyU0ZSaGktcF9PME5jSUdGc2lRdE1FbE9aMGJEbnoyYU9BNkJYaDlsRHFrX1VVdG5rQ2R0elVlUFByVFM5b1cwTXNPTmtuc3JNdWozTDVDeDMzenZvcVRBSDc5d05BTHo4TXJQazBRNUpPeFJRZUtodjlsSGlaY0hUcmpsX1IwMnA4UjV3?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPY1FhdUxmZTJPSFFMWEk4eHlTUm91dkRzUWhtYnV1Vy1WbWhGekpvVk9sZlBTTk1zSlFCYVp4dzNtN1JjbjQwSkE1MklXS0U5LVVSTFN4Rnk0YjhzRFhDVkhpNW84UGVkdlhVWnBQOW52Q2hvay1pMlN5ZzdJU2hRMjZuWWpjdlAteHJDSTRjNzlNNTBWUlE?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Bihar govt finalises MoU with Google to train teachers in AI tools",
-      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPMEhSR2NzSnNtR3lKRy0wRVVLNUdOZVpLR3lXVzljdUhQb29UaGhPdFpKR01yNExVcWZFZmVQbFNvLWhsTlRlTHZERWhpUHBnZld1WUNaTzVfbnlpU0s0WUIyR1Vjamo3dmJiT0NEYUJsTGR2ZXlGTmxmVTNCeTdSMVlSMUlmcXNzYmYwRWlKYnVqeXIzNHNTRmVRMjAyYWlmemNJ0gGoAUFVX3lxTE5HenM4b0t2akhDQTVSY2Q4eF9kcmNwQmI4TExMeVhlamhtRTd5bFRjTEVKejA1ajlJSkhqVTI5b0RCSi1WSDU2aFRXQzNTcGE4ZU53N0Z6b1lZV1h5VWFreWZVekZNRW5DbDZrTFVFNmdKWGdyeXowNzA1OXo3OTRKeDRXSnIyTjNxemFKeEhXaUNMTTFiMXp6UnBjbWFoNWxDSmVZVGZfbg?oc=5",
+      "label": "Warning from within the scientific community: 25 mathematicians sound the alarm over the artificial intelligence race - صوت الإمارات",
+      "url": "https://news.google.com/rss/articles/CBMijAJBVV95cUxNdzdjZDlmaWF3NFNuVHFFekhCbFo5cjYxa2xpX1dfczNELXB4N0Z0dlY0S1FjNVpIbGs5ZVZOdnVyUklJZTFMQTVFNTdMZms2YjFQanpDbWpnRHFXRDVUM0dZZkh2YXBMUjBRSnQ3SG1NeHNrMG81SVR0ekdnZmh1N3J1SVJnUzB2V3QzTWlYWm5fYnE0bUNQMDlGWmhlaFFCd2preER1dEhOV3BYanpDS0JKTmVlOUtHNFlZYVF4SnJ5d0ZsWHlVck1hano1RExMdnpwZHp5VHNLLWxWbU42ZkRNd2lSSFhfZlJBeUtiVW5DOWdQT280OFlyTHV4dEh6UjY2am1LSXlTVW93?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPMEhSR2NzSnNtR3lKRy0wRVVLNUdOZVpLR3lXVzljdUhQb29UaGhPdFpKR01yNExVcWZFZmVQbFNvLWhsTlRlTHZERWhpUHBnZld1WUNaTzVfbnlpU0s0WUIyR1Vjamo3dmJiT0NEYUJsTGR2ZXlGTmxmVTNCeTdSMVlSMUlmcXNzYmYwRWlKYnVqeXIzNHNTRmVRMjAyYWlmemNJ0gGoAUFVX3lxTE5HenM4b0t2akhDQTVSY2Q4eF9kcmNwQmI4TExMeVhlamhtRTd5bFRjTEVKejA1ajlJSkhqVTI5b0RCSi1WSDU2aFRXQzNTcGE4ZU53N0Z6b1lZV1h5VWFreWZVekZNRW5DbDZrTFVFNmdKWGdyeXowNzA1OXo3OTRKeDRXSnIyTjNxemFKeEhXaUNMTTFiMXp6UnBjbWFoNWxDSmVZVGZfbg?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMijAJBVV95cUxNdzdjZDlmaWF3NFNuVHFFekhCbFo5cjYxa2xpX1dfczNELXB4N0Z0dlY0S1FjNVpIbGs5ZVZOdnVyUklJZTFMQTVFNTdMZms2YjFQanpDbWpnRHFXRDVUM0dZZkh2YXBMUjBRSnQ3SG1NeHNrMG81SVR0ekdnZmh1N3J1SVJnUzB2V3QzTWlYWm5fYnE0bUNQMDlGWmhlaFFCd2preER1dEhOV3BYanpDS0JKTmVlOUtHNFlZYVF4SnJ5d0ZsWHlVck1hano1RExMdnpwZHp5VHNLLWxWbU42ZkRNd2lSSFhfZlJBeUtiVW5DOWdQT280OFlyTHV4dEh6UjY2am1LSXlTVW93?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "IIT Madras and CMC Vellore Researchers Build AI Tools for Early Kidney Disease Detection",
-      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOLVNCSk5aeVZaM3Y5X3FPNlVVSnFnb3NpUUZFVjhhNEFDdGRlVEhHYnJRbl9JbVR6eUU2dG1FVGMxMmpwTi1WNjR0OGlrc2ZkRmZRODB6ZEFxdjAtLWQ0c1RZc1hyZzNtRzhQUzgtZzU3blVMWUNhVV80SXNBZnZnQ1k3UmpiSmkwRVlYVjFhVG14cHBBVmRRS1R2cnM5ejRJSFR4TndyMHhRMzQ1bXYweWIzMkxJdWFHYlBEeEQtZw?oc=5",
+      "label": "Teachers’ Role in the Age of Artificial Intelligence",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNUUVOVkhuSDRwekFoZmdIVWN2NVRDTDltalFyWjkxSzBuT0pkVW81aC0wUmZ6aWZSdVhtTlhWZEtld3hLQ1I2STVhR1dxUWdyVGluazBPNXZYZjdHc2YySElrVlY1NlZwd05hWTJHdWNtWFR3TGhHTnlfOUY5T2dQU3gxVHRtdGM?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOLVNCSk5aeVZaM3Y5X3FPNlVVSnFnb3NpUUZFVjhhNEFDdGRlVEhHYnJRbl9JbVR6eUU2dG1FVGMxMmpwTi1WNjR0OGlrc2ZkRmZRODB6ZEFxdjAtLWQ0c1RZc1hyZzNtRzhQUzgtZzU3blVMWUNhVV80SXNBZnZnQ1k3UmpiSmkwRVlYVjFhVG14cHBBVmRRS1R2cnM5ejRJSFR4TndyMHhRMzQ1bXYweWIzMkxJdWFHYlBEeEQtZw?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNUUVOVkhuSDRwekFoZmdIVWN2NVRDTDltalFyWjkxSzBuT0pkVW81aC0wUmZ6aWZSdVhtTlhWZEtld3hLQ1I2STVhR1dxUWdyVGluazBPNXZYZjdHc2YySElrVlY1NlZwd05hWTJHdWNtWFR3TGhHTnlfOUY5T2dQU3gxVHRtdGM?oc=5&hl=en-US&gl=US&ceid=US:en"
     }
   ]
 }
