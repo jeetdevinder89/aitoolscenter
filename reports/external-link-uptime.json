@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T14:40:56.336Z",
+  "generatedAt": "2026-09-21T14:47:39.722Z",
   "timeoutMs": 6000,
   "retries": 2,
   "concurrency": 8,
@@ -7,6 +7,16 @@
   "healthy": 84,
   "failed": 24,
   "failures": [
+    {
+      "source": "tool",
+      "label": "ChatGPT",
+      "url": "https://chatgpt.com/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
     {
       "source": "tool",
       "label": "Claude",
@@ -129,16 +139,6 @@
     },
     {
       "source": "tool",
-      "label": "Codeium",
-      "url": "https://codeium.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 429"
-    },
-    {
-      "source": "tool",
       "label": "Phind",
       "url": "https://www.phind.com/",
       "healthy": false,
@@ -253,11 +253,11 @@
       "source": "tool",
       "label": "ChatGPT",
       "url": "https://chatgpt.com/",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
       "attempts": 3,
-      "finalUrl": "https://chatgpt.com/"
+      "error": "HTTP 403"
     },
     {
       "source": "tool",
@@ -793,11 +793,11 @@
       "source": "tool",
       "label": "Codeium",
       "url": "https://codeium.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 429"
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://devin.ai/desktop"
     },
     {
       "source": "tool",
@@ -1251,83 +1251,83 @@
     },
     {
       "source": "news",
-      "label": "What are the five pros and cons of artificial intelligence?",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPUkJUcjZydEhPb3Itel9PUVFhWFpZcm5GRE1UYUhQQWxRYjdLbmp0RTg4T050Q0N3UGtral9HSFEzc2NXcWFnd3FwOUhPS0tpc0k4cXFZOHJuWHJ1TUYzN1ItMUNxMGRDbDNiMlZYV205eERMTk9uUjg3NzJleUdYOG0zSEIzU2RHTDZCRjROMU9qZW14MXh1SnU1MlFrWkkt0gGmAUFVX3lxTE1PXy1fNFdzYUxKLUVpWWN0RjhGaEp4ZnJXOFVEOGZ6RkxYb0NKUDR5SkliWmZTSXpYR3U1RFdVc0ZPM0FuVll2cF9lbnRpcTN5ZWVWbm1mTVdobklyaVlqUGdRSlFaMEg5SVNTa1AyR25HN0pOUHptdnVmY01JQmRDZUxUbTV1OXl1Z2JjRDI5UXBRR1N5MzJqZWRHd1gxN1ZZZ1U2cHc?oc=5",
+      "label": "Companies adopting agentic AI risk choosing easier-to-approve tools over more capable ones",
+      "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxNR1BEc0RsaElXUHBpSFR2UW1vekwtWmVvNnlMTS1nVmhGaWJIaVhQT3IxRFZtc1JKZDdqVko4clNVWDZLUVN1TW1mM3hSY29LRXNCLVBEc295b3FMQnFYWVNQWEQtVWdGdzZscTVNSmNrekdEQlFNaGVYandKZVowLVgtQnk1R0tkbmxTcHFsLVM1LUozYTBBRGZkUUlPUjJibXcyMXlpclUzaFU4ejJUeWhfRXpFWmdnVWpZakdLVkFkaDhSTHhLNzRRNE9ZZDB1bG96SS1XN2VIRGx4c0FETGhXVS1POEFlYU44Qm01Umw2LWpLSElzZnEwTGtuWDDSAYQCQVVfeXFMT3JLQ2lqQWxIdldjcGhVc0QyZ25Bd0s1YzJiS3FFU3FiQlgxd3ZxNDN5TzM4Q0NhOVJEWVMtT1FDUjIyY0Zmck1VZVB4UUh4aEsyV3dLdmxVd2tuMnRzNTZONTg0UDJfQ3lVLU5VWFVpQm8wTUNkWlFxdXhiQzdtV2Y1NkxjMENOVnViczVqUW1RNUhldkEwVmt6VjBxTm9nMERORmxnaEpJd2FQaElrVGhzWHJLdUR0NXZOb2pmcUowOU9RZUJQQzJBZDM3SklybG5tS0Q4OWpZdWYzUGVvLXlyYllpQjZ0ODVHNnF2Ym53amV6WHFvMjhQMW9Ycks4Ykt4TFM?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPUkJUcjZydEhPb3Itel9PUVFhWFpZcm5GRE1UYUhQQWxRYjdLbmp0RTg4T050Q0N3UGtral9HSFEzc2NXcWFnd3FwOUhPS0tpc0k4cXFZOHJuWHJ1TUYzN1ItMUNxMGRDbDNiMlZYV205eERMTk9uUjg3NzJleUdYOG0zSEIzU2RHTDZCRjROMU9qZW14MXh1SnU1MlFrWkkt0gGmAUFVX3lxTE1PXy1fNFdzYUxKLUVpWWN0RjhGaEp4ZnJXOFVEOGZ6RkxYb0NKUDR5SkliWmZTSXpYR3U1RFdVc0ZPM0FuVll2cF9lbnRpcTN5ZWVWbm1mTVdobklyaVlqUGdRSlFaMEg5SVNTa1AyR25HN0pOUHptdnVmY01JQmRDZUxUbTV1OXl1Z2JjRDI5UXBRR1N5MzJqZWRHd1gxN1ZZZ1U2cHc?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxNR1BEc0RsaElXUHBpSFR2UW1vekwtWmVvNnlMTS1nVmhGaWJIaVhQT3IxRFZtc1JKZDdqVko4clNVWDZLUVN1TW1mM3hSY29LRXNCLVBEc295b3FMQnFYWVNQWEQtVWdGdzZscTVNSmNrekdEQlFNaGVYandKZVowLVgtQnk1R0tkbmxTcHFsLVM1LUozYTBBRGZkUUlPUjJibXcyMXlpclUzaFU4ejJUeWhfRXpFWmdnVWpZakdLVkFkaDhSTHhLNzRRNE9ZZDB1bG96SS1XN2VIRGx4c0FETGhXVS1POEFlYU44Qm01Umw2LWpLSElzZnEwTGtuWDDSAYQCQVVfeXFMT3JLQ2lqQWxIdldjcGhVc0QyZ25Bd0s1YzJiS3FFU3FiQlgxd3ZxNDN5TzM4Q0NhOVJEWVMtT1FDUjIyY0Zmck1VZVB4UUh4aEsyV3dLdmxVd2tuMnRzNTZONTg0UDJfQ3lVLU5VWFVpQm8wTUNkWlFxdXhiQzdtV2Y1NkxjMENOVnViczVqUW1RNUhldkEwVmt6VjBxTm9nMERORmxnaEpJd2FQaElrVGhzWHJLdUR0NXZOb2pmcUowOU9RZUJQQzJBZDM3SklybG5tS0Q4OWpZdWYzUGVvLXlyYllpQjZ0ODVHNnF2Ym53amV6WHFvMjhQMW9Ycks4Ykt4TFM?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Your ’80s style AI photo is temporary: What happens to images you upload?",
-      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOS19sOGtORnVTV1lhMFlma1dRRnA2UkxMaVZ3UEFtY0t4NU9PaHpYVkpXRWZ3QkwzcjllZFl1OFJlTExhUmZaTzNuaF9HLUJONGNwejVFTWxtWFRMcmhLVFRyTVNYS0dsWUF3ZXllanFZMFJiNWUxM2VVYkNxZi1scWtvR3BjYkh1V0VFX2Zzc0hfRjdrQWpTWUNsR0V3NjQ4SUQwN3pkTDJjTXhndXllZDQ4WlVDSDMwYVo4WlVQRELSAccBQVVfeXFMUDRKbXUwQUlGemZRRWFMR0JkSGc2N2VRc0c1eDNyZ3ZMa25QeXQzaXBfLUxDcXRSMVB2bnFuZ09lMUdXRlRTYTE0TUFpR0hiZGZSeTdsMmJQYnRSMWZHemlSa2Y0QUV0TzRwVDZFY3NXTnhjLUJKTUl4emUtSlF0ZDg2a3VGSC05OF8xcDZsekNKcWE0S20zZ1oyQ1J0UmdqUkpUaHdKcm9YLUFqWkxNcW1JbU1XWmtvdnVkVmM1RDBSWi1zSTBpRQ?oc=5",
+      "label": "How to Improve Visibility Across Your Enterprise AI Ecosystem",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOTWVqU2VsRXV6NXBMZXliWW4xYWllRDFqU2xNVHk5VmRGMXhCU1dEejUybkNQY3Fjd3E1R2h2OXNLQmw3SF9rLXF4d3FIUUZ4UTkzM2tZdVhGdWFaSE9OTFF3QXFxeGlUWXlUVDg3dlIzWWFrMEdiOXdzNHBmRTdLXzhOVlByQ096YWVBRExDLWs5eEV3aTU5N2FSZG9vNTFSbkIyWUpRYnE0WG5DYzJ0Rw?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOS19sOGtORnVTV1lhMFlma1dRRnA2UkxMaVZ3UEFtY0t4NU9PaHpYVkpXRWZ3QkwzcjllZFl1OFJlTExhUmZaTzNuaF9HLUJONGNwejVFTWxtWFRMcmhLVFRyTVNYS0dsWUF3ZXllanFZMFJiNWUxM2VVYkNxZi1scWtvR3BjYkh1V0VFX2Zzc0hfRjdrQWpTWUNsR0V3NjQ4SUQwN3pkTDJjTXhndXllZDQ4WlVDSDMwYVo4WlVQRELSAccBQVVfeXFMUDRKbXUwQUlGemZRRWFMR0JkSGc2N2VRc0c1eDNyZ3ZMa25QeXQzaXBfLUxDcXRSMVB2bnFuZ09lMUdXRlRTYTE0TUFpR0hiZGZSeTdsMmJQYnRSMWZHemlSa2Y0QUV0TzRwVDZFY3NXTnhjLUJKTUl4emUtSlF0ZDg2a3VGSC05OF8xcDZsekNKcWE0S20zZ1oyQ1J0UmdqUkpUaHdKcm9YLUFqWkxNcW1JbU1XWmtvdnVkVmM1RDBSWi1zSTBpRQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOTWVqU2VsRXV6NXBMZXliWW4xYWllRDFqU2xNVHk5VmRGMXhCU1dEejUybkNQY3Fjd3E1R2h2OXNLQmw3SF9rLXF4d3FIUUZ4UTkzM2tZdVhGdWFaSE9OTFF3QXFxeGlUWXlUVDg3dlIzWWFrMEdiOXdzNHBmRTdLXzhOVlByQ096YWVBRExDLWs5eEV3aTU5N2FSZG9vNTFSbkIyWUpRYnE0WG5DYzJ0Rw?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "UNESCO launches new tools to reinforce ethical AI Governance at global forum in Riyadh, Saudi Arabia",
-      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQcFdhalJ5OUpQenQ2Y080RUdhT3h1N0M1ZGJGUEEzTEpaXzJvTGZOZUMxNFdfZHNPYlBMUV9iYnpXcEtRdnlQcnNja0NTbWpOWVBSTUtoUndRYmt2U196eTBFYXpHQ3R6SXdUenJHcWFCSGZXeXNKZWFxWkszVG5oLTk4ZFNEOUhiYTBndzlRYnI4V0Zmbi1vV0ZCRGFFYW8tb0U1MG0tMmhWOFBGMkp6Q3ZnVlFfeGZ6X0JlLUJreXFOZ1E?oc=5",
+      "label": "Tech Companies’ Staff Knew Their AI Tools Posed ‘Existential Threat’ to Publishers",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxONWFIN0JYR0pabEhDUmFCM2RHblloV0dMZG9YX250bFlEdUFPMGp1VE9zXzVjdjJqUjdOUHNHZTFIdXZGMVA5NFFPUHhIQ3VPWXJwV1JfRUdsb2d6ZC1adkFuR3pEVEVDOXh0Yi1lUndnZm9ZV2R5SXczTmFwamxQQ2xBRy1JUFZDaDllbEhDVnRXNmIxNUdIRHd6QmxSd0h5SDRheWY0ckNJSGFyV2NwRGo5ZjR6YTA?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQcFdhalJ5OUpQenQ2Y080RUdhT3h1N0M1ZGJGUEEzTEpaXzJvTGZOZUMxNFdfZHNPYlBMUV9iYnpXcEtRdnlQcnNja0NTbWpOWVBSTUtoUndRYmt2U196eTBFYXpHQ3R6SXdUenJHcWFCSGZXeXNKZWFxWkszVG5oLTk4ZFNEOUhiYTBndzlRYnI4V0Zmbi1vV0ZCRGFFYW8tb0U1MG0tMmhWOFBGMkp6Q3ZnVlFfeGZ6X0JlLUJreXFOZ1E?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMitwFBVV95cUxONWFIN0JYR0pabEhDUmFCM2RHblloV0dMZG9YX250bFlEdUFPMGp1VE9zXzVjdjJqUjdOUHNHZTFIdXZGMVA5NFFPUHhIQ3VPWXJwV1JfRUdsb2d6ZC1adkFuR3pEVEVDOXh0Yi1lUndnZm9ZV2R5SXczTmFwamxQQ2xBRy1JUFZDaDllbEhDVnRXNmIxNUdIRHd6QmxSd0h5SDRheWY0ckNJSGFyV2NwRGo5ZjR6YTA?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "AI tools are making ‘experts’ out of stock traders in mainland China, Hong Kong",
-      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPdGwzYjhERTl4eVJhekE3c1UyOVViRFZxQ3plYVNyeXFpcHVhaXhnemVlYzVLMW5VdjAzemdKU19tUHA3bkNoNXhhMFZYRVR0Vk5UUHNFMzFEdkZ4NzRXQU45cFBhM0FFV0pfakpFOTVpUjlJRGdYNnNra3FCWlNpV2w5M0JucmpfLWNDMWtRRV91VkZ4SjhBdXpYaV8zQmFwUzViV3lRR2ZpaDBGUHlVMlpKYWJOMXdEZ282b014ZmpKbFhieFHSAcYBQVVfeXFMT0VhZkg2by1Ibk94SnhPaGpYVGdyekdtV1NLMjloc3ZNbTFqdHE2dEpVU2NjYks0bkdwc08tNno1OXRjU2V0cTNyLXhoVkEtejRreVRhUUNqUk9ONTlRSTI5b3FLQ2FfZWZybmlONnd2dmhSVTRfbVJyODhyaXZXR21MUVg3VFZva0JkYllGbldLZHF3cElZX3dRbmllamVmX3Y5di1KM0p5ZXQ3R2pZVklaWFVLcGxXSWZiZmFUVWRESF9HYWJR?oc=5",
+      "label": "Turning displays of artificial intelligence into everyday productivity",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5qeC1wamZqelFoRWF0akZuZlc4Mm4wVW1TVTBZM3Vjb09qQmlJX3Awd0NhdThlcmFPLV9hcHFFVWhHZ0tiZ0h1SXhxaEQ5eW5FdVo1UDFTNE5UN3BQN3djUnFRY3dtbTV6SDJsTmt6OTc4M2I0UXpfSGMyem1EZw?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPdGwzYjhERTl4eVJhekE3c1UyOVViRFZxQ3plYVNyeXFpcHVhaXhnemVlYzVLMW5VdjAzemdKU19tUHA3bkNoNXhhMFZYRVR0Vk5UUHNFMzFEdkZ4NzRXQU45cFBhM0FFV0pfakpFOTVpUjlJRGdYNnNra3FCWlNpV2w5M0JucmpfLWNDMWtRRV91VkZ4SjhBdXpYaV8zQmFwUzViV3lRR2ZpaDBGUHlVMlpKYWJOMXdEZ282b014ZmpKbFhieFHSAcYBQVVfeXFMT0VhZkg2by1Ibk94SnhPaGpYVGdyekdtV1NLMjloc3ZNbTFqdHE2dEpVU2NjYks0bkdwc08tNno1OXRjU2V0cTNyLXhoVkEtejRreVRhUUNqUk9ONTlRSTI5b3FLQ2FfZWZybmlONnd2dmhSVTRfbVJyODhyaXZXR21MUVg3VFZva0JkYllGbldLZHF3cElZX3dRbmllamVmX3Y5di1KM0p5ZXQ3R2pZVklaWFVLcGxXSWZiZmFUVWRESF9HYWJR?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5qeC1wamZqelFoRWF0akZuZlc4Mm4wVW1TVTBZM3Vjb09qQmlJX3Awd0NhdThlcmFPLV9hcHFFVWhHZ0tiZ0h1SXhxaEQ5eW5FdVo1UDFTNE5UN3BQN3djUnFRY3dtbTV6SDJsTmt6OTc4M2I0UXpfSGMyem1EZw?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Department of War Seeks AI Tools to Track Space & Missile Threats",
-      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9JRVYtaWt1M3YtYnZaaGhHSlBZVnlwTzR4WnZacTRkeUZEM3IzcU9MazRwQTFHV2s4Mkl0Ymw5VFJoa3FfY09hTkNHcnhvdWZfZ0lfalhFQURZZGVsSk02bUNOZVdiSzdNbnJLRm9RQXdPem9LWjhhYmVhLVc?oc=5",
+      "label": "Bengaluru Techie With 15 Years Experience Says AI Made Them Feel 'Substandard'",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPcnpCN1J5NmhDTUN1QW5aMWZCbDJhUklUc0gwSVplNVhReWdtU1NmcnZ6X003TngwTUZ0Q3Njcy16V1N0elk3ZV9BLVJNV0JTX1ByTTduTS1Rb0lBSUxSR3JzNUhfbE5EejhtdFZ0S1E2eG5BMW5jVVcxblRkRVMxQ251NUU2OTZyRVE4Y3AwSG5IZG1uMDRzNk16Vjd5Q2ZybnkwX2xId1JtOEFvMzY4OFFvZkfSAbwBQVVfeXFMUEk2aVZoMTdycFJKRXdsa3IxOEJLcVlScFB3UkswN0pydVJKZGNDMWN0ZG8wcXd0MGREM3NiZXBFRkxpN2tQeHRhT2xFSVA2ZnBQaWNEb0RBWEJ2ZHcwT2ZGNzNfQXV2c1N6b2wtd0xLcWZINXJvS2M1TXp5ZVNKMTNRNnh4S2R6ZnN6ZF90djFmMk5sdmpfQUhtWmlKSzRpM3g4bHppckQ0cGg5blRxQ0RYaklIZ2l0X1VGemg?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9JRVYtaWt1M3YtYnZaaGhHSlBZVnlwTzR4WnZacTRkeUZEM3IzcU9MazRwQTFHV2s4Mkl0Ymw5VFJoa3FfY09hTkNHcnhvdWZfZ0lfalhFQURZZGVsSk02bUNOZVdiSzdNbnJLRm9RQXdPem9LWjhhYmVhLVc?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPcnpCN1J5NmhDTUN1QW5aMWZCbDJhUklUc0gwSVplNVhReWdtU1NmcnZ6X003TngwTUZ0Q3Njcy16V1N0elk3ZV9BLVJNV0JTX1ByTTduTS1Rb0lBSUxSR3JzNUhfbE5EejhtdFZ0S1E2eG5BMW5jVVcxblRkRVMxQ251NUU2OTZyRVE4Y3AwSG5IZG1uMDRzNk16Vjd5Q2ZybnkwX2xId1JtOEFvMzY4OFFvZkfSAbwBQVVfeXFMUEk2aVZoMTdycFJKRXdsa3IxOEJLcVlScFB3UkswN0pydVJKZGNDMWN0ZG8wcXd0MGREM3NiZXBFRkxpN2tQeHRhT2xFSVA2ZnBQaWNEb0RBWEJ2ZHcwT2ZGNzNfQXV2c1N6b2wtd0xLcWZINXJvS2M1TXp5ZVNKMTNRNnh4S2R6ZnN6ZF90djFmMk5sdmpfQUhtWmlKSzRpM3g4bHppckQ0cGg5blRxQ0RYaklIZ2l0X1VGemg?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Meta highlights creation tools for AI glasses",
-      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPY1FhdUxmZTJPSFFMWEk4eHlTUm91dkRzUWhtYnV1Vy1WbWhGekpvVk9sZlBTTk1zSlFCYVp4dzNtN1JjbjQwSkE1MklXS0U5LVVSTFN4Rnk0YjhzRFhDVkhpNW84UGVkdlhVWnBQOW52Q2hvay1pMlN5ZzdJU2hRMjZuWWpjdlAteHJDSTRjNzlNNTBWUlE?oc=5",
+      "label": "Compare Top 21 Manufacturing AI Solutions & Software",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE41V0llMHJ5d0Z1RjB6SlBRQ1oxbm9ZRnVKa0Z0U0NlTFVTcVlsQ0VXQUp2MmlzQTJUMXRONTVJa1owN2ZQX3NNd2JsVFd5UUR5N3RSczJWMkpObnMxMHc?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPY1FhdUxmZTJPSFFMWEk4eHlTUm91dkRzUWhtYnV1Vy1WbWhGekpvVk9sZlBTTk1zSlFCYVp4dzNtN1JjbjQwSkE1MklXS0U5LVVSTFN4Rnk0YjhzRFhDVkhpNW84UGVkdlhVWnBQOW52Q2hvay1pMlN5ZzdJU2hRMjZuWWpjdlAteHJDSTRjNzlNNTBWUlE?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE41V0llMHJ5d0Z1RjB6SlBRQ1oxbm9ZRnVKa0Z0U0NlTFVTcVlsQ0VXQUp2MmlzQTJUMXRONTVJa1owN2ZQX3NNd2JsVFd5UUR5N3RSczJWMkpObnMxMHc?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Warning from within the scientific community: 25 mathematicians sound the alarm over the artificial intelligence race - صوت الإمارات",
-      "url": "https://news.google.com/rss/articles/CBMijAJBVV95cUxNdzdjZDlmaWF3NFNuVHFFekhCbFo5cjYxa2xpX1dfczNELXB4N0Z0dlY0S1FjNVpIbGs5ZVZOdnVyUklJZTFMQTVFNTdMZms2YjFQanpDbWpnRHFXRDVUM0dZZkh2YXBMUjBRSnQ3SG1NeHNrMG81SVR0ekdnZmh1N3J1SVJnUzB2V3QzTWlYWm5fYnE0bUNQMDlGWmhlaFFCd2preER1dEhOV3BYanpDS0JKTmVlOUtHNFlZYVF4SnJ5d0ZsWHlVck1hano1RExMdnpwZHp5VHNLLWxWbU42ZkRNd2lSSFhfZlJBeUtiVW5DOWdQT280OFlyTHV4dEh6UjY2am1LSXlTVW93?oc=5",
+      "label": "AI adoption in Europe is being held back by tool access - I by IMD",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOalZ0XzJDOGVoWDRfckctNFl1TXl0ZWdveFc3Mm5wU203c3YxNEFqUEs4M0N5WFJ0X29IQTUtd0QyNlNac09yMEtRNk5wX1FSSEdlMVdxNlBtYUV3V2hGcWFvZUszc2RFYWY3SkZfSUR2REFmYmhMRGxCRDUxOGhsQVlrRngwaWI1aVg1Nw?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMijAJBVV95cUxNdzdjZDlmaWF3NFNuVHFFekhCbFo5cjYxa2xpX1dfczNELXB4N0Z0dlY0S1FjNVpIbGs5ZVZOdnVyUklJZTFMQTVFNTdMZms2YjFQanpDbWpnRHFXRDVUM0dZZkh2YXBMUjBRSnQ3SG1NeHNrMG81SVR0ekdnZmh1N3J1SVJnUzB2V3QzTWlYWm5fYnE0bUNQMDlGWmhlaFFCd2preER1dEhOV3BYanpDS0JKTmVlOUtHNFlZYVF4SnJ5d0ZsWHlVck1hano1RExMdnpwZHp5VHNLLWxWbU42ZkRNd2lSSFhfZlJBeUtiVW5DOWdQT280OFlyTHV4dEh6UjY2am1LSXlTVW93?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOalZ0XzJDOGVoWDRfckctNFl1TXl0ZWdveFc3Mm5wU203c3YxNEFqUEs4M0N5WFJ0X29IQTUtd0QyNlNac09yMEtRNk5wX1FSSEdlMVdxNlBtYUV3V2hGcWFvZUszc2RFYWY3SkZfSUR2REFmYmhMRGxCRDUxOGhsQVlrRngwaWI1aVg1Nw?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Teachers’ Role in the Age of Artificial Intelligence",
-      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNUUVOVkhuSDRwekFoZmdIVWN2NVRDTDltalFyWjkxSzBuT0pkVW81aC0wUmZ6aWZSdVhtTlhWZEtld3hLQ1I2STVhR1dxUWdyVGluazBPNXZYZjdHc2YySElrVlY1NlZwd05hWTJHdWNtWFR3TGhHTnlfOUY5T2dQU3gxVHRtdGM?oc=5",
+      "label": "Accountex Manchester 2026: Why better data, not new tools, is the real AI competitive advantage",
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOdFk0clI4VzR0c1VCOHUtZW5LX0ZrZUFoNEJJcEZ6NVVSazJ1Qy1OSlpIMUN5akxJUDZGQmdyOE9QSjNuM0ZjTkd5LUJnSzNIWm1ISTdVeHIzZF9RVURZVEdseU4tcWFmTmR2MTdubHdlNHVhNWsxd0pVbjlrcmtQZUh2dWNXMkZoQ0RIWEI3NV85WDBLWTJhT09PMzBBVjVmVnEzcHNOaVM5dFluZDc3VElhamtjMEx1RnNiWkgwcVhJZEpuaTBFNmtwbw?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNUUVOVkhuSDRwekFoZmdIVWN2NVRDTDltalFyWjkxSzBuT0pkVW81aC0wUmZ6aWZSdVhtTlhWZEtld3hLQ1I2STVhR1dxUWdyVGluazBPNXZYZjdHc2YySElrVlY1NlZwd05hWTJHdWNtWFR3TGhHTnlfOUY5T2dQU3gxVHRtdGM?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOdFk0clI4VzR0c1VCOHUtZW5LX0ZrZUFoNEJJcEZ6NVVSazJ1Qy1OSlpIMUN5akxJUDZGQmdyOE9QSjNuM0ZjTkd5LUJnSzNIWm1ISTdVeHIzZF9RVURZVEdseU4tcWFmTmR2MTdubHdlNHVhNWsxd0pVbjlrcmtQZUh2dWNXMkZoQ0RIWEI3NV85WDBLWTJhT09PMzBBVjVmVnEzcHNOaVM5dFluZDc3VElhamtjMEx1RnNiWkgwcVhJZEpuaTBFNmtwbw?oc=5&hl=en-US&gl=US&ceid=US:en"
     }
   ]
 }
