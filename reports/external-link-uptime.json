@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-28T16:23:52.673Z",
+  "generatedAt": "2026-10-05T16:43:56.019Z",
   "timeoutMs": 6000,
   "retries": 2,
   "concurrency": 8,
   "total": 108,
-  "healthy": 83,
-  "failed": 25,
+  "healthy": 85,
+  "failed": 23,
   "failures": [
     {
       "source": "tool",
@@ -89,16 +89,6 @@
     },
     {
       "source": "tool",
-      "label": "Canva AI",
-      "url": "https://www.canva.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
-    },
-    {
-      "source": "tool",
       "label": "NightCafe",
       "url": "https://nightcafe.studio/",
       "healthy": false,
@@ -116,16 +106,6 @@
       "method": "HEAD/GET",
       "attempts": 3,
       "error": "HTTP 403"
-    },
-    {
-      "source": "tool",
-      "label": "Lexica",
-      "url": "https://lexica.art/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 500"
     },
     {
       "source": "tool",
@@ -513,11 +493,11 @@
       "source": "tool",
       "label": "Canva AI",
       "url": "https://www.canva.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.canva.com/"
     },
     {
       "source": "tool",
@@ -613,11 +593,11 @@
       "source": "tool",
       "label": "Lexica",
       "url": "https://lexica.art/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 500"
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://lexica.art/"
     },
     {
       "source": "tool",
@@ -885,9 +865,9 @@
       "url": "https://copilot.microsoft.com/",
       "healthy": true,
       "status": 200,
-      "method": "HEAD",
+      "method": "GET",
       "attempts": 1,
-      "finalUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=4765445b-32c6-49b0-83e6-1d93765276ca&redirect_uri=https%3A%2F%2Fcopilot.com%2Flandingv2&response_type=code%20id_token&scope=openid%20profile%20https%3A%2F%2Fwww.office.com%2Fv2%2FOfficeHome.All&response_mode=form_post&nonce=639262094116402769.YTk0MzM1MTAtZjcyMS00Y2U4LWI2OWYtZDI2ZTE0NjcwZjA4ZmJhZWVjZTgtN2E5NC00YWQyLThmNjktNTBlMWFiNzliMTY5&ui_locales=en-US&mkt=en-US&client-request-id=e51b6809-43a3-4ea9-a042-c51174de5a76&siwa=1&siwg=1&state=OMK_BdORHbJoaOAfGP7BUwt7IOVr9MZ34lccT5CYYTus5GGiWMYYZSFr9Ax1utLu8eAmZpT-W1GdQWBTmkBtHZBLCL3rPGAWLMuZIh0R0TyHgW4Kl3yev14kY41nxFBXEuZenvkeOpcgTFEMVRFh50HdwmNI7uaMhKlOjKGzL2DXVGwV-vxviKP-l_LdPizkgKGTOT3nlxht4gsQBXT1PHZfVdCwMc9IYP3ONQIj1sve3ONK609GZ3772NpWH5CYSwGhibzf1cHxvRNCBHOlBaKhOw_sZWps5sPEKq2CHwOZCAw5BGvDhY5D4l1TEwASPdBa-CaCMJ6WpFVSgA8MYYRCg7xFS3nUTbM7eOFcK36QZEHeN7IxN_BubJWimvW6BopZw0saRIOhZpILJWU4jmFDngb0XKujwHnuKShiEHBgnnk79k-2Qt8rEwNEsUZkNUltIJBLavvPmcX6MB_7NT5g096vgrwtIwHNeZD24mWzUb1szpYD0QiSr-tY9Asqk6uui00FdprK28Uo1uKvhjiuWtI9iIP4vL5gdlsD9D8&x-client-SKU=ID_NET8_0&x-client-ver=8.16.0.0"
+      "finalUrl": "https://copilot.com/?fromcode=cmmlf487uwy&sessionId=954ab36f-b948-493b-92e6-6ec46f8ccfa3&"
     },
     {
       "source": "tool",
@@ -915,9 +895,9 @@
       "url": "https://www.bing.com/chat",
       "healthy": true,
       "status": 200,
-      "method": "HEAD",
+      "method": "GET",
       "attempts": 1,
-      "finalUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=4765445b-32c6-49b0-83e6-1d93765276ca&redirect_uri=https%3A%2F%2Fcopilot.com%2Flandingv2&response_type=code%20id_token&scope=openid%20profile%20https%3A%2F%2Fwww.office.com%2Fv2%2FOfficeHome.All&response_mode=form_post&nonce=639262094120128684.Mjc0NWUwMDMtODY3Yy00NzBkLWJkNGQtZDQ5NzVjZjk5NjAxMjY2MGRlMzMtMmQ1OS00NjI4LWFlYjQtZWIzNmRiNDA5NGFm&ui_locales=en-US&mkt=en-US&client-request-id=84091714-bc98-474f-977f-cf20c70afd16&siwa=1&siwg=1&state=ZWuHKKhY4fQdjn2o_LHZrta5-sb-KXVGSWJieyTjvyZah52mcYo4x9TNwM1VtZSQdzEPp_Z4L3FgKJeSRadbnFNBwis5ypOneZY0-5Y3jREJ63GmSozaw-X9rLPunRJhCqp5b539A8tYzLCcN2Gz17sCC6vPjHcfWIlIP4IjglvKpdac5t6ZMAJjJEq3fQn8z1KNvuBfjYTgB-KvKnBfqQEoD4UqhzXSUQxBO9_FuK4ybc7cFfMfYyDD9B2hcIuvukHyHEW55I_0QYrZxpF3n2V_HyIxsLqbXH8jGfN9JgF8YlF7FimEwRC2Dgw2RpmodpoWsx7U6owDlguYmG-5M51MRNqGJCEzGWcG5NeqT4xgrGr5tdqn9XrFWYtIJQyAkx_FMoK_ZbKeY2ISF60P1wZ9tU-JRG1YExqYWNw-3ZSBazSYm0KOH0-cWreNC79J-8JlXQiYn3TLKYUZLxkDW4_BYfPMjmxHKqZY4Y4lL6cCy5bZhtJu4x0V56WUj6FWAsw8xLZaz2QwySttJSLa2QBFJjjvXQtywPsouK41nmI&x-client-SKU=ID_NET8_0&x-client-ver=8.16.0.0"
+      "finalUrl": "https://copilot.com/?fromcode=cmmlf487uwy&sessionId=d053e46f-8d39-4971-91c0-6e224bccdbe8&"
     },
     {
       "source": "tool",
@@ -1261,6 +1241,76 @@
     },
     {
       "source": "news",
+      "label": "Commentary: Artificial intelligence in the classroom",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNeXFlVjlFZjllRFpuSGJsRkR0a3BjQmdqbnRnNUlHTG9GNHE0alZJcXh0THlKYmNfUngtV3lzUkxiV2RTY0NBVUlIaktwdDhaLW95b3N6cnIxTDE3NEJhYzdyTExVOV9FdXI3cnYwUGdYaUllQkpob19ZZWtuV3V0RlVuVl9JZGxseWdwcU0yRE5HQQ?oc=5",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNeXFlVjlFZjllRFpuSGJsRkR0a3BjQmdqbnRnNUlHTG9GNHE0alZJcXh0THlKYmNfUngtV3lzUkxiV2RTY0NBVUlIaktwdDhaLW95b3N6cnIxTDE3NEJhYzdyTExVOV9FdXI3cnYwUGdYaUllQkpob19ZZWtuV3V0RlVuVl9JZGxseWdwcU0yRE5HQQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+    },
+    {
+      "source": "news",
+      "label": "AI Tools Raise Privacy Questions at Natrona County Schools",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNZWNMVlJ1cEFEeHNqUGFXN0NCZ29aTHVXLTlVMGdrbFRBbml1RG92STVBaVdiZlhUTmRWVDg2TGswSHpKYVNDaVNfSlRETGNHaVgzd2ZXN0ZNNnFBaUdKd3d3Sm9RMVg4UFZla1RpdHVoS0pfT1NuZkNLMEUxcmdidHkwM2JJZHNLWnlBbVRfTWlJVDlFMnkwQlFjYjhiZw?oc=5",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://news.google.com/rss/articles/CBMingFBVV95cUxNZWNMVlJ1cEFEeHNqUGFXN0NCZ29aTHVXLTlVMGdrbFRBbml1RG92STVBaVdiZlhUTmRWVDg2TGswSHpKYVNDaVNfSlRETGNHaVgzd2ZXN0ZNNnFBaUdKd3d3Sm9RMVg4UFZla1RpdHVoS0pfT1NuZkNLMEUxcmdidHkwM2JJZHNLWnlBbVRfTWlJVDlFMnkwQlFjYjhiZw?oc=5&hl=en-US&gl=US&ceid=US:en"
+    },
+    {
+      "source": "news",
+      "label": "AI Tools Suspected in Korea’s Shinhan Bank Hack, Yonhap Says",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQc2k2UjhiRThSdW1BWXJUeVExR2QwaE4wNGlYQzdXSWUwYlFvdEFsSEg0NWp1UDd2Z3Jja3VqVklaN3BBSjlodTZxSlFRZlAzbDE3T2FZd0xaSElCSmhPSDB3MVhUX0FldDBPVjdkNkF0YnBZbHUyczhuRlAtOVFaQnJWR3c4a3lLMXM5NTAxV1pQbC1qdHlxU2VGOV9SclpIYjlUTXZ3RzduM3VmbUxv?oc=5",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQc2k2UjhiRThSdW1BWXJUeVExR2QwaE4wNGlYQzdXSWUwYlFvdEFsSEg0NWp1UDd2Z3Jja3VqVklaN3BBSjlodTZxSlFRZlAzbDE3T2FZd0xaSElCSmhPSDB3MVhUX0FldDBPVjdkNkF0YnBZbHUyczhuRlAtOVFaQnJWR3c4a3lLMXM5NTAxV1pQbC1qdHlxU2VGOV9SclpIYjlUTXZ3RzduM3VmbUxv?oc=5&hl=en-US&gl=US&ceid=US:en"
+    },
+    {
+      "source": "news",
+      "label": "CoreWeave brings Nvidia Vera Rubin, AI tools to its cloud services",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPbmYzcXJwVUZ6RWptRkNtZWxNSDh3YWMyMjRmb3VzUld3VzdYTTZHTDl4Y2dpcV9qYkEybkJNWTJrSG5HbkV6TlhJVFo3c0Fsa0JwVnNxNHVvT1BIbWJmcndNMndYekVybWlPSThNZ0VjQXR3M095SW5VQWVnRlZtMUhkVU54QXFfT2hPbU0xenduQmhucmhUbWVKXzdoTlVlazMwSGRpbFJBOVZvV1JSRzByaGZ6UQ?oc=5",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPbmYzcXJwVUZ6RWptRkNtZWxNSDh3YWMyMjRmb3VzUld3VzdYTTZHTDl4Y2dpcV9qYkEybkJNWTJrSG5HbkV6TlhJVFo3c0Fsa0JwVnNxNHVvT1BIbWJmcndNMndYekVybWlPSThNZ0VjQXR3M095SW5VQWVnRlZtMUhkVU54QXFfT2hPbU0xenduQmhucmhUbWVKXzdoTlVlazMwSGRpbFJBOVZvV1JSRzByaGZ6UQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+    },
+    {
+      "source": "news",
+      "label": "AI Tools Suspected in Korea’s Shinhan Bank Hack, Yonhap News Reports",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBxd2daZmhsV3pKV3BGb1NFbjNuTGlBZktGcGRLT2FOSkRMLVR5MzEzeEZ1anlzc0JsbHloWWdUVDZHM1hsS2tLMjFSTTdmbUs4OVMtdzF2YkRlWG1GbHVyQjNtVkhuNlJqOC1RbGQycDdPTDgxOHBZLUJRNFczZw?oc=5",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBxd2daZmhsV3pKV3BGb1NFbjNuTGlBZktGcGRLT2FOSkRMLVR5MzEzeEZ1anlzc0JsbHloWWdUVDZHM1hsS2tLMjFSTTdmbUs4OVMtdzF2YkRlWG1GbHVyQjNtVkhuNlJqOC1RbGQycDdPTDgxOHBZLUJRNFczZw?oc=5&hl=en-US&gl=US&ceid=US:en"
+    },
+    {
+      "source": "news",
+      "label": "Teaching Cyber Threats Differently: An AI-Powered Gamified Approach",
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNelpZamIzbS1ud0ZvUkZHbGVJV1RUUFAtbkVrNGVTTUd6emFDbkR6Yl9yYVFPaVBPYzk2S1JQd0FCTEhfRWxZaks1VHoyZnowZVp4cjZMRXktZkJxNWo1VDlySlViTXJSemN3cnhpak5GNDFfWGl5OHRCZWRWYVVJbTV6UXRkN2FFbUktY1Awa3hkdnMteWp5ekI1RDN5Rl9pd05WUnVtWUl4eUZhMzJKelk3WWY1NHlEWVRsdzM0N3pWTllQSTBTLVdXdU5sYWNZM0ZEVWJ3?oc=5",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNelpZamIzbS1ud0ZvUkZHbGVJV1RUUFAtbkVrNGVTTUd6emFDbkR6Yl9yYVFPaVBPYzk2S1JQd0FCTEhfRWxZaks1VHoyZnowZVp4cjZMRXktZkJxNWo1VDlySlViTXJSemN3cnhpak5GNDFfWGl5OHRCZWRWYVVJbTV6UXRkN2FFbUktY1Awa3hkdnMteWp5ekI1RDN5Rl9pd05WUnVtWUl4eUZhMzJKelk3WWY1NHlEWVRsdzM0N3pWTllQSTBTLVdXdU5sYWNZM0ZEVWJ3?oc=5&hl=en-US&gl=US&ceid=US:en"
+    },
+    {
+      "source": "news",
+      "label": "UCLA expands student AI tool access, prompting responsible use, learning concerns",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNTUdZZTk3YnBUQWhId3UtakVYanJXZ1hLb2RlbnRGZUoxV0dLa1pmVV9ROTI5Zlhnc3ZyQlNyamxwNS1DamthOWtZLXVrMlhzdkpNWWNTNERtLURzRE9NUVdXSjJyb216SjhrTVRJN3RfSEhTNE5aaXVCNzN6QUZtbjVUQVhReVJwaC1kYXo4MnFxZzl2Z3pGSnVteXFtellHOHZsbmdrQ1IxUzVrVWZVb29mWQ?oc=5",
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNTUdZZTk3YnBUQWhId3UtakVYanJXZ1hLb2RlbnRGZUoxV0dLa1pmVV9ROTI5Zlhnc3ZyQlNyamxwNS1DamthOWtZLXVrMlhzdkpNWWNTNERtLURzRE9NUVdXSjJyb216SjhrTVRJN3RfSEhTNE5aaXVCNzN6QUZtbjVUQVhReVJwaC1kYXo4MnFxZzl2Z3pGSnVteXFtellHOHZsbmdrQ1IxUzVrVWZVb29mWQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+    },
+    {
+      "source": "news",
       "label": "Best AI Tools for Career Development",
       "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFB2QzhkUlh2ZjBFYkhBMldZRXlhN2hiSGJ6OVVaNEhNdHJjclNsZ3NYVE1LQmw4YjRzanlZZ3NVVXQ3SHhMR0gwQThTcGE4YkVfLUdJdUpuVk03SXJmM2M5MTVURE90TWVNZ1E?oc=5",
       "healthy": true,
@@ -1268,76 +1318,6 @@
       "method": "HEAD",
       "attempts": 1,
       "finalUrl": "https://news.google.com/rss/articles/CBMiakFVX3lxTFB2QzhkUlh2ZjBFYkhBMldZRXlhN2hiSGJ6OVVaNEhNdHJjclNsZ3NYVE1LQmw4YjRzanlZZ3NVVXQ3SHhMR0gwQThTcGE4YkVfLUdJdUpuVk03SXJmM2M5MTVURE90TWVNZ1E?oc=5&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "source": "news",
-      "label": "Microsoft revamps Copilot into AI ‘super app’ with coding tools, always-on agent",
-      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPMTRYVHlfVGRuMktHT3NqU0VLU2RrNnFodTMwQ2Vld3hLTEZ4QmZjMXFyS3dNVjAxWmo5RG1KTHhzVm5mbHptWHIwSFVVeDk2WVdiOHhSa3JlTGdaZUNENERELTd3UTRxTE1EUFdiNnpNYzRXTFB4OGxxSzRtMlZGWnJDczZMR09WMklqR2tMLUZQd0JCT2wwUGJhM2taUk51ZkVjMXQ3RkxEbk5Vdm9VQXVtZlotcEVU0gG_AUFVX3lxTE1SOFRjTi1HR283TWpubWJIOU5FbzFxN21yZWhMMDlmaGxkdHlQMjNKQzc3V3dWR1NHaVJYZTVoMkFWTnhMaURFdGstWFlwVFp5eU12YzRQZ1ZQRTh2dFFETTlkYUFEVVUxSG1vdE1KUWd0MlFNLXRXM3dVVjZWODM2ejR3dXdHR2xiaWkzdTU4YkRfZU50Vl9mQzVoS0VKTjBxMGNpMzRaX2RHYnBYLVdvMjZDMHdNdnV3d2N1dkhF?oc=5",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPMTRYVHlfVGRuMktHT3NqU0VLU2RrNnFodTMwQ2Vld3hLTEZ4QmZjMXFyS3dNVjAxWmo5RG1KTHhzVm5mbHptWHIwSFVVeDk2WVdiOHhSa3JlTGdaZUNENERELTd3UTRxTE1EUFdiNnpNYzRXTFB4OGxxSzRtMlZGWnJDczZMR09WMklqR2tMLUZQd0JCT2wwUGJhM2taUk51ZkVjMXQ3RkxEbk5Vdm9VQXVtZlotcEVU0gG_AUFVX3lxTE1SOFRjTi1HR283TWpubWJIOU5FbzFxN21yZWhMMDlmaGxkdHlQMjNKQzc3V3dWR1NHaVJYZTVoMkFWTnhMaURFdGstWFlwVFp5eU12YzRQZ1ZQRTh2dFFETTlkYUFEVVUxSG1vdE1KUWd0MlFNLXRXM3dVVjZWODM2ejR3dXdHR2xiaWkzdTU4YkRfZU50Vl9mQzVoS0VKTjBxMGNpMzRaX2RHYnBYLVdvMjZDMHdNdnV3d2N1dkhF?oc=5&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "source": "news",
-      "label": "AI coding tools shift developers towards review work",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQUlVia2RacFlUQmY3b2tRc1BSZlVLMWZXX1luYnZva2ZZUk9wRVg4X21pLUl2Q0RhXzZkSFJLYk5RQXpmYzcyNllFRnRJQTdkdFJGZ3VlZW9pclBYWHM1bVRRV1ZLcFVjZzRJS2RoYTd6bWJGMUZQb2JaenpFaU9FZHVWbThvZ0d3?oc=5",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQUlVia2RacFlUQmY3b2tRc1BSZlVLMWZXX1luYnZva2ZZUk9wRVg4X21pLUl2Q0RhXzZkSFJLYk5RQXpmYzcyNllFRnRJQTdkdFJGZ3VlZW9pclBYWHM1bVRRV1ZLcFVjZzRJS2RoYTd6bWJGMUZQb2JaenpFaU9FZHVWbThvZ0d3?oc=5&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "source": "news",
-      "label": "How to avoid looking lazy and rude with your new AI tools",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOSGx2enZkcTdRY1NwSV9ta09XTExGWW43bHB5dldPRzlRUHhLSWJ3ajZWWFFpc3Rkc1FhVG9jNG5XYkdkbFZWRW5XYzJDaWpkQW9XLWpzMWJQZk43QXN5c21ta3VjWG0zWHg1R29ZaDRTSnV3eTZjYkZSVVZ2ZkItZXJVR0EwOThpV0o0eEVIRGpTdHNtNnFrYW9LRWNjeGd0Z05qQXY1MHhIZw?oc=5",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOSGx2enZkcTdRY1NwSV9ta09XTExGWW43bHB5dldPRzlRUHhLSWJ3ajZWWFFpc3Rkc1FhVG9jNG5XYkdkbFZWRW5XYzJDaWpkQW9XLWpzMWJQZk43QXN5c21ta3VjWG0zWHg1R29ZaDRTSnV3eTZjYkZSVVZ2ZkItZXJVR0EwOThpV0o0eEVIRGpTdHNtNnFrYW9LRWNjeGd0Z05qQXY1MHhIZw?oc=5&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "source": "news",
-      "label": "AI tools help hacker break in for $25 per target",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOVm9sQTN4T3N2WG9HZnhIeF9ia3FNYVVSTkNmckRTcjE4RWxHd0MwODVCcXZwRkVoSFdRZ09GSkVETHZiY0xxa3VSSkRiSUxJai1hTGdWWmlNc2kycjdCNGVLTDV4cmU2YzNkaktTUkhLVEhxREg3NUxPbTliNFg0Rmd1V0FNWU81Wlp1RlJONU90el9KMGZjZFln?oc=5",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOVm9sQTN4T3N2WG9HZnhIeF9ia3FNYVVSTkNmckRTcjE4RWxHd0MwODVCcXZwRkVoSFdRZ09GSkVETHZiY0xxa3VSSkRiSUxJai1hTGdWWmlNc2kycjdCNGVLTDV4cmU2YzNkaktTUkhLVEhxREg3NUxPbTliNFg0Rmd1V0FNWU81Wlp1RlJONU90el9KMGZjZFln?oc=5&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "source": "news",
-      "label": "AI Is Already Changing Fund Management, But Can it Pick Better Stocks?",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZHVHQWZfZ1ZsU3l4bkFhTVdTRXo1dk9uMlIxVjR3b0Nhc2tSbnc4d2k2bVZMRlZoQk1hQWJBS0VpQkpTYUY5cXg4UlA5UTA4MjctR3VIV1NxS0xVbE1ubVhxUmJUUXZRNlROZ25udFMzWnFEbGlibllpbzhZb0JCVnZLbW10NnNhbE9SYnBzVDM2STB3Mkg3YUhMTGRlNTNXTEdiVVdoU0hIU2s?oc=5",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZHVHQWZfZ1ZsU3l4bkFhTVdTRXo1dk9uMlIxVjR3b0Nhc2tSbnc4d2k2bVZMRlZoQk1hQWJBS0VpQkpTYUY5cXg4UlA5UTA4MjctR3VIV1NxS0xVbE1ubVhxUmJUUXZRNlROZ25udFMzWnFEbGlibllpbzhZb0JCVnZLbW10NnNhbE9SYnBzVDM2STB3Mkg3YUhMTGRlNTNXTEdiVVdoU0hIU2s?oc=5&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "source": "news",
-      "label": "Compare Top 21 Manufacturing AI Solutions & Software",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE41V0llMHJ5d0Z1RjB6SlBRQ1oxbm9ZRnVKa0Z0U0NlTFVTcVlsQ0VXQUp2MmlzQTJUMXRONTVJa1owN2ZQX3NNd2JsVFd5UUR5N3RSczJWMkpObnMxMHc?oc=5",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE41V0llMHJ5d0Z1RjB6SlBRQ1oxbm9ZRnVKa0Z0U0NlTFVTcVlsQ0VXQUp2MmlzQTJUMXRONTVJa1owN2ZQX3NNd2JsVFd5UUR5N3RSczJWMkpObnMxMHc?oc=5&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "source": "news",
-      "label": "Employment AI Tools Raise New Bias, Privacy, and Compliance Challenges",
-      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPUTd5TWtPMkI4NS1PMnc0ejk5MVZMc1V3N29RUU1YU2xXOWtPMnJZOE5wRllnOVR3LVF4dUp6MlFwbklETHdlOE5KYjRWWjNPZ25HMzdLT2Q3cmJWbDJ0QklJanhWOHJQTDROZkdyb2JrY1d2OVFtVzhNOVFIVEZTMlJid3lneG1TQldNM1hkTjljal84bmtyVkt6cEl4YzRWN2hQeDJTdjQzZ0dndU9LeEstVVpaSTRlSjEtSQ?oc=5",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPUTd5TWtPMkI4NS1PMnc0ejk5MVZMc1V3N29RUU1YU2xXOWtPMnJZOE5wRllnOVR3LVF4dUp6MlFwbklETHdlOE5KYjRWWjNPZ25HMzdLT2Q3cmJWbDJ0QklJanhWOHJQTDROZkdyb2JrY1d2OVFtVzhNOVFIVEZTMlJid3lneG1TQldNM1hkTjljal84bmtyVkt6cEl4YzRWN2hQeDJTdjQzZ0dndU9LeEstVVpaSTRlSjEtSQ?oc=5&hl=en-US&gl=US&ceid=US:en"
     }
   ]
 }
