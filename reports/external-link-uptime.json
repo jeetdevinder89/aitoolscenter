@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T16:43:56.019Z",
+  "generatedAt": "2026-10-12T17:17:12.517Z",
   "timeoutMs": 6000,
   "retries": 2,
   "concurrency": 8,
@@ -81,6 +81,16 @@
       "source": "tool",
       "label": "Leonardo.ai",
       "url": "https://leonardo.ai/",
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "tool",
+      "label": "Canva AI",
+      "url": "https://www.canva.com/",
       "healthy": false,
       "status": null,
       "method": "HEAD/GET",
@@ -176,16 +186,6 @@
       "method": "HEAD/GET",
       "attempts": 3,
       "error": "fetch failed"
-    },
-    {
-      "source": "tool",
-      "label": "Make",
-      "url": "https://www.make.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
     },
     {
       "source": "tool",
@@ -493,11 +493,11 @@
       "source": "tool",
       "label": "Canva AI",
       "url": "https://www.canva.com/",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 1,
-      "finalUrl": "https://www.canva.com/"
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
     },
     {
       "source": "tool",
@@ -736,7 +736,7 @@
       "healthy": true,
       "status": 200,
       "method": "HEAD",
-      "attempts": 1,
+      "attempts": 2,
       "finalUrl": "https://www.qlova.com/"
     },
     {
@@ -827,7 +827,7 @@
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://www.jetbrains.com/ai/"
+      "finalUrl": "https://www.jetbrains.com/air/"
     },
     {
       "source": "tool",
@@ -867,7 +867,7 @@
       "status": 200,
       "method": "GET",
       "attempts": 1,
-      "finalUrl": "https://copilot.com/?fromcode=cmmlf487uwy&sessionId=954ab36f-b948-493b-92e6-6ec46f8ccfa3&"
+      "finalUrl": "https://copilot.com/?fromcode=cmmlf487uwy&sessionId=b46e7b43-d4ed-41c7-b0b0-e2165edab14c&"
     },
     {
       "source": "tool",
@@ -897,7 +897,7 @@
       "status": 200,
       "method": "GET",
       "attempts": 1,
-      "finalUrl": "https://copilot.com/?fromcode=cmmlf487uwy&sessionId=d053e46f-8d39-4971-91c0-6e224bccdbe8&"
+      "finalUrl": "https://copilot.com/?fromcode=cmmlf487uwy&sessionId=1339a243-0637-4291-9ccb-775e902ccb01&"
     },
     {
       "source": "tool",
@@ -963,11 +963,11 @@
       "source": "tool",
       "label": "Make",
       "url": "https://www.make.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://www.make.com/"
     },
     {
       "source": "tool",
@@ -1241,83 +1241,83 @@
     },
     {
       "source": "news",
-      "label": "Commentary: Artificial intelligence in the classroom",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNeXFlVjlFZjllRFpuSGJsRkR0a3BjQmdqbnRnNUlHTG9GNHE0alZJcXh0THlKYmNfUngtV3lzUkxiV2RTY0NBVUlIaktwdDhaLW95b3N6cnIxTDE3NEJhYzdyTExVOV9FdXI3cnYwUGdYaUllQkpob19ZZWtuV3V0RlVuVl9JZGxseWdwcU0yRE5HQQ?oc=5",
+      "label": "World Bank jobs council urges 'crisis-era' support measures as IMF warns of AI ‘tsunami’ hit",
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE9ReU51ZE0yMnJUSG41Q2xIQTdLSG9BOEJMMlVVNExsd0dYQU5QZmViQnA2eF93a2lQcUl0d29jN19TNkhfRDk3LVUwNG5La2plN0dGamNoTmpLamJHNUpiXzU1eDRnNnc0OThsNk4yenZaVjY1Q3VKX2R30gF_QVVfeXFMT3RBNEdmZUNVR1kwR0hIQWI2UFZnRUJoZUY3Nm5vOFpWTHBHVG1zY1JHbFdad29DZjdfc21teFMyOVFjUEc1azgxRDU3bmdwSXNIVTNiUTg4ZElXN3pweEhXeTdZa2RrT29LMlV3WnNPLVpNSDJGcWZqaGFJaTNmOA?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNeXFlVjlFZjllRFpuSGJsRkR0a3BjQmdqbnRnNUlHTG9GNHE0alZJcXh0THlKYmNfUngtV3lzUkxiV2RTY0NBVUlIaktwdDhaLW95b3N6cnIxTDE3NEJhYzdyTExVOV9FdXI3cnYwUGdYaUllQkpob19ZZWtuV3V0RlVuVl9JZGxseWdwcU0yRE5HQQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiekFVX3lxTE9ReU51ZE0yMnJUSG41Q2xIQTdLSG9BOEJMMlVVNExsd0dYQU5QZmViQnA2eF93a2lQcUl0d29jN19TNkhfRDk3LVUwNG5La2plN0dGamNoTmpLamJHNUpiXzU1eDRnNnc0OThsNk4yenZaVjY1Q3VKX2R30gF_QVVfeXFMT3RBNEdmZUNVR1kwR0hIQWI2UFZnRUJoZUY3Nm5vOFpWTHBHVG1zY1JHbFdad29DZjdfc21teFMyOVFjUEc1azgxRDU3bmdwSXNIVTNiUTg4ZElXN3pweEhXeTdZa2RrT29LMlV3WnNPLVpNSDJGcWZqaGFJaTNmOA?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "AI Tools Raise Privacy Questions at Natrona County Schools",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNZWNMVlJ1cEFEeHNqUGFXN0NCZ29aTHVXLTlVMGdrbFRBbml1RG92STVBaVdiZlhUTmRWVDg2TGswSHpKYVNDaVNfSlRETGNHaVgzd2ZXN0ZNNnFBaUdKd3d3Sm9RMVg4UFZla1RpdHVoS0pfT1NuZkNLMEUxcmdidHkwM2JJZHNLWnlBbVRfTWlJVDlFMnkwQlFjYjhiZw?oc=5",
+      "label": "Watch LG's Cho on Latest AI-Powered Forecasting Tools",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOSEN5bzVzSC1HVzZIVjZzTGpRdE9pTWpsd3paRFRFeG9KbUFDSm9qZ24yWm0wM3RzY2JYRmltOGRSRTBqblcyUlc1ZEdoU3hzYWk0QnpPUmdsY1dPbXR0VTE4ZDRzMFRGMGVUa29RdE12R1E5d0JpbjJOR05YVGdBVGZzQlMwMWlTcmhuUUJjanJ0R1FxaEVNeC1nNm9palduTl9UMw?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMingFBVV95cUxNZWNMVlJ1cEFEeHNqUGFXN0NCZ29aTHVXLTlVMGdrbFRBbml1RG92STVBaVdiZlhUTmRWVDg2TGswSHpKYVNDaVNfSlRETGNHaVgzd2ZXN0ZNNnFBaUdKd3d3Sm9RMVg4UFZla1RpdHVoS0pfT1NuZkNLMEUxcmdidHkwM2JJZHNLWnlBbVRfTWlJVDlFMnkwQlFjYjhiZw?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOSEN5bzVzSC1HVzZIVjZzTGpRdE9pTWpsd3paRFRFeG9KbUFDSm9qZ24yWm0wM3RzY2JYRmltOGRSRTBqblcyUlc1ZEdoU3hzYWk0QnpPUmdsY1dPbXR0VTE4ZDRzMFRGMGVUa29RdE12R1E5d0JpbjJOR05YVGdBVGZzQlMwMWlTcmhuUUJjanJ0R1FxaEVNeC1nNm9palduTl9UMw?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "AI Tools Suspected in Korea’s Shinhan Bank Hack, Yonhap Says",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQc2k2UjhiRThSdW1BWXJUeVExR2QwaE4wNGlYQzdXSWUwYlFvdEFsSEg0NWp1UDd2Z3Jja3VqVklaN3BBSjlodTZxSlFRZlAzbDE3T2FZd0xaSElCSmhPSDB3MVhUX0FldDBPVjdkNkF0YnBZbHUyczhuRlAtOVFaQnJWR3c4a3lLMXM5NTAxV1pQbC1qdHlxU2VGOV9SclpIYjlUTXZ3RzduM3VmbUxv?oc=5",
+      "label": "Strengthening trust in online search results using AI tools",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQMEw3TFQ0dE1oZjlGdzI2ZnlwVHFmNU5QLVRvd0RQbXhtSm5wVmQyYzVZWjFaOXJ0SkdDQ1EwOWFhQm1fMTZJVXRmbWltMy1fNF9fNWl0Szl2ekVMVHNwVk5SZXFYQUtvRUpRaGhCMXE5Sld5T0FfVEJiY2w0QmNJa3hrWm45MngyMi12cGp6bk1nTmNoWjhFTkFITEJJUTQ3Zkp3VjVGdTNfVDA?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQc2k2UjhiRThSdW1BWXJUeVExR2QwaE4wNGlYQzdXSWUwYlFvdEFsSEg0NWp1UDd2Z3Jja3VqVklaN3BBSjlodTZxSlFRZlAzbDE3T2FZd0xaSElCSmhPSDB3MVhUX0FldDBPVjdkNkF0YnBZbHUyczhuRlAtOVFaQnJWR3c4a3lLMXM5NTAxV1pQbC1qdHlxU2VGOV9SclpIYjlUTXZ3RzduM3VmbUxv?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQMEw3TFQ0dE1oZjlGdzI2ZnlwVHFmNU5QLVRvd0RQbXhtSm5wVmQyYzVZWjFaOXJ0SkdDQ1EwOWFhQm1fMTZJVXRmbWltMy1fNF9fNWl0Szl2ekVMVHNwVk5SZXFYQUtvRUpRaGhCMXE5Sld5T0FfVEJiY2w0QmNJa3hrWm45MngyMi12cGp6bk1nTmNoWjhFTkFITEJJUTQ3Zkp3VjVGdTNfVDA?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "CoreWeave brings Nvidia Vera Rubin, AI tools to its cloud services",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPbmYzcXJwVUZ6RWptRkNtZWxNSDh3YWMyMjRmb3VzUld3VzdYTTZHTDl4Y2dpcV9qYkEybkJNWTJrSG5HbkV6TlhJVFo3c0Fsa0JwVnNxNHVvT1BIbWJmcndNMndYekVybWlPSThNZ0VjQXR3M095SW5VQWVnRlZtMUhkVU54QXFfT2hPbU0xenduQmhucmhUbWVKXzdoTlVlazMwSGRpbFJBOVZvV1JSRzByaGZ6UQ?oc=5",
+      "label": "Google now allows checking if an image, a video, or an audio has been generated with Artificial Intelligence",
+      "url": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxNWDNBNEhBLUJOaEJha3ppUkZJV2w2eUdpZkgzSWFIM1VMSi0yVWZkUVVUWjVOLWtaOVh6ZHhyZ2s4T2ptbklOdnA2TVJTRG9MRGxDcWVtODNUZXhybTUxblk0UVp3Q1Y3bl9IOWtrQzdhSWZWZ1JucEJoSF9LeDVnMFoyN21JWHdOMlN6SnZUVTZHQkxicURVM3JGOTktZWstekNCX0xpZWRjbmtleHc4bkdxRzhYcTFJaDE2V3JscjdXS0tIVzNDakZQR0pFaDV2Q2ZKcWpEWmo1WmlmUG1BTTZZTlp5SnJqcEswQ3RuOXlEdEdBWGtlclFybDY?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPbmYzcXJwVUZ6RWptRkNtZWxNSDh3YWMyMjRmb3VzUld3VzdYTTZHTDl4Y2dpcV9qYkEybkJNWTJrSG5HbkV6TlhJVFo3c0Fsa0JwVnNxNHVvT1BIbWJmcndNMndYekVybWlPSThNZ0VjQXR3M095SW5VQWVnRlZtMUhkVU54QXFfT2hPbU0xenduQmhucmhUbWVKXzdoTlVlazMwSGRpbFJBOVZvV1JSRzByaGZ6UQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxNWDNBNEhBLUJOaEJha3ppUkZJV2w2eUdpZkgzSWFIM1VMSi0yVWZkUVVUWjVOLWtaOVh6ZHhyZ2s4T2ptbklOdnA2TVJTRG9MRGxDcWVtODNUZXhybTUxblk0UVp3Q1Y3bl9IOWtrQzdhSWZWZ1JucEJoSF9LeDVnMFoyN21JWHdOMlN6SnZUVTZHQkxicURVM3JGOTktZWstekNCX0xpZWRjbmtleHc4bkdxRzhYcTFJaDE2V3JscjdXS0tIVzNDakZQR0pFaDV2Q2ZKcWpEWmo1WmlmUG1BTTZZTlp5SnJqcEswQ3RuOXlEdEdBWGtlclFybDY?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "AI Tools Suspected in Korea’s Shinhan Bank Hack, Yonhap News Reports",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBxd2daZmhsV3pKV3BGb1NFbjNuTGlBZktGcGRLT2FOSkRMLVR5MzEzeEZ1anlzc0JsbHloWWdUVDZHM1hsS2tLMjFSTTdmbUs4OVMtdzF2YkRlWG1GbHVyQjNtVkhuNlJqOC1RbGQycDdPTDgxOHBZLUJRNFczZw?oc=5",
+      "label": "How China’s factories leap straight into agentic AI and take it global",
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOeTVORnRfdEdGVUp5akxmZW41VFJmNE5iSk9XMnVTSEM3YnFweVRDSHhJZkZfb3dpck1jMk1PVHZ1QUVGUEhNR0xONm93X01uS3czTm52LS1Jajl4Q0FWXzBiWXR4UkZrTm5SZE1ieWhrX2FwSjBKRkp6OEdTS1U5REw5SDlzLS1DUUwwUV9zVDNLU1YzbEJLR2lxaXpoYnNkaGQ5SzdnYWphVmFhM3BsY1B5YWVGTFBXVk9rZEtWNEFiQ3d3YVoxYUpWQdIBywFBVV95cUxNa2tfSU03UFVGZjZvSXVJakJmZ21rVW5xbWhIc1BxN09SWFExRUJRaFdkeWJEN0ZwZl9tTjNGUU9NU3M5ZTR4TGxiQ1B2eTdCRnRMNlhYM2tlYUhWWFJvazl2S2pYZF9hSmFuakRDTjdnNmtaS3dLdE03dXZoUnhNaWZfZnBTQVhna0JDdVNkcVhvM2EwUUw3NXhrSWU2Nl9qdDlCX3F5SXpLMHFxczZibkVoRHAyMmkzakprWThNTy13ZXhKa2tFMTVwUQ?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBxd2daZmhsV3pKV3BGb1NFbjNuTGlBZktGcGRLT2FOSkRMLVR5MzEzeEZ1anlzc0JsbHloWWdUVDZHM1hsS2tLMjFSTTdmbUs4OVMtdzF2YkRlWG1GbHVyQjNtVkhuNlJqOC1RbGQycDdPTDgxOHBZLUJRNFczZw?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOeTVORnRfdEdGVUp5akxmZW41VFJmNE5iSk9XMnVTSEM3YnFweVRDSHhJZkZfb3dpck1jMk1PVHZ1QUVGUEhNR0xONm93X01uS3czTm52LS1Jajl4Q0FWXzBiWXR4UkZrTm5SZE1ieWhrX2FwSjBKRkp6OEdTS1U5REw5SDlzLS1DUUwwUV9zVDNLU1YzbEJLR2lxaXpoYnNkaGQ5SzdnYWphVmFhM3BsY1B5YWVGTFBXVk9rZEtWNEFiQ3d3YVoxYUpWQdIBywFBVV95cUxNa2tfSU03UFVGZjZvSXVJakJmZ21rVW5xbWhIc1BxN09SWFExRUJRaFdkeWJEN0ZwZl9tTjNGUU9NU3M5ZTR4TGxiQ1B2eTdCRnRMNlhYM2tlYUhWWFJvazl2S2pYZF9hSmFuakRDTjdnNmtaS3dLdE03dXZoUnhNaWZfZnBTQVhna0JDdVNkcVhvM2EwUUw3NXhrSWU2Nl9qdDlCX3F5SXpLMHFxczZibkVoRHAyMmkzakprWThNTy13ZXhKa2tFMTVwUQ?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Teaching Cyber Threats Differently: An AI-Powered Gamified Approach",
-      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNelpZamIzbS1ud0ZvUkZHbGVJV1RUUFAtbkVrNGVTTUd6emFDbkR6Yl9yYVFPaVBPYzk2S1JQd0FCTEhfRWxZaks1VHoyZnowZVp4cjZMRXktZkJxNWo1VDlySlViTXJSemN3cnhpak5GNDFfWGl5OHRCZWRWYVVJbTV6UXRkN2FFbUktY1Awa3hkdnMteWp5ekI1RDN5Rl9pd05WUnVtWUl4eUZhMzJKelk3WWY1NHlEWVRsdzM0N3pWTllQSTBTLVdXdU5sYWNZM0ZEVWJ3?oc=5",
+      "label": "AI deepfake political ads surge ahead of US midterm elections: How to spot fake videos",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPRG9pTlZLMUUyYWhWYmpRWWpJTFQxSTdLdjZveW15NG9HdHBJZHpRRmNxSWg4RmpvMVBDb2VObzIzVzByS2p3TXlYX3A5SU5XcXRoYTlIOFY3d3Y1UTlobEctQWRmaWVOT0swZUJ5RHR6R0hUam0zYlVCM3FMZ3JibnRfVGFPZ1hPdFNHblhEbmpWMm9QZ2ZQa2ZzcDVNcnZETWhLMkVBVE5GNXVuYTllVGVrTkxXdVNvMVBrU3Bjcmh4c0RRbjFfMUxR0gHPAUFVX3lxTE1iSVR0QllSWXZyN0FEVWkzaGdkb2pCdG9qVmozM0VHQ0VOZkJQMlFiZk5MUkE4UExldjlGVURXcl9paUxYcWFpT2E0TkV1a3RYQ1hwcUZuYTBJZWJDb05hOU5tS1JTYTk3Z0ZOTzdhU1lULWVVWTJscW1HOVN2RjFWbl9RcEs3QmUxZk9ZTXRaSHlyRmJfLTY0ZWpnaV9uLWhSSFdxZVRDZHg0U0F4YkZrd3ViRFIwMXBwVk51akZFaVNteTdIdklFUGRfMy1yOA?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNelpZamIzbS1ud0ZvUkZHbGVJV1RUUFAtbkVrNGVTTUd6emFDbkR6Yl9yYVFPaVBPYzk2S1JQd0FCTEhfRWxZaks1VHoyZnowZVp4cjZMRXktZkJxNWo1VDlySlViTXJSemN3cnhpak5GNDFfWGl5OHRCZWRWYVVJbTV6UXRkN2FFbUktY1Awa3hkdnMteWp5ekI1RDN5Rl9pd05WUnVtWUl4eUZhMzJKelk3WWY1NHlEWVRsdzM0N3pWTllQSTBTLVdXdU5sYWNZM0ZEVWJ3?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPRG9pTlZLMUUyYWhWYmpRWWpJTFQxSTdLdjZveW15NG9HdHBJZHpRRmNxSWg4RmpvMVBDb2VObzIzVzByS2p3TXlYX3A5SU5XcXRoYTlIOFY3d3Y1UTlobEctQWRmaWVOT0swZUJ5RHR6R0hUam0zYlVCM3FMZ3JibnRfVGFPZ1hPdFNHblhEbmpWMm9QZ2ZQa2ZzcDVNcnZETWhLMkVBVE5GNXVuYTllVGVrTkxXdVNvMVBrU3Bjcmh4c0RRbjFfMUxR0gHPAUFVX3lxTE1iSVR0QllSWXZyN0FEVWkzaGdkb2pCdG9qVmozM0VHQ0VOZkJQMlFiZk5MUkE4UExldjlGVURXcl9paUxYcWFpT2E0TkV1a3RYQ1hwcUZuYTBJZWJDb05hOU5tS1JTYTk3Z0ZOTzdhU1lULWVVWTJscW1HOVN2RjFWbl9RcEs3QmUxZk9ZTXRaSHlyRmJfLTY0ZWpnaV9uLWhSSFdxZVRDZHg0U0F4YkZrd3ViRFIwMXBwVk51akZFaVNteTdIdklFUGRfMy1yOA?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "UCLA expands student AI tool access, prompting responsible use, learning concerns",
-      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNTUdZZTk3YnBUQWhId3UtakVYanJXZ1hLb2RlbnRGZUoxV0dLa1pmVV9ROTI5Zlhnc3ZyQlNyamxwNS1DamthOWtZLXVrMlhzdkpNWWNTNERtLURzRE9NUVdXSjJyb216SjhrTVRJN3RfSEhTNE5aaXVCNzN6QUZtbjVUQVhReVJwaC1kYXo4MnFxZzl2Z3pGSnVteXFtellHOHZsbmdrQ1IxUzVrVWZVb29mWQ?oc=5",
+      "label": "Claude emerges as fastest-growing AI skill in Korean job postings",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOTG9yczA3YWRWZUpfUUZQdWEydWU1YmFLREdpbHlHM1pqanVyLWxBb3FNZ1Z1Y003LVZ1UFdjYTVyazNQbVpZbldLRk44d2l3LVktdDEzUFZIQm5vUWlHYndQLWRVbHJCNGRZd1ZPZExBdU9YMUgwbkZqaFdSVElrSXdRYlFGdlBBNUVlV3d1RkZzLVp1WnVWVVE5UmtPenJVRGh6WGNuLVRPUWNIbTZDQ1dR0gG3AUFVX3lxTFBzck9zaC1IME9qcDliYXYwdGRfUDRNd19wcEotT0RIb2NUYm5yR0J4aThHbzR2UV9mTC1VamRfQ0tURWZnVE5CSnBBT3d2akFCeVF1VGhkVUltTzNtZVp6TWNkdHY1WlZZdlVia0F2MmRPQ1hmcVBIUGxfUDBjVE5mQ0Y4dGJ0ak1yLVdNWHZIQzNsY3BjRVlYVzlrRVlsYXByUWRoNjF4ZnpONmUwNEpOSGVaU2dGdw?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNTUdZZTk3YnBUQWhId3UtakVYanJXZ1hLb2RlbnRGZUoxV0dLa1pmVV9ROTI5Zlhnc3ZyQlNyamxwNS1DamthOWtZLXVrMlhzdkpNWWNTNERtLURzRE9NUVdXSjJyb216SjhrTVRJN3RfSEhTNE5aaXVCNzN6QUZtbjVUQVhReVJwaC1kYXo4MnFxZzl2Z3pGSnVteXFtellHOHZsbmdrQ1IxUzVrVWZVb29mWQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOTG9yczA3YWRWZUpfUUZQdWEydWU1YmFLREdpbHlHM1pqanVyLWxBb3FNZ1Z1Y003LVZ1UFdjYTVyazNQbVpZbldLRk44d2l3LVktdDEzUFZIQm5vUWlHYndQLWRVbHJCNGRZd1ZPZExBdU9YMUgwbkZqaFdSVElrSXdRYlFGdlBBNUVlV3d1RkZzLVp1WnVWVVE5UmtPenJVRGh6WGNuLVRPUWNIbTZDQ1dR0gG3AUFVX3lxTFBzck9zaC1IME9qcDliYXYwdGRfUDRNd19wcEotT0RIb2NUYm5yR0J4aThHbzR2UV9mTC1VamRfQ0tURWZnVE5CSnBBT3d2akFCeVF1VGhkVUltTzNtZVp6TWNkdHY1WlZZdlVia0F2MmRPQ1hmcVBIUGxfUDBjVE5mQ0Y4dGJ0ak1yLVdNWHZIQzNsY3BjRVlYVzlrRVlsYXByUWRoNjF4ZnpONmUwNEpOSGVaU2dGdw?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Best AI Tools for Career Development",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFB2QzhkUlh2ZjBFYkhBMldZRXlhN2hiSGJ6OVVaNEhNdHJjclNsZ3NYVE1LQmw4YjRzanlZZ3NVVXQ3SHhMR0gwQThTcGE4YkVfLUdJdUpuVk03SXJmM2M5MTVURE90TWVNZ1E?oc=5",
+      "label": "AI Tools for Teachers: Uses, Benefits, and Best Practices",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9xMzh6R09tbVNCTHpEOVczNUxBRUdaTUhackx1eDlMSG9rN0Z2ZFg4b2xuQlVYaWU4RUt3ckZDVlJuWV9xX3N2d1BKeUhNZEFsSlRfdjlGN0xIWGFrYWtvaFhWaER0QQ?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiakFVX3lxTFB2QzhkUlh2ZjBFYkhBMldZRXlhN2hiSGJ6OVVaNEhNdHJjclNsZ3NYVE1LQmw4YjRzanlZZ3NVVXQ3SHhMR0gwQThTcGE4YkVfLUdJdUpuVk03SXJmM2M5MTVURE90TWVNZ1E?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9xMzh6R09tbVNCTHpEOVczNUxBRUdaTUhackx1eDlMSG9rN0Z2ZFg4b2xuQlVYaWU4RUt3ckZDVlJuWV9xX3N2d1BKeUhNZEFsSlRfdjlGN0xIWGFrYWtvaFhWaER0QQ?oc=5&hl=en-US&gl=US&ceid=US:en"
     }
   ]
 }
