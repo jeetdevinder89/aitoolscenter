@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-26T14:47:29.711Z",
+  "generatedAt": "2026-11-02T17:44:18.139Z",
   "timeoutMs": 6000,
   "retries": 2,
   "concurrency": 8,
@@ -867,7 +867,7 @@
       "status": 200,
       "method": "GET",
       "attempts": 1,
-      "finalUrl": "https://copilot.com/?fromcode=cmmlf487uwy&sessionId=21357046-fd6b-441a-a71f-cfd61b2cb421&"
+      "finalUrl": "https://copilot.com/?fromcode=cmmlf487uwy&sessionId=350aaa44-8c19-4563-bf80-be1b012cd095&"
     },
     {
       "source": "tool",
@@ -897,7 +897,7 @@
       "status": 200,
       "method": "GET",
       "attempts": 1,
-      "finalUrl": "https://copilot.com/?fromcode=cmmlf487uwy&sessionId=60161715-be42-4a35-b49c-cbcd9dcb4b17&"
+      "finalUrl": "https://copilot.com/?fromcode=cmmlf487uwy&sessionId=1f7f6469-d9b9-4b55-9f45-bc14097491f0&"
     },
     {
       "source": "tool",
@@ -977,7 +977,7 @@
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://ifttt.com/"
+      "finalUrl": "https://ifttt.ai/"
     },
     {
       "source": "tool",
@@ -1177,7 +1177,7 @@
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://ai.google.dev/"
+      "finalUrl": "https://ai.google.dev/?hl=zh-tw"
     },
     {
       "source": "tool",
@@ -1241,83 +1241,83 @@
     },
     {
       "source": "news",
-      "label": "Number of neuro-inspired AI papers is substantial footprint",
-      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQQzc1TGFRY3M4ampUNi1Ga0FPWlUxZ05tQlF0c3BYVXRaa3RwVllkbHBjcTZ5SE1yXzVtdUt6YVNpbTBFOWJfTnhQUDNNTllEWG41NURGTGF1U2p6U0x1Zy0ySjFkZndPNkRwdTk4R3Y0NUs5SXp6X0x4MDA4QzNDcUFXbWZiNWVrYUV5V0laQTlIdTMtam5JSUJ3aXpyamR5ektPaTRFRWdUdlNoRWRaaDZkbW4teHlBNS1vZ3hUSENJUXdxdjFnOXVNLWd1YzItajBVWTlzRQ?oc=5",
+      "label": "India ranks second globally in AI-powered shopping, 76% consumers use AI tools",
+      "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxPanlpZXBUV09nTUNENmswNVJEa2xWWEdSR2Nwa25IdXY5NkQzbmMweFJtdmxFMC1hMjJ4bVBNWkZfWjNYMFRBaVNQMW5VbGxKWmplRzFUWG1zQkhpZF9GdHJaWm1YbGxJVnJhU3daUDRtWnZhUEg1em9zM0VVcktFd0FNNDBvX2JTT3lnRWc5X1Rwbldvbk1Ka3o0X2NDUy1ieFBQeTNzdnBLLTJybzd5VEVlTXlieHRWUlJQaXIzQmExZ1ZwN25vN2N5RTV6R0xRU0YxeDNnVzJlVnJUMjVWeEhwbHRDN1FhZS1pYtIB8gFBVV95cUxPNFo2ZmFHNTVVOFVjQ2ZKUW45ZkNCWXlTTTF4Z0tGZ3VLRGxsc2xYNmxrRkJZaVlNRXJMbEZNcXJUUzg0a05sU3VhdzFtVzE5a3NjN2hIakNNd05WcVhiMzNPNDRTT3R3N3pQOFF1cUhITUliQ0VWZDRIa3V5VF9lbUNuVzI0SWRVbVVfSHNSbmlfVmFYSXNPUDFNRFRaSHc0OVZiMXBET29XSjJmY1k2b293aEUxd0hWVnNEZURudTJCX29BSk9iR2VFWmZKNmlvZTd1dXYzdjR3THVTWmZkNk5TbkhVTEh2WnRsdTVxMzVKUQ?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQQzc1TGFRY3M4ampUNi1Ga0FPWlUxZ05tQlF0c3BYVXRaa3RwVllkbHBjcTZ5SE1yXzVtdUt6YVNpbTBFOWJfTnhQUDNNTllEWG41NURGTGF1U2p6U0x1Zy0ySjFkZndPNkRwdTk4R3Y0NUs5SXp6X0x4MDA4QzNDcUFXbWZiNWVrYUV5V0laQTlIdTMtam5JSUJ3aXpyamR5ektPaTRFRWdUdlNoRWRaaDZkbW4teHlBNS1vZ3hUSENJUXdxdjFnOXVNLWd1YzItajBVWTlzRQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxPanlpZXBUV09nTUNENmswNVJEa2xWWEdSR2Nwa25IdXY5NkQzbmMweFJtdmxFMC1hMjJ4bVBNWkZfWjNYMFRBaVNQMW5VbGxKWmplRzFUWG1zQkhpZF9GdHJaWm1YbGxJVnJhU3daUDRtWnZhUEg1em9zM0VVcktFd0FNNDBvX2JTT3lnRWc5X1Rwbldvbk1Ka3o0X2NDUy1ieFBQeTNzdnBLLTJybzd5VEVlTXlieHRWUlJQaXIzQmExZ1ZwN25vN2N5RTV6R0xRU0YxeDNnVzJlVnJUMjVWeEhwbHRDN1FhZS1pYtIB8gFBVV95cUxPNFo2ZmFHNTVVOFVjQ2ZKUW45ZkNCWXlTTTF4Z0tGZ3VLRGxsc2xYNmxrRkJZaVlNRXJMbEZNcXJUUzg0a05sU3VhdzFtVzE5a3NjN2hIakNNd05WcVhiMzNPNDRTT3R3N3pQOFF1cUhITUliQ0VWZDRIa3V5VF9lbUNuVzI0SWRVbVVfSHNSbmlfVmFYSXNPUDFNRFRaSHc0OVZiMXBET29XSjJmY1k2b293aEUxd0hWVnNEZURudTJCX29BSk9iR2VFWmZKNmlvZTd1dXYzdjR3THVTWmZkNk5TbkhVTEh2WnRsdTVxMzVKUQ?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Childhood’s Future Will Not Be Decided by Artificial Intelligence: We Will Decide It",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOVldYWE9wX1A4dnBmSXljSHRPXzhHalF3WWxfTU4zZkhZcjI5VWtWZ2R6bGVHUnZMUEF1RXNMaVdZMEo0dWpGRUhUeVZJdGxEOHBESE1vV2tPTWVTYmI0NmJFWnJaN2ZaTzJpZElCUDFGdnNBUVg0dUYzTEtXbTdfRW9ZdVk0WW5rMUcyZTFJLVFMaXNmQllhY3o3dF8yUlhPXzc5RFN6ekZ3UEtaM2xsaGRIWVcyUDhfZ0Ew?oc=5",
+      "label": "Most Firms Using Three or More AI Tools Stop 90% of Fraud Attempts",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOY0RScnRMeUdKRDBDUEkweDBna3lVSlE2VTNnSk16NXFDQ3dzQXRaR24zeldsRGZ4blBtVzBhWEtnU0FaOWRjWWpTd3NDWnpfeU5ZOWRud3MxeldEV0xnVnBXbDBIa1dxQjRxa3V3aHA2cU9COE45N2V5Q2NraGZNZ3pYX0p1NE9CSThVdll5VVdQTzh6bWViZl9maFdkclRIMk9mUGtoRWxxUGtnMHdzcVVDRzMyd3NtV1gtMFhuSnZxRlU?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOVldYWE9wX1A4dnBmSXljSHRPXzhHalF3WWxfTU4zZkhZcjI5VWtWZ2R6bGVHUnZMUEF1RXNMaVdZMEo0dWpGRUhUeVZJdGxEOHBESE1vV2tPTWVTYmI0NmJFWnJaN2ZaTzJpZElCUDFGdnNBUVg0dUYzTEtXbTdfRW9ZdVk0WW5rMUcyZTFJLVFMaXNmQllhY3o3dF8yUlhPXzc5RFN6ekZ3UEtaM2xsaGRIWVcyUDhfZ0Ew?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOY0RScnRMeUdKRDBDUEkweDBna3lVSlE2VTNnSk16NXFDQ3dzQXRaR24zeldsRGZ4blBtVzBhWEtnU0FaOWRjWWpTd3NDWnpfeU5ZOWRud3MxeldEV0xnVnBXbDBIa1dxQjRxa3V3aHA2cU9COE45N2V5Q2NraGZNZ3pYX0p1NE9CSThVdll5VVdQTzh6bWViZl9maFdkclRIMk9mUGtoRWxxUGtnMHdzcVVDRzMyd3NtV1gtMFhuSnZxRlU?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "The cost of using AI is about to skyrocket, but do we have the appetite to pay?",
-      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNOEdXY2RPN2lhWnFDYnNsMlV3aHFCaGFyTjRjMDduOUllNEVBelJ5MWJwNnVDb3Baa1ZsMnhBbThpOVMxUDBJRC1jeXdKSmFQc3ZCS0RfSVk1MEtKdUtiQ19YUXJPZTN6OHBzZ0ZIcWRCczVmd1BDenNkbzByTWJZbEZxQk45bWxDSnk5UmN0ODRqWUlYU0x3MHpZZFVPTGZYUnNqV2FIX3gtMEs1N1VnX0ZkN3RuY1ZY?oc=5",
+      "label": "India’s small companies need to see AI as more than an artificial promise",
+      "url": "https://news.google.com/rss/articles/CBMimwJBVV95cUxOQVVGa05UUldVOTJ6Z3pTRG0zMXQ3dXl0RHJOUWF6aHQxbjFDbHAyYnNlbGVySWFkNWNzZ1cyUjRPUzcyaFhia2FGZWw3WDBXMnlsdHZKNnQ2dXlLMExaXzN3LUkzYXQ1Y0M3MnkyYVlNaHVGd1YxZ1NfRFBsazZ2dl9oVVB4SFg0VWZibFVJYVQ1amtrcm9MMEdNTGFSVERYdmJ5VXdpSmI1a3NsME1QdFFrZjlwalM5aG0xNUhjd01SbkU4eWZQbEZTcktQYTRPR1NYN28tR2FfWFgzQlhyQmk1MDZvYkR3RkNyWHhMNGJlUzFBTE14M005UDg3SlBnT3RBeDdWVEtwUGNzYzM4MGt6NVFPOUF5QmJz0gGgAkFVX3lxTFBSUThvdEtGNU8wajAtT3h3N3RhT3JhMG5VWVVKLVRPVUM3aUROTFI0eDVwN250XzBidWRvN3g4S3VFS3F2ZDhFM19TbnhCZktYVEZJb0dnNlY4bmczeEE4dUQyOHVFZnVyWVMyS3dXMU9SMEJCNExtNmZtRVF5QTlnVFBfVGNwTU10dTUtX0xoeHVsRzMyWVhzMTAwcm84S3E2a1ZmV2pjMURJNDZIYnBjVFlhVXB4anFuRHluWW1MN3g4a0FwN3FPQS1keTdlTi04Q3ZyanJJTzZuMldsc2xNUDJUZE5XY193UGE4THVwYVJMWXhHamRTQ3YzM2k5cUNXT1RBVGhkNmlCSWpNNHJFejZuTXdMYWJNZHFuaVQzYQ?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNOEdXY2RPN2lhWnFDYnNsMlV3aHFCaGFyTjRjMDduOUllNEVBelJ5MWJwNnVDb3Baa1ZsMnhBbThpOVMxUDBJRC1jeXdKSmFQc3ZCS0RfSVk1MEtKdUtiQ19YUXJPZTN6OHBzZ0ZIcWRCczVmd1BDenNkbzByTWJZbEZxQk45bWxDSnk5UmN0ODRqWUlYU0x3MHpZZFVPTGZYUnNqV2FIX3gtMEs1N1VnX0ZkN3RuY1ZY?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMimwJBVV95cUxOQVVGa05UUldVOTJ6Z3pTRG0zMXQ3dXl0RHJOUWF6aHQxbjFDbHAyYnNlbGVySWFkNWNzZ1cyUjRPUzcyaFhia2FGZWw3WDBXMnlsdHZKNnQ2dXlLMExaXzN3LUkzYXQ1Y0M3MnkyYVlNaHVGd1YxZ1NfRFBsazZ2dl9oVVB4SFg0VWZibFVJYVQ1amtrcm9MMEdNTGFSVERYdmJ5VXdpSmI1a3NsME1QdFFrZjlwalM5aG0xNUhjd01SbkU4eWZQbEZTcktQYTRPR1NYN28tR2FfWFgzQlhyQmk1MDZvYkR3RkNyWHhMNGJlUzFBTE14M005UDg3SlBnT3RBeDdWVEtwUGNzYzM4MGt6NVFPOUF5QmJz0gGgAkFVX3lxTFBSUThvdEtGNU8wajAtT3h3N3RhT3JhMG5VWVVKLVRPVUM3aUROTFI0eDVwN250XzBidWRvN3g4S3VFS3F2ZDhFM19TbnhCZktYVEZJb0dnNlY4bmczeEE4dUQyOHVFZnVyWVMyS3dXMU9SMEJCNExtNmZtRVF5QTlnVFBfVGNwTU10dTUtX0xoeHVsRzMyWVhzMTAwcm84S3E2a1ZmV2pjMURJNDZIYnBjVFlhVXB4anFuRHluWW1MN3g4a0FwN3FPQS1keTdlTi04Q3ZyanJJTzZuMldsc2xNUDJUZE5XY193UGE4THVwYVJMWXhHamRTQ3YzM2k5cUNXT1RBVGhkNmlCSWpNNHJFejZuTXdMYWJNZHFuaVQzYQ?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "How AI Is Transforming Hedge Fund Investment Processes",
-      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNaVpPTXc0ZTFSbl85UkdwMDN1NmpJc05rbzdLRnUxYVBQTEV3QWFPRXV2REE2WEM5MlNiWG9zYlZFN3J5RUViZm9CaGNjamphUE44OEY0bGpsQjhySkdvWWZVNUVJQ3VMc2M1YVh5S2NpdWFSN0tvT1h1V2oxZkZTRlVqR3ZESkRRUzkxYlRzUTFjTHJQ?oc=5",
+      "label": "Oracle NetSuite unveils new AI tools for cloud ERP",
+      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPMG1sZFh4YU5tWHhiXy1ocHFGX0xVYUo1UlI4SGo5S09VazZoVzBXUWNxMHpHcGp5b3VwSzBBWUc5VmdrSnRucDlUWG1VRExNaTJjRVpVY2VBUUlrUWJRRF9vSkRCejY5aXpsUjBNNFlpSjRMZTMzS1NhOV9DSGd0dWRMQ2lFdw?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNaVpPTXc0ZTFSbl85UkdwMDN1NmpJc05rbzdLRnUxYVBQTEV3QWFPRXV2REE2WEM5MlNiWG9zYlZFN3J5RUViZm9CaGNjamphUE44OEY0bGpsQjhySkdvWWZVNUVJQ3VMc2M1YVh5S2NpdWFSN0tvT1h1V2oxZkZTRlVqR3ZESkRRUzkxYlRzUTFjTHJQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPMG1sZFh4YU5tWHhiXy1ocHFGX0xVYUo1UlI4SGo5S09VazZoVzBXUWNxMHpHcGp5b3VwSzBBWUc5VmdrSnRucDlUWG1VRExNaTJjRVpVY2VBUUlrUWJRRF9vSkRCejY5aXpsUjBNNFlpSjRMZTMzS1NhOV9DSGd0dWRMQ2lFdw?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "AI Tools Optimize Material Compositions for Multi-Channel Signature Control",
-      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1RcFZ6Z0VWTWVwQ2JVTnR0MlhWeGh4aFNOYk1qYzZPMWRWSjIwU3B5ckJSRDlrX1JBdVNSWExZVVBRSU1GSF9FTFAwOC1tOFBXcGJ4VF93?oc=5",
+      "label": "Macquarie Executive Sees AI Fast-Tracking Junior Analyst Careers",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOUFMtLVhCOVYtUGEzajNySU1BcEwydnJZU21MaE1kOTVILU5Bbll6NnhzMXJrTzhzWW5xOFQ4eHJ0REJsWW9fb2NOT1VQZWdmTkRkZVd6dzVFb2tNMjlYSXVqQ2d6Z2JrNVhsNXdyaEZ0M3lnODdVY0pyRkhqYlF6c1RqZmczTnRmVmF2bU5jLUFrNUg0a0NSczh5TDJpQ3dqTjVYV3gxLW9fWk5oZXExYm0xcmlBQQ?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1RcFZ6Z0VWTWVwQ2JVTnR0MlhWeGh4aFNOYk1qYzZPMWRWSjIwU3B5ckJSRDlrX1JBdVNSWExZVVBRSU1GSF9FTFAwOC1tOFBXcGJ4VF93?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOUFMtLVhCOVYtUGEzajNySU1BcEwydnJZU21MaE1kOTVILU5Bbll6NnhzMXJrTzhzWW5xOFQ4eHJ0REJsWW9fb2NOT1VQZWdmTkRkZVd6dzVFb2tNMjlYSXVqQ2d6Z2JrNVhsNXdyaEZ0M3lnODdVY0pyRkhqYlF6c1RqZmczTnRmVmF2bU5jLUFrNUg0a0NSczh5TDJpQ3dqTjVYV3gxLW9fWk5oZXExYm0xcmlBQQ?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Nintex launches process tool to tie AI to workflows",
-      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQb3Q3T3VCVlU5MlU4WG5UOXpjZHdsUVRwVjVQWjNvUmdHSk5ITTVSbGZQTEM1bXUtZ2wzbkEwVEoyaWNWTW1VbDM3UDhEVDBONWF1OWtnT2Zub2RGS2tXdnA1WEdlamNlbW9zVFFVY3R1WjZWYWEyUnlZS1owSWVHZkNVUDBvYWM?oc=5",
+      "label": "Chemists develop AI tool to convert human ingenuity into life-enhancing enzymes",
+      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE0zN2Fxb3pVRXg3cm5ERmwxYXU0MXdWb294eDdZSnFpX2NYOXA5cW1vYU1iWkcwOEYwUUdOcURXX1JNVms0MXF0Q3ZaNUc4c1RYNlJqMzd3VkZqSndZSlpMQlYzb3JQbFNKS19WNVhYSy14VVp5eHc?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQb3Q3T3VCVlU5MlU4WG5UOXpjZHdsUVRwVjVQWjNvUmdHSk5ITTVSbGZQTEM1bXUtZ2wzbkEwVEoyaWNWTW1VbDM3UDhEVDBONWF1OWtnT2Zub2RGS2tXdnA1WEdlamNlbW9zVFFVY3R1WjZWYWEyUnlZS1owSWVHZkNVUDBvYWM?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMidkFVX3lxTE0zN2Fxb3pVRXg3cm5ERmwxYXU0MXdWb294eDdZSnFpX2NYOXA5cW1vYU1iWkcwOEYwUUdOcURXX1JNVms0MXF0Q3ZaNUc4c1RYNlJqMzd3VkZqSndZSlpMQlYzb3JQbFNKS19WNVhYSy14VVp5eHc?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "AI-enabled emergency management: a hint at PLA’s future AI integration",
-      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNdHhuZzNCV0Zsb2YwTnN5OUVaT0F0R0pjcG9DdldiSFNDQTEzcXR5RjhZY211aGFpX04zalFqbGFhWFRMaWc3MzRXeEZ1eERiSUE0TjdEc0NQLXk5dHVyMFE5bktBM2I2UzJZa3ZYdjViM0VPRl9hS21JclJDMnowc095c1FhSkp6cFR0M2ppNkFPUF9ZdUQtWjdMUGkyTUMxZUdPVnFn?oc=5",
+      "label": "A surprise in the AI world: ChatGPT surpassed specialized medical tools",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPVUpySTdKc3dZN0JVV015eDFCMVR1Vjd3cG1VQ29uQUd2SWxhX2xKUzQ3WHRHTDhiQTBLUkYtNVktbG1SNXphbWQ1ZmFjQlRUeGdwVlhjS2Z5OUxJN0l3RnV5QVJCbFVCU0hZdTd4TkQ0eHVfalJiSl9QWVIxYllkQlJuS0dYT0dRdFNxcVllTDdfUk1SY09Cdw?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNdHhuZzNCV0Zsb2YwTnN5OUVaT0F0R0pjcG9DdldiSFNDQTEzcXR5RjhZY211aGFpX04zalFqbGFhWFRMaWc3MzRXeEZ1eERiSUE0TjdEc0NQLXk5dHVyMFE5bktBM2I2UzJZa3ZYdjViM0VPRl9hS21JclJDMnowc095c1FhSkp6cFR0M2ppNkFPUF9ZdUQtWjdMUGkyTUMxZUdPVnFn?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPVUpySTdKc3dZN0JVV015eDFCMVR1Vjd3cG1VQ29uQUd2SWxhX2xKUzQ3WHRHTDhiQTBLUkYtNVktbG1SNXphbWQ1ZmFjQlRUeGdwVlhjS2Z5OUxJN0l3RnV5QVJCbFVCU0hZdTd4TkQ0eHVfalJiSl9QWVIxYllkQlJuS0dYT0dRdFNxcVllTDdfUk1SY09Cdw?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "US banks clamp down on transactional AI tools: Here is what customers need to know",
-      "url": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxQamFGTjI1X3o1R3RreHppRlVTc0tna1dMSGpKdHhiWWVyVHh4VFJHQS1CdTlHMXpLYUUzT0JZVXYzVkRKSG52TmdQcEY0THc5bmZDckN3cFF4YUNQdmZBSExqRDF5czNKWFRyOWZrUjdLSF9ZVndVVnN3SXhnVkpieHExMXRiclBud3hLeGZoSUctNEdDMTJFM0k4VkJ3SGdLX1cxMm5HaFhGQ0xQOElEWl83cHM4V2czdUhHelJYR1hRYjFLN3loUmdfVnp1YUl5X3RMRUxwNk1PVE9jazZWMnlkcHl2eVpTdzV0VFJyaHJFd1U2UFhwWDRMNGIxZ9IBgwJBVV95cUxNUHhxeVQ5enJjc1ZQVkFnZmtEbmIyeDZaRGdNMHF3dFJzbkw4Zi1selJJU3JVYVRrSnlmelF4TVdackdpb21lV3lpQ2xRUG5PSlRtd0hLemZzcHI0WlZhU3J6UW1HX3BlMEpNaTZnN1ZvTEVtTlJTbXcyQk5vNGJVM2p6QjZyV3U2RlcyRk1DaDJ3VDZEblZRRG14V0NZMFFNbU9BejFrbktsTWE5V1NvX29yMlEzYWI3Y1B2bVM1ZHg5UnhWdWoycEthY0M0ZTZSRG8xRUR3UkF3VGx0d1lQQklyYy1PaXFIRFpINC1ROGVoU2xzMDdGRjhCQjBnZldjeVhJ?oc=5",
+      "label": "Can AI Pick Stocks? 5 AI Investing Apps to Try",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNUU1LREZMeW1OTmI3WXdRMlFibEVHS2Fvam42b2JrV1NYQkVXRzBIeUYtMU5paUt4cHpoS3VvTjZsM2t5Q2QyTkxFRmM0NEtRV1lIRWw5Ulh2aE9vc3BCSU5qbjZuckM4ZV9NQWJ0ek9ZVkp6ZGdWYnVZUENJY0N6eUFVblJHQS1SY0RBXzUxV01tNzg?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxQamFGTjI1X3o1R3RreHppRlVTc0tna1dMSGpKdHhiWWVyVHh4VFJHQS1CdTlHMXpLYUUzT0JZVXYzVkRKSG52TmdQcEY0THc5bmZDckN3cFF4YUNQdmZBSExqRDF5czNKWFRyOWZrUjdLSF9ZVndVVnN3SXhnVkpieHExMXRiclBud3hLeGZoSUctNEdDMTJFM0k4VkJ3SGdLX1cxMm5HaFhGQ0xQOElEWl83cHM4V2czdUhHelJYR1hRYjFLN3loUmdfVnp1YUl5X3RMRUxwNk1PVE9jazZWMnlkcHl2eVpTdzV0VFJyaHJFd1U2UFhwWDRMNGIxZ9IBgwJBVV95cUxNUHhxeVQ5enJjc1ZQVkFnZmtEbmIyeDZaRGdNMHF3dFJzbkw4Zi1selJJU3JVYVRrSnlmelF4TVdackdpb21lV3lpQ2xRUG5PSlRtd0hLemZzcHI0WlZhU3J6UW1HX3BlMEpNaTZnN1ZvTEVtTlJTbXcyQk5vNGJVM2p6QjZyV3U2RlcyRk1DaDJ3VDZEblZRRG14V0NZMFFNbU9BejFrbktsTWE5V1NvX29yMlEzYWI3Y1B2bVM1ZHg5UnhWdWoycEthY0M0ZTZSRG8xRUR3UkF3VGx0d1lQQklyYy1PaXFIRFpINC1ROGVoU2xzMDdGRjhCQjBnZldjeVhJ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNUU1LREZMeW1OTmI3WXdRMlFibEVHS2Fvam42b2JrV1NYQkVXRzBIeUYtMU5paUt4cHpoS3VvTjZsM2t5Q2QyTkxFRmM0NEtRV1lIRWw5Ulh2aE9vc3BCSU5qbjZuckM4ZV9NQWJ0ek9ZVkp6ZGdWYnVZUENJY0N6eUFVblJHQS1SY0RBXzUxV01tNzg?oc=5&hl=en-US&gl=US&ceid=US:en"
     }
   ]
 }
