@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-16T17:50:41.102Z",
+  "generatedAt": "2026-11-23T19:46:04.001Z",
   "timeoutMs": 6000,
   "retries": 2,
   "concurrency": 8,
   "total": 108,
-  "healthy": 87,
-  "failed": 21,
+  "healthy": 90,
+  "failed": 18,
   "failures": [
     {
       "source": "tool",
@@ -59,8 +59,8 @@
     },
     {
       "source": "tool",
-      "label": "DALL-E 3",
-      "url": "https://openai.com/dall-e-3",
+      "label": "Leonardo.ai",
+      "url": "https://leonardo.ai/",
       "healthy": false,
       "status": null,
       "method": "HEAD/GET",
@@ -69,8 +69,8 @@
     },
     {
       "source": "tool",
-      "label": "Leonardo.ai",
-      "url": "https://leonardo.ai/",
+      "label": "Canva AI",
+      "url": "https://www.canva.com/",
       "healthy": false,
       "status": null,
       "method": "HEAD/GET",
@@ -169,16 +169,6 @@
     },
     {
       "source": "tool",
-      "label": "ChatGPT Enterprise",
-      "url": "https://openai.com/enterprise",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
-    },
-    {
-      "source": "tool",
       "label": "Microsoft 365 Copilot",
       "url": "https://www.microsoft.com/microsoft-365/business/microsoft-365-copilot",
       "healthy": false,
@@ -196,26 +186,6 @@
       "method": "HEAD/GET",
       "attempts": 3,
       "error": "HTTP 404"
-    },
-    {
-      "source": "tool",
-      "label": "OpenAI API",
-      "url": "https://openai.com/api",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
-    },
-    {
-      "source": "override",
-      "label": "OpenAI API",
-      "url": "https://platform.openai.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
     }
   ],
   "checks": [
@@ -357,7 +327,7 @@
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://www.notion.so/product/ai"
+      "finalUrl": "https://www.notion.com/product/ai"
     },
     {
       "source": "tool",
@@ -433,11 +403,11 @@
       "source": "tool",
       "label": "DALL-E 3",
       "url": "https://openai.com/dall-e-3",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://openai.com/index/dall-e-3/"
     },
     {
       "source": "tool",
@@ -473,11 +443,11 @@
       "source": "tool",
       "label": "Canva AI",
       "url": "https://www.canva.com/",
-      "healthy": true,
-      "status": 200,
-      "method": "HEAD",
-      "attempts": 2,
-      "finalUrl": "https://www.canva.com/"
+      "healthy": false,
+      "status": null,
+      "method": "HEAD/GET",
+      "attempts": 3,
+      "error": "HTTP 403"
     },
     {
       "source": "tool",
@@ -973,11 +943,11 @@
       "source": "tool",
       "label": "ChatGPT Enterprise",
       "url": "https://openai.com/enterprise",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
+      "healthy": true,
+      "status": 200,
+      "method": "GET",
+      "attempts": 1,
+      "finalUrl": "https://chatgpt.com/business/enterprise/"
     },
     {
       "source": "tool",
@@ -1133,11 +1103,11 @@
       "source": "tool",
       "label": "OpenAI API",
       "url": "https://openai.com/api",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
+      "healthy": true,
+      "status": 200,
+      "method": "HEAD",
+      "attempts": 1,
+      "finalUrl": "https://openai.com/api/"
     },
     {
       "source": "tool",
@@ -1213,91 +1183,91 @@
       "source": "override",
       "label": "OpenAI API",
       "url": "https://platform.openai.com/",
-      "healthy": false,
-      "status": null,
-      "method": "HEAD/GET",
-      "attempts": 3,
-      "error": "HTTP 403"
-    },
-    {
-      "source": "news",
-      "label": "APA offers new guidance as artificial intelligence use at work expands",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPeU9FSWVZeWdiVnZKT3BFRm05czdhUEJlRkYwTUFhMFdFQ1phSUhTZVNyYlhkVi02M0ZaY2lfeUh1VEkyTjF1NVl0bkRjdEhBLWI2V2xVakd3N0NJdXJkUEpvbFNsNVN1aWNSSUtib0lJMEFvNzQxT2JBajZFWDNxZVFyT192S295bG14d3N3?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPeU9FSWVZeWdiVnZKT3BFRm05czdhUEJlRkYwTUFhMFdFQ1phSUhTZVNyYlhkVi02M0ZaY2lfeUh1VEkyTjF1NVl0bkRjdEhBLWI2V2xVakd3N0NJdXJkUEpvbFNsNVN1aWNSSUtib0lJMEFvNzQxT2JBajZFWDNxZVFyT192S295bG14d3N3?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://platform.openai.com/"
     },
     {
       "source": "news",
-      "label": "Dubai Arbitration Week 2026: Public AI tools and loss of legal professional privilege | SCC Times",
-      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPYkNBMDh1V0lTd1U5WFllai00N1Ewb2lQSzdOUHNqR3h2aF8tVVgxWGhEMEpoY3Q5X2Q5VnBPRlY3bWNfeHNzUFBGRUIyeFJtNmFNQ2xNTktiMl96QmRhUjk4OWc3emwxT2xqQzFiXzEzZmNNMzRUWDB5bXFtMk1LMVpTcEtwZGxweE82QjBZRDk4RlhXYTBWSlZDM19BZE1WdHFNemkxYVVyVHd0NjZOOW9B?oc=5",
+      "label": "If the AI bubble bursts, it could create a serious problem for health care",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNVDl2THRGejl5ZlktLS1UdTZfTW5Pc2s3ZHV5dkVPeTh5akttU1AtVUNWV0hZSGd4V2JEMEhlRFF6ZUt6WUFtXzdLQ2JfNTFZejh3aGcwTllaakJmanlnbXJhbkhuSUo1TExEczVlUVdoZl9nOFhSVjNsaUhJaHloVUJsOENSVVd1QkpKZlpn?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPYkNBMDh1V0lTd1U5WFllai00N1Ewb2lQSzdOUHNqR3h2aF8tVVgxWGhEMEpoY3Q5X2Q5VnBPRlY3bWNfeHNzUFBGRUIyeFJtNmFNQ2xNTktiMl96QmRhUjk4OWc3emwxT2xqQzFiXzEzZmNNMzRUWDB5bXFtMk1LMVpTcEtwZGxweE82QjBZRDk4RlhXYTBWSlZDM19BZE1WdHFNemkxYVVyVHd0NjZOOW9B?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNVDl2THRGejl5ZlktLS1UdTZfTW5Pc2s3ZHV5dkVPeTh5akttU1AtVUNWV0hZSGd4V2JEMEhlRFF6ZUt6WUFtXzdLQ2JfNTFZejh3aGcwTllaakJmanlnbXJhbkhuSUo1TExEczVlUVdoZl9nOFhSVjNsaUhJaHloVUJsOENSVVd1QkpKZlpn?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Legal AI firms face adoption, integration test as competition intensifies",
-      "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQMkVDZGVRdmx6OWxqZDhjZWJGWGRYTXZfcVFnSDZxQmYzUnhFNHUyTVhhc3l4U3BJN0tDOHNCcnhIeGt5bzNZbzNEeHYzTGtfTXJ4d3ktTk1Mdm1FOXBrUDBRdVJiZDVWSnVMSkZBbDNWaDRpZm1CQW9TbGZEcVdKVnpERmszQUUtU29ONFpPSHY5RG1TNTBJWWQxbUZaLVQwQ29wS0tDVUY4Y21pZFRWalNjQ0tHTHlOcUZFRU1ockFHeVZFOHRjVTNleS03ZGFMcmZzRjI0a1piSF9xR2pzeXlva9IB5wFBVV95cUxNMzl0ZUJkaUtEWkZfcW1NRWEtTV95QWp1aEhBb2RlRTJYTWFCcHBTU0Q1dThaYmYtc3NLSU5laVZTZWszUjNHZjJfV085UFQ2U3F1alItRWJ0TzdfZXlsUmJ3WHBEYktYdFNOZ0VLc1BYeklZRG53UjNNWkZBdUtfcUV1OVVUcXVRbHZDLWxqTFJmUlplMmhWYnd0dFdrVHdXaU52TTRyMndyakhCa0tVVDdOUS1yZTNDT0sxUS1vMldpRUVWQ0JrMkh4SExLMnBqOXZySlNZQ3I3RVFEWUNOQkM3OXZTQ0k?oc=5",
+      "label": "The unseen and growing threat of shadow AI",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQOHprXzRsVUVPM2pKVEVSbi1PeGYweUk1MnRKa2ktdlFWWmx4cjhUQ2hHZ1A4M3JtMkpYRGhRZDJJMlV3dUhvcF9pTy1WNERJUzlFSVpWUEptel9fblR2QWZrYjgzZTI0TmhSNkxNX2dhODdQUDBoUkFlOUF5VzR2WW40cDRoYUxBZEN6UnBzX2Rrc0tuX2k4?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQMkVDZGVRdmx6OWxqZDhjZWJGWGRYTXZfcVFnSDZxQmYzUnhFNHUyTVhhc3l4U3BJN0tDOHNCcnhIeGt5bzNZbzNEeHYzTGtfTXJ4d3ktTk1Mdm1FOXBrUDBRdVJiZDVWSnVMSkZBbDNWaDRpZm1CQW9TbGZEcVdKVnpERmszQUUtU29ONFpPSHY5RG1TNTBJWWQxbUZaLVQwQ29wS0tDVUY4Y21pZFRWalNjQ0tHTHlOcUZFRU1ockFHeVZFOHRjVTNleS03ZGFMcmZzRjI0a1piSF9xR2pzeXlva9IB5wFBVV95cUxNMzl0ZUJkaUtEWkZfcW1NRWEtTV95QWp1aEhBb2RlRTJYTWFCcHBTU0Q1dThaYmYtc3NLSU5laVZTZWszUjNHZjJfV085UFQ2U3F1alItRWJ0TzdfZXlsUmJ3WHBEYktYdFNOZ0VLc1BYeklZRG53UjNNWkZBdUtfcUV1OVVUcXVRbHZDLWxqTFJmUlplMmhWYnd0dFdrVHdXaU52TTRyMndyakhCa0tVVDdOUS1yZTNDT0sxUS1vMldpRUVWQ0JrMkh4SExLMnBqOXZySlNZQ3I3RVFEWUNOQkM3OXZTQ0k?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQOHprXzRsVUVPM2pKVEVSbi1PeGYweUk1MnRKa2ktdlFWWmx4cjhUQ2hHZ1A4M3JtMkpYRGhRZDJJMlV3dUhvcF9pTy1WNERJUzlFSVpWUEptel9fblR2QWZrYjgzZTI0TmhSNkxNX2dhODdQUDBoUkFlOUF5VzR2WW40cDRoYUxBZEN6UnBzX2Rrc0tuX2k4?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "HLTH26: Apple launches 200K-person study to examine how consumers use health AI",
-      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQS2g1VE5ncFdqMWNXbnZRUGVOejhFT21maHpyQ2hxRkxzajhWaS1NRDM5bFU2LVlEMkJKTURxcVh2SzBLdGJmdW1nY25SNmpBNFpiY3JNVF9zT3NnbnpDd2pjbERrM3M1enVvelBxd1cwWGtKdk1NbHhwZWZOOG5ERU1vOTBLdmhSSjEwTkFaVllKRzFjcmJuWW5CTzRfY3ZqdF9ZXy1hcmdIMExoR1o4XzcxZ2wtZFE?oc=5",
+      "label": "Twilio adds voice AI tools to fix live call issues",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOMnZkT01lRldRSnJ0dG9xYU5tTXN2Y243WktPdldYWnFtUlp5VGNtNGxTVFM1dC1FdE5UdVk4Nld2SDF4Z0F6YmtPVjQ3UE1Db2s3M1Q4eVpYYUhFVXJVZnR6R19vT2hnNmplZ2xYQXJZN19SLVBuYlJudngtbURmRVdmN3I?oc=5",
+      "healthy": true,
+      "status": 200,
+      "method": "GET",
+      "attempts": 1,
+      "finalUrl": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOMnZkT01lRldRSnJ0dG9xYU5tTXN2Y243WktPdldYWnFtUlp5VGNtNGxTVFM1dC1FdE5UdVk4Nld2SDF4Z0F6YmtPVjQ3UE1Db2s3M1Q4eVpYYUhFVXJVZnR6R19vT2hnNmplZ2xYQXJZN19SLVBuYlJudngtbURmRVdmN3I?oc=5&hl=en-US&gl=US&ceid=US:en"
+    },
+    {
+      "source": "news",
+      "label": "South Korean Civil Servants Build 1,035 AI Tools, With 23 Teams Advancing to Finals on Nov. 25",
+      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5mYXlTQ1Q5eEZJN1lqTnkyOFpoczNkQ2htZk9jTEtlbFh4NjAwNGJkX2o4UXc1cFROU2dlbUwwN3VmemVHeUNKVTFKeVJxeHdVVGdHcDI2WUtSRS1pc2Zjc1FNSUNjUWpjVnZQT2JMd2lERUtUcHc?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQS2g1VE5ncFdqMWNXbnZRUGVOejhFT21maHpyQ2hxRkxzajhWaS1NRDM5bFU2LVlEMkJKTURxcVh2SzBLdGJmdW1nY25SNmpBNFpiY3JNVF9zT3NnbnpDd2pjbERrM3M1enVvelBxd1cwWGtKdk1NbHhwZWZOOG5ERU1vOTBLdmhSSjEwTkFaVllKRzFjcmJuWW5CTzRfY3ZqdF9ZXy1hcmdIMExoR1o4XzcxZ2wtZFE?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5mYXlTQ1Q5eEZJN1lqTnkyOFpoczNkQ2htZk9jTEtlbFh4NjAwNGJkX2o4UXc1cFROU2dlbUwwN3VmemVHeUNKVTFKeVJxeHdVVGdHcDI2WUtSRS1pc2Zjc1FNSUNjUWpjVnZQT2JMd2lERUtUcHc?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Inside China’s drive to build an AI-native generation",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQWWdJcFZKMVdSNWljb0VOTkhCcTA1UXdPUTdmcmZ0Y0paZE12eXRoRVk3NW5xZ1NtVnhFUWtnNWFxQV81WUlPWHZwc0Q0Y3M1OEtURUxoYVBDTk9DeEMxam5xTzlYeXg3OGFMWHRaUXc5ZEdsMW1QcDBaWVRMSG1VLUw4LWZTQ3NlVUhydk9B?oc=5",
+      "label": "How Does AI Work? Basics to Know",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5oS0s2MnRadGZMUDE4OXd2SG1MZFFHdDZ6b2JYb1k4Y2VDWk04N01ZZElCSllJWTUxdWxsbkhxV1MyTlRCYmdsT2ZqQUFoZ3ZDV3YyMlNPb0c2Qm9uaVE0?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQWWdJcFZKMVdSNWljb0VOTkhCcTA1UXdPUTdmcmZ0Y0paZE12eXRoRVk3NW5xZ1NtVnhFUWtnNWFxQV81WUlPWHZwc0Q0Y3M1OEtURUxoYVBDTk9DeEMxam5xTzlYeXg3OGFMWHRaUXc5ZEdsMW1QcDBaWVRMSG1VLUw4LWZTQ3NlVUhydk9B?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5oS0s2MnRadGZMUDE4OXd2SG1MZFFHdDZ6b2JYb1k4Y2VDWk04N01ZZElCSllJWTUxdWxsbkhxV1MyTlRCYmdsT2ZqQUFoZ3ZDV3YyMlNPb0c2Qm9uaVE0?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Tanishq jewellery heist: Suspect in face mask identified by Madurai cops with AI tools’ aid",
-      "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOelpoZXJ5Mk9GU3Fwa3hPVHE3NWFOOURzcWpHTkxNQm5UM09yd09GNERnclY4Z3hpWUVhS3YwSWVLMzF6MUpYTE4wUjloWlJ2bDNoTUhjd21SME5PLTRRMGpLUkROZWt3MEQ5RTRGTF9CWFRmeVQxdXBnSWFQUS1fV29FeWdrM0ZCOU53X1cwZmEtbXZ3elN1eHNpNFdvc3hmeV84RDgzano2bW5hOGxiSVA4Z3NCYkd1Ti1MZ1FpTlY0QkI4UkFpczlyZjNTajFYREtRbVBQM2hZU3VhTktfTWpld3FicHPSAfQBQVVfeXFMT2xTN0xEREFwUFBSVFBwV1NrX0ZtYWJRQ3JBRDd5c0hlZHRiX0VUdVEtU2ZsVDBnNVBXVmlaaVJJd3FJbHZIWEVxTGc0di04MllOdHlxdUpVU1l1NDJ0dmlwR2U4REtlLWN6Z2p3RTI0N2U2MkFabl9IeUdDQWVxWGNkWVotOURTRFotdzBDbUk5VGxBT3VXNG41ejFmZGlkczYxbXRmWUF0cndzd01GelBZU1ZGeVVCT3lmcmNVakZKX01XQWJlVmxySFMtVi1NWU14RHNiYzlPMElkWkV6VWN3a1dWVmV0ak1PSk96WjdxVlk1NQ?oc=5",
+      "label": "Vection Technologies (ASX:VR1) Combines Spatial Tools With AI for Enterprise Work",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQUVNMR0FBWEpLQm9DRUxTVFJNYTRRV0pqLV82Rk4wYnFOelNyVEdOazJOLUZidkxwdzZCS2JJOTRjVGxoOU5JeWpJOTRXNjJfZVhSRHNVOTJuQm5pdGtORXBLUUpmOGVZSy1rYmRUbDdNLTc0ZzZOekhWd1Y0MjlKQzM4aVcwMURIa3VWUEprSENjRVdnOVo1T3h3RDhTMWxNSHpGOS1DSU5WVDN0SC16ODV3cHZwdGxzYkhzQ3RmclF5WFdtenlwVE1B?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOelpoZXJ5Mk9GU3Fwa3hPVHE3NWFOOURzcWpHTkxNQm5UM09yd09GNERnclY4Z3hpWUVhS3YwSWVLMzF6MUpYTE4wUjloWlJ2bDNoTUhjd21SME5PLTRRMGpLUkROZWt3MEQ5RTRGTF9CWFRmeVQxdXBnSWFQUS1fV29FeWdrM0ZCOU53X1cwZmEtbXZ3elN1eHNpNFdvc3hmeV84RDgzano2bW5hOGxiSVA4Z3NCYkd1Ti1MZ1FpTlY0QkI4UkFpczlyZjNTajFYREtRbVBQM2hZU3VhTktfTWpld3FicHPSAfQBQVVfeXFMT2xTN0xEREFwUFBSVFBwV1NrX0ZtYWJRQ3JBRDd5c0hlZHRiX0VUdVEtU2ZsVDBnNVBXVmlaaVJJd3FJbHZIWEVxTGc0di04MllOdHlxdUpVU1l1NDJ0dmlwR2U4REtlLWN6Z2p3RTI0N2U2MkFabl9IeUdDQWVxWGNkWVotOURTRFotdzBDbUk5VGxBT3VXNG41ejFmZGlkczYxbXRmWUF0cndzd01GelBZU1ZGeVVCT3lmcmNVakZKX01XQWJlVmxySFMtVi1NWU14RHNiYzlPMElkWkV6VWN3a1dWVmV0ak1PSk96WjdxVlk1NQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQUVNMR0FBWEpLQm9DRUxTVFJNYTRRV0pqLV82Rk4wYnFOelNyVEdOazJOLUZidkxwdzZCS2JJOTRjVGxoOU5JeWpJOTRXNjJfZVhSRHNVOTJuQm5pdGtORXBLUUpmOGVZSy1rYmRUbDdNLTc0ZzZOekhWd1Y0MjlKQzM4aVcwMURIa3VWUEprSENjRVdnOVo1T3h3RDhTMWxNSHpGOS1DSU5WVDN0SC16ODV3cHZwdGxzYkhzQ3RmclF5WFdtenlwVE1B?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Why AI Won’t Replace Teacher Judgment: A Professor’s Microwave Lesson",
-      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxORXlxamo3UmpMcEhmdVkyREx5TE5oeTJNa2d4VnNUYW83dk5vcTdlaWZVVUEwelkxalJKb2ZHY245ek1iOG1QbkstX29pY2tUY3ZEY081VkxHa1NMZ2tRc3BFTXkxOVZKT2IyeVNLb19sWHkzNDdqYklRNDNjWW94Y0xqTXJaY18teko3dm9xOUZhOHZyYWw2MDlUc2VCSHRnTmpSVGszNlRGRVZS?oc=5",
+      "label": "IS AI MAKING US THINK LESS? Brain scans suggest relying on AI for answers may weaken our use of personal knowledge and critical thinking, debating whether technology makes us smarter or simply more dependent. #DWShift",
+      "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQaUhucFVJeW5pWDY1aEpmaWw3dU5Tc1VMcWNtQ0dmcGtnZDB1eEkzZV9RN1VCWXhtT2Z0a1RUa0FUY181Q2NpME1qdE02V3NKSFFwbkpjRXA0TVJ4d1FSX0J4RVVrQjVhb3pkNnNyeWlhcE5DVVNGT2F3Vkd1R09qOTFnVUNYSDkxcW5Xd2h5M1JVSGZtdDVWUDlMNzM2SDl3ZW9BMkFCWEQ3cm9VZGxwWVJSWVBIU2dLc3IwSWNMZFNuM0pBY0V0TUtFTEFMRi1QOGZHRUJtR3A?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMirAFBVV95cUxORXlxamo3UmpMcEhmdVkyREx5TE5oeTJNa2d4VnNUYW83dk5vcTdlaWZVVUEwelkxalJKb2ZHY245ek1iOG1QbkstX29pY2tUY3ZEY081VkxHa1NMZ2tRc3BFTXkxOVZKT2IyeVNLb19sWHkzNDdqYklRNDNjWW94Y0xqTXJaY18teko3dm9xOUZhOHZyYWw2MDlUc2VCSHRnTmpSVGszNlRGRVZS?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQaUhucFVJeW5pWDY1aEpmaWw3dU5Tc1VMcWNtQ0dmcGtnZDB1eEkzZV9RN1VCWXhtT2Z0a1RUa0FUY181Q2NpME1qdE02V3NKSFFwbkpjRXA0TVJ4d1FSX0J4RVVrQjVhb3pkNnNyeWlhcE5DVVNGT2F3Vkd1R09qOTFnVUNYSDkxcW5Xd2h5M1JVSGZtdDVWUDlMNzM2SDl3ZW9BMkFCWEQ3cm9VZGxwWVJSWVBIU2dLc3IwSWNMZFNuM0pBY0V0TUtFTEFMRi1QOGZHRUJtR3A?oc=5&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "source": "news",
-      "label": "Cost attribution and controls for AI developer and productivity tools on Amazon Bedrock | Artificial Intelligence",
-      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPNDhuWHJsYkZJQ3p6R1g3bkNsa25JSHVCY3hwQWJQTzNVN0k3Q3hkRXYySnJHWVJ4dWkyVGctUUtLaGYxZkhnWm9uRDliZ0JJMi0xM0d3YjB2ZVpCQVRyV19ab2c3a2RCUTRiclZKTGxfZi03V0p4b1ljRkpSbnlOUFhOVDN1amFVenNmTXRibHdNYXBzMDZvSWxtNC04RS1ld3JDbTNDNGtQNmtFQ2JuRlZLZ1ZkNWJTUUVnemlLN3d5TXJlRnlobk1acWFxTWs?oc=5",
+      "label": "Why Qualitative Research Is Essential for Building Human-Centered AI",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNOTFMMloxUlRtOWVrUWdmWldHWU5jQnBnVFRJOTZkYmQ5anZ5TmlSN3c2ZGFJU0FLRFRZY0xLdWpFaGdBU1A4YzNGQ3JPM05qQUZGcHhvbnlUQTFrT0x1Zjk0UnlhN1VkQXZYMHkxdGVJajgyU1d5eXFTcmF4bF81YW1vTllMTEV1VXVCUGxxTWtuSzZSNUNHVTdHaVpTZmNtSV9DNVoxYWFJX2c?oc=5",
       "healthy": true,
       "status": 200,
       "method": "HEAD",
       "attempts": 1,
-      "finalUrl": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPNDhuWHJsYkZJQ3p6R1g3bkNsa25JSHVCY3hwQWJQTzNVN0k3Q3hkRXYySnJHWVJ4dWkyVGctUUtLaGYxZkhnWm9uRDliZ0JJMi0xM0d3YjB2ZVpCQVRyV19ab2c3a2RCUTRiclZKTGxfZi03V0p4b1ljRkpSbnlOUFhOVDN1amFVenNmTXRibHdNYXBzMDZvSWxtNC04RS1ld3JDbTNDNGtQNmtFQ2JuRlZLZ1ZkNWJTUUVnemlLN3d5TXJlRnlobk1acWFxTWs?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "finalUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNOTFMMloxUlRtOWVrUWdmWldHWU5jQnBnVFRJOTZkYmQ5anZ5TmlSN3c2ZGFJU0FLRFRZY0xLdWpFaGdBU1A4YzNGQ3JPM05qQUZGcHhvbnlUQTFrT0x1Zjk0UnlhN1VkQXZYMHkxdGVJajgyU1d5eXFTcmF4bF81YW1vTllMTEV1VXVCUGxxTWtuSzZSNUNHVTdHaVpTZmNtSV9DNVoxYWFJX2c?oc=5&hl=en-US&gl=US&ceid=US:en"
     }
   ]
 }
